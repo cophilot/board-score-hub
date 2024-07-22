@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface BoardScoreTableProps {
     definition: any;
+    children?: any;
 }
 
 /**
@@ -17,7 +18,10 @@ interface BoardScoreTableProps {
  * @version 1.0.0
  * @created 2024-7-21
  */
-function BoardScorePage({ definition }: BoardScoreTableProps): JSX.Element {
+function BoardScorePage({
+    definition,
+    children,
+}: BoardScoreTableProps): JSX.Element {
     const navigate = useNavigate();
     const [playerSize, setPlayerSize] = useState<number>(
         GameStorage.getPlayerSize(definition.title, definition.playerSizes[0])
@@ -58,6 +62,7 @@ function BoardScorePage({ definition }: BoardScoreTableProps): JSX.Element {
                 }}>
                 Home
             </button>
+            {children}
         </div>
     );
 }

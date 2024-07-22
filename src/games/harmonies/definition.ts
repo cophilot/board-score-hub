@@ -1,3 +1,5 @@
+import leaf from './assets/leaf.png';
+
 export default function getDefinition() {
     return {
         title: 'Harmonies',
@@ -10,7 +12,7 @@ export default function getDefinition() {
         rows: [
             {
                 name: 'Leaf',
-                icon: 'src/games/harmonies/assets/leaf.png',
+                icon: leaf,
             },
             {
                 name: 'Stone',

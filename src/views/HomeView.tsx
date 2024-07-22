@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import StyleUtils from '../utils/StyleUtils';
 import { useNavigate } from 'react-router-dom';
 import StringUtils from '../utils/StringUtils';
+import By from '../components/By/By';
 
 export default function HomeView() {
     const navigate = useNavigate();
@@ -10,7 +11,12 @@ export default function HomeView() {
         document.title = 'BoardScoreHub';
     }, []);
 
-    const games = ['Harmonies', 'Seven Wonders: Duel', 'Dorfromatik: Duel'];
+    const games = [
+        'Harmonies',
+        'Seven Wonders: Duel',
+        'Dorfromatik: Duel',
+        'Everdell',
+    ];
     games.sort((a, b) => a.localeCompare(b));
 
     return (
@@ -31,14 +37,7 @@ export default function HomeView() {
                     </button>
                 ))}
             </div>
-            <div
-                style={{
-                    marginTop: '20px',
-                    marginBottom: '50px',
-                    fontSize: '16px',
-                }}>
-                by <a href="https://philipp-bonin.com/">Philipp B.</a>
-            </div>
+            <By />
         </div>
     );
 }

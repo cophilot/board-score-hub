@@ -1,8 +1,8 @@
 import BoardScorePage from '../../api/BoardScorePage/BoardScorePage';
-import getDefinition from './definition';
 import By from '../../components/By/By';
+import getDefinition from './definition';
 
-export default function $$name.p$$View() {
+export default function EverdellView() {
     return (
         <BoardScorePage definition={getDefinition()}>
             <By />

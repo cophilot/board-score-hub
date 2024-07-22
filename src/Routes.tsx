@@ -3,11 +3,13 @@ import HomeView from './views/HomeView';
 import HarmoniesView from './games/harmonies/View';
 import SevenWondersDuelView from './games/seven-wonders-duel/View';
 import DorfromatikDuelView from './games/dorfromatik-duel/View';
+import EverdellView from './games/everdell/View';
 function Routes() {
     return (
         <>
             <HashRouter>
                 <ReactRoutes>
+                    <Route path="/game/everdell" Component={EverdellView} />
                     <Route
                         path="/game/dorfromatik-duel"
                         Component={DorfromatikDuelView}
