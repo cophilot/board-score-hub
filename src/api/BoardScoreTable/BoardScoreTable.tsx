@@ -122,7 +122,8 @@ function BoardScoreTable({
                                 value={playerNames[index] || ''}
                                 onChange={(e) => {
                                     const newPlayerNames = playerNames.slice();
-                                    newPlayerNames[index] = e.target.value;
+                                    newPlayerNames[index] =
+                                        e.target.value.toUpperCase();
                                     setPlayerNames(newPlayerNames);
                                     GameStorage.setPlayerNames(
                                         definition.title,
