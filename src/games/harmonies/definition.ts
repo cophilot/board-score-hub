@@ -4,6 +4,7 @@ import flower from './assets/flower.png';
 import house from './assets/house.png';
 import water from './assets/water.png';
 import card from './assets/card.png';
+import { WinMode } from '../../api/types/WinMode';
 
 export default function getDefinition() {
     return {
@@ -13,7 +14,7 @@ export default function getDefinition() {
         primaryColor: '#0094b8',
         secondaryColor: '#f7ac1f',
         playerSizes: [1, 2, 3, 4],
-        winMode: 'most',
+        winMode: WinMode.MOST,
         rows: [
             {
                 name: 'Leaf',

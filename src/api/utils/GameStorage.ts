@@ -68,4 +68,21 @@ export default class GameStorage {
             JSON.stringify(matrix)
         );
     }
+
+    static setGameSettings(gameTitle: string, settings: unknown) {
+        localStorage.setItem(
+            GameStorage.getStorageKeyFromTitle(gameTitle, 'settings'),
+            JSON.stringify(settings)
+        );
+    }
+
+    static getGameSettings(gameTitle: string, fallback: unknown = {}) {
+        const settings = localStorage.getItem(
+            GameStorage.getStorageKeyFromTitle(gameTitle, 'settings')
+        );
+        if (settings === null) {
+            return fallback;
+        }
+        return JSON.parse(settings);
+    }
 }

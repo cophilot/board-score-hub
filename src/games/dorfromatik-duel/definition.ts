@@ -10,6 +10,7 @@ import flagYellow from './assets/flag-yellow.png';
 import flagRed from './assets/flag-red.png';
 import longRail from './assets/longest-rail.png';
 import longRiver from './assets/longest-river.png';
+import { WinMode } from '../../api/types/WinMode';
 
 export default function getDefinition() {
     return {
@@ -19,7 +20,7 @@ export default function getDefinition() {
         primaryColor: '#7ba1d4',
         secondaryColor: '#ee776c',
         playerSizes: [2],
-        winMode: 'most',
+        winMode: WinMode.MOST,
         rows: [
             {
                 name: 'Tree',

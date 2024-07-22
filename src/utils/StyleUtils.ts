@@ -11,7 +11,7 @@ export default class StyleUtils {
         document.documentElement.style.setProperty('--primary-color', color);
     }
 
-    static setSecondaryColor(color: string = '#f7eb83') {
+    static setSecondaryColor(color: string = '#E9BD43') {
         document.documentElement.style.setProperty('--secondary-color', color);
     }
 

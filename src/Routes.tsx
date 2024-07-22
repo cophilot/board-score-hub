@@ -4,11 +4,16 @@ import HarmoniesView from './games/harmonies/View';
 import SevenWondersDuelView from './games/seven-wonders-duel/View';
 import DorfromatikDuelView from './games/dorfromatik-duel/View';
 import EverdellView from './games/everdell/View';
+import ExpandableTable from './views/ExpandableTable';
 function Routes() {
     return (
         <>
             <HashRouter>
                 <ReactRoutes>
+                    <Route
+                        path="/general-table/expandable"
+                        Component={ExpandableTable}
+                    />
                     <Route path="/game/everdell" Component={EverdellView} />
                     <Route
                         path="/game/dorfromatik-duel"

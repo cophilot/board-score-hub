@@ -13,6 +13,7 @@
         color: var(--bg-color);
         position: sticky;
         top: -3px;
+        z-index: 10000;
     }
 
     th,
@@ -40,6 +41,10 @@
         background-color: var(--primary-color);
         color: var(--bg-color);
     }
+    .row-help {
+        font-size: 16px;
+        opacity: 0.7;
+    }
 }
 
 @media (max-width: 600px) {
@@ -52,16 +57,15 @@
             font-size: 16px;
         }
         .row-icon {
-            height: 50px;
+            height: 60px;
         }
         input {
             font-size: 16px;
             max-width: 30px;
         }
-        th {
-            input {
-                font-size: 16px;
-            }
+        .row-help {
+            font-size: 11px;
+            opacity: 0.7;
         }
     }
 }

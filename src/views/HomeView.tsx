@@ -3,6 +3,7 @@ import StyleUtils from '../utils/StyleUtils';
 import { useNavigate } from 'react-router-dom';
 import StringUtils from '../utils/StringUtils';
 import By from '../components/By/By';
+import getAllGames from '../allGames';
 
 export default function HomeView() {
     const navigate = useNavigate();
@@ -11,18 +12,28 @@ export default function HomeView() {
         document.title = 'BoardScoreHub';
     }, []);
 
-    const games = [
-        'Harmonies',
-        'Seven Wonders: Duel',
-        'Dorfromatik: Duel',
-        'Everdell',
-    ];
+    const games = getAllGames();
     games.sort((a, b) => a.localeCompare(b));
 
     return (
         <div>
             <h1>BoardScoreHub</h1>
-            <div className="ver games">
+            <h2>General</h2>
+            <div className="ver">
+                <button
+                    className="btn selected"
+                    style={{ minWidth: '300px' }}
+                    onClick={() => {
+                        navigate('/general-table/expandable');
+                    }}>
+                    Expandable Table
+                </button>
+                <button className="btn selected" style={{ minWidth: '300px' }}>
+                    Fix size Table
+                </button>
+            </div>
+            <h2>Games</h2>
+            <div className="ver">
                 {games.map((game) => (
                     <button
                         key={game}

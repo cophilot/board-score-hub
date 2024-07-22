@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 interface BoardScoreTableProps {
     definition: any;
     children?: any;
+    onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
 }
 
 /**
@@ -21,15 +22,27 @@ interface BoardScoreTableProps {
 export default function BoardScorePage({
     definition,
     children,
+    onCellChange,
 }: BoardScoreTableProps): JSX.Element {
     const navigate = useNavigate();
+
     const [playerSize, setPlayerSize] = useState<number>(
         GameStorage.getPlayerSize(definition.title, definition.playerSizes[0])
+    );
+    const [settings, setSettings] = useState(
+        GameStorage.getGameSettings(definition.title, {
+            showHelp: false,
+        })
     );
 
     const onPlayerSizeChange = (size: number) => {
         setPlayerSize(size);
         GameStorage.setPlayerSize(definition.title, size);
+    };
+
+    const applySettings = (newSettings: any) => {
+        setSettings(newSettings);
+        GameStorage.setGameSettings(definition.title, newSettings);
     };
 
     useEffect(() => {
@@ -49,8 +62,21 @@ export default function BoardScorePage({
                 initPlayerSize={playerSize}
                 onPlayerSizeChange={onPlayerSizeChange}></PlayerSwitch>
             <BoardScoreTable
+                onCellChange={onCellChange}
                 definition={definition}
+                gameSettings={settings}
                 playerSize={playerSize}></BoardScoreTable>
+            <button
+                className="btn selected nav-btn print-hide"
+                onClick={() => {
+                    const newSettings = {
+                        ...settings,
+                        showHelp: !settings.showHelp,
+                    };
+                    applySettings(newSettings);
+                }}>
+                {settings.showHelp ? 'Hide Help' : 'Help'}
+            </button>
             <button className="btn selected nav-btn print-hide" onClick={print}>
                 Export
             </button>
@@ -88,17 +114,20 @@ function print() {
         const element = showElements[i] as HTMLElement;
         element.style.display = 'block';
     }
+    setTimeout(() => {
+        window.print();
+        setTimeout(() => {
+            for (let i = 0; i < hideElements.length; i++) {
+                const element = hideElements[i] as HTMLElement;
+                element.style.display = 'block';
+            }
 
-    window.print();
-    for (let i = 0; i < hideElements.length; i++) {
-        const element = hideElements[i] as HTMLElement;
-        element.style.display = 'block';
-    }
-
-    for (let i = 0; i < showElements.length; i++) {
-        const element = showElements[i] as HTMLElement;
-        element.style.display = 'none';
-    }
+            for (let i = 0; i < showElements.length; i++) {
+                const element = showElements[i] as HTMLElement;
+                element.style.display = 'none';
+            }
+        }, 100);
+    }, 100);
 }
 
 function setInitialAttributes(definition: any) {

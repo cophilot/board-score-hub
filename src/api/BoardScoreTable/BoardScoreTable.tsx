@@ -2,10 +2,13 @@
 import { useEffect, useState } from 'react';
 import './BoardScoreTable.scss';
 import GameStorage from '../utils/GameStorage';
+import { getFunctionForWinMode, WinMode } from '../types/WinMode';
 
 interface BoardScoreTableProps {
     definition: any;
     playerSize: number;
+    gameSettings: any;
+    onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
 }
 
 /**
@@ -14,7 +17,12 @@ interface BoardScoreTableProps {
  * @version 1.0.0
  * @created 2024-7-21
  */
-function BoardScoreTable({ definition, playerSize }: BoardScoreTableProps) {
+function BoardScoreTable({
+    definition,
+    playerSize,
+    gameSettings,
+    onCellChange,
+}: BoardScoreTableProps) {
     const playerSizes = Array.from(Array(playerSize).keys());
     const rows = definition.rows || [];
 
@@ -40,7 +48,11 @@ function BoardScoreTable({ definition, playerSize }: BoardScoreTableProps) {
     }, [playerSize, tableMatrix]);
 
     const getTableValue = (rowIndex: number, playerIndex: number) => {
-        return tableMatrix[rowIndex][playerIndex];
+        const row = tableMatrix[rowIndex];
+        if (!row) {
+            return 0;
+        }
+        return tableMatrix[rowIndex][playerIndex] || 0;
     };
 
     const setTableValue = (
@@ -52,16 +64,31 @@ function BoardScoreTable({ definition, playerSize }: BoardScoreTableProps) {
         if (isNaN(value)) {
             return;
         }
+
+        let couldBeAdded = false;
         const newTableMatrix = tableMatrix.map(
             (row: number[], index: number) => {
                 if (index === rowIndex) {
                     row[playerIndex] = Number(value);
+                    couldBeAdded = true;
                 }
                 return row;
             }
         );
+
+        if (!couldBeAdded) {
+            newTableMatrix.push(
+                Array.from(Array(playerSize).keys()).map(() => 0)
+            );
+            newTableMatrix[newTableMatrix.length - 1][playerIndex] =
+                Number(value);
+        }
+
         setTableMatrix(newTableMatrix);
         GameStorage.setGameMatrix(definition.title, newTableMatrix);
+        if (onCellChange) {
+            onCellChange(rowIndex, playerIndex, value);
+        }
     };
 
     const getColumnTotal = (playerIndex: number) => {
@@ -74,8 +101,8 @@ function BoardScoreTable({ definition, playerSize }: BoardScoreTableProps) {
     };
 
     const getWinningScore = () => {
-        const winMode = definition.winMode || 'most';
-        const winFn = winMode === 'most' ? Math.max : Math.min;
+        const winMode = definition.winMode || WinMode.MOST;
+        const winFn = getFunctionForWinMode(winMode);
         const value = winFn(...totalRow);
         // check if all values are the same
         if (totalRow.every((val) => val === value)) {
@@ -111,8 +138,11 @@ function BoardScoreTable({ definition, playerSize }: BoardScoreTableProps) {
             </thead>
             <tbody>
                 {rows.map((row: any, index: number) => (
-                    <tr key={index}>
-                        <FirstRowCell row={row} />
+                    <tr key={index} style={getStyleFromRow(row)}>
+                        <FirstRowCell
+                            row={row}
+                            helpOn={gameSettings.showHelp}
+                        />
                         {playerSizes.map((playerIndex) => (
                             <InputCell
                                 key={playerIndex}
@@ -125,7 +155,10 @@ function BoardScoreTable({ definition, playerSize }: BoardScoreTableProps) {
                     </tr>
                 ))}
                 <tr key="total" className="total-row">
-                    <FirstRowCell row={{ name: 'Total' }} />
+                    <FirstRowCell
+                        row={{ name: 'Total' }}
+                        helpOn={gameSettings.showHelp}
+                    />
                     {totalRow.map((value, playerIndex) => (
                         <td
                             key={playerIndex}
@@ -180,14 +213,34 @@ function InputCell({
 
 type FirstRowCellProps = {
     row: any;
+    helpOn?: boolean;
 };
 
-function FirstRowCell({ row }: FirstRowCellProps) {
+function FirstRowCell({ row, helpOn }: FirstRowCellProps) {
     let inner = row.name;
     if (row.icon) {
         inner = <img src={row.icon} alt={row.name} className="row-icon" />;
+        if (helpOn) {
+            inner = (
+                <>
+                    {inner}
+                    <p className="row-help">{row.name}</p>
+                </>
+            );
+        }
     }
     return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
+}
+
+function getStyleFromRow(row: any) {
+    const style: any = {};
+    if (row.bgColor) {
+        style.backgroundColor = row.bgColor;
+    }
+    if (row.fontColor) {
+        style.color = row.fontColor;
+    }
+    return style;
 }
 
 function getEmptyTbaleMatrix(rows: number, cols: number) {
