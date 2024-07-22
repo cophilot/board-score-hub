@@ -18,7 +18,7 @@ interface BoardScoreTableProps {
  * @version 1.0.0
  * @created 2024-7-21
  */
-function BoardScorePage({
+export default function BoardScorePage({
     definition,
     children,
 }: BoardScoreTableProps): JSX.Element {
@@ -36,9 +36,14 @@ function BoardScorePage({
         setInitialAttributes(definition);
     }, [definition]);
 
+    const date = new Date().toLocaleDateString();
+
     return (
         <div className="board-score-page">
             {definition.title && <h1>{definition.title}</h1>}
+            <h2 className="print-show">
+                <i>{date}</i>
+            </h2>
             <PlayerSwitch
                 playerSizes={definition.playerSizes}
                 initPlayerSize={playerSize}
@@ -46,9 +51,11 @@ function BoardScorePage({
             <BoardScoreTable
                 definition={definition}
                 playerSize={playerSize}></BoardScoreTable>
-            <button className="btn selected nav-btn">Export</button>
+            <button className="btn selected nav-btn print-hide" onClick={print}>
+                Export
+            </button>
             <button
-                className="btn selected nav-btn"
+                className="btn selected nav-btn print-hide"
                 onClick={() => {
                     GameStorage.deleteStorage(definition.title);
                     window.location.reload();
@@ -56,17 +63,43 @@ function BoardScorePage({
                 Clear
             </button>
             <button
-                className="btn selected nav-btn"
+                className="btn selected nav-btn print-hide"
                 onClick={() => {
                     navigate('/');
                 }}>
                 Home
             </button>
+            <h2 className="print-show">
+                <i>board-score-hub.philipp-bonin.com</i>
+            </h2>
             {children}
         </div>
     );
 }
-export default BoardScorePage;
+function print() {
+    // hide all elements with class print-hide
+    const hideElements = document.getElementsByClassName('print-hide');
+    for (let i = 0; i < hideElements.length; i++) {
+        const element = hideElements[i] as HTMLElement;
+        element.style.display = 'none';
+    }
+    const showElements = document.getElementsByClassName('print-show');
+    for (let i = 0; i < showElements.length; i++) {
+        const element = showElements[i] as HTMLElement;
+        element.style.display = 'block';
+    }
+
+    window.print();
+    for (let i = 0; i < hideElements.length; i++) {
+        const element = hideElements[i] as HTMLElement;
+        element.style.display = 'block';
+    }
+
+    for (let i = 0; i < showElements.length; i++) {
+        const element = showElements[i] as HTMLElement;
+        element.style.display = 'none';
+    }
+}
 
 function setInitialAttributes(definition: any) {
     setAttributeIfPresent(definition.title, (title) => {
