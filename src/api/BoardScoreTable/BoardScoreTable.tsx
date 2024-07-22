@@ -39,9 +39,16 @@ function BoardScoreTable({
         GameStorage.getPlayerNames(definition.title, [])
     );
 
+    const [rounds, setRounds] = useState(-1);
+    useEffect(() => {
+        if (definition.roundMapper) {
+            setRounds(definition.roundMapper[playerSize]);
+        }
+    }, [definition.roundMapper, playerSize]);
+
     useEffect(() => {
         const newTotalRow = Array.from(Array(playerSize).keys()).map(
-            (playerIndex) => getColumnTotal(playerIndex)
+            (playerIndex) => getColumnTotal(tableMatrix, playerIndex, rounds)
         );
         setTotalRow(newTotalRow);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -91,15 +98,6 @@ function BoardScoreTable({
         }
     };
 
-    const getColumnTotal = (playerIndex: number) => {
-        return tableMatrix.reduce((acc: number, row: number[]) => {
-            if (isNaN(row[playerIndex])) {
-                return acc;
-            }
-            return acc + row[playerIndex];
-        }, 0);
-    };
-
     const getWinningScore = () => {
         const winMode = definition.winMode || WinMode.MOST;
         const winFn = getFunctionForWinMode(winMode);
@@ -137,23 +135,26 @@ function BoardScoreTable({
                 </tr>
             </thead>
             <tbody>
-                {rows.map((row: any, index: number) => (
-                    <tr key={index} style={getStyleFromRow(row)}>
-                        <FirstRowCell
-                            row={row}
-                            helpOn={gameSettings.showHelp}
-                        />
-                        {playerSizes.map((playerIndex) => (
-                            <InputCell
-                                key={playerIndex}
-                                rowIndex={index}
-                                playerIndex={playerIndex}
-                                getValueFunction={getTableValue}
-                                setValueFunction={setTableValue}
-                            />
-                        ))}
-                    </tr>
-                ))}
+                {rows.map(
+                    (row: any, index: number) =>
+                        (rounds === -1 || index < rounds) && (
+                            <tr key={index} style={getStyleFromRow(row)}>
+                                <FirstRowCell
+                                    row={row}
+                                    helpOn={gameSettings.showHelp}
+                                />
+                                {playerSizes.map((playerIndex) => (
+                                    <InputCell
+                                        key={playerIndex}
+                                        rowIndex={index}
+                                        playerIndex={playerIndex}
+                                        getValueFunction={getTableValue}
+                                        setValueFunction={setTableValue}
+                                    />
+                                ))}
+                            </tr>
+                        )
+                )}
                 <tr key="total" className="total-row">
                     <FirstRowCell
                         row={{ name: 'Total' }}
@@ -231,6 +232,22 @@ function FirstRowCell({ row, helpOn }: FirstRowCellProps) {
     }
     return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
 }
+
+const getColumnTotal = (
+    tableMatrix: number[][],
+    playerIndex: number,
+    round = -1
+) => {
+    return tableMatrix.reduce((acc: number, row: number[], index: number) => {
+        if (round !== -1 && index >= round) {
+            return acc;
+        }
+        if (isNaN(row[playerIndex])) {
+            return acc;
+        }
+        return acc + row[playerIndex];
+    }, 0);
+};
 
 function getStyleFromRow(row: any) {
     const style: any = {};

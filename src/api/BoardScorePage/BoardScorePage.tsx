@@ -50,7 +50,7 @@ export default function BoardScorePage({
     }, [definition]);
 
     const date = new Date().toLocaleDateString();
-
+    const showHelpButton = definition.rows.some((row: any) => row.icon);
     return (
         <div className="board-score-page">
             {definition.title && <h1>{definition.title}</h1>}
@@ -66,17 +66,19 @@ export default function BoardScorePage({
                 definition={definition}
                 gameSettings={settings}
                 playerSize={playerSize}></BoardScoreTable>
-            <button
-                className="btn selected nav-btn print-hide"
-                onClick={() => {
-                    const newSettings = {
-                        ...settings,
-                        showHelp: !settings.showHelp,
-                    };
-                    applySettings(newSettings);
-                }}>
-                {settings.showHelp ? 'Hide Help' : 'Help'}
-            </button>
+            {showHelpButton && (
+                <button
+                    className="btn selected nav-btn print-hide"
+                    onClick={() => {
+                        const newSettings = {
+                            ...settings,
+                            showHelp: !settings.showHelp,
+                        };
+                        applySettings(newSettings);
+                    }}>
+                    {settings.showHelp ? 'Hide Help' : 'Help'}
+                </button>
+            )}
             <button className="btn selected nav-btn print-hide" onClick={print}>
                 Export
             </button>

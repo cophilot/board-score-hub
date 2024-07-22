@@ -1,3 +1,5 @@
+import { WinMode } from '../../api/types/WinMode';
+
 export default function getDefinition() {
     return {
         title: '$$name$$',
@@ -6,7 +8,7 @@ export default function getDefinition() {
         //primaryColor: '#fff',
         //secondaryColor: '#000',
         playerSizes: [1, 2, 3, 4],
-        winMode: 'most',
+        winMode: WinMode.MOST,
         rows: [
             {
                 name: 'Row1',

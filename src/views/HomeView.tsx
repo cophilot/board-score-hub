@@ -21,34 +21,47 @@ export default function HomeView() {
             <h2>General</h2>
             <div className="ver">
                 <button
-                    className="btn selected"
-                    style={{ minWidth: '300px' }}
+                    className="btn selected wide"
                     onClick={() => {
                         navigate('/general-table/expandable');
                     }}>
                     Expandable Table
                 </button>
-                <button className="btn selected" style={{ minWidth: '300px' }}>
-                    Fix size Table
-                </button>
+                <button className="btn selected wide">Fix size Table</button>
             </div>
             <h2>Games</h2>
             <div className="ver">
                 {games.map((game) => (
-                    <button
-                        key={game}
-                        className="btn selected"
-                        style={{ minWidth: '300px' }}
-                        onClick={() => {
-                            navigate(
-                                `/game/${StringUtils.gameNameToPath(game)}`
-                            );
-                        }}>
-                        {game}
-                    </button>
+                    <LinkGameButton key={game} game={game} />
                 ))}
             </div>
             <By />
         </div>
+    );
+}
+
+function LinkGameButton({ game }: { game: string }) {
+    const navigate = useNavigate();
+    if (game.includes('$x$')) {
+        const [name, link] = game.split('$x$');
+        return (
+            <a
+                className="btn selected"
+                href={link}
+                target="_blank"
+                style={{ minWidth: '250px' }}>
+                {name}
+            </a>
+        );
+    }
+
+    return (
+        <button
+            className="btn selected wide"
+            onClick={() => {
+                navigate(`/game/${StringUtils.gameNameToPath(game)}`);
+            }}>
+            {game}
+        </button>
     );
 }
