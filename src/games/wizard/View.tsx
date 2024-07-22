@@ -1,11 +1,6 @@
-import BoardScorePage from '../../api/BoardScorePage/BoardScorePage';
+import GameView from '../../components/GameView';
 import getDefinition from './definition';
-import By from '../../components/By/By';
 
 export default function WizardView() {
-    return (
-        <BoardScorePage definition={getDefinition()}>
-            <By />
-        </BoardScorePage>
-    );
+    return <GameView definition={getDefinition()} />;
 }

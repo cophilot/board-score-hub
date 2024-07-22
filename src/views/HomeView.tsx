@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import StyleUtils from '../utils/StyleUtils';
 import { useNavigate } from 'react-router-dom';
 import StringUtils from '../utils/StringUtils';
-import By from '../components/By/By';
+import By from '../components/By';
 import getAllGames from '../allGames';
+import Logo from '../components/Logo';
 
 export default function HomeView() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function HomeView() {
 
     return (
         <div>
-            <h1>BoardScoreHub</h1>
+            <Logo />
             <h2>General</h2>
             <div className="ver">
                 <button

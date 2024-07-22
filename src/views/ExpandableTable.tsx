@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import BoardScorePage from '../api/BoardScorePage/BoardScorePage';
 import { WinMode } from '../api/types/WinMode';
-import By from '../components/By/By';
+import By from '../components/By';
 
 export default function ExpandableTable() {
     const rowsLSKey = 'expandable table-rows';

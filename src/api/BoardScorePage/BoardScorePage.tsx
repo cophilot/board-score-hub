@@ -11,6 +11,7 @@ interface BoardScoreTableProps {
     definition: any;
     children?: any;
     onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
+    logo?: JSX.Element;
 }
 
 /**
@@ -23,6 +24,7 @@ export default function BoardScorePage({
     definition,
     children,
     onCellChange,
+    logo,
 }: BoardScoreTableProps): JSX.Element {
     const navigate = useNavigate();
 
@@ -53,6 +55,7 @@ export default function BoardScorePage({
     const showHelpButton = definition.rows.some((row: any) => row.icon);
     return (
         <div className="board-score-page">
+            {logo}
             {definition.title && <h1>{definition.title}</h1>}
             <h2 className="print-show">
                 <i>{date}</i>

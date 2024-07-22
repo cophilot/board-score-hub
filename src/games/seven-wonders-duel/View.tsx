@@ -1,11 +1,6 @@
-import BoardScorePage from '../../api/BoardScorePage/BoardScorePage';
-import By from '../../components/By/By';
+import GameView from '../../components/GameView';
 import getDefinition from './definition';
 
 export default function SevenWondersDuelView() {
-    return (
-        <BoardScorePage definition={getDefinition()}>
-            <By />
-        </BoardScorePage>
-    );
+    return <GameView definition={getDefinition()} />;
 }
