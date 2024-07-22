@@ -1,3 +1,16 @@
+import tree from './assets/tree.png';
+import field from './assets/field.png';
+import house from './assets/house.png';
+import rail from './assets/rail.png';
+import river from './assets/river.png';
+import border from './assets/border.png';
+import six from './assets/six.png';
+import flagGreen from './assets/flag-green.png';
+import flagYellow from './assets/flag-yellow.png';
+import flagRed from './assets/flag-red.png';
+import longRail from './assets/longest-rail.png';
+import longRiver from './assets/longest-river.png';
+
 export default function getDefinition() {
     return {
         title: 'Dorfromatik: Duel',
@@ -10,51 +23,51 @@ export default function getDefinition() {
         rows: [
             {
                 name: 'Tree',
-                icon: 'src/games/dorfromatik-duel/assets/tree.png',
+                icon: tree,
             },
             {
                 name: 'Field',
-                icon: 'src/games/dorfromatik-duel/assets/field.png',
+                icon: field,
             },
             {
                 name: 'House',
-                icon: 'src/games/dorfromatik-duel/assets/house.png',
+                icon: house,
             },
             {
                 name: 'Railway',
-                icon: 'src/games/dorfromatik-duel/assets/rail.png',
+                icon: rail,
             },
             {
                 name: 'River',
-                icon: 'src/games/dorfromatik-duel/assets/river.png',
+                icon: river,
             },
             {
                 name: 'Border',
-                icon: 'src/games/dorfromatik-duel/assets/border.png',
+                icon: border,
             },
             {
                 name: 'Six',
-                icon: 'src/games/dorfromatik-duel/assets/six.png',
+                icon: six,
             },
             {
                 name: 'Flag green',
-                icon: 'src/games/dorfromatik-duel/assets/flag-green.png',
+                icon: flagGreen,
             },
             {
                 name: 'Flag yellow',
-                icon: 'src/games/dorfromatik-duel/assets/flag-yellow.png',
+                icon: flagYellow,
             },
             {
                 name: 'Flag red',
-                icon: 'src/games/dorfromatik-duel/assets/flag-red.png',
+                icon: flagRed,
             },
             {
                 name: 'Longest Railway',
-                icon: 'src/games/dorfromatik-duel/assets/longest-rail.png',
+                icon: longRail,
             },
             {
                 name: 'Longest River',
-                icon: 'src/games/dorfromatik-duel/assets/longest-river.png',
+                icon: longRiver,
             },
         ],
     };

@@ -1,4 +1,9 @@
 import leaf from './assets/leaf.png';
+import stone from './assets/stone.png';
+import flower from './assets/flower.png';
+import house from './assets/house.png';
+import water from './assets/water.png';
+import card from './assets/card.png';
 
 export default function getDefinition() {
     return {
@@ -16,43 +21,43 @@ export default function getDefinition() {
             },
             {
                 name: 'Stone',
-                icon: 'src/games/harmonies/assets/stone.png',
+                icon: stone,
             },
             {
                 name: 'Flower',
-                icon: 'src/games/harmonies/assets/flower.png',
+                icon: flower,
             },
             {
                 name: 'House',
-                icon: 'src/games/harmonies/assets/house.png',
+                icon: house,
             },
             {
                 name: 'Water',
-                icon: 'src/games/harmonies/assets/water.png',
+                icon: water,
             },
             {
                 name: 'Animal',
-                icon: 'src/games/harmonies/assets/card.png',
+                icon: card,
             },
             {
                 name: 'Animal',
-                icon: 'src/games/harmonies/assets/card.png',
+                icon: card,
             },
             {
                 name: 'Animal',
-                icon: 'src/games/harmonies/assets/card.png',
+                icon: card,
             },
             {
                 name: 'Animal',
-                icon: 'src/games/harmonies/assets/card.png',
+                icon: card,
             },
             {
                 name: 'Animal',
-                icon: 'src/games/harmonies/assets/card.png',
+                icon: card,
             },
             {
                 name: 'Animal',
-                icon: 'src/games/harmonies/assets/card.png',
+                icon: card,
             },
         ],
     };
