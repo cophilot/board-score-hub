@@ -1,0 +1,28 @@
+import { Route, Routes as ReactRoutes, HashRouter } from 'react-router-dom';
+import HomeView from './views/HomeView';
+import HarmoniesView from './games/harmonies/View';
+import SevenWondersDuelView from './games/seven-wonders-duel/View';
+import DorfromatikDuelView from './games/dorfromatik-duel/View';
+function Routes() {
+    return (
+        <>
+            <HashRouter>
+                <ReactRoutes>
+                    <Route
+                        path="/game/dorfromatik-duel"
+                        Component={DorfromatikDuelView}
+                    />
+                    <Route
+                        path="/game/seven-wonders-duel"
+                        Component={SevenWondersDuelView}
+                    />
+                    <Route path="/game/harmonies" Component={HarmoniesView} />
+                    <Route path="/" Component={HomeView} />
+                    <Route path="*" Component={HomeView} />
+                </ReactRoutes>
+            </HashRouter>
+        </>
+    );
+}
+
+export default Routes;

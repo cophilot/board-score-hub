@@ -1,0 +1,197 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from 'react';
+import './BoardScoreTable.scss';
+import GameStorage from '../utils/GameStorage';
+
+interface BoardScoreTableProps {
+    definition: any;
+    playerSize: number;
+}
+
+/**
+ * This is a BoardScoreTable component
+ * @author cophilot
+ * @version 1.0.0
+ * @created 2024-7-21
+ */
+function BoardScoreTable({ definition, playerSize }: BoardScoreTableProps) {
+    const playerSizes = Array.from(Array(playerSize).keys());
+    const rows = definition.rows || [];
+
+    const [tableMatrix, setTableMatrix] = useState(
+        GameStorage.getGameMatrix(
+            definition.title,
+            getEmptyTbaleMatrix(rows.length, playerSize)
+        )
+    );
+    const [totalRow, setTotalRow] = useState(
+        Array.from(Array(playerSize).keys()).map(() => 0)
+    );
+    const [playerNames, setPlayerNames] = useState(
+        GameStorage.getPlayerNames(definition.title, [])
+    );
+
+    useEffect(() => {
+        const newTotalRow = Array.from(Array(playerSize).keys()).map(
+            (playerIndex) => getColumnTotal(playerIndex)
+        );
+        setTotalRow(newTotalRow);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [playerSize, tableMatrix]);
+
+    const getTableValue = (rowIndex: number, playerIndex: number) => {
+        return tableMatrix[rowIndex][playerIndex];
+    };
+
+    const setTableValue = (
+        rowIndex: number,
+        playerIndex: number,
+        value: any
+    ) => {
+        // return if value is not a number
+        if (isNaN(value)) {
+            return;
+        }
+        const newTableMatrix = tableMatrix.map(
+            (row: number[], index: number) => {
+                if (index === rowIndex) {
+                    row[playerIndex] = Number(value);
+                }
+                return row;
+            }
+        );
+        setTableMatrix(newTableMatrix);
+        GameStorage.setGameMatrix(definition.title, newTableMatrix);
+    };
+
+    const getColumnTotal = (playerIndex: number) => {
+        return tableMatrix.reduce((acc: number, row: number[]) => {
+            if (isNaN(row[playerIndex])) {
+                return acc;
+            }
+            return acc + row[playerIndex];
+        }, 0);
+    };
+
+    const getWinningScore = () => {
+        const winMode = definition.winMode || 'most';
+        const winFn = winMode === 'most' ? Math.max : Math.min;
+        const value = winFn(...totalRow);
+        // check if all values are the same
+        if (totalRow.every((val) => val === value)) {
+            return null;
+        }
+        return value;
+    };
+
+    return (
+        <table className="board-score-table">
+            <thead>
+                <tr key="header">
+                    <th key="-1"></th>
+                    {playerSizes.map((index) => (
+                        <th key={index}>
+                            <input
+                                type="text"
+                                placeholder={'P' + (index + 1)}
+                                value={playerNames[index] || ''}
+                                onChange={(e) => {
+                                    const newPlayerNames = playerNames.slice();
+                                    newPlayerNames[index] = e.target.value;
+                                    setPlayerNames(newPlayerNames);
+                                    GameStorage.setPlayerNames(
+                                        definition.title,
+                                        newPlayerNames
+                                    );
+                                }}
+                            />
+                        </th>
+                    ))}
+                </tr>
+            </thead>
+            <tbody>
+                {rows.map((row: any, index: number) => (
+                    <tr key={index}>
+                        <FirstRowCell row={row} />
+                        {playerSizes.map((playerIndex) => (
+                            <InputCell
+                                key={playerIndex}
+                                rowIndex={index}
+                                playerIndex={playerIndex}
+                                getValueFunction={getTableValue}
+                                setValueFunction={setTableValue}
+                            />
+                        ))}
+                    </tr>
+                ))}
+                <tr key="total" className="total-row">
+                    <FirstRowCell row={{ name: 'Total' }} />
+                    {totalRow.map((value, playerIndex) => (
+                        <td
+                            key={playerIndex}
+                            className={
+                                'total-cell ' +
+                                (getWinningScore() == value ? 'win' : '')
+                            }>
+                            {isNaN(value) ? 0 : value}
+                        </td>
+                    ))}
+                </tr>
+            </tbody>
+        </table>
+    );
+}
+export default BoardScoreTable;
+
+type InputCellProps = {
+    rowIndex: number;
+    playerIndex: number;
+    getValueFunction: (rowIndex: number, playerIndex: number) => any;
+    setValueFunction: (
+        rowIndex: number,
+        playerIndex: number,
+        value: any
+    ) => void;
+};
+
+function InputCell({
+    rowIndex,
+    playerIndex,
+    getValueFunction,
+    setValueFunction,
+}: InputCellProps) {
+    let value = getValueFunction(rowIndex, playerIndex);
+    if (value === 0) {
+        value = '';
+    }
+
+    return (
+        <td>
+            <input
+                type="text"
+                onChange={(e) =>
+                    setValueFunction(rowIndex, playerIndex, e.target.value)
+                }
+                value={value}
+            />
+        </td>
+    );
+}
+
+type FirstRowCellProps = {
+    row: any;
+};
+
+function FirstRowCell({ row }: FirstRowCellProps) {
+    let inner = row.name;
+    if (row.icon) {
+        inner = <img src={row.icon} alt={row.name} className="row-icon" />;
+    }
+    return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
+}
+
+function getEmptyTbaleMatrix(rows: number, cols: number) {
+    return Array.from(Array(rows).keys()).map(() =>
+        Array.from(Array(cols).keys()).map(() => 0)
+    );
+}

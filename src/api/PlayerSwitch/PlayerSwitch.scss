@@ -1,0 +1,8 @@
+.player-switch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    // max 4 buttons per row
+    max-width: 350px;
+}

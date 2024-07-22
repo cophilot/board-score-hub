@@ -1,16 +1,10 @@
 import './App.scss';
-import BoardScorePage from './components/BoardScorePage/BoardScorePage';
+import Routes from './Routes';
 
 function App() {
     return (
         <>
-            <BoardScorePage
-                definition={{
-                    bgColor: 'blue',
-                    title: 'Harmonies',
-                    fontColor: 'red',
-                }}
-            />
+            <Routes />
         </>
     );
 }
