@@ -14,11 +14,15 @@ export default class StyleUtils {
     static setSecondaryColor(color: string = '#E9BD43') {
         document.documentElement.style.setProperty('--secondary-color', color);
     }
+    static setFontFamily(fontFamily: string = 'Ubuntu') {
+        document.documentElement.style.setProperty('--font-family', fontFamily);
+    }
 
     static setDefaultValues() {
         StyleUtils.setBackGroundColor();
         StyleUtils.setFontColor();
         StyleUtils.setPrimaryColor();
         StyleUtils.setSecondaryColor();
+        StyleUtils.setFontFamily();
     }
 }

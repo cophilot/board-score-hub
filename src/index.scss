@@ -1,5 +1,5 @@
 :root {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: var(--font-family);
     font-weight: 400;
 
     color: var(--font-color);
@@ -15,7 +15,7 @@ input {
     background-color: transparent;
     border: none;
     text-align: center;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: var(--font-family);
     font-weight: bold;
     &:focus {
         outline: none;
@@ -57,6 +57,7 @@ a {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
     border-radius: 5px;
     background-color: var(--bg-color);
+    font-family: var(--font-family);
 }
 
 .selected {

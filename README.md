@@ -1,30 +1,29 @@
-# React + TypeScript + Vite
+<div align="center">
+  <br />
+  <img src="src/assets/logo.png" alt="board-score-hubLogo" width="30%"/>
+  <h1>board-score-hub</h1>
+  <p>
+     Description
+  </p>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<!-- Badges -->
+<div align="center">
+   <a href="https://github.com/cophilot/board-score-hub/blob/master/LICENSE">
+       <img src="https://img.shields.io/github/license/cophilot/board-score-hub" alt="license" />
+   </a>
+   <a href="https://github.com/cophilot/board-score-hub/stargazers">
+       <img src="https://img.shields.io/github/stars/cophilot/board-score-hub" alt="stars" />
+   </a>
+   <a href="https://github.com/cophilot/board-score-hub/commits/master">
+       <img src="https://img.shields.io/github/last-commit/cophilot/board-score-hub" alt="last commit" />
+   </a>
+</div>
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+BoardScoreHub is a web application that is used for keeping track of scores for board games. It is a simple and easy-to-use application that allows users to create and manage games, players, and scores. The application is built using React.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+by [Philipp B.](https://github.com/cophilot)

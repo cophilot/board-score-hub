@@ -40,7 +40,6 @@ export default class ColorUtils {
     static isDarkColor(color: string): boolean {
         const rgb = this.hexToRgb(color);
         const lum = this.luminance(rgb);
-        console.log(lum);
         return lum < 0.05;
     }
 }

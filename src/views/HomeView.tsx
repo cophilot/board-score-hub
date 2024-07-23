@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import StyleUtils from '../utils/StyleUtils';
+import StyleUtils from '../api/utils/StyleUtils';
 import { useNavigate } from 'react-router-dom';
 import StringUtils from '../utils/StringUtils';
 import By from '../components/By';
@@ -13,7 +13,7 @@ export default function HomeView() {
         document.title = 'BoardScoreHub';
     }, []);
 
-    const games = getAllGames();
+    const games = getAllGames().map((game) => game.definition.title);
     games.sort((a, b) => a.localeCompare(b));
 
     return (
@@ -36,6 +36,10 @@ export default function HomeView() {
                     <LinkGameButton key={game} game={game} />
                 ))}
             </div>
+            <h2>External</h2>
+            <LinkGameButton game="Cascadia$x$https://cascoria.philipp-bonin.com/#/" />
+            {/*             <h2>Custom</h2>
+             */}{' '}
             <By />
         </div>
     );
@@ -47,11 +51,11 @@ function LinkGameButton({ game }: { game: string }) {
         const [name, link] = game.split('$x$');
         return (
             <a
-                className="btn selected"
+                className="btn selected mb"
                 href={link}
                 target="_blank"
-                style={{ minWidth: '250px' }}>
-                {name}
+                style={{ minWidth: '350px' }}>
+                {name} <i className="bi bi-arrow-up-right-square"></i>
             </a>
         );
     }

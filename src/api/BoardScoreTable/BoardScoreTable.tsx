@@ -139,7 +139,9 @@ function BoardScoreTable({
                 {rows.map(
                     (row: any, index: number) =>
                         (rounds === -1 || index < rounds) && (
-                            <tr key={index} style={getStyleFromRow(row)}>
+                            <tr
+                                key={index}
+                                style={getStyleFromRow(row, definition, index)}>
                                 <FirstRowCell
                                     row={row}
                                     helpOn={gameSettings.showHelp}
@@ -250,11 +252,15 @@ const getColumnTotal = (
     }, 0);
 };
 
-function getStyleFromRow(row: any) {
+function getStyleFromRow(row: any, definition: any, rowIndex: number) {
     const style: any = {};
+
     if (row.bgColor) {
         style.backgroundColor = row.bgColor;
+    } else if (definition.stripColor && rowIndex % 2 === 1) {
+        style.backgroundColor = definition.stripColor;
     }
+
     if (row.fontColor) {
         style.color = row.fontColor;
     }

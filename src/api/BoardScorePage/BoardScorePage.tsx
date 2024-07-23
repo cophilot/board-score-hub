@@ -2,7 +2,7 @@
 import './BoardScorePage.scss';
 import { useEffect, useState } from 'react';
 import PlayerSwitch from '../PlayerSwitch/PlayerSwitch';
-import StyleUtils from '../../utils/StyleUtils';
+import StyleUtils from '../utils/StyleUtils';
 import BoardScoreTable from '../BoardScoreTable/BoardScoreTable';
 import GameStorage from '../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
@@ -53,6 +53,7 @@ export default function BoardScorePage({
 
     const date = new Date().toLocaleDateString();
     const showHelpButton = definition.rows.some((row: any) => row.icon);
+
     return (
         <div className="board-score-page">
             {logo}
@@ -153,6 +154,11 @@ function setInitialAttributes(definition: any) {
     setAttributeIfPresent(
         definition.secondaryColor,
         StyleUtils.setSecondaryColor,
+        true
+    );
+    setAttributeIfPresent(
+        definition.fontFamily,
+        StyleUtils.setFontFamily,
         true
     );
 }

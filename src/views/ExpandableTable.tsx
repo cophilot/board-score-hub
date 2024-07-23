@@ -9,7 +9,6 @@ export default function ExpandableTable() {
     const [rows, setRows] = useState([
         {
             name: 'Row 1',
-            bgColor: 'white',
         },
     ]);
 
@@ -26,6 +25,7 @@ export default function ExpandableTable() {
             playerSizes: [1, 2, 3, 4, 5, 6],
             winMode: WinMode.NONE,
             rows: rows,
+            stripColor: '#d8d8d8',
         };
     }, [rows]);
 
@@ -33,16 +33,10 @@ export default function ExpandableTable() {
         if (row < rows.length - 1) {
             return;
         }
-        const newRowNumber = rows.length + 1;
-        let bgColor = 'white';
-        if (newRowNumber % 2 === 0) {
-            bgColor = '#d8d8d8';
-        }
         const newRows = [
             ...rows,
             {
-                name: `Row ${newRowNumber}`,
-                bgColor: bgColor,
+                name: `Row ${rows.length + 1}`,
             },
         ];
         setRows(newRows);

@@ -8,7 +8,7 @@ function By() {
     return (
         <div
             style={{
-                marginTop: '20px',
+                marginTop: '50px',
                 marginBottom: '50px',
                 fontSize: '16px',
             }}>

@@ -1,6 +1,6 @@
 import GameView from '../../components/GameView';
 import getDefinition from './definition';
 
-export default function $$name.p$$View() {
+export default function CalicoView() {
     return <GameView definition={getDefinition()} />;
 }
