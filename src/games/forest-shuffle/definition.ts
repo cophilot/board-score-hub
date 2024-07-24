@@ -1,22 +1,43 @@
 import { WinMode } from '../../api/types/WinMode';
-
+import cardIcon from './assets/card.png';
+import topIcon from './assets/top.png';
+import downIcon from './assets/down.png';
+import leftIcon from './assets/left.png';
+import rightIcon from './assets/right.png';
+import caveIcon from './assets/cave.png';
 export default function getDefinition() {
     return {
-        title: 'ForestShuffle',
-        //bgColor: '#fff',
-        //fontColor: '#000',
-        //primaryColor: '#fff',
-        //secondaryColor: '#000',
-        playerSizes: [1, 2, 3, 4],
+        title: 'Forest Shuffle',
+        bgColor: '#dce2c9',
+        fontColor: '#315a39',
+        primaryColor: '#bbad86',
+        secondaryColor: '#b11917',
+        playerSizes: [2, 3, 4, 5],
         winMode: WinMode.MOST,
         rows: [
             {
-                name: 'Row1',
+                name: 'Tree',
+                icon: cardIcon,
             },
-
             {
-                name: 'Row2',
-                icon: 'src/games/forest-shuffle/assets/test.png',
+                name: 'Cards on top',
+                icon: topIcon,
+            },
+            {
+                name: 'Cards on right',
+                icon: rightIcon,
+            },
+            {
+                name: 'Cards below',
+                icon: downIcon,
+            },
+            {
+                name: 'Cards on left',
+                icon: leftIcon,
+            },
+            {
+                name: 'Cave',
+                icon: caveIcon,
             },
         ],
     };

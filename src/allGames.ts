@@ -7,6 +7,8 @@ import Scout from './games/scout/main';
 import SevenWondersDuel from './games/seven-wonders-duel/main';
 import TerraformingMars from './games/terraforming-mars/main';
 import Wizard from './games/wizard/main';
+import Wingspan from './games/wingspan/main';
+import ForestShuffle from './games/forest-shuffle/main';
 
 export default function getAllGames() {
     return [
@@ -19,5 +21,7 @@ export default function getAllGames() {
         SevenWondersDuel,
         TerraformingMars,
         Wizard,
+        Wingspan,
+        ForestShuffle,
     ];
 }

@@ -7,6 +7,8 @@ export default function getDefinition() {
         //fontColor: '#000',
         //primaryColor: '#fff',
         //secondaryColor: '#000',
+        // fontFamily: FontUtils.PLAYFUL,
+        // stripColor: '#000',
         playerSizes: [1, 2, 3, 4],
         winMode: WinMode.MOST,
         rows: [
