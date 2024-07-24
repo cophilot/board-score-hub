@@ -48,10 +48,10 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .board-score-table {
         font-size: 16px;
-        width: 95%;
+        max-width: 95%;
         th,
         td {
             padding: 2px;

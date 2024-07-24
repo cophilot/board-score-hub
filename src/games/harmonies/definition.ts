@@ -5,6 +5,7 @@ import house from './assets/house.png';
 import water from './assets/water.png';
 import card from './assets/card.png';
 import { WinMode } from '../../api/types/WinMode';
+import FontUtils from '../../api/utils/FontUtils';
 
 export default function getDefinition() {
     return {
@@ -13,6 +14,8 @@ export default function getDefinition() {
         fontColor: 'black',
         primaryColor: '#0094b8',
         secondaryColor: '#f7ac1f',
+        stripColor: '#ccbd9f',
+        fontFamily: FontUtils.PLAYFUL,
         playerSizes: [1, 2, 3, 4],
         winMode: WinMode.MOST,
         rows: [

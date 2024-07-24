@@ -39,7 +39,7 @@ export default function HomeView() {
             <h2>External</h2>
             <LinkGameButton game="Cascadia$x$https://cascoria.philipp-bonin.com/#/" />
             {/*             <h2>Custom</h2>
-             */}{' '}
+             */}
             <By />
         </div>
     );
@@ -50,13 +50,15 @@ function LinkGameButton({ game }: { game: string }) {
     if (game.includes('$x$')) {
         const [name, link] = game.split('$x$');
         return (
-            <a
-                className="btn selected mb"
-                href={link}
-                target="_blank"
-                style={{ minWidth: '350px' }}>
-                {name} <i className="bi bi-arrow-up-right-square"></i>
-            </a>
+            <div className="btn selected" style={{ width: '250px' }}>
+                <a
+                    className=""
+                    href={link}
+                    target="_blank"
+                    style={{ color: 'white' }}>
+                    {name} <i className="bi bi-arrow-up-right-square"></i>
+                </a>
+            </div>
         );
     }
 

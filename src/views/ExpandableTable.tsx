@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import BoardScorePage from '../api/BoardScorePage/BoardScorePage';
 import { WinMode } from '../api/types/WinMode';
 import By from '../components/By';
+import Logo from '../components/Logo';
 
 export default function ExpandableTable() {
     const rowsLSKey = 'expandable table-rows';
@@ -42,8 +43,13 @@ export default function ExpandableTable() {
         setRows(newRows);
         localStorage.setItem(rowsLSKey, JSON.stringify(newRows));
     };
+    const logo = <Logo size={100} />;
+
     return (
-        <BoardScorePage definition={definition} onCellChange={onCellChange}>
+        <BoardScorePage
+            definition={definition}
+            onCellChange={onCellChange}
+            logo={logo}>
             <By />
         </BoardScorePage>
     );
