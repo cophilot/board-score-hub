@@ -49,6 +49,7 @@ export default function BoardScorePage({
 
     useEffect(() => {
         setInitialAttributes(definition);
+        //setTimeout(() => setInitialAttributes(definition), 10);
     }, [definition]);
 
     const date = new Date().toLocaleDateString();

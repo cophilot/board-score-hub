@@ -38,8 +38,14 @@ export default function HomeView() {
             </div>
             <h2>External</h2>
             <LinkGameButton game="Cascadia$x$https://cascoria.philipp-bonin.com/#/" />
-            {/*             <h2>Custom</h2>
-             */}
+            <h2>Custom</h2>
+            <button
+                className="btn selected wide"
+                onClick={() => {
+                    navigate('/custom/create');
+                }}>
+                Create <i className="bi bi-plus-circle"></i>
+            </button>
             <By />
         </div>
     );
