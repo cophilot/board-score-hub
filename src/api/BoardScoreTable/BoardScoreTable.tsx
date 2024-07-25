@@ -205,7 +205,7 @@ function InputCell({
     return (
         <td>
             <input
-                type="text"
+                type="number"
                 onChange={(e) =>
                     setValueFunction(rowIndex, playerIndex, e.target.value)
                 }

@@ -30,6 +30,15 @@
         max-width: 50px;
         color: var(--font-color);
     }
+    ::placeholder {
+        color: var(--font-color);
+        opacity: 1; /* Firefox */
+    }
+    ::-ms-input-placeholder {
+        /* Edge 12 -18 */
+        color: var(--font-color);
+        color: red;
+    }
     .row-icon {
         height: 70px;
     }
@@ -48,20 +57,32 @@
     }
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
 @media (max-width: 700px) {
     .board-score-table {
-        font-size: 16px;
+        font-size: 18px;
         max-width: 95%;
         th,
         td {
             padding: 2px;
-            font-size: 16px;
+            font-size: 18px;
         }
         .row-icon {
             height: 60px;
         }
         input {
-            font-size: 16px;
+            font-size: 18px;
             max-width: 30px;
         }
         .row-help {

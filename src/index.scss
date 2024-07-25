@@ -58,6 +58,10 @@ a {
     border-radius: 5px;
     background-color: var(--bg-color);
     font-family: var(--font-family);
+    transition: all 0.3s;
+    &:hover {
+        scale: 1.1;
+    }
 }
 
 .selected {
