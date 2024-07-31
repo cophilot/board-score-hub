@@ -26,4 +26,8 @@ BoardScoreHub is a web application that is used for keeping track of scores for 
 
 ---
 
+## Add a game
+
+---
+
 by [Philipp B.](https://github.com/cophilot)
