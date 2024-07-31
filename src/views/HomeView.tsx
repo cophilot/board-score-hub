@@ -5,6 +5,7 @@ import StringUtils from '../utils/StringUtils';
 import By from '../components/By';
 import getAllGames from '../allGames';
 import Logo from '../components/Logo';
+import DevMessage from '../components/DevMessage/DevMessage';
 
 export default function HomeView() {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function HomeView() {
     return (
         <div>
             <Logo />
+            <DevMessage />
             <h2>General</h2>
             <div className="ver">
                 <button
@@ -37,15 +39,20 @@ export default function HomeView() {
                 ))}
             </div>
             <h2>External</h2>
-            <LinkGameButton game="Cascadia$x$https://cascoria.philipp-bonin.com/#/" />
+            <div className="ver">
+                <LinkGameButton game="Cascadia$x$https://cascoria.philipp-bonin.com/#/" />
+            </div>
             <h2>Custom</h2>
-            <button
+            <b>
+                <i>Coming soon...</i>
+            </b>
+            {/*  <button
                 className="btn selected wide"
                 onClick={() => {
                     navigate('/custom/create');
                 }}>
                 Create <i className="bi bi-plus-circle"></i>
-            </button>
+            </button> */}
             <By />
         </div>
     );
