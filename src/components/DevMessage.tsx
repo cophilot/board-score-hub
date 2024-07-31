@@ -1,5 +1,3 @@
-import './DevMessage.scss';
-
 /**
  * This is a DevMessage component
  * @author cophilot
@@ -8,7 +6,7 @@ import './DevMessage.scss';
  */
 function DevMessage() {
     return (
-        <div className="dev-message">
+        <div className="msg">
             Please note that this is a{' '}
             <span className="imp">development version</span> of the website.
             Some features may not work as expected. If you encounter any issues,
