@@ -6,6 +6,7 @@ import StyleUtils from '../utils/StyleUtils';
 import BoardScoreTable from '../BoardScoreTable/BoardScoreTable';
 import GameStorage from '../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
+import UIUtils from '../utils/UIUtils';
 
 interface BoardScoreTableProps {
     definition: any;
@@ -109,32 +110,28 @@ export default function BoardScorePage({
         </div>
     );
 }
-function print() {
-    // hide all elements with class print-hide
-    const hideElements = document.getElementsByClassName('print-hide');
-    for (let i = 0; i < hideElements.length; i++) {
-        const element = hideElements[i] as HTMLElement;
-        element.style.display = 'none';
-    }
-    const showElements = document.getElementsByClassName('print-show');
-    for (let i = 0; i < showElements.length; i++) {
-        const element = showElements[i] as HTMLElement;
-        element.style.display = 'block';
-    }
-    setTimeout(() => {
-        window.print();
-        setTimeout(() => {
-            for (let i = 0; i < hideElements.length; i++) {
-                const element = hideElements[i] as HTMLElement;
-                element.style.display = 'block';
-            }
 
-            for (let i = 0; i < showElements.length; i++) {
-                const element = showElements[i] as HTMLElement;
-                element.style.display = 'none';
-            }
-        }, 100);
-    }, 100);
+function print() {
+    const displayStyles = UIUtils.hideElementsWithClass('print-hide');
+    UIUtils.showElementsWithClass('print-show');
+
+    setTimeout(() => {
+        const html = document.documentElement.outerHTML;
+        const win = window.open('', 'printwindow');
+        if (!win) {
+            alert('Please allow popups for this website');
+            return;
+        }
+        win.document.write(html);
+        setTimeout(() => {
+            win.print();
+            win.close();
+            setTimeout(() => {
+                UIUtils.showElementsWithClass('print-hide', displayStyles);
+                UIUtils.hideElementsWithClass('print-show');
+            }, 500);
+        }, 500);
+    }, 500);
 }
 
 function setInitialAttributes(definition: any) {
