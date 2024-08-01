@@ -20,11 +20,11 @@ export default function getDefinition() {
                 icon: cardIcon,
             },
             {
-                name: 'Cards on top',
+                name: 'Cards top',
                 icon: topIcon,
             },
             {
-                name: 'Cards on right',
+                name: 'Cards right',
                 icon: rightIcon,
             },
             {
@@ -32,7 +32,7 @@ export default function getDefinition() {
                 icon: downIcon,
             },
             {
-                name: 'Cards on left',
+                name: 'Cards left',
                 icon: leftIcon,
             },
             {

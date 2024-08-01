@@ -221,18 +221,42 @@ type FirstRowCellProps = {
 };
 
 function FirstRowCell({ row, helpOn }: FirstRowCellProps) {
-    let inner = row.name;
-    if (row.icon) {
-        inner = <img src={row.icon} alt={row.name} className="row-icon" />;
-        if (helpOn) {
-            inner = (
+    const [showHelp, setShowHelp] = useState(helpOn);
+    const [inner, setInner] = useState(row.name);
+
+    const onIconClick = () => {
+        if (helpOn || showHelp) {
+            return;
+        }
+        setShowHelp(true);
+        setTimeout(() => {
+            setShowHelp(false);
+        }, 2000);
+    };
+
+    useEffect(() => {
+        if (!row.icon) {
+            return;
+        }
+        let newInner = (
+            <img
+                src={row.icon}
+                alt={row.name}
+                className="row-icon"
+                onClick={onIconClick}
+            />
+        );
+        if (helpOn || showHelp) {
+            newInner = (
                 <>
-                    {inner}
+                    {newInner}
                     <p className="row-help">{row.name}</p>
                 </>
             );
         }
-    }
+        setInner(newInner);
+    }, [row.icon, row.name, helpOn, showHelp]);
+
     return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
 }
 
