@@ -221,16 +221,16 @@ type FirstRowCellProps = {
 };
 
 function FirstRowCell({ row, helpOn }: FirstRowCellProps) {
-    const [showHelp, setShowHelp] = useState(helpOn);
+    const [showTempHelp, setShowTempHelp] = useState(false);
     const [inner, setInner] = useState(row.name);
 
     const onIconClick = () => {
-        if (helpOn || showHelp) {
+        if (helpOn || showTempHelp) {
             return;
         }
-        setShowHelp(true);
+        setShowTempHelp(true);
         setTimeout(() => {
-            setShowHelp(false);
+            setShowTempHelp(false);
         }, 2000);
     };
 
@@ -246,7 +246,7 @@ function FirstRowCell({ row, helpOn }: FirstRowCellProps) {
                 onClick={onIconClick}
             />
         );
-        if (helpOn || showHelp) {
+        if (helpOn || showTempHelp) {
             newInner = (
                 <>
                     {newInner}
@@ -255,7 +255,8 @@ function FirstRowCell({ row, helpOn }: FirstRowCellProps) {
             );
         }
         setInner(newInner);
-    }, [row.icon, row.name, helpOn, showHelp]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [row.icon, row.name, helpOn, showTempHelp]);
 
     return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
 }
