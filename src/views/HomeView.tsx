@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import StyleUtils from '../api/utils/StyleUtils';
 import { useNavigate } from 'react-router-dom';
-import StringUtils from '../utils/StringUtils';
 import By from '../components/By';
-import getAllGames from '../allGames';
+import { getSortedGameNames } from '../allGames';
 import Logo from '../components/Logo';
 import DevMessage from '../components/DevMessage';
+import GameButton from '../components/GameButton/GameButton';
+import FavoriteGameSection from '../components/FavoriteGameSection/FavoriteGameSection';
 
 export default function HomeView() {
     const navigate = useNavigate();
@@ -14,8 +15,7 @@ export default function HomeView() {
         document.title = 'BoardScoreHub';
     }, []);
 
-    const games = getAllGames().map((game) => game.definition.title);
-    games.sort((a, b) => a.localeCompare(b));
+    const games = getSortedGameNames();
 
     return (
         <div>
@@ -32,10 +32,12 @@ export default function HomeView() {
                 </button>
                 {/* <button className="btn selected wide">Fix size Table</button> */}
             </div>
+            <h2>Favorites</h2>
+            <FavoriteGameSection />
             <h2>Games</h2>
             <div className="ver">
                 {games.map((game) => (
-                    <LinkGameButton key={game} game={game} />
+                    <GameButton key={game} game={game} />
                 ))}
             </div>
             <p>
@@ -50,7 +52,11 @@ export default function HomeView() {
             </p>
             <h2>External</h2>
             <div className="ver">
-                <LinkGameButton game="Cascadia$x$https://cascoria.philipp-bonin.com/#/" />
+                <GameButton
+                    game="Cascadia"
+                    asLink
+                    link="https://cascoria.philipp-bonin.com/#/"
+                />
             </div>
             <h2>Custom</h2>
             <div className="msg">
@@ -65,33 +71,5 @@ export default function HomeView() {
             </button> */}
             <By />
         </div>
-    );
-}
-
-function LinkGameButton({ game }: { game: string }) {
-    const navigate = useNavigate();
-    if (game.includes('$x$')) {
-        const [name, link] = game.split('$x$');
-        return (
-            <div className="btn selected" style={{ width: '250px' }}>
-                <a
-                    className=""
-                    href={link}
-                    target="_blank"
-                    style={{ color: 'white' }}>
-                    {name} <i className="bi bi-arrow-up-right-square"></i>
-                </a>
-            </div>
-        );
-    }
-
-    return (
-        <button
-            className="btn selected wide"
-            onClick={() => {
-                navigate(`/game/${StringUtils.gameNameToPath(game)}`);
-            }}>
-            {game}
-        </button>
     );
 }

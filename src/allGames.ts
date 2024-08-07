@@ -10,7 +10,7 @@ import Wizard from './games/wizard/main';
 import Wingspan from './games/wingspan/main';
 import ForestShuffle from './games/forest-shuffle/main';
 
-export default function getAllGames() {
+export function getAllGames() {
     return [
         Everdell,
         Calico,
@@ -24,4 +24,15 @@ export default function getAllGames() {
         Wingspan,
         ForestShuffle,
     ];
+}
+
+export function getSortedGames() {
+    const games = getAllGames();
+    games.sort((a, b) => a.definition.title.localeCompare(b.definition.title));
+    return games;
+}
+
+export function getSortedGameNames(): string[] {
+    const games = getSortedGames();
+    return games.map((game) => game.definition.title);
 }

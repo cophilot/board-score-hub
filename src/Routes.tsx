@@ -1,7 +1,7 @@
 import { Route, Routes as ReactRoutes, HashRouter } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import ExpandableTable from './views/ExpandableTable';
-import getAllGames from './allGames';
+import { getAllGames } from './allGames';
 import StringUtils from './utils/StringUtils';
 import CreateCustomView from './views/CreateCustomView/CreateCustomView';
 
