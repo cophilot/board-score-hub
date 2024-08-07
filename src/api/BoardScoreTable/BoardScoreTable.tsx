@@ -25,6 +25,7 @@ function BoardScoreTable({
 }: BoardScoreTableProps) {
     const playerSizes = Array.from(Array(playerSize).keys());
     const rows = definition.rows || [];
+    const tableStyle = parseTableStyle(definition);
 
     const [tableMatrix, setTableMatrix] = useState(
         GameStorage.getGameMatrix(
@@ -65,13 +66,8 @@ function BoardScoreTable({
     const setTableValue = (
         rowIndex: number,
         playerIndex: number,
-        value: any
+        value: number
     ) => {
-        // return if value is not a number
-        if (isNaN(value)) {
-            return;
-        }
-
         let couldBeAdded = false;
         const newTableMatrix = tableMatrix.map(
             (row: number[], index: number) => {
@@ -110,7 +106,7 @@ function BoardScoreTable({
     };
 
     return (
-        <table className="board-score-table">
+        <table className="board-score-table" style={tableStyle}>
             <thead>
                 <tr key="header">
                     <th key="-1"></th>
@@ -139,30 +135,43 @@ function BoardScoreTable({
                 {rows.map(
                     (row: any, index: number) =>
                         (rounds === -1 || index < rounds) && (
-                            <tr
-                                key={index}
-                                style={getStyleFromRow(row, definition, index)}>
-                                <FirstRowCell
-                                    row={row}
-                                    helpOn={gameSettings.showHelp}
-                                />
-                                {playerSizes.map((playerIndex) => (
-                                    <InputCell
-                                        key={playerIndex}
-                                        rowIndex={index}
-                                        playerIndex={playerIndex}
-                                        getValueFunction={getTableValue}
-                                        setValueFunction={setTableValue}
-                                    />
-                                ))}
-                            </tr>
+                            <>
+                                {gameSettings.showHelp && row.icon && (
+                                    <tr
+                                        className="help-row"
+                                        key={'help-row-' + index}>
+                                        <td colSpan={playerSize + 1}>
+                                            {row.name +
+                                                (row.description
+                                                    ? ' - ' + row.description
+                                                    : '')}
+                                        </td>
+                                    </tr>
+                                )}
+                                <tr
+                                    key={index}
+                                    style={getStyleFromRow(
+                                        row,
+                                        definition,
+                                        index
+                                    )}>
+                                    <FirstRowCell row={row} />
+                                    {playerSizes.map((playerIndex) => (
+                                        <InputCell
+                                            row={row}
+                                            key={playerIndex}
+                                            rowIndex={index}
+                                            playerIndex={playerIndex}
+                                            getValueFunction={getTableValue}
+                                            setValueFunction={setTableValue}
+                                        />
+                                    ))}
+                                </tr>
+                            </>
                         )
                 )}
                 <tr key="total" className="total-row">
-                    <FirstRowCell
-                        row={{ name: 'Total' }}
-                        helpOn={gameSettings.showHelp}
-                    />
+                    <FirstRowCell row={{ name: 'Total' }} />
                     {totalRow.map((value, playerIndex) => (
                         <td
                             key={playerIndex}
@@ -181,6 +190,7 @@ function BoardScoreTable({
 export default BoardScoreTable;
 
 type InputCellProps = {
+    row: any;
     rowIndex: number;
     playerIndex: number;
     getValueFunction: (rowIndex: number, playerIndex: number) => any;
@@ -192,6 +202,7 @@ type InputCellProps = {
 };
 
 function InputCell({
+    row,
     rowIndex,
     playerIndex,
     getValueFunction,
@@ -202,13 +213,22 @@ function InputCell({
         value = '';
     }
 
+    const setValue = (value: any) => {
+        if (isNaN(value)) {
+            return;
+        }
+        let newValue = Number(value);
+        if (row.negative && newValue > 0) {
+            newValue *= -1;
+        }
+        setValueFunction(rowIndex, playerIndex, newValue);
+    };
+
     return (
         <td>
             <input
                 type="number"
-                onChange={(e) =>
-                    setValueFunction(rowIndex, playerIndex, e.target.value)
-                }
+                onChange={(e) => setValue(e.target.value)}
                 value={value}
             />
         </td>
@@ -220,44 +240,11 @@ type FirstRowCellProps = {
     helpOn?: boolean;
 };
 
-function FirstRowCell({ row, helpOn }: FirstRowCellProps) {
-    const [showTempHelp, setShowTempHelp] = useState(false);
-    const [inner, setInner] = useState(row.name);
-
-    const onIconClick = () => {
-        if (helpOn || showTempHelp) {
-            return;
-        }
-        setShowTempHelp(true);
-        setTimeout(() => {
-            setShowTempHelp(false);
-        }, 2000);
-    };
-
-    useEffect(() => {
-        if (!row.icon) {
-            return;
-        }
-        let newInner = (
-            <img
-                src={row.icon}
-                alt={row.name}
-                className="row-icon"
-                onClick={onIconClick}
-            />
-        );
-        if (helpOn || showTempHelp) {
-            newInner = (
-                <>
-                    {newInner}
-                    <p className="row-help">{row.name}</p>
-                </>
-            );
-        }
-        setInner(newInner);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [row.icon, row.name, helpOn, showTempHelp]);
-
+function FirstRowCell({ row }: FirstRowCellProps) {
+    let inner = row.name;
+    if (row.icon) {
+        inner = <img src={row.icon} alt={row.name} className="row-icon" />;
+    }
     return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
 }
 
@@ -296,4 +283,19 @@ function getEmptyTbaleMatrix(rows: number, cols: number) {
     return Array.from(Array(rows).keys()).map(() =>
         Array.from(Array(cols).keys()).map(() => 0)
     );
+}
+
+function parseTableStyle(definition: any) {
+    const style: any = {};
+    style.borderSpacing = getDefValue(definition, 'tableSpacing', 0);
+    style.border = getDefValue(
+        definition,
+        'tableBorder',
+        '2px solid var(--primary-color)'
+    );
+    return style;
+}
+
+function getDefValue(definition: any, key: string, fallback: any) {
+    return definition[key] || fallback;
 }
