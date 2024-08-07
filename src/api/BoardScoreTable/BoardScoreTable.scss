@@ -1,8 +1,6 @@
 .board-score-table {
     width: 100%;
     max-width: 800px;
-    border-collapse: collapse;
-    border-spacing: 0;
     margin: 20px 20px;
     font-size: 20px;
     line-height: 1;
@@ -17,7 +15,7 @@
 
     th,
     td {
-        border: 3px solid var(--primary-color);
+        border: 1px solid var(--primary-color);
         padding: 20px;
         height: 50px;
         font-size: 30px;
@@ -49,9 +47,16 @@
         background-color: var(--primary-color);
         color: var(--bg-color);
     }
-    .row-help {
-        font-size: 16px;
-        opacity: 0.7;
+    .help-row {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        td {
+            padding: 0;
+            height: 30px;
+            font-weight: bold;
+            margin: 0;
+            font-size: 18px;
+        }
     }
 }
 
@@ -83,9 +88,11 @@ input[type='number'] {
             font-size: 18px;
             max-width: 30px;
         }
-        .row-help {
-            font-size: 11px;
-            opacity: 0.7;
+        .help-row {
+            td {
+                height: 20px;
+                font-size: 14px;
+            }
         }
     }
 }
