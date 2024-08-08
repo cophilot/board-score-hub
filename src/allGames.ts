@@ -9,6 +9,7 @@ import TerraformingMars from './games/terraforming-mars/main';
 import Wizard from './games/wizard/main';
 import Wingspan from './games/wingspan/main';
 import ForestShuffle from './games/forest-shuffle/main';
+import WorldWonders from './games/world-wonders/main';
 
 export function getAllGames() {
     return [
@@ -22,6 +23,7 @@ export function getAllGames() {
         TerraformingMars,
         Wizard,
         Wingspan,
+        WorldWonders,
         ForestShuffle,
     ];
 }

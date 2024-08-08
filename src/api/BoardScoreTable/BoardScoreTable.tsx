@@ -141,10 +141,12 @@ function BoardScoreTable({
                                         className="help-row"
                                         key={'help-row-' + index}>
                                         <td colSpan={playerSize + 1}>
-                                            {row.name +
-                                                (row.description
+                                            <b>{row.name}</b>
+                                            <i>
+                                                {row.description
                                                     ? ' - ' + row.description
-                                                    : '')}
+                                                    : ''}
+                                            </i>
                                         </td>
                                     </tr>
                                 )}
