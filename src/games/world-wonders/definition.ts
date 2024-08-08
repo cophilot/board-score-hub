@@ -14,7 +14,7 @@ export default function getDefinition() {
         fontColor: '#6c5f56',
         primaryColor: '#b39d90',
         secondaryColor: '#ffec33',
-        fontFamily: FontUtils.CLASSIC,
+        fontFamily: FontUtils.ANCIENT,
         stripColor: '#cfbeb0',
         playerSizes: [1, 2, 3, 4, 5],
         winMode: WinMode.MOST,

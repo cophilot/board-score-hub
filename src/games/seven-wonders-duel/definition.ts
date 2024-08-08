@@ -7,6 +7,7 @@ import greenChip from './assets/green-chip.png';
 import coins from './assets/coins.png';
 import military from './assets/military.png';
 import { WinMode } from '../../api/types/WinMode';
+import FontUtils from '../../api/utils/FontUtils';
 
 export default function getDefinition() {
     return {
@@ -17,6 +18,7 @@ export default function getDefinition() {
         secondaryColor: '#2a7c6d',
         playerSizes: [2],
         winMode: WinMode.MOST,
+        fontFamily: FontUtils.ANCIENT,
         rows: [
             {
                 name: 'Blue cards',
