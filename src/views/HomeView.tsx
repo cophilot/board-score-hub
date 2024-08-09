@@ -7,6 +7,7 @@ import Logo from '../components/Logo';
 import DevMessage from '../components/DevMessage';
 import GameButton from '../components/GameButton/GameButton';
 import FavoriteGameSection from '../components/FavoriteGameSection/FavoriteGameSection';
+import RouteButton from '../components/RouteButton/RouteButton';
 
 export default function HomeView() {
     const navigate = useNavigate();
@@ -66,9 +67,11 @@ export default function HomeView() {
                 className="btn selected wide"
                 onClick={() => {
                     navigate('/custom/create');
-                }}>
-                Create <i className="bi bi-plus-circle"></i>
-            </button> */}
+                    }}>
+                    Create <i className="bi bi-plus-circle"></i>
+                    </button> */}
+            <h2>Other</h2>
+            <RouteButton to="privacy">Privacy</RouteButton>
             <By />
         </div>
     );

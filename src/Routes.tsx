@@ -4,6 +4,7 @@ import ExpandableTable from './views/ExpandableTable';
 import { getAllGames } from './allGames';
 import StringUtils from './utils/StringUtils';
 import CreateCustomView from './views/CreateCustomView/CreateCustomView';
+import PrivacyView from './views/PrivacyView';
 
 function Routes() {
     const games = getAllGames();
@@ -25,6 +26,7 @@ function Routes() {
                         />
                     ))}
                     <Route path="/custom/create" Component={CreateCustomView} />
+                    <Route path="/privacy" Component={PrivacyView} />
                     <Route path="/" Component={HomeView} />
                     <Route path="*" Component={HomeView} />
                 </ReactRoutes>

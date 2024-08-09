@@ -46,6 +46,10 @@ a {
     color: var(--primary-color);
 }
 
+p {
+    font-size: 20px;
+}
+
 .btn {
     cursor: pointer;
     margin: 10px;
@@ -138,4 +142,14 @@ a {
     font-size: 30px;
     margin: 10px;
     cursor: pointer;
+}
+
+.content {
+    max-width: 600px;
+}
+
+@media screen and (max-width: 600px) {
+    .content {
+        max-width: 95%;
+    }
 }
