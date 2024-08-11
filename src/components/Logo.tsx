@@ -1,10 +1,12 @@
 import logoPic from '../assets/logo.png';
 import logoPicWhite from '../assets/logo-white.png';
 import ColorUtils from '../utils/ColorUtils';
+import { useIsDarkModeEnabled } from '../providers/ThemeProvider';
 
 interface LogoProps {
     size?: number;
     bgColor?: string;
+    detectDarkMode?: boolean;
 }
 /**
  * This is a Logo component
@@ -12,7 +14,16 @@ interface LogoProps {
  * @version 1.0.0
  * @created 2024-7-22
  */
-function Logo({ size = 200, bgColor = '#fff' }: LogoProps) {
+function Logo({
+    size = 200,
+    bgColor = '#fff',
+    detectDarkMode = false,
+}: LogoProps) {
+    const isDarkModeEnabled = useIsDarkModeEnabled();
+    if (detectDarkMode) {
+        bgColor = isDarkModeEnabled() ? '#000' : '#fff';
+    }
+
     let icon = logoPic;
     if (ColorUtils.isDarkColor(bgColor)) {
         icon = logoPicWhite;

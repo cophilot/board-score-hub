@@ -18,11 +18,18 @@ export default class StyleUtils {
         document.documentElement.style.setProperty('--font-family', fontFamily);
     }
 
-    static setDefaultValues() {
-        StyleUtils.setBackGroundColor();
-        StyleUtils.setFontColor();
-        StyleUtils.setPrimaryColor();
-        StyleUtils.setSecondaryColor();
+    static setDefaultValues(darkMode: boolean = false) {
+        if (darkMode) {
+            StyleUtils.setBackGroundColor('#1D2B53');
+            StyleUtils.setFontColor('#fff');
+            StyleUtils.setPrimaryColor('#FF004D');
+            StyleUtils.setSecondaryColor('#FAEF5D');
+        } else {
+            StyleUtils.setBackGroundColor();
+            StyleUtils.setFontColor();
+            StyleUtils.setPrimaryColor();
+            StyleUtils.setSecondaryColor();
+        }
         StyleUtils.setFontFamily();
     }
 }

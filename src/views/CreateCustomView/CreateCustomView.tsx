@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import By from '../../components/By';
 import './CreateCustomView.scss';
 import { useEffect } from 'react';
-import StyleUtils from '../../api/utils/StyleUtils';
 
 /**
  * This is the CreateCustomView
@@ -13,7 +12,6 @@ import StyleUtils from '../../api/utils/StyleUtils';
 function CreateCustomView() {
     const navigate = useNavigate();
     useEffect(() => {
-        StyleUtils.setDefaultValues();
         document.title = 'BoardScoreHub';
     }, []);
     return (

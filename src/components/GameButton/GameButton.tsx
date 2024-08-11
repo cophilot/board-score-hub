@@ -24,7 +24,7 @@ function GameButton({ game, asLink = false, link = '' }: GameButtonProps) {
                     className=""
                     href={link}
                     target="_blank"
-                    style={{ color: 'white' }}>
+                    style={{ color: 'var(--bg-color)' }}>
                     {game} <i className="bi bi-arrow-up-right-square"></i>
                 </a>
             </div>

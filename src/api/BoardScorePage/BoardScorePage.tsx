@@ -13,6 +13,7 @@ interface BoardScoreTableProps {
     children?: any;
     onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
     logo?: JSX.Element;
+    isDarkModeEnabled?: boolean;
 }
 
 /**
@@ -26,6 +27,7 @@ export default function BoardScorePage({
     children,
     onCellChange,
     logo,
+    isDarkModeEnabled = false,
 }: BoardScoreTableProps): JSX.Element {
     const navigate = useNavigate();
 
@@ -49,9 +51,8 @@ export default function BoardScorePage({
     };
 
     useEffect(() => {
-        setInitialAttributes(definition);
-        //setTimeout(() => setInitialAttributes(definition), 10);
-    }, [definition]);
+        setInitialAttributes(definition, isDarkModeEnabled);
+    }, [definition, isDarkModeEnabled]);
 
     const date = new Date().toLocaleDateString();
     const showHelpButton = definition.rows.some((row: any) => row.icon);
@@ -134,44 +135,27 @@ function print() {
     }, 500);
 }
 
-function setInitialAttributes(definition: any) {
+function setInitialAttributes(definition: any, darkMode: boolean) {
+    StyleUtils.setDefaultValues(darkMode);
     setAttributeIfPresent(definition.title, (title) => {
         document.title = title + ' - BoardScoreHub';
     });
-    setAttributeIfPresent(
-        definition.bgColor,
-        StyleUtils.setBackGroundColor,
-        true
-    );
-    setAttributeIfPresent(definition.fontColor, StyleUtils.setFontColor, true);
-    setAttributeIfPresent(
-        definition.primaryColor,
-        StyleUtils.setPrimaryColor,
-        true
-    );
+    setAttributeIfPresent(definition.bgColor, StyleUtils.setBackGroundColor);
+    setAttributeIfPresent(definition.fontColor, StyleUtils.setFontColor);
+    setAttributeIfPresent(definition.primaryColor, StyleUtils.setPrimaryColor);
     setAttributeIfPresent(
         definition.secondaryColor,
-        StyleUtils.setSecondaryColor,
-        true
+        StyleUtils.setSecondaryColor
     );
-    setAttributeIfPresent(
-        definition.fontFamily,
-        StyleUtils.setFontFamily,
-        true
-    );
+    setAttributeIfPresent(definition.fontFamily, StyleUtils.setFontFamily);
 }
 
 function setAttributeIfPresent(
     attribute: unknown,
-    callback: (arg0?: any) => void,
-    callWithDefaultAttribute = false
+    callback: (arg0?: any) => void
 ) {
     if (attribute !== undefined && attribute !== null) {
         callback(attribute);
         return;
-    }
-
-    if (callWithDefaultAttribute) {
-        callback();
     }
 }

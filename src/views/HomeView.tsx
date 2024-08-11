@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import StyleUtils from '../api/utils/StyleUtils';
 import { useNavigate } from 'react-router-dom';
 import By from '../components/By';
 import { getSortedGameNames } from '../allGames';
@@ -8,20 +7,32 @@ import DevMessage from '../components/DevMessage';
 import GameButton from '../components/GameButton/GameButton';
 import FavoriteGameSection from '../components/FavoriteGameSection/FavoriteGameSection';
 import RouteButton from '../components/RouteButton/RouteButton';
+import {
+    useIsDarkModeEnabled,
+    useToggleTheme,
+} from '../providers/ThemeProvider';
 
 export default function HomeView() {
     const navigate = useNavigate();
+    const toggleTheme = useToggleTheme();
+    const isDarkModeEnabled = useIsDarkModeEnabled();
     useEffect(() => {
-        StyleUtils.setDefaultValues();
         document.title = 'BoardScoreHub';
     }, []);
 
     const games = getSortedGameNames();
-
     return (
         <div>
-            <Logo />
+            <Logo detectDarkMode />
             <DevMessage />
+            <i
+                className={
+                    'bi icon ' +
+                    (isDarkModeEnabled()
+                        ? 'bi-brightness-high-fill'
+                        : 'bi-moon-fill')
+                }
+                onClick={toggleTheme}></i>
             <h2>General</h2>
             <div className="ver">
                 <button

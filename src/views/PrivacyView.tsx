@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import StyleUtils from '../api/utils/StyleUtils';
 import HomeButton from '../components/HomeButton/HomeButton';
 import Logo from '../components/Logo';
 
@@ -11,12 +10,11 @@ import Logo from '../components/Logo';
  */
 function PrivacyView() {
     useEffect(() => {
-        StyleUtils.setDefaultValues();
         document.title = 'BoardScoreHub';
     }, []);
     return (
         <div className="content">
-            <Logo />
+            <Logo detectDarkMode />
             <h1>BoardScoreHub Privacy</h1>
             <p>
                 Only data is <b>only</b> kept in your browser. No data will be
