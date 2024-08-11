@@ -11,6 +11,7 @@ import {
     useIsDarkModeEnabled,
     useToggleTheme,
 } from '../providers/ThemeProvider';
+import StyleUtils from '../api/utils/StyleUtils';
 
 export default function HomeView() {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function HomeView() {
     const isDarkModeEnabled = useIsDarkModeEnabled();
     useEffect(() => {
         document.title = 'BoardScoreHub';
+        StyleUtils.setDefaultValues(isDarkModeEnabled());
     }, []);
 
     const games = getSortedGameNames();
