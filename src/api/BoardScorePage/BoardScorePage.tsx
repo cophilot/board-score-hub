@@ -51,7 +51,9 @@ export default function BoardScorePage({
     };
 
     useEffect(() => {
-        setInitialAttributes(definition, isDarkModeEnabled);
+        setTimeout(() => {
+            setInitialAttributes(definition, isDarkModeEnabled);
+        }, 10);
     }, [definition, isDarkModeEnabled]);
 
     const date = new Date().toLocaleDateString();
