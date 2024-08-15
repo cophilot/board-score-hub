@@ -29,9 +29,7 @@
         color: var(--font-color);
     }
     ::placeholder {
-        color: var(--font-color);
         color: var(--bg-color);
-
         opacity: 1; /* Firefox */
     }
     ::-ms-input-placeholder {
@@ -48,6 +46,7 @@
         font-weight: bold;
     }
     .win {
+        color: var(--secondary-color);
         background-color: var(--primary-color);
     }
     .help-row {
