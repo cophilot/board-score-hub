@@ -7,10 +7,12 @@
     th {
         font-weight: bold;
         background-color: var(--primary-color);
-        color: var(--bg-color);
         position: sticky;
         top: -3px;
         z-index: 10000;
+        input {
+            color: var(--bg-color);
+        }
     }
 
     th,
@@ -28,12 +30,14 @@
     }
     ::placeholder {
         color: var(--font-color);
+        color: var(--bg-color);
+
         opacity: 1; /* Firefox */
     }
     ::-ms-input-placeholder {
         /* Edge 12 -18 */
         color: var(--font-color);
-        color: red;
+        color: var(--bg-color);
     }
     .row-icon {
         height: 70px;
@@ -45,7 +49,6 @@
     }
     .win {
         background-color: var(--primary-color);
-        color: var(--bg-color);
     }
     .help-row {
         background-color: var(--primary-color);
