@@ -230,6 +230,7 @@ function InputCell({
         <td>
             <input
                 type="number"
+                inputMode="numeric"
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
             />
