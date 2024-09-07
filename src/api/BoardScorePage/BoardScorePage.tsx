@@ -13,6 +13,7 @@ interface BoardScoreTableProps {
     children?: any;
     onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
     logo?: JSX.Element;
+    afterTableElement?: JSX.Element;
     isDarkModeEnabled?: boolean;
 }
 
@@ -27,6 +28,7 @@ export default function BoardScorePage({
     children,
     onCellChange,
     logo,
+    afterTableElement,
     isDarkModeEnabled = false,
 }: BoardScoreTableProps): JSX.Element {
     const navigate = useNavigate();
@@ -75,6 +77,7 @@ export default function BoardScorePage({
                 definition={definition}
                 gameSettings={settings}
                 playerSize={playerSize}></BoardScoreTable>
+            {afterTableElement}
             {showHelpButton && (
                 <button
                     className="btn selected nav-btn print-hide"
