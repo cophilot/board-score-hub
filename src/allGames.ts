@@ -10,6 +10,7 @@ import Wizard from './games/wizard/main';
 import Wingspan from './games/wingspan/main';
 import ForestShuffle from './games/forest-shuffle/main';
 import WorldWonders from './games/world-wonders/main';
+import SeaSaltPaper from './games/sea-salt-paper/main';
 
 export function getAllGames() {
     return [
@@ -25,6 +26,7 @@ export function getAllGames() {
         Wingspan,
         WorldWonders,
         ForestShuffle,
+        SeaSaltPaper,
     ];
 }
 
