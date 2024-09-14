@@ -39,6 +39,7 @@ function BoardScoreTable({
     const [playerNames, setPlayerNames] = useState(
         GameStorage.getPlayerNames(definition.title, [])
     );
+    const [showInputHelpBar, setShowInputHelpBar] = useState<boolean>(false);
 
     const [rounds, setRounds] = useState(-1);
     useEffect(() => {
@@ -106,87 +107,98 @@ function BoardScoreTable({
     };
 
     return (
-        <table className="board-score-table" style={tableStyle}>
-            <thead>
-                <tr key="header">
-                    <th key="-1"></th>
-                    {playerSizes.map((index) => (
-                        <th key={index}>
-                            <input
-                                type="text"
-                                placeholder={'P' + (index + 1)}
-                                value={playerNames[index] || ''}
-                                onChange={(e) => {
-                                    const newPlayerNames = playerNames.slice();
-                                    newPlayerNames[index] =
-                                        e.target.value.toUpperCase();
-                                    setPlayerNames(newPlayerNames);
-                                    GameStorage.setPlayerNames(
-                                        definition.title,
-                                        newPlayerNames
-                                    );
-                                }}
-                            />
-                        </th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {rows.map(
-                    (row: any, index: number) =>
-                        (rounds === -1 || index < rounds) && (
-                            <>
-                                {gameSettings.showHelp && row.icon && (
+        <>
+            <table className="board-score-table" style={tableStyle}>
+                <thead>
+                    <tr key="header">
+                        <th key="-1"></th>
+                        {playerSizes.map((index) => (
+                            <th key={index}>
+                                <input
+                                    type="text"
+                                    placeholder={'P' + (index + 1)}
+                                    value={playerNames[index] || ''}
+                                    onChange={(e) => {
+                                        const newPlayerNames =
+                                            playerNames.slice();
+                                        newPlayerNames[index] =
+                                            e.target.value.toUpperCase();
+                                        setPlayerNames(newPlayerNames);
+                                        GameStorage.setPlayerNames(
+                                            definition.title,
+                                            newPlayerNames
+                                        );
+                                    }}
+                                />
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows.map(
+                        (row: any, index: number) =>
+                            (rounds === -1 || index < rounds) && (
+                                <>
+                                    {gameSettings.showHelp && row.icon && (
+                                        <tr
+                                            className="help-row"
+                                            key={'help-row-' + index}>
+                                            <td colSpan={playerSize + 1}>
+                                                <b>{row.name}</b>
+                                                <i>
+                                                    {row.description
+                                                        ? ' - ' +
+                                                          row.description
+                                                        : ''}
+                                                </i>
+                                            </td>
+                                        </tr>
+                                    )}
                                     <tr
-                                        className="help-row"
-                                        key={'help-row-' + index}>
-                                        <td colSpan={playerSize + 1}>
-                                            <b>{row.name}</b>
-                                            <i>
-                                                {row.description
-                                                    ? ' - ' + row.description
-                                                    : ''}
-                                            </i>
-                                        </td>
+                                        key={index}
+                                        style={getStyleFromRow(
+                                            row,
+                                            definition,
+                                            index
+                                        )}>
+                                        <FirstRowCell row={row} />
+                                        {playerSizes.map((playerIndex) => (
+                                            <InputCell
+                                                row={row}
+                                                key={playerIndex}
+                                                rowIndex={index}
+                                                playerIndex={playerIndex}
+                                                getValueFunction={getTableValue}
+                                                setValueFunction={setTableValue}
+                                                showInputHelpBar={() =>
+                                                    setShowInputHelpBar(true)
+                                                }
+                                                hideInputHelpBar={() =>
+                                                    setShowInputHelpBar(false)
+                                                }
+                                            />
+                                        ))}
                                     </tr>
-                                )}
-                                <tr
-                                    key={index}
-                                    style={getStyleFromRow(
-                                        row,
-                                        definition,
-                                        index
-                                    )}>
-                                    <FirstRowCell row={row} />
-                                    {playerSizes.map((playerIndex) => (
-                                        <InputCell
-                                            row={row}
-                                            key={playerIndex}
-                                            rowIndex={index}
-                                            playerIndex={playerIndex}
-                                            getValueFunction={getTableValue}
-                                            setValueFunction={setTableValue}
-                                        />
-                                    ))}
-                                </tr>
-                            </>
-                        )
-                )}
-                <tr key="total" className="total-row">
-                    <FirstRowCell row={{ name: 'Total' }} />
-                    {totalRow.map((value, playerIndex) => (
-                        <td
-                            key={playerIndex}
-                            className={
-                                'total-cell ' +
-                                (getWinningScore() == value ? 'win' : '')
-                            }>
-                            {isNaN(value) ? 0 : value}
-                        </td>
-                    ))}
-                </tr>
-            </tbody>
-        </table>
+                                </>
+                            )
+                    )}
+                    <tr key="total" className="total-row">
+                        <FirstRowCell row={{ name: 'Total' }} />
+                        {totalRow.map((value, playerIndex) => (
+                            <td
+                                key={playerIndex}
+                                className={
+                                    'total-cell ' +
+                                    (getWinningScore() == value ? 'win' : '')
+                                }>
+                                {isNaN(value) ? 0 : value}
+                            </td>
+                        ))}
+                    </tr>
+                </tbody>
+            </table>
+            {showInputHelpBar && <div className="input-help-bar"></div>}
+        </>
     );
 }
 export default BoardScoreTable;
@@ -201,6 +213,8 @@ type InputCellProps = {
         playerIndex: number,
         value: any
     ) => void;
+    showInputHelpBar: () => void;
+    hideInputHelpBar: () => void;
 };
 
 function InputCell({
@@ -209,6 +223,8 @@ function InputCell({
     playerIndex,
     getValueFunction,
     setValueFunction,
+    showInputHelpBar,
+    hideInputHelpBar,
 }: InputCellProps) {
     let value = getValueFunction(rowIndex, playerIndex);
     if (value === 0) {
@@ -229,10 +245,12 @@ function InputCell({
     return (
         <td>
             <input
-                type="number"
+                type="text"
                 inputMode="numeric"
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
+                onFocus={showInputHelpBar}
+                onBlur={hideInputHelpBar}
             />
         </td>
     );
