@@ -88,10 +88,12 @@ export default function BoardScorePage({
                         };
                         applySettings(newSettings);
                     }}>
+                    <i className="bi bi-question-circle"></i>
                     {settings.showHelp ? 'Hide Help' : 'Help'}
                 </button>
             )}
             <button className="btn selected nav-btn print-hide" onClick={print}>
+                <i className="bi bi-box-arrow-up"></i>
                 Export
             </button>
             <button
@@ -100,6 +102,7 @@ export default function BoardScorePage({
                     GameStorage.deleteStorage(definition.title);
                     window.location.reload();
                 }}>
+                <i className="bi bi-arrow-clockwise"></i>
                 Clear
             </button>
             <button
@@ -107,6 +110,7 @@ export default function BoardScorePage({
                 onClick={() => {
                     navigate('/');
                 }}>
+                <i className="bi bi-house"></i>
                 Home
             </button>
             <h2 className="print-show">
