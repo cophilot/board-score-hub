@@ -52,6 +52,26 @@ export default class GameStorage {
         );
     }
 
+    static getSelectedExtension(gameTitle: string, fallback: string[] = []) {
+        const selectedExtension = localStorage.getItem(
+            GameStorage.getStorageKeyFromTitle(gameTitle, 'selected-extension')
+        );
+        if (selectedExtension === null) {
+            return fallback;
+        }
+        return JSON.parse(selectedExtension);
+    }
+
+    static setSelectedExtension(
+        gameTitle: string,
+        selectedExtension: string[]
+    ) {
+        localStorage.setItem(
+            GameStorage.getStorageKeyFromTitle(gameTitle, 'selected-extension'),
+            JSON.stringify(selectedExtension)
+        );
+    }
+
     static getGameMatrix(gameTitle: string, fallback: number[][] = []) {
         const matrix = localStorage.getItem(
             GameStorage.getStorageKeyFromTitle(gameTitle, 'matrix')

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './BoardScoreTable.scss';
 import GameStorage from '../utils/GameStorage';
 import { getFunctionForWinMode, WinMode } from '../types/WinMode';
+import ExtensionButtons from '../ExtensionButtons/ExtensionButtons';
 
 interface BoardScoreTableProps {
     definition: any;
@@ -24,9 +25,8 @@ function BoardScoreTable({
     onCellChange,
 }: BoardScoreTableProps) {
     const playerSizes = Array.from(Array(playerSize).keys());
-    const rows = definition.rows || [];
+    const [rows, setRows] = useState(definition.rows || []);
     const tableStyle = parseTableStyle(definition);
-
     const [tableMatrix, setTableMatrix] = useState(
         GameStorage.getGameMatrix(
             definition.title,
@@ -106,87 +106,108 @@ function BoardScoreTable({
     };
 
     return (
-        <table className="board-score-table" style={tableStyle}>
-            <thead>
-                <tr key="header">
-                    <th key="-1"></th>
-                    {playerSizes.map((index) => (
-                        <th key={index}>
-                            <input
-                                type="text"
-                                placeholder={'P' + (index + 1)}
-                                value={playerNames[index] || ''}
-                                onChange={(e) => {
-                                    const newPlayerNames = playerNames.slice();
-                                    newPlayerNames[index] =
-                                        e.target.value.toUpperCase();
-                                    setPlayerNames(newPlayerNames);
-                                    GameStorage.setPlayerNames(
-                                        definition.title,
-                                        newPlayerNames
-                                    );
-                                }}
-                            />
-                        </th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {rows.map(
-                    (row: any, index: number) =>
-                        (rounds === -1 || index < rounds) && (
-                            <>
-                                {gameSettings.showHelp && row.icon && (
-                                    <tr
-                                        className="help-row"
-                                        key={'help-row-' + index}>
-                                        <td colSpan={playerSize + 1}>
-                                            <b>{row.name}</b>
-                                            <i>
-                                                {row.description
-                                                    ? ' - ' + row.description
-                                                    : ''}
-                                            </i>
-                                        </td>
-                                    </tr>
-                                )}
-                                <tr
-                                    key={index}
-                                    style={getStyleFromRow(
-                                        row,
-                                        definition,
-                                        index
-                                    )}>
-                                    <FirstRowCell row={row} />
-                                    {playerSizes.map((playerIndex) => (
-                                        <InputCell
-                                            row={row}
-                                            key={playerIndex}
-                                            rowIndex={index}
-                                            playerIndex={playerIndex}
-                                            getValueFunction={getTableValue}
-                                            setValueFunction={setTableValue}
-                                        />
-                                    ))}
-                                </tr>
-                            </>
+        <>
+            <ExtensionButtons
+                definition={definition}
+                onExtensionOn={(extensionName, extensionDefinition) => {
+                    const extRows = extensionDefinition.rows || [];
+                    extRows.forEach((row: any) => {
+                        row.__extName = extensionName;
+                    });
+                    setRows([...rows, ...extRows]);
+                }}
+                onExtensionOff={(extensionName) => {
+                    setRows(
+                        rows.filter(
+                            (row: any) => row.__extName !== extensionName
                         )
-                )}
-                <tr key="total" className="total-row">
-                    <FirstRowCell row={{ name: 'Total' }} />
-                    {totalRow.map((value, playerIndex) => (
-                        <td
-                            key={playerIndex}
-                            className={
-                                'total-cell ' +
-                                (getWinningScore() == value ? 'win' : '')
-                            }>
-                            {isNaN(value) ? 0 : value}
-                        </td>
-                    ))}
-                </tr>
-            </tbody>
-        </table>
+                    );
+                }}
+            />
+            <table className="board-score-table" style={tableStyle}>
+                <thead>
+                    <tr key="header">
+                        <th key="-1"></th>
+                        {playerSizes.map((index) => (
+                            <th key={index}>
+                                <input
+                                    type="text"
+                                    placeholder={'P' + (index + 1)}
+                                    value={playerNames[index] || ''}
+                                    onChange={(e) => {
+                                        const newPlayerNames =
+                                            playerNames.slice();
+                                        newPlayerNames[index] =
+                                            e.target.value.toUpperCase();
+                                        setPlayerNames(newPlayerNames);
+                                        GameStorage.setPlayerNames(
+                                            definition.title,
+                                            newPlayerNames
+                                        );
+                                    }}
+                                />
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows.map(
+                        (row: any, index: number) =>
+                            (rounds === -1 || index < rounds) && (
+                                <>
+                                    {gameSettings.showHelp && row.icon && (
+                                        <tr
+                                            className="help-row"
+                                            key={'help-row-' + index}>
+                                            <td colSpan={playerSize + 1}>
+                                                <b>{row.name}</b>
+                                                <i>
+                                                    {row.description
+                                                        ? ' - ' +
+                                                          row.description
+                                                        : ''}
+                                                </i>
+                                            </td>
+                                        </tr>
+                                    )}
+                                    <tr
+                                        key={index}
+                                        style={getStyleFromRow(
+                                            row,
+                                            definition,
+                                            index
+                                        )}>
+                                        <FirstRowCell row={row} />
+                                        {playerSizes.map((playerIndex) => (
+                                            <InputCell
+                                                row={row}
+                                                key={playerIndex}
+                                                rowIndex={index}
+                                                playerIndex={playerIndex}
+                                                getValueFunction={getTableValue}
+                                                setValueFunction={setTableValue}
+                                            />
+                                        ))}
+                                    </tr>
+                                </>
+                            )
+                    )}
+                    <tr key="total" className="total-row">
+                        <FirstRowCell row={{ name: 'Total' }} />
+                        {totalRow.map((value, playerIndex) => (
+                            <td
+                                key={playerIndex}
+                                className={
+                                    'total-cell ' +
+                                    (getWinningScore() == value ? 'win' : '')
+                                }>
+                                {isNaN(value) ? 0 : value}
+                            </td>
+                        ))}
+                    </tr>
+                </tbody>
+            </table>
+        </>
     );
 }
 export default BoardScoreTable;
