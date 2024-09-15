@@ -1,6 +1,6 @@
 <div align="center">
   <br />
-  <img src="src/assets/logo.png" alt="board-score-hubLogo" width="30%"/>
+  <img src="src/assets/logo-red.png" alt="board-score-hub" width="30%"/>
   <h1>board-score-hub</h1>
   <p>
      Description
