@@ -1,71 +1,71 @@
 :root {
-    font-family: var(--font-family);
-    font-weight: 400;
+	font-family: var(--font-family);
+	font-weight: 400;
 
-    color: var(--font-color);
-    background-color: var(--bg-color);
+	color: var(--font-color);
+	background-color: var(--bg-color);
 
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 input {
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    font-family: var(--font-family);
-    font-weight: bold;
-    &:focus {
-        outline: none;
-    }
+	background-color: transparent;
+	border: none;
+	text-align: center;
+	font-family: var(--font-family);
+	font-weight: bold;
+	&:focus {
+		outline: none;
+	}
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
 }
 
 h1 {
-    letter-spacing: -3px;
-    font-size: 3rem;
+	letter-spacing: -3px;
+	font-size: 3rem;
 }
 
 h2 {
-    letter-spacing: -2px;
-    font-size: 2.5rem;
+	letter-spacing: -2px;
+	font-size: 2.5rem;
 }
 
 a {
-    text-decoration: none;
-    color: var(--primary-color);
+	text-decoration: none;
+	color: var(--primary-color);
 }
 
 p {
-    font-size: 20px;
+	font-size: 20px;
 }
 
 .btn {
-    cursor: pointer;
-    margin: 10px;
-    font-size: 20px;
-    padding: 10px 20px;
-    font-weight: bold;
-    color: var(--font-color);
-    border: 3px solid var(--primary-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
-    border-radius: 5px;
-    background-color: var(--bg-color);
-    font-family: var(--font-family);
-    transition: all 0.3s;
-    &:hover {
-        scale: 1.1;
-    }
+	cursor: pointer;
+	margin: 10px;
+	font-size: 20px;
+	padding: 10px 20px;
+	font-weight: bold;
+	color: var(--font-color);
+	border: 3px solid var(--primary-color);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
+	border-radius: 5px;
+	background-color: var(--bg-color);
+	font-family: var(--font-family);
+	transition: all 0.3s;
+	&:hover {
+		scale: 1.1;
+	}
 }
 
 /* .btn {
@@ -85,71 +85,71 @@ p {
 } */
 
 .selected {
-    background-color: var(--primary-color);
-    color: var(--bg-color);
+	background-color: var(--primary-color);
+	color: var(--bg-color);
 }
 
 .ver {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .print-show {
-    display: none;
+	display: none;
 }
 .wide {
-    min-width: 300px;
+	min-width: 300px;
 }
 
 .mt {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .mb {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .mr {
-    margin-right: 20px;
+	margin-right: 20px;
 }
 
 .ml {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .msg {
-    margin: 25px 25px;
-    font-weight: bold;
-    color: var(--font-color);
-    background-color: var(--bg-color);
-    font-size: 20px;
-    padding: 20px;
-    font-weight: bold;
-    border-radius: 10px;
-    border: 3px solid var(--primary-color);
-    box-shadow: 0 0 10px 0 var(--primary-color);
-    max-width: 400px;
+	margin: 25px 25px;
+	font-weight: bold;
+	color: var(--font-color);
+	background-color: var(--bg-color);
+	font-size: 20px;
+	padding: 20px;
+	font-weight: bold;
+	border-radius: 10px;
+	border: 3px solid var(--primary-color);
+	box-shadow: 0 0 10px 0 var(--primary-color);
+	max-width: 400px;
 }
 
 .imp {
-    color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .icon {
-    font-size: 30px;
-    margin: 10px;
-    cursor: pointer;
+	font-size: 30px;
+	margin: 10px;
+	cursor: pointer;
 }
 
 .content {
-    max-width: 600px;
-    padding-bottom: 100px;
+	max-width: 600px;
+	padding-bottom: 100px;
 }
 
 @media screen and (max-width: 600px) {
-    .content {
-        max-width: 95%;
-    }
+	.content {
+		max-width: 95%;
+	}
 }

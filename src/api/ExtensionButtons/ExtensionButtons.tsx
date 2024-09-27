@@ -4,9 +4,9 @@ import './ExtensionButtons.scss';
 import GameStorage from '../utils/GameStorage';
 
 interface ExtensionButtonsProps {
-    definition: any;
-    onExtensionOn?: (extensionName: string, extensionDefinition: any) => void;
-    onExtensionOff?: (extensionName: string) => void;
+	definition: any;
+	onExtensionOn?: (extensionName: string, extensionDefinition: any) => void;
+	onExtensionOff?: (extensionName: string) => void;
 }
 
 /**
@@ -16,63 +16,58 @@ interface ExtensionButtonsProps {
  * @created 2024-7-21
  */
 function ExtensionButtons({
-    definition,
-    onExtensionOn,
-    onExtensionOff,
+	definition,
+	onExtensionOn,
+	onExtensionOff,
 }: ExtensionButtonsProps) {
-    const extensionsDefinition = definition.extensions || {};
-    const extensionsNames = Object.keys(extensionsDefinition);
+	const extensionsDefinition = definition.extensions || {};
+	const extensionsNames = Object.keys(extensionsDefinition);
 
-    const [selectedExtensions, setSelectedExtensions] = useState<string[]>(
-        GameStorage.getSelectedExtension(definition.title, [])
-    );
+	const [selectedExtensions, setSelectedExtensions] = useState<string[]>(
+		GameStorage.getSelectedExtension(definition.title, []),
+	);
 
-    const handleExtensionClick = (extensionName: string) => {
-        let newSelectedExtensions = [...selectedExtensions];
-        if (selectedExtensions.includes(extensionName)) {
-            newSelectedExtensions = selectedExtensions.filter(
-                (name) => name !== extensionName
-            );
-            onExtensionOff?.(extensionName);
-        } else {
-            newSelectedExtensions.push(extensionName);
-            onExtensionOn?.(extensionName, extensionsDefinition[extensionName]);
-        }
+	const handleExtensionClick = (extensionName: string) => {
+		let newSelectedExtensions = [...selectedExtensions];
+		if (selectedExtensions.includes(extensionName)) {
+			newSelectedExtensions = selectedExtensions.filter(
+				(name) => name !== extensionName,
+			);
+			onExtensionOff?.(extensionName);
+		} else {
+			newSelectedExtensions.push(extensionName);
+			onExtensionOn?.(extensionName, extensionsDefinition[extensionName]);
+		}
 
-        GameStorage.setSelectedExtension(
-            definition.title,
-            newSelectedExtensions
-        );
-        setSelectedExtensions(newSelectedExtensions);
-    };
+		GameStorage.setSelectedExtension(definition.title, newSelectedExtensions);
+		setSelectedExtensions(newSelectedExtensions);
+	};
 
-    useEffect(() => {
-        GameStorage.getSelectedExtension(definition.title, []).forEach(
-            (extensionName: string) => {
-                onExtensionOn?.(
-                    extensionName,
-                    extensionsDefinition[extensionName]
-                );
-            }
-        );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+	useEffect(() => {
+		GameStorage.getSelectedExtension(definition.title, []).forEach(
+			(extensionName: string) => {
+				onExtensionOn?.(extensionName, extensionsDefinition[extensionName]);
+			},
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-    return (
-        <div className="print-hide">
-            {extensionsNames.length > 0 && <h2>Extensions</h2>}
-            {extensionsNames.map((name) => (
-                <button
-                    key={name}
-                    className={
-                        'btn nav-btn ' +
-                        (selectedExtensions.includes(name) ? 'selected' : '')
-                    }
-                    onClick={() => handleExtensionClick(name)}>
-                    {name}
-                </button>
-            ))}
-        </div>
-    );
+	return (
+		<div className="print-hide">
+			{extensionsNames.length > 0 && <h2>Extensions</h2>}
+			{extensionsNames.map((name) => (
+				<button
+					key={name}
+					className={
+						'btn nav-btn ' +
+						(selectedExtensions.includes(name) ? 'selected' : '')
+					}
+					onClick={() => handleExtensionClick(name)}
+				>
+					{name}
+				</button>
+			))}
+		</div>
+	);
 }
 export default ExtensionButtons;

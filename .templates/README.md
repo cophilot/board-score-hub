@@ -31,7 +31,7 @@ tpy new <template-name>
 This will create a new folder in the `.templates` folder with the given name. You can now add files to this folder that will be used to generate new files from this template.
 Inside the folder you will also find a `.templify` file. This file is used by templify to generate new files from this template. Please open and read the file to learn more about how to use it.
 
-### Load templates 
+### Load templates
 
 You can also load templates from a GitHub repository into your project:
 

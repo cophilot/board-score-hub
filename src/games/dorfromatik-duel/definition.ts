@@ -11,65 +11,67 @@ import flagRed from './assets/flag-red.png';
 import longRail from './assets/longest-rail.png';
 import longRiver from './assets/longest-river.png';
 import { WinMode } from '../../api/types/WinMode';
+import { GameDef } from '../../api/types/GameDef';
 
-export default function getDefinition() {
-    return {
-        title: 'Dorfromatik: Duel',
-        //bgColor: '#859395',
-        //fontColor: 'white',
-        primaryColor: '#7ba1d4',
-        secondaryColor: '#ee776c',
-        playerSizes: [2],
-        winMode: WinMode.MOST,
-        rows: [
-            {
-                name: 'Tree',
-                icon: tree,
-            },
-            {
-                name: 'Field',
-                icon: field,
-            },
-            {
-                name: 'House',
-                icon: house,
-            },
-            {
-                name: 'Railway',
-                icon: rail,
-            },
-            {
-                name: 'River',
-                icon: river,
-            },
-            {
-                name: 'Border',
-                icon: border,
-            },
-            {
-                name: 'Six',
-                icon: six,
-            },
-            {
-                name: 'Flag green',
-                icon: flagGreen,
-            },
-            {
-                name: 'Flag yellow',
-                icon: flagYellow,
-            },
-            {
-                name: 'Flag red',
-                icon: flagRed,
-            },
-            {
-                name: 'Longest Railway',
-                icon: longRail,
-            },
-            {
-                name: 'Longest River',
-                icon: longRiver,
-            },
-        ],
-    };
+export default function getDefinition(): GameDef {
+	return {
+		title: 'Dorfromatik: Duel',
+		url: 'https://boardgamegeek.com/boardgame/395364/dorfromantik-the-duel',
+		//bgColor: '#859395',
+		//fontColor: 'white',
+		primaryColor: '#7ba1d4',
+		secondaryColor: '#ee776c',
+		playerSizes: [2],
+		winMode: WinMode.MOST,
+		rows: [
+			{
+				name: 'Tree',
+				icon: tree,
+			},
+			{
+				name: 'Field',
+				icon: field,
+			},
+			{
+				name: 'House',
+				icon: house,
+			},
+			{
+				name: 'Railway',
+				icon: rail,
+			},
+			{
+				name: 'River',
+				icon: river,
+			},
+			{
+				name: 'Border',
+				icon: border,
+			},
+			{
+				name: 'Six',
+				icon: six,
+			},
+			{
+				name: 'Flag green',
+				icon: flagGreen,
+			},
+			{
+				name: 'Flag yellow',
+				icon: flagYellow,
+			},
+			{
+				name: 'Flag red',
+				icon: flagRed,
+			},
+			{
+				name: 'Longest Railway',
+				icon: longRail,
+			},
+			{
+				name: 'Longest River',
+				icon: longRiver,
+			},
+		],
+	};
 }

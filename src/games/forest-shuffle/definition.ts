@@ -6,39 +6,39 @@ import leftIcon from './assets/left.png';
 import rightIcon from './assets/right.png';
 import caveIcon from './assets/cave.png';
 export default function getDefinition() {
-    return {
-        title: 'Forest Shuffle',
-        bgColor: '#dce2c9',
-        fontColor: '#315a39',
-        primaryColor: '#bbad86',
-        secondaryColor: '#b11917',
-        playerSizes: [2, 3, 4, 5],
-        winMode: WinMode.MOST,
-        rows: [
-            {
-                name: 'Tree',
-                icon: cardIcon,
-            },
-            {
-                name: 'Cards top',
-                icon: topIcon,
-            },
-            {
-                name: 'Cards right',
-                icon: rightIcon,
-            },
-            {
-                name: 'Cards below',
-                icon: downIcon,
-            },
-            {
-                name: 'Cards left',
-                icon: leftIcon,
-            },
-            {
-                name: 'Cave',
-                icon: caveIcon,
-            },
-        ],
-    };
+	return {
+		title: 'Forest Shuffle',
+		bgColor: '#dce2c9',
+		fontColor: '#315a39',
+		primaryColor: '#bbad86',
+		secondaryColor: '#b11917',
+		playerSizes: [2, 3, 4, 5],
+		winMode: WinMode.MOST,
+		rows: [
+			{
+				name: 'Tree',
+				icon: cardIcon,
+			},
+			{
+				name: 'Cards top',
+				icon: topIcon,
+			},
+			{
+				name: 'Cards right',
+				icon: rightIcon,
+			},
+			{
+				name: 'Cards below',
+				icon: downIcon,
+			},
+			{
+				name: 'Cards left',
+				icon: leftIcon,
+			},
+			{
+				name: 'Cave',
+				icon: caveIcon,
+			},
+		],
+	};
 }

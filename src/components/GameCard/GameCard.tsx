@@ -1,9 +1,9 @@
 import './GameCard.scss';
 
 interface GameCardProps {
-    definition: any;
-    onClick: () => void;
-    icon?: string;
+	definition: any;
+	onClick: () => void;
+	icon?: string;
 }
 
 /**
@@ -13,17 +13,17 @@ interface GameCardProps {
  * @created 2024-7-23
  */
 function GameCard({ definition, onClick, icon }: GameCardProps) {
-    const isMobile = window.innerWidth < 700;
-    const iconElement = icon ? <i className={`bi ${icon}`}></i> : null;
+	const isMobile = window.innerWidth < 700;
+	const iconElement = icon ? <i className={`bi ${icon}`}></i> : null;
 
-    if (isMobile) {
-        return (
-            <button className="btn selected wide" onClick={onClick}>
-                {definition.title}
-                {iconElement}
-            </button>
-        );
-    }
-    return <div className="game-card">Hello from GameCard</div>;
+	if (isMobile) {
+		return (
+			<button className="btn selected wide" onClick={onClick}>
+				{definition.title}
+				{iconElement}
+			</button>
+		);
+	}
+	return <div className="game-card">Hello from GameCard</div>;
 }
 export default GameCard;

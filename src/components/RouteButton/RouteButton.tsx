@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import './RouteButton.scss';
 
 interface RouteButtonProps {
-    to: string;
-    children: string;
-    small?: boolean;
+	to: string;
+	children: string;
+	small?: boolean;
 }
 
 /**
@@ -14,18 +14,19 @@ interface RouteButtonProps {
  * @created 2024-8-9
  */
 function RouteButton({ to, children, small = false }: RouteButtonProps) {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    const className = 'btn selected ' + (small ? '' : 'wide');
+	const className = 'btn selected ' + (small ? '' : 'wide');
 
-    return (
-        <button
-            className={className}
-            onClick={() => {
-                navigate(to);
-            }}>
-            {children}
-        </button>
-    );
+	return (
+		<button
+			className={className}
+			onClick={() => {
+				navigate(to);
+			}}
+		>
+			{children}
+		</button>
+	);
 }
 export default RouteButton;

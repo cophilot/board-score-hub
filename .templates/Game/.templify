@@ -12,5 +12,5 @@
 
 # IMPORTANT: Lines starting with a . are auto generated and should not be changed.
 
-description:
-path:src/games
+description:A new Game definition
+path:src/games/$$name.k$$

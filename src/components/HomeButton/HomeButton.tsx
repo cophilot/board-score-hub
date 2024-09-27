@@ -8,10 +8,10 @@ import './HomeButton.scss';
  * @created 2024-8-9
  */
 function HomeButton() {
-    return (
-        <RouteButton to="/" small>
-            Home
-        </RouteButton>
-    );
+	return (
+		<RouteButton to="/" small>
+			Home
+		</RouteButton>
+	);
 }
 export default HomeButton;

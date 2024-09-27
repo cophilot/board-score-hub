@@ -13,30 +13,30 @@ import WorldWonders from './games/world-wonders/main';
 import SeaSaltPaper from './games/sea-salt-paper/main';
 
 export function getAllGames() {
-    return [
-        Everdell,
-        Calico,
-        DorfromantikDuel,
-        Harmonies,
-        LetsGoToJapan,
-        Scout,
-        SevenWondersDuel,
-        TerraformingMars,
-        Wizard,
-        Wingspan,
-        WorldWonders,
-        ForestShuffle,
-        SeaSaltPaper,
-    ];
+	return [
+		Everdell,
+		Calico,
+		DorfromantikDuel,
+		Harmonies,
+		LetsGoToJapan,
+		Scout,
+		SevenWondersDuel,
+		TerraformingMars,
+		Wizard,
+		Wingspan,
+		WorldWonders,
+		ForestShuffle,
+		SeaSaltPaper,
+	];
 }
 
 export function getSortedGames() {
-    const games = getAllGames();
-    games.sort((a, b) => a.definition.title.localeCompare(b.definition.title));
-    return games;
+	const games = getAllGames();
+	games.sort((a, b) => a.definition.title.localeCompare(b.definition.title));
+	return games;
 }
 
 export function getSortedGameNames(): string[] {
-    const games = getSortedGames();
-    return games.map((game) => game.definition.title);
+	const games = getSortedGames();
+	return games.map((game) => game.definition.title);
 }
