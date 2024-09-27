@@ -5,11 +5,12 @@ import Logo from '../../components/Logo';
 import getDefinition from './definition';
 
 export default function SeaSaltPaperView() {
-	const [definition, setDefinition] = useState(getDefinition());
-	const [roundCounter, setRoundCounter] = useState(1);
-	const [totalRow, setTotalRow] = useState([0, 0, 0, 0]);
+	const [definition] = useState(getDefinition());
+	//const [definition, setDefinition] = useState(getDefinition());
+	//const [roundCounter, setRoundCounter] = useState(1);
+	//const [totalRow, setTotalRow] = useState([0, 0, 0, 0]);
 
-	const onSaveRound = () => {
+	/* const onSaveRound = () => {
 		definition.rows.push({
 			name: `Round ${roundCounter}`,
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -18,16 +19,16 @@ export default function SeaSaltPaperView() {
 		});
 		setDefinition(definition);
 		setRoundCounter(roundCounter + 1);
-	};
+	}; */
 
-	const roundBtn = (
+	/* const roundBtn = (
 		<button className="btn selected nav-btn print-hide" onClick={onSaveRound}>
 			Save Round
 		</button>
-	);
-	const getTotalRow = (totalRow: number[]) => {
+	); */
+	/* const getTotalRow = (totalRow: number[]) => {
 		setTotalRow(totalRow);
-	};
+	}; */
 
 	const logo = <Logo size={100} bgColor={definition.bgColor || '#fff'} />;
 	return (
@@ -35,7 +36,7 @@ export default function SeaSaltPaperView() {
 			definition={definition}
 			logo={logo}
 			//afterTableElement={roundBtn}
-			getTotalRow={getTotalRow}
+			//getTotalRow={getTotalRow}
 		>
 			<By />
 		</BoardScorePage>

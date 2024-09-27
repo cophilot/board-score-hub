@@ -1,7 +1,8 @@
+import { GameDef } from '../../api/types/GameDef';
 import './GameCard.scss';
 
 interface GameCardProps {
-	definition: any;
+	definition: GameDef;
 	onClick: () => void;
 	icon?: string;
 }
