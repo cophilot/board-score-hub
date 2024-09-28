@@ -4,6 +4,8 @@ import { WinMode } from '../../api/types/WinMode';
 export default function getDefinition(): GameDef {
 	return {
 		title: 'Wizard',
+		url: 'https://boardgamegeek.com/boardgame/1465/wizard',
+		rulesUrl: 'https://blog.amigo-spiele.de/content/ap/rule/06900-GB-AmigoRule.pdf',
 		bgColor: '#1F1F1F',
 		fontColor: '#29A972',
 		primaryColor: '#8C2225',
