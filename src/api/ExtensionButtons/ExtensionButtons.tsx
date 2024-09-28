@@ -1,11 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import './ExtensionButtons.scss';
 import GameStorage from '../utils/GameStorage';
+import { ExtensionDef, GameDef } from '../types/GameDef';
 
 interface ExtensionButtonsProps {
-	definition: any;
-	onExtensionOn?: (extensionName: string, extensionDefinition: any) => void;
+	definition: GameDef;
+	onExtensionOn?: (
+		extensionName: string,
+		extensionDefinition: ExtensionDef,
+	) => void;
 	onExtensionOff?: (extensionName: string) => void;
 }
 

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
 import './BoardScorePage.scss';
 import { useEffect, useState } from 'react';
 import PlayerSwitch from '../PlayerSwitch/PlayerSwitch';

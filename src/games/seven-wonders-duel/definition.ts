@@ -8,12 +8,14 @@ import coins from './assets/coins.png';
 import military from './assets/military.png';
 import { WinMode } from '../../api/types/WinMode';
 import FontUtils from '../../api/utils/FontUtils';
+import { GameDef } from '../../api/types/GameDef';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: 'Seven Wonders: Duel',
+		url: 'https://boardgamegeek.com/boardgame/173346/7-wonders-duel',
+		rulesUrl: 'https://cdn.1j1ju.com/medias/1a/ba/6b-7-wonders-duel-rules.pdf',
 		bgColor: '#fbdbb3',
-		//fontColor: '#000',
 		primaryColor: '#c59551',
 		secondaryColor: '#2a7c6d',
 		playerSizes: [2],

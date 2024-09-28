@@ -6,12 +6,15 @@ import treeIcon from './assets/tree.png';
 import cityIcon from './assets/city.png';
 import terraformingRatingIcon from './assets/terraforming-rating.png';
 import victoryPointsIcon from './assets/victory-points.png';
+import { GameDef } from '../../api/types/GameDef';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: 'Terraforming Mars',
+		url: 'https://boardgamegeek.com/boardgame/167791/terraforming-mars',
+		rulesUrl:
+			'https://cdn.1j1ju.com/medias/13/3f/fb-terraforming-mars-rule.pdf',
 		bgColor: '#a36743',
-		//fontColor: '#000',
 		primaryColor: '#612720',
 		secondaryColor: '#ffe048',
 		fontFamily: FontUtils.FUTURISTIC,

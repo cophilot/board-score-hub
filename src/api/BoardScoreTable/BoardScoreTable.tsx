@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
 import { useEffect, useState } from 'react';
 import './BoardScoreTable.scss';
 import GameStorage from '../utils/GameStorage';
 import { getFunctionForWinMode, WinMode } from '../types/WinMode';
 import ExtensionButtons from '../ExtensionButtons/ExtensionButtons';
+import { GameDef } from '../types/GameDef';
 
 interface BoardScoreTableProps {
-	definition: any;
+	definition: GameDef;
 	playerSize: number;
 	gameSettings: any;
 	onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;

@@ -1,3 +1,5 @@
+import { WinMode } from './WinMode';
+
 export interface GameDef {
 	title: string; // The name of the game
 	playerSizes: number[]; // An array of all possible player counts
@@ -10,7 +12,7 @@ export interface GameDef {
 	fontFamily?: string; // The font family to be used
 	url?: string; // The URL to the game
 	rulesUrl?: string; // The URL to the rules
-	winMode?: string; // The winnning mode
+	winMode?: WinMode; // The winnning mode
 	extensions?: { [name: string]: ExtensionDef }; // Specify Extensions
 	roundMapper?: { [playerCount: number]: number }; // A mapping of player count to round count
 }

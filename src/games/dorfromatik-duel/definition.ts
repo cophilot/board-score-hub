@@ -17,8 +17,8 @@ export default function getDefinition(): GameDef {
 	return {
 		title: 'Dorfromatik: Duel',
 		url: 'https://boardgamegeek.com/boardgame/395364/dorfromantik-the-duel',
-		//bgColor: '#859395',
-		//fontColor: 'white',
+		rulesUrl:
+			'https://pegasus.de/media/pdf/e9/7c/e3/4250231736070_Dorfromantik_Duel_Rules_EN_Web.pdf',
 		primaryColor: '#7ba1d4',
 		secondaryColor: '#ee776c',
 		playerSizes: [2],

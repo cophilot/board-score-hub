@@ -5,11 +5,14 @@ import goalTileLeft from './assets/goal-tile-left.png';
 import catTokens from './assets/cat-tokens.png';
 import buttonTokens from './assets/button-tokens.png';
 import FontUtils from '../../api/utils/FontUtils';
+import { GameDef } from '../../api/types/GameDef';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: 'Calico',
 		url: 'https://boardgamegeek.com/boardgame/283155/calico',
+		rulesUrl:
+			'https://www.alderac.com/wp-content/uploads/2020/09/Calico-Rules.pdf',
 		bgColor: '#fbf8f0',
 		fontColor: '#000',
 		primaryColor: '#142688',

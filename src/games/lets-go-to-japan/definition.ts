@@ -3,10 +3,14 @@ import moodIcon from './assets/mood.png';
 import experienceIcon from './assets/experience.png';
 import researchTokenIcon from './assets/research-tokens.png';
 import trainsIcon from './assets/trains.png';
+import { GameDef } from '../../api/types/GameDef';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: "Let's Go! To Japan",
+		url: 'https://boardgamegeek.com/boardgame/368173/lets-go-to-japan',
+		rulesUrl:
+			'https://www.alderac.com/wp-content/uploads/2023/03/LetsGoToJapan_Influencer_EN_1P_Rulebook_FINAL-copy.pdf',
 		bgColor: '#f6f8f9',
 		fontColor: '#000',
 		primaryColor: '#59c4db',

@@ -6,10 +6,14 @@ import water from './assets/water.png';
 import card from './assets/card.png';
 import { WinMode } from '../../api/types/WinMode';
 import FontUtils from '../../api/utils/FontUtils';
+import { GameDef } from '../../api/types/GameDef';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: 'Harmonies',
+		url: 'https://boardgamegeek.com/boardgame/414317/harmonies',
+		rulesUrl:
+			'https://cdn.svc.asmodee.net/production-libellud/uploads/2024/03/LIBELLUD_HARMONIES_RULES_EN-1.pdf',
 		bgColor: '#deceac',
 		fontColor: 'black',
 		primaryColor: '#0094b8',

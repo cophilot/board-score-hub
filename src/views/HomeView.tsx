@@ -20,7 +20,7 @@ export default function HomeView() {
 	useEffect(() => {
 		document.title = 'BoardScoreHub';
 		StyleUtils.setDefaultValues(isDarkModeEnabled());
-	}, []);
+	}, [isDarkModeEnabled]);
 
 	const games = getSortedGameNames();
 	return (

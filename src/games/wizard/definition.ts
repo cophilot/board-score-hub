@@ -1,6 +1,7 @@
+import { GameDef } from '../../api/types/GameDef';
 import { WinMode } from '../../api/types/WinMode';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: 'Wizard',
 		bgColor: '#1F1F1F',

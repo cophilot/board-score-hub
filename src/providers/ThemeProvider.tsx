@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { ReactNode, useEffect } from 'react';
 import StyleUtils from '../api/utils/StyleUtils';
 
@@ -56,7 +57,7 @@ export function ThemeProvider({ children }: Props) {
 
 	useEffect(() => {
 		StyleUtils.setDefaultValues(isDarkMode);
-	}, []);
+	}, [isDarkMode]);
 
 	const isDarkModeEnabled = () => {
 		return isDarkMode;

@@ -1,9 +1,13 @@
+import { GameDef } from '../../api/types/GameDef';
 import { WinMode } from '../../api/types/WinMode';
 import FontUtils from '../../api/utils/FontUtils';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: 'Scout',
+		url: 'https://boardgamegeek.com/boardgame/291453/scout',
+		rulesUrl:
+			'https://onemoregame.cloud-line.com/files/SCOUT!_v2.1_English_open.pdf',
 		bgColor: '#FBD800',
 		fontColor: '#4B0082',
 		primaryColor: '#F08600',

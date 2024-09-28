@@ -11,6 +11,8 @@ import { GameDef } from '../../api/types/GameDef';
 export default function getDefinition(): GameDef {
 	return {
 		title: 'Everdell',
+		url: 'https://boardgamegeek.com/boardgame/199792/everdell',
+		rulesUrl: 'https://cdn.1j1ju.com/medias/c6/cd/89-everdell-rulebook.pdf',
 		bgColor: '#5c652e',
 		fontColor: '#342a28',
 		primaryColor: '#714839',
@@ -19,7 +21,6 @@ export default function getDefinition(): GameDef {
 		playerSizes: [1, 2, 3, 4],
 		winMode: WinMode.MOST,
 		stripeColor: '#4b5729',
-		rulesUrl: 'https://cdn.1j1ju.com/medias/c6/cd/89-everdell-rulebook.pdf',
 		rows: [
 			{
 				name: 'Cards in Village',

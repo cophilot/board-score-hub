@@ -7,8 +7,9 @@ import bonusIcon from './assets/bonus.png';
 import tuckedCardIcon from './assets/tucked-card.png';
 import birdIcon from './assets/bird.png';
 import nectarIcon from './assets/nectar.png';
+import { GameDef } from '../../api/types/GameDef';
 
-export default function getDefinition() {
+export default function getDefinition(): GameDef {
 	return {
 		title: 'Wingspan',
 		bgColor: '#f4f5f0',

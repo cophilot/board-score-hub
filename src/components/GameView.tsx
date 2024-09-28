@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import BoardScorePage from '../api/BoardScorePage/BoardScorePage';
+import { GameDef } from '../api/types/GameDef';
 import By from './By';
 import Logo from './Logo';
 
 interface GameViewProps {
-	definition: any;
+	definition: GameDef;
 	afterTabelElement?: JSX.Element;
 }
 
