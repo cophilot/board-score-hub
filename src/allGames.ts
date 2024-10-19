@@ -11,6 +11,7 @@ import Wingspan from './games/wingspan/main';
 import ForestShuffle from './games/forest-shuffle/main';
 import WorldWonders from './games/world-wonders/main';
 import SeaSaltPaper from './games/sea-salt-paper/main';
+import SpiritsOfTheWild from './games/spirits-of-the-wild/main';
 
 export function getAllGames() {
 	return [
@@ -27,6 +28,7 @@ export function getAllGames() {
 		WorldWonders,
 		ForestShuffle,
 		SeaSaltPaper,
+		SpiritsOfTheWild,
 	];
 }
 
