@@ -12,6 +12,7 @@ import ForestShuffle from './games/forest-shuffle/main';
 import WorldWonders from './games/world-wonders/main';
 import SeaSaltPaper from './games/sea-salt-paper/main';
 import SpiritsOfTheWild from './games/spirits-of-the-wild/main';
+import Faraway from './games/faraway/main';
 
 export function getAllGames() {
 	return [
@@ -29,6 +30,7 @@ export function getAllGames() {
 		ForestShuffle,
 		SeaSaltPaper,
 		SpiritsOfTheWild,
+		Faraway,
 	];
 }
 

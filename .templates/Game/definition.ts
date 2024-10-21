@@ -3,7 +3,7 @@ import { WinMode } from '../../api/types/WinMode';
 
 export default function getDefinition(): GameDef {
 	return {
-		title: '$$name$$',
+		title: '$$name.p$$',
 		//url: '',
 		//bgColor: '#fff',
 		//fontColor: '#000',
