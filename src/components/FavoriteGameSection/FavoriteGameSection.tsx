@@ -18,6 +18,7 @@ function FavoriteGameSection() {
 	const games = getSortedGameNames();
 
 	const setFavoriteGames = (favoriteGames: string[]) => {
+		favoriteGames.sort();
 		setFavoriteGamesInternal(favoriteGames);
 		LocalStorageService.setFavoriteGames(favoriteGames);
 	};

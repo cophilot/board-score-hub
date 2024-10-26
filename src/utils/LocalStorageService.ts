@@ -8,7 +8,10 @@ export default class LocalStorageService {
 		if (favoriteGames === null) {
 			return [];
 		}
-		return JSON.parse(favoriteGames);
+		const arr: string[] = JSON.parse(favoriteGames);
+		// sort the array to make sure the order is consistent
+		arr.sort();
+		return arr;
 	}
 
 	static setFavoriteGames(favoriteGames: string[]) {
