@@ -83,8 +83,25 @@ export default function HomeView() {
                     }}>
                     Create <i className="bi bi-plus-circle"></i>
                     </button> */}
-			<h2>Other</h2>
-			<RouteButton to="privacy">Privacy</RouteButton>
+			<h2>Other Tools</h2>
+			<div className="ver">
+				<GameButton
+					game="TapOrder"
+					asLink
+					link="https://tap-order.philipp-bonin.com/"
+				/>
+				<GameButton
+					game="Next Station: Helper"
+					asLink
+					link="https://next-station.philipp-bonin.com/"
+				/>
+			</div>
+			<h2>Infos</h2>
+			<div className="ver">
+				<RouteButton to="privacy">Concept</RouteButton>
+				<RouteButton to="privacy">Privacy</RouteButton>
+				<RouteButton to="privacy">Contributers</RouteButton>
+			</div>
 			<By />
 		</div>
 	);
