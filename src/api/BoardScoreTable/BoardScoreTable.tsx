@@ -4,7 +4,7 @@ import './BoardScoreTable.scss';
 import GameStorage from '../utils/GameStorage';
 import { getFunctionForWinMode, WinMode } from '../types/WinMode';
 import ExtensionButtons from '../ExtensionButtons/ExtensionButtons';
-import { GameDef, RowDef } from '../types/GameDef';
+import { GameDef, Label, RowDef } from '../types/GameDef';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -79,19 +79,18 @@ function BoardScoreTable({
 		playerIndex: number,
 		value: number,
 	) => {
-		let couldBeAdded = false;
-		const newTableMatrix = tableMatrix.map((row: number[], index: number) => {
+		let newTableMatrix = tableMatrix;
+
+		while (newTableMatrix.length < rows.length) {
+			newTableMatrix.push(Array.from(Array(playerSize).keys()).map(() => 0));
+		}
+
+		newTableMatrix = tableMatrix.map((row: number[], index: number) => {
 			if (index === rowIndex) {
 				row[playerIndex] = Number(value);
-				couldBeAdded = true;
 			}
 			return row;
 		});
-
-		if (!couldBeAdded) {
-			newTableMatrix.push(Array.from(Array(playerSize).keys()).map(() => 0));
-			newTableMatrix[newTableMatrix.length - 1][playerIndex] = Number(value);
-		}
 
 		setTableMatrix(newTableMatrix);
 		GameStorage.setGameMatrix(definition.title, newTableMatrix);
@@ -109,6 +108,14 @@ function BoardScoreTable({
 			return null;
 		}
 		return value;
+	};
+
+	const getLabelForID = (id: string | undefined): Label | undefined => {
+		if (!id) {
+			return undefined;
+		}
+		const l = definition.labels || [];
+		return l.find((label: Label) => label.beforeID === id);
 	};
 
 	return (
@@ -155,6 +162,13 @@ function BoardScoreTable({
 						(row: RowDef, index: number) =>
 							(rounds === -1 || index < rounds) && (
 								<>
+									{getLabelForID(row.id) && (
+										<tr key={'label-row-' + index} className="label-row">
+											<td colSpan={playerSize + 1}>
+												{getLabelForID(row.id)?.label}
+											</td>
+										</tr>
+									)}
 									{gameSettings.showHelp && row.icon && (
 										<tr className="help-row" key={'help-row-' + index}>
 											<td colSpan={playerSize + 1}>
@@ -234,6 +248,7 @@ function InputCell({
 		if (row.negative && newValue > 0) {
 			newValue *= -1;
 		}
+
 		setValueFunction(rowIndex, playerIndex, newValue);
 	};
 

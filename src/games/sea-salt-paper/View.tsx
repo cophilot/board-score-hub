@@ -3,39 +3,54 @@ import BoardScorePage from '../../api/BoardScorePage/BoardScorePage';
 import By from '../../components/By';
 import Logo from '../../components/Logo';
 import getDefinition from './definition';
+import { GameDef, Label, RowDef } from '../../api/types/GameDef';
 
 export default function SeaSaltPaperView() {
-	const [definition] = useState(getDefinition());
-	//const [definition, setDefinition] = useState(getDefinition());
-	//const [roundCounter, setRoundCounter] = useState(1);
-	//const [totalRow, setTotalRow] = useState([0, 0, 0, 0]);
+	const [def, setDef] = useState(getDefinition());
 
-	/* const onSaveRound = () => {
-		definition.rows.push({
-			name: `Round ${roundCounter}`,
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-expect-error
-			staticNumber: totalRow,
+	const ogRows = getDefinition().rows;
+	const [rows, setRows] = useState(ogRows);
+	const [labels, setLabels] = useState<Label[]>([]);
+
+	const newRound = () => {
+		let newLabels: Label[] = labels;
+		if (labels.length === 0) {
+			newLabels = [
+				{
+					beforeID: 'round-1',
+					label: 'Round 1',
+				},
+			];
+		}
+
+		newLabels.push({
+			beforeID: `round-${newLabels.length + 1}`,
+			label: `Round ${newLabels.length + 1}`,
 		});
-		setDefinition(definition);
-		setRoundCounter(roundCounter + 1);
-	}; */
 
-	/* const roundBtn = (
-		<button className="btn selected nav-btn print-hide" onClick={onSaveRound}>
-			Save Round
+		setLabels(newLabels);
+
+		const addRows = JSON.parse(JSON.stringify(ogRows)) as RowDef[]; // deep copy
+		addRows[0].id = `round-${newLabels.length}`;
+		const newRows: RowDef[] = [...rows, ...addRows];
+
+		setRows(newRows);
+		const newDef: GameDef = { ...def, rows: newRows, labels: newLabels };
+		setDef(newDef);
+	};
+
+	const roundBtn = (
+		<button className="btn selected nav-btn print-hide" onClick={newRound}>
+			<i className="bi bi-table"></i>New Round
 		</button>
-	); */
-	/* const getTotalRow = (totalRow: number[]) => {
-		setTotalRow(totalRow);
-	}; */
+	);
 
-	const logo = <Logo size={100} bgColor={definition.bgColor || '#fff'} />;
+	const logo = <Logo size={100} bgColor={def.bgColor || '#fff'} />;
 	return (
 		<BoardScorePage
-			definition={definition}
+			definition={def}
 			logo={logo}
-			//afterTableElement={roundBtn}
+			afterTableElement={roundBtn}
 			//getTotalRow={getTotalRow}
 		>
 			<By />

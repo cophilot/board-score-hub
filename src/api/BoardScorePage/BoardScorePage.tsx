@@ -114,12 +114,30 @@ export default function BoardScorePage({
 			<button
 				className="btn selected nav-btn print-hide"
 				onClick={() => {
+					//TODO
+				}}
+			>
+				<i className="bi bi-x-circle"></i>
+				Clear
+			</button>
+			<button
+				className="btn selected nav-btn print-hide"
+				onClick={() => {
 					GameStorage.deleteStorage(definition.title);
 					window.location.reload();
 				}}
 			>
 				<i className="bi bi-arrow-clockwise"></i>
 				Reset
+			</button>
+			<button
+				className="btn selected nav-btn print-hide"
+				onClick={() => {
+					//TODO
+				}}
+			>
+				<i className="bi bi-graph-up"></i>
+				Plot
 			</button>
 			<button
 				className="btn selected nav-btn print-hide"

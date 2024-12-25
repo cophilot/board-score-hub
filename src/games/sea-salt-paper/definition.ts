@@ -26,6 +26,7 @@ export default function getDefinition(): GameDef {
 		winMode: WinMode.MOST,
 		rows: [
 			{
+				id: 'round-1',
 				name: 'Duo Cards',
 				icon: duoCards,
 				description: '1 Point / Duo',

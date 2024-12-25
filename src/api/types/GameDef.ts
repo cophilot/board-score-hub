@@ -4,6 +4,7 @@ export interface GameDef {
 	title: string; // The name of the game
 	playerSizes: number[]; // An array of all possible player counts
 	rows: RowDef[]; // An array of rows
+	labels?: Label[]; // An array of labels
 	bgColor?: string; // The background color to be used
 	fontColor?: string; // The font color to be used
 	primaryColor?: string; // The primary color to be used
@@ -18,11 +19,17 @@ export interface GameDef {
 }
 
 export interface RowDef {
+	id?: string; // The ID of the row
 	name: string; // The name of the row
 	icon?: string; // The icon to be displayed for the row
 	description?: string; // The description of the row
 	bgColor?: string; // The background color to be used only for this row
 	negative?: boolean; // Whether this row is negative
+}
+
+export interface Label {
+	beforeID?: string; // The ID of the row to add this label after
+	label: string; // The label to be displayed
 }
 
 export interface ExtensionDef {
