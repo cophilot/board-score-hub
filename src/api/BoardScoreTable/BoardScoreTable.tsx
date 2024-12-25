@@ -4,7 +4,7 @@ import './BoardScoreTable.scss';
 import GameStorage from '../utils/GameStorage';
 import { getFunctionForWinMode, WinMode } from '../types/WinMode';
 import ExtensionButtons from '../ExtensionButtons/ExtensionButtons';
-import { GameDef } from '../types/GameDef';
+import { GameDef, RowDef } from '../types/GameDef';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -44,6 +44,11 @@ function BoardScoreTable({
 	);
 
 	const [rounds, setRounds] = useState(-1);
+
+	useEffect(() => {
+		setRows(definition.rows || []);
+	}, [definition.rows]);
+
 	useEffect(() => {
 		if (definition.roundMapper) {
 			setRounds(definition.roundMapper[playerSize]);
@@ -147,7 +152,7 @@ function BoardScoreTable({
 				</thead>
 				<tbody>
 					{rows.map(
-						(row: any, index: number) =>
+						(row: RowDef, index: number) =>
 							(rounds === -1 || index < rounds) && (
 								<>
 									{gameSettings.showHelp && row.icon && (

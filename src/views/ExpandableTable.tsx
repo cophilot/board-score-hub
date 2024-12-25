@@ -4,12 +4,13 @@ import { WinMode } from '../api/types/WinMode';
 import By from '../components/By';
 import Logo from '../components/Logo';
 import { useIsDarkModeEnabled } from '../providers/ThemeProvider';
+import { RowDef } from '../api/types/GameDef';
 
 export default function ExpandableTable() {
 	const rowsLSKey = 'expandable-table-rows';
 	const isDarkModeEnabled = useIsDarkModeEnabled();
 
-	const [rows, setRows] = useState([
+	const [rows, setRows] = useState<RowDef[]>([
 		{
 			name: 'Row 1',
 		},
@@ -18,7 +19,8 @@ export default function ExpandableTable() {
 	useEffect(() => {
 		const storedRows = localStorage.getItem(rowsLSKey);
 		if (storedRows) {
-			setRows(JSON.parse(storedRows));
+			const parsedRows = JSON.parse(storedRows);
+			setRows(parsedRows);
 		}
 	}, []);
 
@@ -30,7 +32,7 @@ export default function ExpandableTable() {
 			rows: rows,
 			stripeColor: isDarkModeEnabled() ? '#15203f' : '#d8d8d8',
 		};
-	}, [isDarkModeEnabled, rows]);
+	}, [rows, isDarkModeEnabled]);
 
 	const onCellChange = (row: number) => {
 		if (row < rows.length - 1) {
@@ -45,6 +47,7 @@ export default function ExpandableTable() {
 		setRows(newRows);
 		localStorage.setItem(rowsLSKey, JSON.stringify(newRows));
 	};
+
 	const logo = <Logo size={100} detectDarkMode />;
 
 	return (
