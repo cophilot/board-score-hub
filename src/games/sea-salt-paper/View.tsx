@@ -45,7 +45,7 @@ export default function SeaSaltPaperView() {
 		</button>
 	);
 
-	const logo = <Logo size={100} bgColor={def.bgColor || '#fff'} />;
+	const logo = <Logo size={100} bgColor="#000" />;
 	return (
 		<BoardScorePage
 			definition={def}

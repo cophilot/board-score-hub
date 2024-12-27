@@ -56,6 +56,12 @@ export default function ExpandableTable() {
 			onCellChange={onCellChange}
 			logo={logo}
 			isDarkModeEnabled={isDarkModeEnabled()}
+			onReset={() => {
+				localStorage.removeItem(rowsLSKey);
+			}}
+			onClear={() => {
+				localStorage.removeItem(rowsLSKey);
+			}}
 		>
 			<By />
 		</BoardScorePage>

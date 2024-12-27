@@ -18,6 +18,12 @@ export default class GameStorage {
 		gameKeys.forEach((key) => localStorage.removeItem(key));
 	}
 
+	static deleteGameMatrix(gameTitle: string) {
+		localStorage.removeItem(
+			GameStorage.getStorageKeyFromTitle(gameTitle, 'matrix'),
+		);
+	}
+
 	static getPlayerNames(gameTitle: string, fallback: string[] = []) {
 		const playerNames = localStorage.getItem(
 			GameStorage.getStorageKeyFromTitle(gameTitle, 'player-names'),

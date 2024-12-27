@@ -14,6 +14,8 @@ interface BoardScoreTableProps {
 	children?: any;
 	onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
 	getTotalRow?: (row: number[]) => void;
+	onReset?: () => void;
+	onClear?: () => void;
 	logo?: JSX.Element;
 	afterTableElement?: JSX.Element;
 	isDarkModeEnabled?: boolean;
@@ -30,6 +32,8 @@ export default function BoardScorePage({
 	children,
 	onCellChange,
 	getTotalRow,
+	onReset,
+	onClear,
 	logo,
 	afterTableElement,
 	isDarkModeEnabled = false,
@@ -111,10 +115,23 @@ export default function BoardScorePage({
 					</button>
 				</a>
 			)}
-			<button
+			{/* <button
 				className="btn selected nav-btn print-hide"
 				onClick={() => {
 					//TODO
+				}}
+			>
+				<i className="bi bi-graph-up"></i>
+				Plot
+			</button> */}
+			<button
+				className="btn selected nav-btn print-hide"
+				onClick={() => {
+					if (onClear) {
+						onClear();
+					}
+					GameStorage.deleteGameMatrix(definition.title);
+					window.location.reload();
 				}}
 			>
 				<i className="bi bi-x-circle"></i>
@@ -123,6 +140,9 @@ export default function BoardScorePage({
 			<button
 				className="btn selected nav-btn print-hide"
 				onClick={() => {
+					if (onReset) {
+						onReset();
+					}
 					GameStorage.deleteStorage(definition.title);
 					window.location.reload();
 				}}
@@ -130,15 +150,7 @@ export default function BoardScorePage({
 				<i className="bi bi-arrow-clockwise"></i>
 				Reset
 			</button>
-			<button
-				className="btn selected nav-btn print-hide"
-				onClick={() => {
-					//TODO
-				}}
-			>
-				<i className="bi bi-graph-up"></i>
-				Plot
-			</button>
+
 			<button
 				className="btn selected nav-btn print-hide"
 				onClick={() => {
