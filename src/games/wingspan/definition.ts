@@ -57,6 +57,7 @@ export default function getDefinition(): GameDef {
 			Oceania: {
 				rows: [
 					{
+						id: 'oceania',
 						name: 'Nectar',
 						description:
 							'5 points for the player with the most nectar and 2 points for the player with the second most nectar per region',
@@ -65,5 +66,11 @@ export default function getDefinition(): GameDef {
 				],
 			},
 		},
+		labels: [
+			{
+				beforeID: 'oceania',
+				label: 'Oceania',
+			},
+		],
 	};
 }

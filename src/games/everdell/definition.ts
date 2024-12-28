@@ -3,6 +3,7 @@ import journey from './assets/journey.png';
 import pointToken from './assets/point-token.png';
 import specialEvents from './assets/special-events.png';
 import village from './assets/village.png';
+import visitor from './assets/visitor.png';
 import prosperity from './assets/prosperity.png';
 import { WinMode } from '../../api/types/WinMode';
 import FontUtils from '../../api/utils/FontUtils';
@@ -45,6 +46,24 @@ export default function getDefinition(): GameDef {
 			{
 				name: 'Journey',
 				icon: journey,
+			},
+		],
+		extensions: {
+			Newleaf: {
+				rows: [
+					{
+						id: 'newleaf',
+						name: 'Vistors',
+						description: 'Points from the visitors challenges',
+						icon: visitor,
+					},
+				],
+			},
+		},
+		labels: [
+			{
+				beforeID: 'newleaf',
+				label: 'Newleaf',
 			},
 		],
 	};
