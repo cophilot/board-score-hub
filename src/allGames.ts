@@ -15,6 +15,7 @@ import SpiritsOfTheWild from './games/spirits-of-the-wild/main';
 import Faraway from './games/faraway/main';
 import SavannahPark from './games/savannah-park/main';
 import TheWhiteCastle from './games/the-white-castle/main';
+import Pixies from './games/pixies/main';
 
 export function getAllGames() {
 	return [
@@ -35,6 +36,7 @@ export function getAllGames() {
 		Faraway,
 		SavannahPark,
 		TheWhiteCastle,
+		Pixies,
 	];
 }
 
