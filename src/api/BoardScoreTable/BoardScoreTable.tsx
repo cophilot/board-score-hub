@@ -5,6 +5,8 @@ import GameStorage from '../utils/GameStorage';
 import { getFunctionForWinMode, WinMode } from '../types/WinMode';
 import ExtensionButtons from '../ExtensionButtons/ExtensionButtons';
 import { GameDef, Label, RowDef } from '../types/GameDef';
+import NumInput from '../NumInput/NumInput';
+import { NumInputFocusManager } from '../NumInput/NumInputFocusManager';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -119,99 +121,103 @@ function BoardScoreTable({
 	};
 
 	return (
-		<>
-			<ExtensionButtons
-				definition={definition}
-				onExtensionOn={(extensionName, extensionDefinition) => {
-					const extRows = extensionDefinition.rows || [];
-					extRows.forEach((row: any) => {
-						row.__extName = extensionName;
-					});
-					setRows([...rows, ...extRows]);
-				}}
-				onExtensionOff={(extensionName) => {
-					setRows(rows.filter((row: any) => row.__extName !== extensionName));
-				}}
-			/>
-			<table className="board-score-table" style={tableStyle}>
-				<thead>
-					<tr key="header">
-						<th key="-1"></th>
-						{playerSizes.map((index) => (
-							<th key={index}>
-								<input
-									type="text"
-									placeholder={'P' + (index + 1)}
-									value={playerNames[index] || ''}
-									onChange={(e) => {
-										const newPlayerNames = playerNames.slice();
-										newPlayerNames[index] = e.target.value.toUpperCase();
-										setPlayerNames(newPlayerNames);
-										GameStorage.setPlayerNames(
-											definition.title,
-											newPlayerNames,
-										);
-									}}
-								/>
-							</th>
-						))}
-					</tr>
-				</thead>
-				<tbody>
-					{rows.map(
-						(row: RowDef, index: number) =>
-							(rounds === -1 || index < rounds) && (
-								<>
-									{getLabelForID(row.id) && (
-										<tr key={'label-row-' + index} className="label-row">
-											<td colSpan={playerSize + 1}>
-												{getLabelForID(row.id)?.label}
-											</td>
+		<NumInputFocusManager>
+			<>
+				<ExtensionButtons
+					definition={definition}
+					onExtensionOn={(extensionName, extensionDefinition) => {
+						const extRows = extensionDefinition.rows || [];
+						extRows.forEach((row: any) => {
+							row.__extName = extensionName;
+						});
+						setRows([...rows, ...extRows]);
+					}}
+					onExtensionOff={(extensionName) => {
+						setRows(rows.filter((row: any) => row.__extName !== extensionName));
+					}}
+				/>
+				<table className="board-score-table" style={tableStyle}>
+					<thead>
+						<tr key="header">
+							<th key="-1"></th>
+							{playerSizes.map((index) => (
+								<th key={index}>
+									<input
+										type="text"
+										placeholder={'P' + (index + 1)}
+										value={playerNames[index] || ''}
+										onChange={(e) => {
+											const newPlayerNames = playerNames.slice();
+											newPlayerNames[index] = e.target.value.toUpperCase();
+											setPlayerNames(newPlayerNames);
+											GameStorage.setPlayerNames(
+												definition.title,
+												newPlayerNames,
+											);
+										}}
+									/>
+								</th>
+							))}
+						</tr>
+					</thead>
+					<tbody>
+						{rows.map(
+							(row: RowDef, index: number) =>
+								(rounds === -1 || index < rounds) && (
+									<>
+										{getLabelForID(row.id) && (
+											<tr key={'label-row-' + index} className="label-row">
+												<td colSpan={playerSize + 1}>
+													{getLabelForID(row.id)?.label}
+												</td>
+											</tr>
+										)}
+										{gameSettings.showHelp && row.icon && (
+											<tr className="help-row" key={'help-row-' + index}>
+												<td colSpan={playerSize + 1}>
+													<b>{row.name}</b>
+													<i>
+														{row.description ? ' - ' + row.description : ''}
+													</i>
+												</td>
+											</tr>
+										)}
+										<tr
+											key={index}
+											style={getStyleFromRow(row, definition, index)}
+										>
+											<FirstRowCell row={row} />
+											{playerSizes.map((playerIndex) => (
+												<InputCell
+													row={row}
+													key={playerIndex}
+													rowIndex={index}
+													playerIndex={playerIndex}
+													getValueFunction={getTableValue}
+													setValueFunction={setTableValue}
+												/>
+											))}
 										</tr>
-									)}
-									{gameSettings.showHelp && row.icon && (
-										<tr className="help-row" key={'help-row-' + index}>
-											<td colSpan={playerSize + 1}>
-												<b>{row.name}</b>
-												<i>{row.description ? ' - ' + row.description : ''}</i>
-											</td>
-										</tr>
-									)}
-									<tr
-										key={index}
-										style={getStyleFromRow(row, definition, index)}
-									>
-										<FirstRowCell row={row} />
-										{playerSizes.map((playerIndex) => (
-											<InputCell
-												row={row}
-												key={playerIndex}
-												rowIndex={index}
-												playerIndex={playerIndex}
-												getValueFunction={getTableValue}
-												setValueFunction={setTableValue}
-											/>
-										))}
-									</tr>
-								</>
-							),
-					)}
-					<tr key="total" className="total-row">
-						<FirstRowCell row={{ name: 'Total' }} />
-						{totalRow.map((value, playerIndex) => (
-							<td
-								key={playerIndex}
-								className={
-									'total-cell ' + (getWinningScore() == value ? 'win' : '')
-								}
-							>
-								{isNaN(value) ? 0 : value}
-							</td>
-						))}
-					</tr>
-				</tbody>
-			</table>
-		</>
+									</>
+								),
+						)}
+						<tr key="total" className="total-row">
+							<FirstRowCell row={{ name: 'Total' }} />
+							{totalRow.map((value, playerIndex) => (
+								<td
+									key={playerIndex}
+									className={
+										'total-cell ' + (getWinningScore() == value ? 'win' : '')
+									}
+								>
+									{isNaN(value) ? 0 : value}
+								</td>
+							))}
+						</tr>
+					</tbody>
+				</table>
+			</>
+		</NumInputFocusManager>
 	);
 }
 export default BoardScoreTable;
@@ -240,16 +246,18 @@ function InputCell({
 		staticNumber = staticNumber[playerIndex];
 	}
 
+	const transformValue = (value: number): number => {
+		if (row.negative && value > 0) {
+			return value * -1;
+		}
+		return value;
+	};
+
 	const setValue = (value: any) => {
 		if (isNaN(value)) {
 			return;
 		}
-		let newValue = Number(value);
-		if (row.negative && newValue > 0) {
-			newValue *= -1;
-		}
-
-		setValueFunction(rowIndex, playerIndex, newValue);
+		setValueFunction(rowIndex, playerIndex, Number(value));
 	};
 
 	useEffect(() => {
@@ -264,11 +272,11 @@ function InputCell({
 			{staticNumber ? (
 				<input type="text" value={staticNumber} disabled={true} />
 			) : (
-				<input
-					type="number"
-					inputMode="numeric"
-					onChange={(e) => setValue(e.target.value)}
+				<NumInput
+					name={row.name}
 					value={value}
+					onChange={setValue}
+					transformNumber={transformValue}
 				/>
 			)}
 		</td>
