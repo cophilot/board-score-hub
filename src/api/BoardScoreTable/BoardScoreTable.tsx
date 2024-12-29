@@ -136,9 +136,18 @@ function BoardScoreTable({
 						setRows(rows.filter((row: any) => row.__extName !== extensionName));
 					}}
 				/>
-				<table className="board-score-table" style={tableStyle}>
+				<table
+					className="board-score-table"
+					style={tableStyle}
+					id="board-score-table"
+				>
 					<thead>
-						<tr key="header">
+						<tr className="label-row screenshot-show">
+							<td colSpan={playerSize + 1}>
+								{new Date().toLocaleDateString()}
+							</td>
+						</tr>
+						<tr key="header" className="screenshoöt-hide">
 							<th key="-1"></th>
 							{playerSizes.map((index) => (
 								<th key={index}>
@@ -157,6 +166,14 @@ function BoardScoreTable({
 										}}
 									/>
 								</th>
+							))}
+						</tr>
+						<tr className="screenshot-show">
+							<th key="-1"></th>
+							{playerSizes.map((index) => (
+								<td key={index} className="inverted">
+									<div>{playerNames[index] || 'P' + (index + 1)}</div>
+								</td>
 							))}
 						</tr>
 					</thead>
@@ -213,6 +230,11 @@ function BoardScoreTable({
 									{isNaN(value) ? 0 : value}
 								</td>
 							))}
+						</tr>
+						<tr className="label-row screenshot-show">
+							<td colSpan={playerSize + 1}>
+								board-score-hub.philipp-bonin.com
+							</td>
 						</tr>
 					</tbody>
 				</table>

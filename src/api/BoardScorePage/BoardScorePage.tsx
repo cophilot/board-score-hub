@@ -8,6 +8,7 @@ import GameStorage from '../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
 import UIUtils from '../utils/UIUtils';
 import { GameDef } from '../types/GameDef';
+import html2canvas from 'html2canvas';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -107,6 +108,13 @@ export default function BoardScorePage({
 				<i className="bi bi-box-arrow-up"></i>
 				Export
 			</button>
+			<button
+				className="btn selected nav-btn print-hide"
+				onClick={() => exportImage(definition.title)}
+			>
+				<i className="bi bi-camera"></i>
+				Screenshot
+			</button>
 			{definition.rulesUrl && (
 				<a href={definition.rulesUrl} target="_blank" rel="noreferrer">
 					<button className="btn selected nav-btn print-hide">
@@ -165,6 +173,26 @@ export default function BoardScorePage({
 			</h2>
 			{children}
 		</div>
+	);
+}
+
+function exportImage(gameName: string) {
+	const dateStr = new Date().toLocaleDateString();
+
+	const displayStyles = UIUtils.hideElementsWithClass('screenshot-hide');
+	UIUtils.showElementsWithClass('screenshot-show');
+
+	html2canvas(document.querySelector('#board-score-table') as HTMLElement).then(
+		(canvas) => {
+			const link = document.createElement('a');
+			link.download = `${gameName}-${dateStr}-board-score-hub.png`;
+			link.href = canvas.toDataURL('image/png');
+			link.click();
+			setTimeout(() => {
+				UIUtils.showElementsWithClass('screenshot-hide', displayStyles);
+				UIUtils.hideElementsWithClass('screenshot-show');
+			}, 500);
+		},
 	);
 }
 
