@@ -2,6 +2,8 @@ import basicEvents from './assets/basic-events.png';
 import journey from './assets/journey.png';
 import pointToken from './assets/point-token.png';
 import specialEvents from './assets/special-events.png';
+import expedition from './assets/expedition.png';
+import discoveryCard from './assets/discovery-cards.png';
 import village from './assets/village.png';
 import visitor from './assets/visitor.png';
 import prosperity from './assets/prosperity.png';
@@ -59,11 +61,30 @@ export default function getDefinition(): GameDef {
 					},
 				],
 			},
+			Spirecrest: {
+				rows: [
+					{
+						id: 'spirecrest',
+						name: 'Expedition',
+						description: 'Points gained from your expedition',
+						icon: expedition,
+					},
+					{
+						name: 'Discovery Cards',
+						description: 'Points from your discovery cards',
+						icon: discoveryCard,
+					},
+				],
+			},
 		},
 		labels: [
 			{
 				beforeID: 'newleaf',
 				label: 'Newleaf',
+			},
+			{
+				beforeID: 'spirecrest',
+				label: 'Spirecrest',
 			},
 		],
 	};
