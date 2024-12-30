@@ -14,6 +14,7 @@ interface BoardScoreTableProps {
 	playerSize: number;
 	gameSettings: any;
 	showPlot?: boolean;
+	onClosePlot: () => void;
 	onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
 	getTotalRow?: (row: number[]) => void;
 }
@@ -29,6 +30,7 @@ function BoardScoreTable({
 	playerSize,
 	gameSettings,
 	onCellChange,
+	onClosePlot,
 	getTotalRow,
 	showPlot,
 }: BoardScoreTableProps) {
@@ -131,6 +133,7 @@ function BoardScoreTable({
 						definition={definition}
 						tableMatrix={tableMatrix}
 						playerNames={fillPlayerNames(playerNames, playerSize)}
+						onClose={onClosePlot}
 					/>
 				)}
 				<ExtensionButtons

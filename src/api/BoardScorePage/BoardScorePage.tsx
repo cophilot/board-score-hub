@@ -88,6 +88,7 @@ export default function BoardScorePage({
 					gameSettings={settings}
 					playerSize={playerSize}
 					showPlot={showPlot}
+					onClosePlot={() => setShowPlot(false)}
 				></BoardScoreTable>
 				{afterTableElement}
 				{showHelpButton && (

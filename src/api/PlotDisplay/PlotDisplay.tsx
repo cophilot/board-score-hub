@@ -7,10 +7,11 @@ interface PlotDisplayProps {
 	definition: GameDef;
 	tableMatrix: number[][];
 	playerNames: string[];
+	onClose: () => void;
 }
 
 /**
- * This is a PlotDisplay component
+ * Show the game statistics in a plot
  * @author cophilot
  * @version 1.0.0
  * @created 2024-12-29
@@ -19,8 +20,10 @@ function PlotDisplay({
 	definition,
 	playerNames,
 	tableMatrix,
+	onClose,
 }: PlotDisplayProps) {
 	const [isRotated, setRotate] = useState(false);
+	const [isBar, setIsBar] = useState(false);
 
 	const series = useMemo(() => {
 		return playerNames.map((playerName, index) => {
@@ -33,7 +36,7 @@ function PlotDisplay({
 			return {
 				symbolSize: getFontSize(),
 				name: playerName,
-				type: 'line',
+				type: isBar ? 'bar' : 'line',
 				data: data,
 				smooth: true,
 				lineStyle: {
@@ -43,24 +46,36 @@ function PlotDisplay({
 				},
 			};
 		});
-	}, [playerNames, tableMatrix]);
+	}, [playerNames, tableMatrix, isBar]);
 
 	return (
 		<div className="plot-display">
-			<ReactECharts
-				className={isRotated ? 'rotated' : ''}
-				option={getOptions(definition, series)}
-				style={{
-					height: isRotated ? '100vw' : '90vh',
-					minWidth: isRotated ? '90vh' : '100vw',
-					color: definition.fontColor,
-				}}
-			/>
+			<div id="plot">
+				<ReactECharts
+					className={isRotated ? 'rotated' : ''}
+					option={getOptions(definition, series)}
+					style={{
+						height: isRotated ? '100vw' : '90vh',
+						minWidth: isRotated ? '90vh' : '100vw',
+						color: definition.fontColor,
+					}}
+				/>
+			</div>
 			<div className="control-panel">
 				<div onClick={() => setRotate(!isRotated)}>
 					<i className="bi bi-arrow-counterclockwise"></i>
 				</div>
-				<div>Rotate</div>
+				<div onClick={() => setIsBar(!isBar)}>
+					{isBar ? (
+						<i className="bi bi-bar-chart-line"></i>
+					) : (
+						<i className="bi bi-graph-up"></i>
+					)}
+				</div>
+
+				<div onClick={onClose}>
+					<i className="bi bi-x-lg"></i>
+				</div>
 			</div>
 		</div>
 	);
