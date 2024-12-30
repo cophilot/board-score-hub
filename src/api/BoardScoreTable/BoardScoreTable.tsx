@@ -7,11 +7,13 @@ import ExtensionButtons from '../ExtensionButtons/ExtensionButtons';
 import { GameDef, Label, RowDef } from '../types/GameDef';
 import NumInput from '../NumInput/NumInput';
 import { NumInputFocusManager } from '../NumInput/NumInputFocusManager';
+import PlotDisplay from '../PlotDisplay/PlotDisplay';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
 	playerSize: number;
 	gameSettings: any;
+	showPlot?: boolean;
 	onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
 	getTotalRow?: (row: number[]) => void;
 }
@@ -28,6 +30,7 @@ function BoardScoreTable({
 	gameSettings,
 	onCellChange,
 	getTotalRow,
+	showPlot,
 }: BoardScoreTableProps) {
 	const playerSizes = Array.from(Array(playerSize).keys());
 	const [rows, setRows] = useState(definition.rows || []);
@@ -123,6 +126,13 @@ function BoardScoreTable({
 	return (
 		<NumInputFocusManager>
 			<>
+				{showPlot && (
+					<PlotDisplay
+						definition={definition}
+						tableMatrix={tableMatrix}
+						playerNames={fillPlayerNames(playerNames, playerSize)}
+					/>
+				)}
 				<ExtensionButtons
 					definition={definition}
 					onExtensionOn={(extensionName, extensionDefinition) => {
@@ -346,4 +356,16 @@ function parseTableStyle(definition: any) {
 
 function getDefValue(definition: any, key: string, fallback: any) {
 	return definition[key] || fallback;
+}
+
+function fillPlayerNames(playerNames: string[], playerSize: number): string[] {
+	const newPlayers: string[] = [];
+	for (let i = 0; i < playerSize; i++) {
+		let name = playerNames[i];
+		if (!name || name === '') {
+			name = `P${i + 1}`;
+		}
+		newPlayers.push(name);
+	}
+	return newPlayers;
 }

@@ -48,7 +48,7 @@ export default function BoardScorePage({
 			showHelp: false,
 		}),
 	);
-
+	const [showPlot, setShowPlot] = useState(false);
 	const onPlayerSizeChange = (size: number) => {
 		setPlayerSize(size);
 		GameStorage.setPlayerSize(definition.title, size);
@@ -69,102 +69,105 @@ export default function BoardScorePage({
 	const showHelpButton = definition.rows.some((row: any) => row.icon);
 
 	return (
-		<div className="board-score-page">
-			{logo}
-			<TableHeading definition={definition} />
-			<h2 className="print-show">
-				<i>{date}</i>
-			</h2>
-			<PlayerSwitch
-				playerSizes={definition.playerSizes}
-				initPlayerSize={playerSize}
-				onPlayerSizeChange={onPlayerSizeChange}
-			></PlayerSwitch>
-			<BoardScoreTable
-				onCellChange={onCellChange}
-				getTotalRow={getTotalRow}
-				definition={definition}
-				gameSettings={settings}
-				playerSize={playerSize}
-			></BoardScoreTable>
-			{afterTableElement}
-			{showHelpButton && (
+		<>
+			<div className="board-score-page">
+				{logo}
+				<TableHeading definition={definition} />
+				<h2 className="print-show">
+					<i>{date}</i>
+				</h2>
+				<PlayerSwitch
+					playerSizes={definition.playerSizes}
+					initPlayerSize={playerSize}
+					onPlayerSizeChange={onPlayerSizeChange}
+				></PlayerSwitch>
+				<BoardScoreTable
+					onCellChange={onCellChange}
+					getTotalRow={getTotalRow}
+					definition={definition}
+					gameSettings={settings}
+					playerSize={playerSize}
+					showPlot={showPlot}
+				></BoardScoreTable>
+				{afterTableElement}
+				{showHelpButton && (
+					<button
+						className="btn selected nav-btn print-hide"
+						onClick={() => {
+							const newSettings = {
+								...settings,
+								showHelp: !settings.showHelp,
+							};
+							applySettings(newSettings);
+						}}
+					>
+						<i className="bi bi-question-circle"></i>
+						{settings.showHelp ? 'Hide Help' : 'Help'}
+					</button>
+				)}
+				<button className="btn selected nav-btn print-hide" onClick={print}>
+					<i className="bi bi-box-arrow-up"></i>
+					Export
+				</button>
+				{definition.rulesUrl && (
+					<a href={definition.rulesUrl} target="_blank" rel="noreferrer">
+						<button className="btn selected nav-btn print-hide">
+							<i className="bi bi-book"></i>
+							Rules
+						</button>
+					</a>
+				)}
 				<button
 					className="btn selected nav-btn print-hide"
 					onClick={() => {
-						const newSettings = {
-							...settings,
-							showHelp: !settings.showHelp,
-						};
-						applySettings(newSettings);
+						setShowPlot(!showPlot);
 					}}
 				>
-					<i className="bi bi-question-circle"></i>
-					{settings.showHelp ? 'Hide Help' : 'Help'}
+					<i className="bi bi-graph-up"></i>
+					Plot
 				</button>
-			)}
-			<button className="btn selected nav-btn print-hide" onClick={print}>
-				<i className="bi bi-box-arrow-up"></i>
-				Export
-			</button>
-			{definition.rulesUrl && (
-				<a href={definition.rulesUrl} target="_blank" rel="noreferrer">
-					<button className="btn selected nav-btn print-hide">
-						<i className="bi bi-book"></i>
-						Rules
-					</button>
-				</a>
-			)}
-			{/* <button
-				className="btn selected nav-btn print-hide"
-				onClick={() => {
-					//TODO
-				}}
-			>
-				<i className="bi bi-graph-up"></i>
-				Plot
-			</button> */}
-			<button
-				className="btn selected nav-btn print-hide"
-				onClick={() => {
-					if (onClear) {
-						onClear();
-					}
-					GameStorage.deleteGameMatrix(definition.title);
-					window.location.reload();
-				}}
-			>
-				<i className="bi bi-x-circle"></i>
-				Clear
-			</button>
-			<button
-				className="btn selected nav-btn print-hide"
-				onClick={() => {
-					if (onReset) {
-						onReset();
-					}
-					GameStorage.deleteStorage(definition.title);
-					window.location.reload();
-				}}
-			>
-				<i className="bi bi-arrow-clockwise"></i>
-				Reset
-			</button>
+				<button
+					className="btn selected nav-btn print-hide"
+					onClick={() => {
+						if (onClear) {
+							onClear();
+						}
+						GameStorage.deleteGameMatrix(definition.title);
+						window.location.reload();
+					}}
+				>
+					<i className="bi bi-x-circle"></i>
+					Clear
+				</button>
+				<button
+					className="btn selected nav-btn print-hide"
+					onClick={() => {
+						if (onReset) {
+							onReset();
+						}
+						GameStorage.deleteStorage(definition.title);
+						window.location.reload();
+					}}
+				>
+					<i className="bi bi-arrow-clockwise"></i>
+					Reset
+				</button>
 
-			<button
-				className="btn selected nav-btn print-hide"
-				onClick={() => {
-					navigate('/');
-				}}
-			>
-				<i className="bi bi-house"></i>
-				Home
-			</button>
-			<h2 className="print-show">
-				<i>board-score-hub.philipp-bonin.com</i>
-			</h2>
-			{children}
-		</div>
+				<button
+					className="btn selected nav-btn print-hide"
+					onClick={() => {
+						navigate('/');
+					}}
+				>
+					<i className="bi bi-house"></i>
+					Home
+				</button>
+				<h2 className="print-show">
+					<i>board-score-hub.philipp-bonin.com</i>
+				</h2>
+				{children}
+			</div>
+		</>
 	);
 }
 
