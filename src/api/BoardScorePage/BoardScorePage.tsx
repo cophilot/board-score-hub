@@ -81,6 +81,8 @@ export default function BoardScorePage({
 					initPlayerSize={playerSize}
 					onPlayerSizeChange={onPlayerSizeChange}
 				></PlayerSwitch>
+				<h2>Timer</h2>
+				<button className="btn">Start</button>
 				<BoardScoreTable
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}
