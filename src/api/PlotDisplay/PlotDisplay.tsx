@@ -24,15 +24,24 @@ function PlotDisplay({
 }: PlotDisplayProps) {
 	const [isRotated, setRotate] = useState(false);
 	const [isBar, setIsBar] = useState(false);
+	const [isCumulative, setIsCumulative] = useState(false);
 
 	const series = useMemo(() => {
+		
 		return playerNames.map((playerName, index) => {
+			
+			let before: (number | undefined) = undefined;
 			const data = tableMatrix
 				.map((row) => row[index])
 				.map((value) => {
 					value = value || 0;
+					if (isCumulative && before !== undefined) {
+						value = value + before!;
+					}
+					before = value;
 					return value;
 				});
+
 			return {
 				symbolSize: getFontSize(),
 				name: playerName,
@@ -46,7 +55,7 @@ function PlotDisplay({
 				},
 			};
 		});
-	}, [playerNames, tableMatrix, isBar]);
+	}, [playerNames, tableMatrix, isBar, isCumulative]);
 
 	return (
 		<div className="plot-display">
@@ -73,6 +82,14 @@ function PlotDisplay({
 					)}
 				</div>
 
+				<div onClick={()=> setIsCumulative(!isCumulative)}>
+					{isCumulative ? (
+						<i className="bi bi-stop-circle"></i>
+
+					) : (
+						<i className="bi bi-plus-circle"></i>
+					)}
+				</div>
 				<div onClick={onClose}>
 					<i className="bi bi-x-lg"></i>
 				</div>
