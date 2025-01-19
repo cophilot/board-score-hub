@@ -22,15 +22,14 @@ function PlotDisplay({
 	tableMatrix,
 	onClose,
 }: PlotDisplayProps) {
+	const [extend, setExtend] = useState(false);
 	const [isRotated, setRotate] = useState(false);
 	const [isBar, setIsBar] = useState(false);
-	const [isCumulative, setIsCumulative] = useState(false);
+	const [isCumulative, setIsCumulative] = useState(true);
 
 	const series = useMemo(() => {
-		
 		return playerNames.map((playerName, index) => {
-			
-			let before: (number | undefined) = undefined;
+			let before: number | undefined = undefined;
 			const data = tableMatrix
 				.map((row) => row[index])
 				.map((value) => {
@@ -71,28 +70,38 @@ function PlotDisplay({
 				/>
 			</div>
 			<div className="control-panel">
-				<div onClick={() => setRotate(!isRotated)}>
-					<i className="bi bi-arrow-counterclockwise"></i>
-				</div>
-				<div onClick={() => setIsBar(!isBar)}>
-					{isBar ? (
-						<i className="bi bi-bar-chart-line"></i>
-					) : (
-						<i className="bi bi-graph-up"></i>
-					)}
-				</div>
+				{!extend ? (
+					<div onClick={() => setExtend(true)}>
+						<i className="bi bi-arrow-up-circle"></i>
+					</div>
+				) : (
+					<>
+						<div onClick={() => setRotate(!isRotated)}>
+							<i className="bi bi-arrow-counterclockwise"></i>
+						</div>
+						<div onClick={() => setIsBar(!isBar)}>
+							{isBar ? (
+								<i className="bi bi-bar-chart-line"></i>
+							) : (
+								<i className="bi bi-graph-up"></i>
+							)}
+						</div>
 
-				<div onClick={()=> setIsCumulative(!isCumulative)}>
-					{isCumulative ? (
-						<i className="bi bi-stop-circle"></i>
-
-					) : (
-						<i className="bi bi-plus-circle"></i>
-					)}
-				</div>
-				<div onClick={onClose}>
-					<i className="bi bi-x-lg"></i>
-				</div>
+						<div onClick={() => setIsCumulative(!isCumulative)}>
+							{isCumulative ? (
+								<i className="bi bi-stop-circle"></i>
+							) : (
+								<i className="bi bi-plus-circle"></i>
+							)}
+						</div>
+						<div onClick={() => setExtend(false)}>
+							<i className="bi bi-arrow-down-circle"></i>
+						</div>
+						<div onClick={onClose}>
+							<i className="bi bi-x-lg"></i>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	);

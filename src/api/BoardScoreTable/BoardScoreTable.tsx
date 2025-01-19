@@ -204,6 +204,9 @@ function BoardScoreTable({
 												<InputCell
 													row={row}
 													key={playerIndex}
+													playerName={
+														playerNames[playerIndex] || 'P' + (playerIndex + 1)
+													}
 													rowIndex={index}
 													playerIndex={playerIndex}
 													getValueFunction={getTableValue}
@@ -239,6 +242,7 @@ type InputCellProps = {
 	row: any;
 	rowIndex: number;
 	playerIndex: number;
+	playerName: string;
 	getValueFunction: (rowIndex: number, playerIndex: number) => any;
 	setValueFunction: (rowIndex: number, playerIndex: number, value: any) => void;
 };
@@ -247,6 +251,7 @@ function InputCell({
 	row,
 	rowIndex,
 	playerIndex,
+	playerName,
 	getValueFunction,
 	setValueFunction,
 }: InputCellProps) {
@@ -286,7 +291,7 @@ function InputCell({
 				<input type="text" value={staticNumber} disabled={true} />
 			) : (
 				<NumInput
-					name={row.name}
+					name={row.name + ' | ' + playerName}
 					value={value}
 					onChange={setValue}
 					transformNumber={transformValue}

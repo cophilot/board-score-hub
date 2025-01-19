@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import './NumInput.scss';
 import NumPad from '../NumPad/NumPad';
-import { useNumInputFocus } from './NumInputFocusManager';
+import {
+	useNumInputFocus,
+	useNumInputLooseFocus,
+} from './NumInputFocusManager';
 
 interface NumInputProps {
 	value?: number;
@@ -17,6 +20,7 @@ function NumInput({
 	transformNumber,
 }: NumInputProps) {
 	const onFocus = useNumInputFocus();
+	const lostFocus = useNumInputLooseFocus();
 
 	const [showNumPad, setShowNumPad] = useState(false);
 	const [num, setNum] = useState<number>(value);
@@ -35,6 +39,10 @@ function NumInput({
 		changed(newNum);
 	};
 
+	const onSignChange = () => {
+		changed(num * -1);
+	};
+
 	const onDeleteClick = () => {
 		if (num === 0) return;
 		const isNegative = num < 0;
@@ -48,14 +56,20 @@ function NumInput({
 		onFocus(() => setShowNumPad(false));
 	};
 
+	const closeNumPad = () => {
+		setShowNumPad(false);
+		lostFocus();
+	};
+
 	return (
 		<>
 			{showNumPad && (
 				<NumPad
 					name={name}
 					onNumberClick={onNumberClick}
-					onClose={() => setShowNumPad(false)}
+					onClose={closeNumPad}
 					onBackspaceClick={onDeleteClick}
+					onSignChange={onSignChange}
 				/>
 			)}
 			<div className="NumInput" onClick={onInputClick}>

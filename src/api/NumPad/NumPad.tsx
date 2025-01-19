@@ -4,6 +4,7 @@ interface NumPadProps {
 	onNumberClick: (num: number) => void;
 	onClose?: () => void;
 	onBackspaceClick?: () => void;
+	onSignChange?: () => void;
 	name?: string;
 }
 
@@ -11,6 +12,7 @@ function NumPad({
 	onNumberClick,
 	onClose,
 	onBackspaceClick,
+	onSignChange,
 	name = '',
 }: NumPadProps) {
 	return (
@@ -55,7 +57,9 @@ function NumPad({
 				</button>
 			</div>
 			<div className="row">
-				<button className="btn left-bottom inverted"></button>
+				<button className="btn left-bottom inverted" onClick={onSignChange}>
+					<i className="bi bi-plus-slash-minus"></i>
+				</button>
 				<button className="btn" onClick={() => onNumberClick(0)}>
 					0
 				</button>
