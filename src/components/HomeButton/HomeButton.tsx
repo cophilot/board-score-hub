@@ -10,7 +10,9 @@ import './HomeButton.scss';
 function HomeButton() {
 	return (
 		<RouteButton to="/" small>
-			Home
+			<>
+				<i className="bi bi-house"></i> Home
+			</>
 		</RouteButton>
 	);
 }

@@ -3,7 +3,7 @@ import './RouteButton.scss';
 
 interface RouteButtonProps {
 	to: string;
-	children: string;
+	children: JSX.Element;
 	small?: boolean;
 }
 
