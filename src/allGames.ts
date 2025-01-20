@@ -16,6 +16,7 @@ import Faraway from './games/faraway/main';
 import SavannahPark from './games/savannah-park/main';
 import TheWhiteCastle from './games/the-white-castle/main';
 import Pixies from './games/pixies/main';
+import EverdellDuo from './games/everdell-duo/main';
 
 export function getAllGames() {
 	return [
@@ -37,6 +38,7 @@ export function getAllGames() {
 		SavannahPark,
 		TheWhiteCastle,
 		Pixies,
+		EverdellDuo,
 	];
 }
 
