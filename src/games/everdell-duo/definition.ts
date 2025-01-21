@@ -1,6 +1,10 @@
 import { GameDef } from '../../api/types/GameDef';
 import { WinMode } from '../../api/types/WinMode';
 import FontUtils from '../../api/utils/FontUtils';
+import prosperity from './assets/prosperity.png';
+import events from './assets/events.png';
+import cards from './assets/cards.png';
+import pointToken from './assets/point-token.png';
 
 export default function getDefinition(): GameDef {
 	return {
@@ -18,15 +22,20 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Points on Cards',
+				icon: cards,
 			},
+
 			{
 				name: 'Purple bonus points',
+				icon: prosperity,
 			},
 			{
 				name: 'Points tokens',
+				icon: pointToken,
 			},
 			{
 				name: 'Events',
+				icon: events,
 			},
 		],
 	};
