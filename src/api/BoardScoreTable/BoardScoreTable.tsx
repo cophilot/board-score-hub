@@ -8,6 +8,7 @@ import { GameDef, Label, RowDef } from '../types/GameDef';
 import NumInput from '../NumInput/NumInput';
 import { NumInputFocusManager } from '../NumInput/NumInputFocusManager';
 import PlotDisplay from '../PlotDisplay/PlotDisplay';
+import { isMobile } from '../utils/functions';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -285,17 +286,27 @@ function InputCell({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [staticNumber]);
 
+	const inputElement = isMobile() ? (
+		<NumInput
+			name={row.name + ' | ' + playerName}
+			value={value}
+			onChange={setValue}
+			transformNumber={transformValue}
+		/>
+	) : (
+		<input
+			type="number"
+			value={value}
+			onChange={(e) => setValue(Number(e.target.value))}
+		/>
+	);
+
 	return (
 		<td>
 			{staticNumber ? (
 				<input type="text" value={staticNumber} disabled={true} />
 			) : (
-				<NumInput
-					name={row.name + ' | ' + playerName}
-					value={value}
-					onChange={setValue}
-					transformNumber={transformValue}
-				/>
+				inputElement
 			)}
 		</td>
 	);
