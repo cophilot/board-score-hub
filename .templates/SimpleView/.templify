@@ -1,0 +1,6 @@
+# This file is used by templify to generate new files from this template.
+# You can use the following variables in this file:
+# description:The description of the template
+# path:The path of the template
+description:A new simple View
+path:src/views

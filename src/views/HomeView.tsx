@@ -94,9 +94,9 @@ export default function HomeView() {
 			</div>
 			<h2>Infos</h2>
 			<div className="ver">
-				<RouteButton to="privacy">Concept</RouteButton>
+				<RouteButton to="concept">Concept</RouteButton>
 				<RouteButton to="privacy">Privacy</RouteButton>
-				<RouteButton to="privacy">Contributers</RouteButton>
+				{/*<RouteButton to="contributors">Contributors</RouteButton>*/}
 			</div>
 			<By />
 		</div>
