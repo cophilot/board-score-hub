@@ -1,6 +1,27 @@
 import { useNavigate } from 'react-router-dom';
 import './GameButton.scss';
 import StringUtils from '../../utils/StringUtils';
+import { GameWithView } from '../../api/types/GameWithView';
+import { ExternalGameDef } from '../../api/types/GameDef';
+
+interface GameWithViewButtonProps {
+	game: GameWithView | undefined;
+}
+
+/** This is a wrapper component for GameButton that takes in a GameWithView */
+export function GameWithViewButton({ game }: GameWithViewButtonProps) {
+	if (game === undefined) {
+		return <></>;
+	}
+	return (
+		<GameButton
+			key={game.definition.title}
+			game={game.definition.title}
+			asLink={(game.definition as ExternalGameDef).link !== undefined}
+			link={(game.definition as ExternalGameDef).link}
+		/>
+	);
+}
 
 interface GameButtonProps {
 	game: string;
@@ -14,7 +35,11 @@ interface GameButtonProps {
  * @version 1.0.0
  * @created 2024-8-7
  */
-function GameButton({ game, asLink = false, link = '' }: GameButtonProps) {
+export function GameButton({
+	game,
+	asLink = false,
+	link = '',
+}: GameButtonProps) {
 	const navigate = useNavigate();
 
 	if (asLink) {
@@ -42,4 +67,3 @@ function GameButton({ game, asLink = false, link = '' }: GameButtonProps) {
 		</button>
 	);
 }
-export default GameButton;

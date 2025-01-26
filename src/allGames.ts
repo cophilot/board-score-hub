@@ -17,8 +17,10 @@ import SavannahPark from './games/savannah-park/main';
 import TheWhiteCastle from './games/the-white-castle/main';
 import Pixies from './games/pixies/main';
 import EverdellDuo from './games/everdell-duo/main';
+import { GameWithView } from './api/types/GameWithView';
+import Cascadia from './games/cascadia/main';
 
-export function getAllGames() {
+export function getAllGames(): GameWithView[] {
 	return [
 		Everdell,
 		Calico,
@@ -39,6 +41,7 @@ export function getAllGames() {
 		TheWhiteCastle,
 		Pixies,
 		EverdellDuo,
+		Cascadia,
 	];
 }
 
@@ -51,4 +54,8 @@ export function getSortedGames() {
 export function getSortedGameNames(): string[] {
 	const games = getSortedGames();
 	return games.map((game) => game.definition.title);
+}
+
+export function getGameByName(name: string): GameWithView | undefined {
+	return getAllGames().find((game) => game.definition.title === name);
 }

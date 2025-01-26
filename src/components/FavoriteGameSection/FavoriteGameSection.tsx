@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './FavoriteGameSection.scss';
-import { getSortedGameNames } from '../../allGames';
+import { getGameByName, getSortedGameNames } from '../../allGames';
 import LocalStorageService from '../../utils/LocalStorageService';
-import GameButton from '../GameButton/GameButton';
+import { GameWithViewButton } from '../GameButton/GameButton';
 
 /**
  * This is a FavoriteGameSection component
@@ -50,7 +50,9 @@ function FavoriteGameSection() {
 							{game}
 						</button>
 					))
-				: favoriteGames.map((game) => <GameButton game={game} key={game} />)}
+				: favoriteGames.map((gameName: string) => (
+						<GameWithViewButton game={getGameByName(gameName)} />
+					))}
 			<i
 				className={'bi icon ' + getIconClassName(addingMode, favoriteGames)}
 				onClick={() => setAddingMode(!addingMode)}

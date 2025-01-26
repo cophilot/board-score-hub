@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import By from '../components/By';
-import { getSortedGameNames } from '../allGames';
+import { getSortedGames } from '../allGames';
 import Logo from '../components/Logo';
 import DevMessage from '../components/DevMessage';
-import GameButton from '../components/GameButton/GameButton';
+import {
+	GameButton,
+	GameWithViewButton,
+} from '../components/GameButton/GameButton';
 import FavoriteGameSection from '../components/FavoriteGameSection/FavoriteGameSection';
 import RouteButton from '../components/RouteButton/RouteButton';
 import {
@@ -12,6 +15,7 @@ import {
 	useToggleTheme,
 } from '../providers/ThemeProvider';
 import StyleUtils from '../api/utils/StyleUtils';
+import { GameWithView } from '../api/types/GameWithView';
 
 export default function HomeView() {
 	const navigate = useNavigate();
@@ -22,7 +26,7 @@ export default function HomeView() {
 		StyleUtils.setDefaultValues(isDarkModeEnabled());
 	}, [isDarkModeEnabled]);
 
-	const games = getSortedGameNames();
+	const games = getSortedGames();
 	return (
 		<div>
 			<Logo detectDarkMode />
@@ -50,9 +54,9 @@ export default function HomeView() {
 			<FavoriteGameSection />
 			<h2>Games</h2>
 			<div className="ver">
-				{games.map((game) => (
-					<GameButton key={game} game={game} />
-				))}
+				{games.map((game: GameWithView) => {
+					return <GameWithViewButton game={game} />;
+				})}
 			</div>
 			<p>
 				<i>Missing a game? </i>
@@ -64,14 +68,6 @@ export default function HomeView() {
 					</a>
 				</b>
 			</p>
-			<h2>External</h2>
-			<div className="ver">
-				<GameButton
-					game="Cascadia"
-					asLink
-					link="https://cascoria.philipp-bonin.com/#/"
-				/>
-			</div>
 			<h2>Custom</h2>
 			<div className="msg">
 				<i>Coming soon...</i>

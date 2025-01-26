@@ -18,6 +18,12 @@ export interface GameDef {
 	roundMapper?: { [playerCount: number]: number }; // A mapping of player count to round count
 }
 
+export interface ExternalGameDef {
+	title: string; // The name of the game
+	playerSizes: number[]; // An array of all possible player counts
+	link: string; // The URL to the game
+}
+
 export interface RowDef {
 	id?: string; // The ID of the row
 	name: string; // The name of the row
