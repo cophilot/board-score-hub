@@ -7,6 +7,7 @@ interface LogoProps {
 	size?: number;
 	bgColor?: string;
 	detectDarkMode?: boolean;
+	style?: React.CSSProperties;
 }
 /**
  * This is a Logo component
@@ -18,6 +19,7 @@ function Logo({
 	size = 200,
 	bgColor = '#fff',
 	detectDarkMode = false,
+	style = {},
 }: LogoProps) {
 	const isDarkModeEnabled = useIsDarkModeEnabled();
 	if (detectDarkMode) {
@@ -28,14 +30,14 @@ function Logo({
 	if (ColorUtils.isDarkColor(bgColor)) {
 		icon = logoPicWhite;
 	}
-	const style = {
+	const imgStyle = {
 		width: size,
 		height: size,
 		marginTop: 20,
 	};
 	return (
-		<div className="logo">
-			<img src={icon} alt="BoardGameHub" style={style} />
+		<div className="logo" style={style}>
+			<img src={icon} alt="BoardGameHub" style={imgStyle} />
 		</div>
 	);
 }

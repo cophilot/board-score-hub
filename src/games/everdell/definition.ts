@@ -16,6 +16,8 @@ export default function getDefinition(): GameDef {
 		title: 'Everdell',
 		url: 'https://boardgamegeek.com/boardgame/199792/everdell',
 		rulesUrl: 'https://cdn.1j1ju.com/medias/c6/cd/89-everdell-rulebook.pdf',
+		banner:
+			'https://d19y2ttatozxjp.cloudfront.net/assets/everdell/HeroBanner_Everdell.png',
 		bgColor: '#5c652e',
 		fontColor: '#342a28',
 		primaryColor: '#714839',

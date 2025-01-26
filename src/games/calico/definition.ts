@@ -13,6 +13,8 @@ export default function getDefinition(): GameDef {
 		url: 'https://boardgamegeek.com/boardgame/283155/calico',
 		rulesUrl:
 			'https://www.alderac.com/wp-content/uploads/2020/09/Calico-Rules.pdf',
+		banner:
+			'https://mlpnk72yciwc.i.optimole.com/cqhiHLc.IIZS~2ef73/w:auto/h:auto/q:75/https://bleedingcool.com/wp-content/uploads/2022/12/Quilts-Cats-Of-Calico-Art.jpg',
 		bgColor: '#fbf8f0',
 		fontColor: '#000',
 		primaryColor: '#142688',

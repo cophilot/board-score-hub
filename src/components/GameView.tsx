@@ -12,11 +12,35 @@ export default function GameView({
 	definition,
 	afterTabelElement,
 }: GameViewProps): JSX.Element {
-	const logo = <Logo size={100} bgColor={definition.bgColor || '#fff'} />;
+	const logoElement = (
+		<>
+			<Logo
+				size={100}
+				bgColor={definition.bgColor || '#fff'}
+				style={{
+					zIndex: 11,
+				}}
+			/>
+			{definition.banner && (
+				<img
+					src={definition.banner}
+					alt={definition.title}
+					style={{
+						width: '100%',
+						height: 'auto',
+						maxWidth: '600px',
+						marginTop: '-150px',
+						opacity: 0.8,
+						zIndex: 10,
+					}}
+				/>
+			)}
+		</>
+	);
 	return (
 		<BoardScorePage
 			definition={definition}
-			logo={logo}
+			logo={logoElement}
 			afterTableElement={afterTabelElement}
 		>
 			<By />

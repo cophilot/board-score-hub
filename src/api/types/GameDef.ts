@@ -11,6 +11,7 @@ export interface GameDef {
 	secondaryColor?: string; // The secondary color to be used
 	stripeColor?: string; // The color of the stripes
 	fontFamily?: string; // The font family to be used
+	banner?: string; // The URL to the banner
 	url?: string; // The URL to the game
 	rulesUrl?: string; // The URL to the rules
 	winMode?: WinMode; // The winnning mode
