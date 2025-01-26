@@ -59,3 +59,31 @@ export function getSortedGameNames(): string[] {
 export function getGameByName(name: string): GameWithView | undefined {
 	return getAllGames().find((game) => game.definition.title === name);
 }
+
+export function getGameOfTheDay() {
+	const games = getAllGames();
+	let index = getPseudoRandomIntForToday(0, games.length - 1);
+	if (index < 0) {
+		index *= -1;
+	}
+	return games[index];
+}
+
+function getPseudoRandomIntForToday(min: number, max: number): number {
+	if (min >= max) {
+		throw new Error('Min must be less than max.');
+	}
+
+	// Get today's date in YYYY-MM-DD format
+	const today = new Date().toISOString().split('T')[0];
+	// Create a hash from today's date
+	const hash = today.split('').reduce((acc, char) => {
+		return acc + char.charCodeAt(0);
+	}, 0);
+
+	// Generate a pseudo-random number using the hash
+	const random = (Math.sin(hash) * 10000) % 1; // A deterministic pseudo-random value in [0, 1)
+
+	// Scale to the desired range
+	return Math.floor(min + random * (max - min + 1));
+}

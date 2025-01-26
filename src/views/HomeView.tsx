@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import By from '../components/By';
-import { getSortedGames } from '../allGames';
+import { getGameOfTheDay, getSortedGames } from '../allGames';
 import Logo from '../components/Logo';
 import DevMessage from '../components/DevMessage';
 import {
@@ -50,6 +50,8 @@ export default function HomeView() {
 				</button>
 				{/* <button className="btn selected wide">Fix size Table</button> */}
 			</div>
+			<h2>Game of the Day</h2>
+			<GameWithViewButton game={getGameOfTheDay()} />
 			<h2>Favorites</h2>
 			<FavoriteGameSection />
 			<h2>Games</h2>
