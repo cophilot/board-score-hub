@@ -11,6 +11,8 @@ export default function getDefinition(): GameDef {
 		url: 'https://boardgamegeek.com/boardgame/368173/lets-go-to-japan',
 		rulesUrl:
 			'https://www.alderac.com/wp-content/uploads/2023/03/LetsGoToJapan_Influencer_EN_1P_Rulebook_FINAL-copy.pdf',
+		banner:
+			'https://wallpapercat.com/w/full/0/c/0/1518683-3840x2160-desktop-4k-mount-fuji-japan-wallpaper-photo.jpg',
 		bgColor: '#f6f8f9',
 		fontColor: '#000',
 		primaryColor: '#59c4db',

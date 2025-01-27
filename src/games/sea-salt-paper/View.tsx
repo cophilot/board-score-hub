@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import BoardScorePage from '../../api/BoardScorePage/BoardScorePage';
 import By from '../../components/By';
-import Logo from '../../components/Logo';
 import getDefinition from './definition';
 import { GameDef, Label, RowDef } from '../../api/types/GameDef';
+import LogoWithBanner from '../../components/LogoWithBanner';
 
 export default function SeaSaltPaperView() {
 	const [def, setDef] = useState(getDefinition());
@@ -45,7 +45,13 @@ export default function SeaSaltPaperView() {
 		</button>
 	);
 
-	const logo = <Logo size={100} bgColor="#000" />;
+	const logo = (
+		<LogoWithBanner
+			title={def.title}
+			banner={def.banner}
+			logoBgColor={def.bgColor}
+		/>
+	);
 	return (
 		<BoardScorePage
 			definition={def}

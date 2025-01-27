@@ -15,6 +15,8 @@ export default function getDefinition(): GameDef {
 		url: 'https://boardgamegeek.com/boardgame/339484/savannah-park',
 		rulesUrl:
 			'https://deep-print-games.com/wp-content/uploads/2021/05/SavPark_Rulebook_US.pdf',
+		banner:
+			'https://www.wallart.com/media/catalog/product/cache/5b18b93ddbe5d6592c6b175f41d24454/w/0/w03048-small.jpg',
 		bgColor: '#A2AB74',
 		fontColor: '#000',
 		primaryColor: '#F6AF32',

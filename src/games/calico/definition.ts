@@ -27,6 +27,8 @@ export default function getDefinition(): GameDef {
 				name: 'Top Goal Tile',
 				icon: goalTileTop,
 				bgColor: '#6c993b',
+				fn: (n: number) => n * -2,
+				fnDisplay: '_ x -2',
 			},
 			{
 				name: 'Left Goal Tile',

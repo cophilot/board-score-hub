@@ -18,6 +18,8 @@ export default function getDefinition(): GameDef {
 		url: 'https://boardgamegeek.com/boardgame/367220/sea-salt-and-paper',
 		rulesUrl:
 			'https://cdn.1j1ju.com/medias/a5/4b/bb-sea-salt-paper-rulebook.pdf',
+		banner:
+			'https://studiobombyx.com/assets/Imageprincipale_seasaltandpaper-1-1024x576.jpg',
 		bgColor: '#124876',
 		fontColor: '#fff',
 		primaryColor: '#fff',

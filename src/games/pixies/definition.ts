@@ -10,6 +10,8 @@ export default function getDefinition(): GameDef {
 		title: 'Pixies',
 		url: 'https://boardgamegeek.com/boardgame/411875/pixies',
 		rulesUrl: 'https://studiobombyx.com/assets/PIXIES_rulebook_EN.pdf',
+		banner:
+			'https://studiobombyx.com/assets/Imageprincipale_PIXIES-1-1024x576.jpg',
 		bgColor: '#93c23b',
 		fontColor: '#fff',
 		primaryColor: '#243f16',

@@ -14,6 +14,8 @@ export default function getDefinition(): GameDef {
 		url: 'https://boardgamegeek.com/boardgame/167791/terraforming-mars',
 		rulesUrl:
 			'https://cdn.1j1ju.com/medias/13/3f/fb-terraforming-mars-rule.pdf',
+		banner:
+			'https://meeplebr.com/app/uploads/2020/06/Terraforming-Mars-Big-Box-Cabe%C3%A7alho-site.png',
 		bgColor: '#a36743',
 		primaryColor: '#612720',
 		secondaryColor: '#ffe048',

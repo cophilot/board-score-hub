@@ -14,6 +14,7 @@ export default function getDefinition(): GameDef {
 		title: 'Wingspan',
 		url: 'https://boardgamegeek.com/boardgame/266192/wingspan',
 		rulesUrl: 'https://www.szellemlovas.hu/szabalyok/fesztavEN.pdf',
+		banner: 'https://cdn.mos.cms.futurecdn.net/frHNesBiPKkAJJ2aPrWAZD.jpg',
 		bgColor: '#f4f5f0',
 		fontColor: '#73645b',
 		primaryColor: '#9fcccf',
