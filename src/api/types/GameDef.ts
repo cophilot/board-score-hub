@@ -32,6 +32,9 @@ export interface RowDef {
 	description?: string; // The description of the row
 	bgColor?: string; // The background color to be used only for this row
 	negative?: boolean; // Whether this row is negative
+	fn?: (n: number) => number; // The function to calculate the score
+	fnDisplay?: string; // A string to display the function
+	staticNumber?: number[]; // A static number to be displayed
 }
 
 export interface Label {
