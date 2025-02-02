@@ -19,9 +19,11 @@ import Pixies from './games/pixies/main';
 import EverdellDuo from './games/everdell-duo/main';
 import { GameWithView } from './api/types/GameWithView';
 import Cascadia from './games/cascadia/main';
+// ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
+		// ~~new-game~~
 		Everdell,
 		Calico,
 		DorfromantikDuel,
