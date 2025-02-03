@@ -108,4 +108,21 @@ export default class GameStorage {
 		}
 		return JSON.parse(settings);
 	}
+
+	static getGameTimer(gameTitle: string, fallback: number = 0) {
+		const timer = localStorage.getItem(
+			GameStorage.getStorageKeyFromTitle(gameTitle, 'timer'),
+		);
+		if (timer === null) {
+			return fallback;
+		}
+		return parseInt(timer);
+	}
+
+	static setGameTimer(gameTitle: string, timer: number) {
+		localStorage.setItem(
+			GameStorage.getStorageKeyFromTitle(gameTitle, 'timer'),
+			timer.toString(),
+		);
+	}
 }

@@ -28,7 +28,6 @@ function PlayerSwitch({
 
 	return (
 		<>
-			<h2 className="print-hide">Players</h2>
 			<div className="player-switch print-hide">
 				{playerSizes.map((size) => (
 					<button

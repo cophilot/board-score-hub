@@ -8,6 +8,7 @@ import GameStorage from '../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
 import UIUtils from '../utils/UIUtils';
 import { GameDef } from '../types/GameDef';
+import Timer from '../Timer/Timer';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -76,11 +77,14 @@ export default function BoardScorePage({
 				<h2 className="print-show">
 					<i>{date}</i>
 				</h2>
+				<h2 className="print-hide">Players</h2>
 				<PlayerSwitch
 					playerSizes={definition.playerSizes}
 					initPlayerSize={playerSize}
 					onPlayerSizeChange={onPlayerSizeChange}
 				></PlayerSwitch>
+				<h2 className="print-hide">Timer</h2>
+				<Timer gameTitle={definition.title} />
 				<BoardScoreTable
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}
