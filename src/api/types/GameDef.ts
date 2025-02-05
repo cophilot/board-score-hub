@@ -3,6 +3,8 @@ import { WinMode } from './WinMode';
 export interface GameDef {
 	title: string; // The name of the game
 	playerSizes: number[]; // An array of all possible player counts
+	minDurr?: number; // The minimum duration of the game
+	maxDurr?: number; // The maximum duration of the game
 	rows: RowDef[]; // An array of rows
 	labels?: Label[]; // An array of labels
 	bgColor?: string; // The background color to be used
