@@ -159,6 +159,28 @@ p {
 	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
+.icon-btn {
+	font-size: 35px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+select {
+	font-size: 20px;
+	cursor: pointer;
+	background-color: var(--bg-color);
+	border: 3px solid var(--primary-color);
+	border-radius: 5px;
+	padding: 5px 15px;
+	font-family: var(--font-family);
+	color: var(--font-color);
+	appearance: none;
+	&:focus {
+		outline: none;
+		border-color: var(--secondary-color);
+	}
+}
+
 @media screen and (max-width: 600px) {
 	.content {
 		max-width: 95%;

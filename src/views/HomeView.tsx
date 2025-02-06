@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import By from '../components/By';
 import { getGameOfTheDay, getSortedGames } from '../allGames';
@@ -16,6 +16,7 @@ import {
 } from '../providers/ThemeProvider';
 import StyleUtils from '../api/utils/StyleUtils';
 import { GameWithView } from '../api/types/GameWithView';
+import GameFilter from '../components/GameFilter/GameFilter';
 
 export default function HomeView() {
 	const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function HomeView() {
 		StyleUtils.setDefaultValues(isDarkModeEnabled());
 	}, [isDarkModeEnabled]);
 
-	const games = getSortedGames();
+	const [games, setGames] = useState(getSortedGames());
 	return (
 		<div>
 			<Logo detectDarkMode />
@@ -55,6 +56,7 @@ export default function HomeView() {
 			<h2>Favorites</h2>
 			<FavoriteGameSection />
 			<h2>Games</h2>
+			<GameFilter allGames={getSortedGames()} setGames={setGames} />
 			<div className="ver">
 				{games.map((game: GameWithView) => {
 					return <GameWithViewButton game={game} />;

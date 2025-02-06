@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import './FavoriteGameSection.scss';
-import { getGameByName, getSortedGameNames } from '../../allGames';
+import {
+	getGameByName,
+	getSortedGameNames,
+	getSortedGames,
+} from '../../allGames';
 import LocalStorageService from '../../utils/LocalStorageService';
 import { GameWithViewButton } from '../GameButton/GameButton';
+import GameFilter from '../GameFilter/GameFilter';
 
 /**
  * This is a FavoriteGameSection component
@@ -15,7 +20,8 @@ function FavoriteGameSection() {
 	const [favoriteGames, setFavoriteGamesInternal] = useState<string[]>(
 		LocalStorageService.getFavoriteGames(),
 	);
-	const games = getSortedGameNames();
+	const allGames = getSortedGames();
+	const [games, setGames] = useState(allGames);
 
 	const setFavoriteGames = (favoriteGames: string[]) => {
 		favoriteGames.sort();
@@ -37,17 +43,25 @@ function FavoriteGameSection() {
 
 	return (
 		<div className="ver">
+			{!addingMode && <GameFilter allGames={allGames} setGames={setGames} />}
 			{addingMode
 				? games.map((game) => (
 						<button
-							key={game}
+							key={game.definition.title}
 							className={
-								'btn wide ' + (favoriteGames.includes(game) ? 'selected' : '')
+								'btn wide ' +
+								(favoriteGames.includes(game.definition.title)
+									? 'selected'
+									: '')
 							}
-							style={favoriteGames.includes(game) ? {} : templateButtonStyle}
-							onClick={() => onGameClick(game)}
+							style={
+								favoriteGames.includes(game.definition.title)
+									? {}
+									: templateButtonStyle
+							}
+							onClick={() => onGameClick(game.definition.title)}
 						>
-							{game}
+							{game.definition.title}
 						</button>
 					))
 				: favoriteGames.map((gameName: string) => (
