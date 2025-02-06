@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import './FavoriteGameSection.scss';
-import {
-	getGameByName,
-	getSortedGameNames,
-	getSortedGames,
-} from '../../allGames';
+import { getGameByName, getSortedGames } from '../../allGames';
 import LocalStorageService from '../../utils/LocalStorageService';
 import { GameWithViewButton } from '../GameButton/GameButton';
 import GameFilter from '../GameFilter/GameFilter';
