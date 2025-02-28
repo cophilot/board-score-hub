@@ -39,7 +39,9 @@ function FavoriteGameSection() {
 
 	return (
 		<div className="ver">
-			{!addingMode && <GameFilter allGames={allGames} setGames={setGames} />}
+			{!addingMode && favoriteGames.length > 0 && (
+				<GameFilter allGames={allGames} setGames={setGames} />
+			)}
 			{addingMode
 				? games.map((game) => (
 						<button
