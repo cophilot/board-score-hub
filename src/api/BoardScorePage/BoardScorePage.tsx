@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
 import './BoardScorePage.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import PlayerSwitch from '../PlayerSwitch/PlayerSwitch';
 import StyleUtils from '../utils/StyleUtils';
 import BoardScoreTable from '../BoardScoreTable/BoardScoreTable';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import UIUtils from '../utils/UIUtils';
 import { GameDef } from '../types/GameDef';
 import Timer from '../Timer/Timer';
+import { GameMenu } from '../GameMenu/GameMenu';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -55,11 +56,6 @@ export default function BoardScorePage({
 		GameStorage.setPlayerSize(definition.title, size);
 	};
 
-	const applySettings = (newSettings: any) => {
-		setSettings(newSettings);
-		GameStorage.setGameSettings(definition.title, newSettings);
-	};
-
 	useEffect(() => {
 		setTimeout(() => {
 			setInitialAttributes(definition, isDarkModeEnabled);
@@ -69,15 +65,96 @@ export default function BoardScorePage({
 	const date = new Date().toLocaleDateString();
 	const showHelpButton = definition.rows.some((row: any) => row.icon);
 
+	const buttonDefinitions = useMemo(() => {
+		const applySettings = (newSettings: any) => {
+			setSettings(newSettings);
+			GameStorage.setGameSettings(definition.title, newSettings);
+		};
+		return [
+			{
+				label: settings.showHelp ? 'Hide Help' : 'Help',
+				iconClass: 'bi bi-question-circle',
+				onClick: () => {
+					const newSettings = {
+						...settings,
+						showHelp: !settings.showHelp,
+					};
+					applySettings(newSettings);
+				},
+				disabled: !showHelpButton,
+			},
+			{
+				label: 'Export',
+				iconClass: 'bi bi-box-arrow-up',
+				onClick: print,
+			},
+			{
+				label: 'Rules',
+				iconClass: 'bi bi-book',
+				onClick: () => {
+					window.open(definition.rulesUrl, '_blank');
+				},
+				disabled: !definition.rulesUrl,
+			},
+			{
+				label: 'Plot',
+				iconClass: 'bi bi-graph-up',
+				onClick: () => {
+					setShowPlot(!showPlot);
+				},
+			},
+			{
+				label: 'Clear',
+				iconClass: 'bi bi-x-circle',
+				onClick: () => {
+					if (onClear) {
+						onClear();
+					}
+					GameStorage.deleteGameMatrix(definition.title);
+					window.location.reload();
+				},
+			},
+			{
+				label: 'Reset',
+				iconClass: 'bi bi-arrow-clockwise',
+				onClick: () => {
+					if (onReset) {
+						onReset();
+					}
+					GameStorage.deleteStorage(definition.title);
+					window.location.reload();
+				},
+			},
+			{
+				label: 'Home',
+				iconClass: 'bi bi-house',
+				onClick: () => {
+					navigate('/');
+				},
+			},
+		];
+	}, [
+		definition,
+		navigate,
+		onClear,
+		onReset,
+		settings,
+		showHelpButton,
+		showPlot,
+	]);
+
 	return (
 		<>
 			<div className="board-score-page">
+				<GameMenu buttonDefinitions={buttonDefinitions} />
 				{logo}
 				<TableHeading definition={definition} />
 				<h2 className="print-show">
 					<i>{date}</i>
 				</h2>
-				<h2 className="print-hide">Players</h2>
+				{definition.playerSizes.length > 1 && (
+					<h2 className="print-hide">Players</h2>
+				)}
 				<PlayerSwitch
 					playerSizes={definition.playerSizes}
 					initPlayerSize={playerSize}
@@ -95,78 +172,6 @@ export default function BoardScorePage({
 					onClosePlot={() => setShowPlot(false)}
 				></BoardScoreTable>
 				{afterTableElement}
-				{showHelpButton && (
-					<button
-						className="btn selected nav-btn print-hide"
-						onClick={() => {
-							const newSettings = {
-								...settings,
-								showHelp: !settings.showHelp,
-							};
-							applySettings(newSettings);
-						}}
-					>
-						<i className="bi bi-question-circle"></i>
-						{settings.showHelp ? 'Hide Help' : 'Help'}
-					</button>
-				)}
-				<button className="btn selected nav-btn print-hide" onClick={print}>
-					<i className="bi bi-box-arrow-up"></i>
-					Export
-				</button>
-				{definition.rulesUrl && (
-					<a href={definition.rulesUrl} target="_blank" rel="noreferrer">
-						<button className="btn selected nav-btn print-hide">
-							<i className="bi bi-book"></i>
-							Rules
-						</button>
-					</a>
-				)}
-				<button
-					className="btn selected nav-btn print-hide"
-					onClick={() => {
-						setShowPlot(!showPlot);
-					}}
-				>
-					<i className="bi bi-graph-up"></i>
-					Plot
-				</button>
-				<button
-					className="btn selected nav-btn print-hide"
-					onClick={() => {
-						if (onClear) {
-							onClear();
-						}
-						GameStorage.deleteGameMatrix(definition.title);
-						window.location.reload();
-					}}
-				>
-					<i className="bi bi-x-circle"></i>
-					Clear
-				</button>
-				<button
-					className="btn selected nav-btn print-hide"
-					onClick={() => {
-						if (onReset) {
-							onReset();
-						}
-						GameStorage.deleteStorage(definition.title);
-						window.location.reload();
-					}}
-				>
-					<i className="bi bi-arrow-clockwise"></i>
-					Reset
-				</button>
-
-				<button
-					className="btn selected nav-btn print-hide"
-					onClick={() => {
-						navigate('/');
-					}}
-				>
-					<i className="bi bi-house"></i>
-					Home
-				</button>
 				<h2 className="print-show">
 					<i>board-score-hub.philipp-bonin.com</i>
 				</h2>
