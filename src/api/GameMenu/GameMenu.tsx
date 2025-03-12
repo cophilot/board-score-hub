@@ -23,7 +23,10 @@ export function GameMenu({ buttonDefinitions }: GameMenuProps) {
 
 	if (!isExpanded) {
 		return (
-			<div className="not-expanded-menu" onClick={() => setIsExpanded(true)}>
+			<div
+				className="not-expanded-menu print-hide"
+				onClick={() => setIsExpanded(true)}
+			>
 				<div className="bar"></div>
 				<div className="bar"></div>
 				<div className="bar"></div>
@@ -37,7 +40,7 @@ export function GameMenu({ buttonDefinitions }: GameMenuProps) {
 	};
 
 	return (
-		<div className="game-menu">
+		<div className="game-menu print-hide">
 			{buttonDefinitions.map((buttonDef, index) => {
 				if (buttonDef.disabled) {
 					return null;

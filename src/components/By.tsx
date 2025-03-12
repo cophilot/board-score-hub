@@ -9,7 +9,7 @@ function By() {
 		<div
 			style={{
 				marginTop: '50px',
-				marginBottom: '50px',
+				marginBottom: '250px',
 				fontSize: '16px',
 				display: 'flex',
 				justifyContent: 'center',
