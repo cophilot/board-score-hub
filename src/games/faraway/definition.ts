@@ -22,7 +22,7 @@ export default function getDefinition(): GameDef {
 		secondaryColor: '#edd406',
 		//fontFamily: FontUtils.PLAYFUL,
 		stripeColor: '#f8f4ee',
-		playerSizes: [2, 3, 4, 5, 6,7],
+		playerSizes: [2, 3, 4, 5, 6],
 		winMode: WinMode.MOST,
 		rows: [
 			{
