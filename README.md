@@ -3,7 +3,7 @@
   <img src="src/assets/logo-red.png" alt="board-score-hub" width="30%"/>
   <h1>board-score-hub</h1>
   <p>
-     Description
+     A collection of digitital score sheets for a broad variety of board games.
   </p>
 </div>
 
