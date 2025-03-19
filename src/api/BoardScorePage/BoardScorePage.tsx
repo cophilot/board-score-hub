@@ -8,7 +8,6 @@ import GameStorage from '../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
 import UIUtils from '../utils/UIUtils';
 import { GameDef } from '../types/GameDef';
-import Timer from '../Timer/Timer';
 import { GameMenu } from '../GameMenu/GameMenu';
 
 interface BoardScoreTableProps {
@@ -125,23 +124,8 @@ export default function BoardScorePage({
 					window.location.reload();
 				},
 			},
-			{
-				label: 'Home',
-				iconClass: 'bi bi-house',
-				onClick: () => {
-					navigate('/');
-				},
-			},
 		];
-	}, [
-		definition,
-		navigate,
-		onClear,
-		onReset,
-		settings,
-		showHelpButton,
-		showPlot,
-	]);
+	}, [definition, onClear, onReset, settings, showHelpButton, showPlot]);
 
 	return (
 		<>
@@ -160,8 +144,8 @@ export default function BoardScorePage({
 					initPlayerSize={playerSize}
 					onPlayerSizeChange={onPlayerSizeChange}
 				></PlayerSwitch>
-				<h2 className="print-hide">Timer</h2>
-				<Timer gameTitle={definition.title} />
+				{/* <h2 className="print-hide">Timer</h2>
+				<Timer gameTitle={definition.title} /> */}
 				<BoardScoreTable
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}
@@ -172,6 +156,15 @@ export default function BoardScorePage({
 					onClosePlot={() => setShowPlot(false)}
 				></BoardScoreTable>
 				{afterTableElement}
+				<button
+					className="btn selected nav-btn print-hide"
+					onClick={() => {
+						navigate('/');
+					}}
+				>
+					<i className="bi bi-house"></i>
+					Home
+				</button>
 				<h2 className="print-show">
 					<i>board-score-hub.philipp-bonin.com</i>
 				</h2>

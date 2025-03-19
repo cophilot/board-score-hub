@@ -17,8 +17,8 @@ function PrivacyView() {
 			<Logo detectDarkMode />
 			<h1>BoardScoreHub Privacy</h1>
 			<p>
-				Only data is <b>only</b> kept in your browser. No data will be sent to
-				any server. This garantuees your privacy, but also means that you cannot
+				Data is <b>only</b> kept in your browser. No data will be sent to any
+				server. This garantuees your privacy, but also means that you cannot
 				access your data from another device. This also does not garantuee the
 				persistence of your data. If you clear your browser data, your data will
 				be lost without any way to recover it.
