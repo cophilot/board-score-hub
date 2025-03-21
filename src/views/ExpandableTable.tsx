@@ -4,7 +4,7 @@ import { WinMode } from '../core/types/WinMode';
 import By from '../components/By';
 import Logo from '../components/Logo';
 import { useIsDarkModeEnabled } from '../providers/ThemeProvider';
-import { RowDef } from '../core/types/GameDef';
+import { RowDef } from '../core/types/RowDef';
 
 export default function ExpandableTable() {
 	const rowsLSKey = 'expandable-table-rows';

@@ -175,7 +175,6 @@ export default function BoardScorePage({
 					getTotalRow={getTotalRow}
 					definition={definition}
 					gameSettings={settings}
-					playerSize={gst.currPlayerSize}
 					showPlot={settings.showPlot}
 					onClosePlot={() => {
 						const newSettings = {

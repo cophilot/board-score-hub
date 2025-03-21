@@ -2,8 +2,9 @@ import { useState } from 'react';
 import BoardScorePage from '../../core/BoardScorePage/BoardScorePage';
 import By from '../../components/By';
 import getDefinition from './definition';
-import { GameDef, Label, RowDef } from '../../core/types/GameDef';
+import { GameDef, Label } from '../../core/types/GameDef';
 import LogoWithBanner from '../../components/LogoWithBanner';
+import { RowDef } from '../../core/types/RowDef';
 
 export default function SeaSaltPaperView() {
 	const [def, setDef] = useState(getDefinition());
