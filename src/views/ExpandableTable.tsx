@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import BoardScorePage from '../core/BoardScorePage/BoardScorePage';
+import BoardScorePage from '../core/main/BoardScorePage/BoardScorePage';
 import { WinMode } from '../core/types/WinMode';
 import By from '../components/By';
 import Logo from '../components/Logo';

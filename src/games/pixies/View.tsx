@@ -1,4 +1,4 @@
-import BoardScorePage from '../../core/BoardScorePage/BoardScorePage';
+import BoardScorePage from '../../core/main/BoardScorePage/BoardScorePage';
 import { useState } from 'react';
 import By from '../../components/By';
 import getDefinition from './definition';

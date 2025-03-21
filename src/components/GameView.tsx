@@ -1,4 +1,4 @@
-import BoardScorePage from '../core/BoardScorePage/BoardScorePage';
+import BoardScorePage from '../core/main/BoardScorePage/BoardScorePage';
 import { GameDef } from '../core/types/GameDef';
 import By from './By';
 import LogoWithBanner from './LogoWithBanner';

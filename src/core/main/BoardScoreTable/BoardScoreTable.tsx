@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useState } from 'react';
 import './BoardScoreTable.scss';
-import GameStorage from '../utils/GameStorage';
-import { getFunctionForWinMode, WinMode } from '../types/WinMode';
-import ExtensionButtons from '../components/ExtensionButtons/ExtensionButtons';
-import { GameDef, Label } from '../types/GameDef';
-import NumInput from '../components/NumInput/NumInput';
-import { NumInputFocusManager } from '../components/NumInput/NumInputFocusManager';
-import PlotDisplay from '../components/PlotDisplay/PlotDisplay';
-import { isMobile } from '../utils/functions';
-import { GameState } from '../types/GameState';
-import { InternalRowDef, RowDef } from '../types/RowDef';
-import { GameSettings } from '../types/GameSettings';
+import GameStorage from '../../utils/GameStorage';
+import { getFunctionForWinMode, WinMode } from '../../types/WinMode';
+import ExtensionButtons from '../../components/ExtensionButtons/ExtensionButtons';
+import { GameDef, Label } from '../../types/GameDef';
+import NumInput from '../../components/NumInput/NumInput';
+import { NumInputFocusManager } from '../../components/NumInput/NumInputFocusManager';
+import PlotDisplay from '../../components/PlotDisplay/PlotDisplay';
+import { isMobile } from '../../utils/functions';
+import { GameState } from '../../types/GameState';
+import { InternalRowDef, RowDef } from '../../types/RowDef';
+import { GameSettings } from '../../types/GameSettings';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -42,7 +41,6 @@ function BoardScoreTable({
 }: BoardScoreTableProps) {
 	//** STARTING CONSTANTS **//
 	const playerSizes = Array.from(Array(state.currPlayerSize).keys());
-	const tableStyle = parseTableStyle(definition);
 	//** END CONSTANTS **//
 
 	//** STARTING STATE **//
@@ -50,7 +48,7 @@ function BoardScoreTable({
 	const [tableMatrix, setTableMatrix] = useState(
 		GameStorage.getGameMatrix(
 			definition.title,
-			getEmptyTbaleMatrix(rows.length, state.currPlayerSize),
+			getEmptyTableMatrix(rows.length, state.currPlayerSize),
 		),
 	);
 	const [totalRow, setTotalRow] = useState(
@@ -200,7 +198,7 @@ function BoardScoreTable({
 					onExtensionOn={onExtensionOn}
 					onExtensionOff={onExtensionOff}
 				/>
-				<table className="board-score-table" style={tableStyle}>
+				<table className="board-score-table">
 					<thead>
 						<tr key="header">
 							<th key="-1"></th>
@@ -248,7 +246,7 @@ function BoardScoreTable({
 										)}
 										<tr
 											key={index}
-											style={getStyleFromRow(row, definition, index)}
+											style={getStyleForRow(row, definition, index)}
 										>
 											<FirstRowCell row={row} />
 											{playerSizes.map((playerIndex) => (
@@ -373,8 +371,8 @@ const getColumnTotal = (
 	}, 0);
 };
 
-function getStyleFromRow(row: any, definition: any, rowIndex: number) {
-	const style: any = {};
+function getStyleForRow(row: RowDef, definition: GameDef, rowIndex: number) {
+	const style: React.CSSProperties = {};
 
 	if (row.bgColor) {
 		style.backgroundColor = row.bgColor;
@@ -388,25 +386,10 @@ function getStyleFromRow(row: any, definition: any, rowIndex: number) {
 	return style;
 }
 
-function getEmptyTbaleMatrix(rows: number, cols: number) {
+function getEmptyTableMatrix(rows: number, cols: number) {
 	return Array.from(Array(rows).keys()).map(() =>
 		Array.from(Array(cols).keys()).map(() => 0),
 	);
-}
-
-function parseTableStyle(definition: any) {
-	const style: any = {};
-	style.borderSpacing = getDefValue(definition, 'tableSpacing', 0);
-	style.border = getDefValue(
-		definition,
-		'tableBorder',
-		'2px solid var(--primary-color)',
-	);
-	return style;
-}
-
-function getDefValue(definition: any, key: string, fallback: any) {
-	return definition[key] || fallback;
 }
 
 function fillPlayerNames(playerNames: string[], playerSize: number): string[] {

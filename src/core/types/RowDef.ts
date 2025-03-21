@@ -4,6 +4,7 @@ export interface RowDef {
 	icon?: string; // The icon to be displayed for the row
 	description?: string; // The description of the row
 	bgColor?: string; // The background color to be used only for this row
+	fontColor?: string; // The font color to be used only for this row
 	negative?: boolean; // Whether this row is negative
 	fn?: (n: number) => number; // The function to calculate the score
 	fnDisplay?: string; // A string to display the function

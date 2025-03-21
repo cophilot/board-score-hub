@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import BoardScorePage from '../../core/BoardScorePage/BoardScorePage';
+import BoardScorePage from '../../core/main/BoardScorePage/BoardScorePage';
 import By from '../../components/By';
 import getDefinition from './definition';
 import { GameDef, Label } from '../../core/types/GameDef';

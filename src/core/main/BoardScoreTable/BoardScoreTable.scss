@@ -4,6 +4,8 @@
 	margin: 20px 20px;
 	font-size: 20px;
 	line-height: 1;
+	border-spacing: 0;
+	border: 2px solid var(--primary-color);
 	th {
 		font-weight: bold;
 		background-color: var(--primary-color);

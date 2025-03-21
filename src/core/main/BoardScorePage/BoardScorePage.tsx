@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
 import './BoardScorePage.scss';
 import { useEffect, useState, useMemo } from 'react';
-import PlayerSwitch from '../components/PlayerSwitch/PlayerSwitch';
-import StyleUtils from '../utils/StyleUtils';
+import PlayerSwitch from '../../components/PlayerSwitch/PlayerSwitch';
+import StyleUtils from '../../utils/StyleUtils';
 import BoardScoreTable from '../BoardScoreTable/BoardScoreTable';
-import GameStorage from '../utils/GameStorage';
+import GameStorage from '../../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
-import UIUtils from '../utils/UIUtils';
-import { GameDef } from '../types/GameDef';
-import { GameMenu } from '../components/GameMenu/GameMenu';
-import { GameState, getDefaultGameState } from '../types/GameState';
+import UIUtils from '../../utils/UIUtils';
+import { GameDef } from '../../types/GameDef';
+import { GameMenu } from '../../components/GameMenu/GameMenu';
+import { GameState, getDefaultGameState } from '../../types/GameState';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
