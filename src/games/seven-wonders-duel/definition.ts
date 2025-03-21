@@ -6,9 +6,9 @@ import worldWonder from './assets/world-wonder.png';
 import greenChip from './assets/green-chip.png';
 import coins from './assets/coins.png';
 import military from './assets/military.png';
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
-import { GameDef } from '../../api/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

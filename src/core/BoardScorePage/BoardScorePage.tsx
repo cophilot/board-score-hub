@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
 import './BoardScorePage.scss';
 import { useEffect, useState, useMemo } from 'react';
-import PlayerSwitch from '../PlayerSwitch/PlayerSwitch';
+import PlayerSwitch from '../components/PlayerSwitch/PlayerSwitch';
 import StyleUtils from '../utils/StyleUtils';
 import BoardScoreTable from '../BoardScoreTable/BoardScoreTable';
 import GameStorage from '../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
 import UIUtils from '../utils/UIUtils';
 import { GameDef } from '../types/GameDef';
-import { GameMenu } from '../GameMenu/GameMenu';
+import { GameMenu } from '../components/GameMenu/GameMenu';
+import { GameState, getDefaultGameState } from '../types/GameState';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
@@ -20,6 +21,7 @@ interface BoardScoreTableProps {
 	logo?: JSX.Element;
 	afterTableElement?: JSX.Element;
 	isDarkModeEnabled?: boolean;
+	onGameStateChange?: (gameState: GameState) => void;
 }
 
 /**
@@ -38,21 +40,39 @@ export default function BoardScorePage({
 	logo,
 	afterTableElement,
 	isDarkModeEnabled = false,
+	onGameStateChange,
 }: BoardScoreTableProps): JSX.Element {
+	//** STARTING CONSTANTS **//
 	const navigate = useNavigate();
+	const date = new Date().toLocaleDateString();
+	const showHelpButton = definition.rows.some((row: any) => row.icon);
+	//** END CONSTANTS **//
 
-	const [playerSize, setPlayerSize] = useState<number>(
-		GameStorage.getPlayerSize(definition.title, definition.playerSizes[0]),
+	//** STARTING STATES **//
+	const [gst, setGST] = useState<GameState>(
+		GameStorage.getGameState(definition.title, () =>
+			getDefaultGameState(definition),
+		),
 	);
+	/* const [playerSize, setPlayerSize] = useState<number>(
+		GameStorage.getPlayerSize(definition.title, definition.playerSizes[0]),
+	); */
 	const [settings, setSettings] = useState(
 		GameStorage.getGameSettings(definition.title, {
 			showHelp: false,
+			showPlot: false,
 		}),
 	);
-	const [showPlot, setShowPlot] = useState(false);
+	//** END STATES **//
+
+	const setGameSate = (newState: GameState) => {
+		setGST(newState);
+		onGameStateChange && onGameStateChange(newState);
+		GameStorage.saveGameState(definition.title, newState);
+	};
+
 	const onPlayerSizeChange = (size: number) => {
-		setPlayerSize(size);
-		GameStorage.setPlayerSize(definition.title, size);
+		setGameSate({ ...gst, currPlayerSize: size });
 	};
 
 	useEffect(() => {
@@ -61,13 +81,11 @@ export default function BoardScorePage({
 		}, 10);
 	}, [definition, isDarkModeEnabled]);
 
-	const date = new Date().toLocaleDateString();
-	const showHelpButton = definition.rows.some((row: any) => row.icon);
-
 	const buttonDefinitions = useMemo(() => {
-		const applySettings = (newSettings: any) => {
+		const applySettings = (newSettings: any, saveInStorage = true) => {
 			setSettings(newSettings);
-			GameStorage.setGameSettings(definition.title, newSettings);
+			saveInStorage &&
+				GameStorage.setGameSettings(definition.title, newSettings);
 		};
 		return [
 			{
@@ -99,7 +117,11 @@ export default function BoardScorePage({
 				label: 'Plot',
 				iconClass: 'bi bi-graph-up',
 				onClick: () => {
-					setShowPlot(!showPlot);
+					const newSettings = {
+						...settings,
+						showPlot: !settings.showPlot,
+					};
+					applySettings(newSettings, false);
 				},
 			},
 			{
@@ -125,7 +147,7 @@ export default function BoardScorePage({
 				},
 			},
 		];
-	}, [definition, onClear, onReset, settings, showHelpButton, showPlot]);
+	}, [definition, onClear, onReset, settings, showHelpButton]);
 
 	return (
 		<>
@@ -141,19 +163,27 @@ export default function BoardScorePage({
 				)}
 				<PlayerSwitch
 					playerSizes={definition.playerSizes}
-					initPlayerSize={playerSize}
+					initPlayerSize={gst.currPlayerSize}
 					onPlayerSizeChange={onPlayerSizeChange}
 				></PlayerSwitch>
 				{/* <h2 className="print-hide">Timer</h2>
 				<Timer gameTitle={definition.title} /> */}
 				<BoardScoreTable
+					state={gst}
+					setState={setGameSate}
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}
 					definition={definition}
 					gameSettings={settings}
-					playerSize={playerSize}
-					showPlot={showPlot}
-					onClosePlot={() => setShowPlot(false)}
+					playerSize={gst.currPlayerSize}
+					showPlot={settings.showPlot}
+					onClosePlot={() => {
+						const newSettings = {
+							...settings,
+							showPlot: false,
+						};
+						setSettings(newSettings);
+					}}
 				></BoardScoreTable>
 				{afterTableElement}
 				<button

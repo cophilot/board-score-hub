@@ -1,6 +1,6 @@
-import { GameDef } from '../../api/types/GameDef';
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
+import { GameDef } from '../../core/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
 import prosperity from './assets/prosperity.png';
 import events from './assets/events.png';
 import cards from './assets/cards.png';

@@ -4,9 +4,9 @@ import flower from './assets/flower.png';
 import house from './assets/house.png';
 import water from './assets/water.png';
 import card from './assets/card.png';
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
-import { GameDef } from '../../api/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

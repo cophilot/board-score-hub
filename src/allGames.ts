@@ -17,7 +17,7 @@ import SavannahPark from './games/savannah-park/main';
 import TheWhiteCastle from './games/the-white-castle/main';
 import Pixies from './games/pixies/main';
 import EverdellDuo from './games/everdell-duo/main';
-import { GameWithView } from './api/types/GameWithView';
+import { GameWithView } from './core/types/GameWithView';
 import Cascadia from './games/cascadia/main';
 import PlanetUnknown from './games/planet-unknown/main';
 // ~~new-game-import~~

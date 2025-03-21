@@ -1,12 +1,12 @@
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
 import awardsIcon from './assets/awards.png';
 import milestonesIcon from './assets/milestones.png';
 import treeIcon from './assets/tree.png';
 import cityIcon from './assets/city.png';
 import terraformingRatingIcon from './assets/terraforming-rating.png';
 import victoryPointsIcon from './assets/victory-points.png';
-import { GameDef } from '../../api/types/GameDef';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

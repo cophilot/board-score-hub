@@ -1,9 +1,9 @@
-import { WinMode } from '../../api/types/WinMode';
+import { WinMode } from '../../core/types/WinMode';
 import moodIcon from './assets/mood.png';
 import experienceIcon from './assets/experience.png';
 import researchTokenIcon from './assets/research-tokens.png';
 import trainsIcon from './assets/trains.png';
-import { GameDef } from '../../api/types/GameDef';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

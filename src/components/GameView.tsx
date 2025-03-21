@@ -1,5 +1,5 @@
-import BoardScorePage from '../api/BoardScorePage/BoardScorePage';
-import { GameDef } from '../api/types/GameDef';
+import BoardScorePage from '../core/BoardScorePage/BoardScorePage';
+import { GameDef } from '../core/types/GameDef';
 import By from './By';
 import LogoWithBanner from './LogoWithBanner';
 

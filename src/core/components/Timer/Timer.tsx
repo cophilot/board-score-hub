@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Timer.scss';
-import GameStorage from '../utils/GameStorage';
+import GameStorage from '../../utils/GameStorage';
 
 interface TimerProps {
 	gameTitle: string;

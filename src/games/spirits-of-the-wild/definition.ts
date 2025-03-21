@@ -1,5 +1,5 @@
-import { GameDef } from '../../api/types/GameDef';
-import { WinMode } from '../../api/types/WinMode';
+import { GameDef } from '../../core/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
 import owl from './assets/owl.png';
 import rabbit from './assets/rabbit.png';
 import beaver from './assets/beaver.png';

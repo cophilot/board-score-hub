@@ -7,9 +7,9 @@ import discoveryCard from './assets/discovery-cards.png';
 import village from './assets/village.png';
 import visitor from './assets/visitor.png';
 import prosperity from './assets/prosperity.png';
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
-import { GameDef } from '../../api/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

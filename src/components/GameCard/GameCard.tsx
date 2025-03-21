@@ -1,4 +1,4 @@
-import { GameDef } from '../../api/types/GameDef';
+import { GameDef } from '../../core/types/GameDef';
 import './GameCard.scss';
 
 interface GameCardProps {

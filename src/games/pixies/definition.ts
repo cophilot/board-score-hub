@@ -1,5 +1,5 @@
-import { GameDef } from '../../api/types/GameDef';
-import { WinMode } from '../../api/types/WinMode';
+import { GameDef } from '../../core/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
 import validatedCards from './assets/validated-cards.png';
 import spiral from './assets/spiral.png';
 import cross from './assets/cross.png';

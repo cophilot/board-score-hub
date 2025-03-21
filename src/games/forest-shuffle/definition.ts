@@ -1,11 +1,11 @@
-import { WinMode } from '../../api/types/WinMode';
+import { WinMode } from '../../core/types/WinMode';
 import cardIcon from './assets/card.png';
 import topIcon from './assets/top.png';
 import downIcon from './assets/down.png';
 import leftIcon from './assets/left.png';
 import rightIcon from './assets/right.png';
 import caveIcon from './assets/cave.png';
-import { GameDef } from '../../api/types/GameDef';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

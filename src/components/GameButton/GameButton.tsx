@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import './GameButton.scss';
 import StringUtils from '../../utils/StringUtils';
-import { GameWithView } from '../../api/types/GameWithView';
-import { ExternalGameDef } from '../../api/types/GameDef';
+import { GameWithView } from '../../core/types/GameWithView';
+import { ExternalGameDef } from '../../core/types/GameDef';
 
 interface GameWithViewButtonProps {
 	game: GameWithView | undefined;

@@ -1,3 +1,9 @@
+import {
+	gameSateToString,
+	GameState,
+	gameStateFromString,
+} from '../types/GameState';
+
 export default class GameStorage {
 	static getStorageKeyFromTitle(gameTitle: string, subKey: string = '') {
 		let key = gameTitle.toLowerCase() + '-storage';
@@ -56,6 +62,23 @@ export default class GameStorage {
 			GameStorage.getStorageKeyFromTitle(gameTitle, 'player-size'),
 			playerSize.toString(),
 		);
+	}
+
+	static saveGameState(gameTitle: string, gameState: GameState) {
+		localStorage.setItem(
+			GameStorage.getStorageKeyFromTitle(gameTitle, 'game-state'),
+			gameSateToString(gameState),
+		);
+	}
+
+	static getGameState(gameTitle: string, fallback: () => GameState) {
+		const gameState = localStorage.getItem(
+			GameStorage.getStorageKeyFromTitle(gameTitle, 'game-state'),
+		);
+		if (gameState === null) {
+			return fallback();
+		}
+		return gameStateFromString(gameState);
 	}
 
 	static getSelectedExtension(gameTitle: string, fallback: string[] = []) {

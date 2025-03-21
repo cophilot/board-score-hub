@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import BoardScorePage from '../api/BoardScorePage/BoardScorePage';
-import { WinMode } from '../api/types/WinMode';
+import BoardScorePage from '../core/BoardScorePage/BoardScorePage';
+import { WinMode } from '../core/types/WinMode';
 import By from '../components/By';
 import Logo from '../components/Logo';
 import { useIsDarkModeEnabled } from '../providers/ThemeProvider';
-import { RowDef } from '../api/types/GameDef';
+import { RowDef } from '../core/types/GameDef';
 
 export default function ExpandableTable() {
 	const rowsLSKey = 'expandable-table-rows';

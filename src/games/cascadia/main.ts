@@ -1,4 +1,4 @@
-import { GameWithView } from '../../api/types/GameWithView';
+import { GameWithView } from '../../core/types/GameWithView';
 import { NullView } from '../../NullView';
 
 const Cascadia: GameWithView = {

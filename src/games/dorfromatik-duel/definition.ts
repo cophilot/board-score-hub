@@ -10,8 +10,8 @@ import flagYellow from './assets/flag-yellow.png';
 import flagRed from './assets/flag-red.png';
 import longRail from './assets/longest-rail.png';
 import longRiver from './assets/longest-river.png';
-import { WinMode } from '../../api/types/WinMode';
-import { GameDef } from '../../api/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

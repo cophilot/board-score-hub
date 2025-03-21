@@ -1,6 +1,6 @@
-import { GameDef } from '../../api/types/GameDef';
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
+import { GameDef } from '../../core/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
 import planet from './assets/planet.png';
 import tracker from './assets/tracker.png';
 import civCard from './assets/civ-card.png';

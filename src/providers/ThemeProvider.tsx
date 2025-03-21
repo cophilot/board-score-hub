@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { ReactNode, useEffect } from 'react';
-import StyleUtils from '../api/utils/StyleUtils';
+import StyleUtils from '../core/utils/StyleUtils';
 
 const ThemeContext = React.createContext({
 	isDarkModeEnabled: (): boolean => {

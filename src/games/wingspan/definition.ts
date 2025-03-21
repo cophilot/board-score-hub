@@ -1,5 +1,5 @@
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
 import eggIcon from './assets/eggs.png';
 import resourceIcon from './assets/resources.png';
 import roundGoalIcon from './assets/round-goals.png';
@@ -7,7 +7,7 @@ import bonusIcon from './assets/bonus.png';
 import tuckedCardIcon from './assets/tucked-card.png';
 import birdIcon from './assets/bird.png';
 import nectarIcon from './assets/nectar.png';
-import { GameDef } from '../../api/types/GameDef';
+import { GameDef } from '../../core/types/GameDef';
 
 export default function getDefinition(): GameDef {
 	return {

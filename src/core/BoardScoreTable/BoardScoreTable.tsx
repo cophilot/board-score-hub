@@ -1,22 +1,26 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCallback, useEffect, useState } from 'react';
 import './BoardScoreTable.scss';
 import GameStorage from '../utils/GameStorage';
 import { getFunctionForWinMode, WinMode } from '../types/WinMode';
-import ExtensionButtons from '../ExtensionButtons/ExtensionButtons';
-import { GameDef, Label, RowDef } from '../types/GameDef';
-import NumInput from '../NumInput/NumInput';
-import { NumInputFocusManager } from '../NumInput/NumInputFocusManager';
-import PlotDisplay from '../PlotDisplay/PlotDisplay';
+import ExtensionButtons from '../components/ExtensionButtons/ExtensionButtons';
+import { GameDef, Label } from '../types/GameDef';
+import NumInput from '../components/NumInput/NumInput';
+import { NumInputFocusManager } from '../components/NumInput/NumInputFocusManager';
+import PlotDisplay from '../components/PlotDisplay/PlotDisplay';
 import { isMobile } from '../utils/functions';
+import { GameState } from '../types/GameState';
+import { InternalRowDef, RowDef } from '../types/RowDef';
+import { GameSettings } from '../types/GameSettings';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
-	playerSize: number;
-	gameSettings: any;
+	state: GameState;
+	setState: (state: GameState) => void;
+	gameSettings: GameSettings;
 	showPlot?: boolean;
 	onClosePlot: () => void;
-	onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
+	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
 	getTotalRow?: (row: number[]) => void;
 }
 
@@ -27,53 +31,38 @@ interface BoardScoreTableProps {
  * @created 2024-7-21
  */
 function BoardScoreTable({
+	state,
+	setState,
 	definition,
-	playerSize,
 	gameSettings,
 	onCellChange,
 	onClosePlot,
 	getTotalRow,
 	showPlot,
 }: BoardScoreTableProps) {
-	const playerSizes = Array.from(Array(playerSize).keys());
-	const [rows, setRows] = useState(definition.rows || []);
+	//** STARTING CONSTANTS **//
+	const playerSizes = Array.from(Array(state.currPlayerSize).keys());
 	const tableStyle = parseTableStyle(definition);
+	//** END CONSTANTS **//
+
+	//** STARTING STATE **//
+	const [rows, setRows] = useState(definition.rows || []);
 	const [tableMatrix, setTableMatrix] = useState(
 		GameStorage.getGameMatrix(
 			definition.title,
-			getEmptyTbaleMatrix(rows.length, playerSize),
+			getEmptyTbaleMatrix(rows.length, state.currPlayerSize),
 		),
 	);
 	const [totalRow, setTotalRow] = useState(
-		Array.from(Array(playerSize).keys()).map(() => 0),
+		Array.from(Array(state.currPlayerSize).keys()).map(() => 0),
 	);
 	const [playerNames, setPlayerNames] = useState(
 		GameStorage.getPlayerNames(definition.title, []),
 	);
-
 	const [rounds, setRounds] = useState(-1);
+	//** END STATE **//
 
-	useEffect(() => {
-		setRows(definition.rows || []);
-	}, [definition.rows]);
-
-	useEffect(() => {
-		if (definition.roundMapper) {
-			setRounds(definition.roundMapper[playerSize]);
-		}
-	}, [definition.roundMapper, playerSize]);
-
-	useEffect(() => {
-		const newTotalRow = Array.from(Array(playerSize).keys()).map(
-			(playerIndex) => getColumnTotal(tableMatrix, playerIndex, rounds),
-		);
-		setTotalRow(newTotalRow);
-		if (getTotalRow) {
-			getTotalRow(newTotalRow);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [playerSize, tableMatrix]);
-
+	//** START FUNCTIONS **//
 	const getTableValue = (rowIndex: number, playerIndex: number) => {
 		const row = tableMatrix[rowIndex];
 		if (!row) {
@@ -90,7 +79,9 @@ function BoardScoreTable({
 		let newTableMatrix = tableMatrix;
 
 		while (newTableMatrix.length < rows.length) {
-			newTableMatrix.push(Array.from(Array(playerSize).keys()).map(() => 0));
+			newTableMatrix.push(
+				Array.from(Array(state.currPlayerSize).keys()).map(() => 0),
+			);
 		}
 
 		newTableMatrix = tableMatrix.map((row: number[], index: number) => {
@@ -126,6 +117,72 @@ function BoardScoreTable({
 		return l.find((label: Label) => label.beforeID === id);
 	};
 
+	const onExtensionOn = useCallback(
+		(extensionName: string, emitToState = true) => {
+			const exDef = definition.extensions?.[extensionName];
+			if (!exDef) {
+				return;
+			}
+			const exRows = exDef.rows || [];
+			exRows.forEach((row: InternalRowDef) => {
+				row.__extName = extensionName;
+			});
+			setRows([...rows, ...exRows]);
+
+			if (!emitToState) {
+				return;
+			}
+			setState({
+				...state,
+				activatedExtension: [...state.activatedExtension, extensionName],
+			});
+		},
+		[definition.extensions, rows, setState, state],
+	);
+
+	const onExtensionOff = (extensionName: string) => {
+		setRows(
+			rows.filter((row: InternalRowDef) => row.__extName !== extensionName),
+		);
+		setState({
+			...state,
+			activatedExtension: state.activatedExtension.filter(
+				(ext: string) => ext !== extensionName,
+			),
+		});
+	};
+	//** END FUNCTIONS **//
+
+	//** STARTING HOOKS **//
+	useEffect(() => {
+		setRows(definition.rows || []);
+	}, [definition.rows]);
+
+	useEffect(() => {
+		if (definition.roundMapper) {
+			setRounds(definition.roundMapper[state.currPlayerSize]);
+		}
+	}, [definition.roundMapper, state.currPlayerSize]);
+
+	useEffect(() => {
+		const newTotalRow = Array.from(Array(state.currPlayerSize).keys()).map(
+			(playerIndex) => getColumnTotal(tableMatrix, playerIndex, rounds),
+		);
+		setTotalRow(newTotalRow);
+		if (getTotalRow) {
+			getTotalRow(newTotalRow);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [state.currPlayerSize, tableMatrix]);
+
+	useEffect(() => {
+		state.activatedExtension.forEach((extensionName) => {
+			onExtensionOn(extensionName, false);
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [state.activatedExtension]);
+	//** END HOOKS **//
+
 	return (
 		<NumInputFocusManager>
 			<>
@@ -133,22 +190,15 @@ function BoardScoreTable({
 					<PlotDisplay
 						definition={definition}
 						tableMatrix={tableMatrix}
-						playerNames={fillPlayerNames(playerNames, playerSize)}
+						playerNames={fillPlayerNames(playerNames, state.currPlayerSize)}
 						onClose={onClosePlot}
 					/>
 				)}
 				<ExtensionButtons
-					definition={definition}
-					onExtensionOn={(extensionName, extensionDefinition) => {
-						const extRows = extensionDefinition.rows || [];
-						extRows.forEach((row: any) => {
-							row.__extName = extensionName;
-						});
-						setRows([...rows, ...extRows]);
-					}}
-					onExtensionOff={(extensionName) => {
-						setRows(rows.filter((row: any) => row.__extName !== extensionName));
-					}}
+					extensionDefinition={definition.extensions}
+					initialSelectedExtensions={state.activatedExtension}
+					onExtensionOn={onExtensionOn}
+					onExtensionOff={onExtensionOff}
 				/>
 				<table className="board-score-table" style={tableStyle}>
 					<thead>
@@ -181,14 +231,14 @@ function BoardScoreTable({
 									<>
 										{getLabelForID(row.id) && (
 											<tr key={'label-row-' + index} className="label-row">
-												<td colSpan={playerSize + 1}>
+												<td colSpan={state.currPlayerSize + 1}>
 													{getLabelForID(row.id)?.label}
 												</td>
 											</tr>
 										)}
 										{gameSettings.showHelp && row.icon && (
 											<tr className="help-row" key={'help-row-' + index}>
-												<td colSpan={playerSize + 1}>
+												<td colSpan={state.currPlayerSize + 1}>
 													<b>{row.name}</b>
 													<i>
 														{row.description ? ' - ' + row.description : ''}
@@ -210,8 +260,8 @@ function BoardScoreTable({
 													}
 													rowIndex={index}
 													playerIndex={playerIndex}
-													getValueFunction={getTableValue}
-													setValueFunction={setTableValue}
+													getValue={getTableValue}
+													setValue={setTableValue}
 												/>
 											))}
 										</tr>
@@ -240,12 +290,12 @@ function BoardScoreTable({
 export default BoardScoreTable;
 
 type InputCellProps = {
-	row: any;
+	row: RowDef;
 	rowIndex: number;
 	playerIndex: number;
 	playerName: string;
-	getValueFunction: (rowIndex: number, playerIndex: number) => any;
-	setValueFunction: (rowIndex: number, playerIndex: number, value: any) => void;
+	getValue: (rowIndex: number, playerIndex: number) => number;
+	setValue: (rowIndex: number, playerIndex: number, value: number) => void;
 };
 
 function InputCell({
@@ -253,17 +303,10 @@ function InputCell({
 	rowIndex,
 	playerIndex,
 	playerName,
-	getValueFunction,
-	setValueFunction,
+	getValue,
+	setValue,
 }: InputCellProps) {
-	let value = getValueFunction(rowIndex, playerIndex);
-	if (value === 0) {
-		value = '';
-	}
-	let staticNumber = row.staticNumber;
-	if (staticNumber && Array.isArray(staticNumber)) {
-		staticNumber = staticNumber[playerIndex];
-	}
+	const value = getValue(rowIndex, playerIndex);
 
 	const transformValue = (value: number): number => {
 		if (row.negative && value > 0) {
@@ -272,53 +315,42 @@ function InputCell({
 		return value;
 	};
 
-	const setValue = (value: any) => {
+	const setValueFn = (value: number) => {
 		if (isNaN(value)) {
 			return;
 		}
-		setValueFunction(rowIndex, playerIndex, Number(value));
+		setValue(rowIndex, playerIndex, Number(value));
 	};
 
-	useEffect(() => {
-		if (staticNumber) {
-			setValue(staticNumber);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [staticNumber]);
+	const getValueOrUndefined = () => {
+		return value === 0 ? undefined : value;
+	};
 
 	const inputElement = isMobile() ? (
 		<NumInput
 			name={row.name + ' | ' + playerName}
-			value={value}
-			onChange={setValue}
+			value={getValueOrUndefined()}
+			onChange={setValueFn}
 			transformNumber={transformValue}
 		/>
 	) : (
 		<input
 			type="number"
-			value={value}
-			onChange={(e) => setValue(Number(e.target.value))}
+			value={getValueOrUndefined()}
+			onChange={(e) => setValueFn(Number(e.target.value))}
 		/>
 	);
 
-	return (
-		<td>
-			{staticNumber ? (
-				<input type="text" value={staticNumber} disabled={true} />
-			) : (
-				inputElement
-			)}
-		</td>
-	);
+	return <td>{inputElement}</td>;
 }
 
 type FirstRowCellProps = {
-	row: any;
+	row: RowDef;
 	helpOn?: boolean;
 };
 
 function FirstRowCell({ row }: FirstRowCellProps) {
-	let inner = row.name;
+	let inner = <>{row.name}</>;
 	if (row.icon) {
 		inner = <img src={row.icon} alt={row.name} className="row-icon" />;
 	}

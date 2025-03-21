@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import BoardScorePage from '../../api/BoardScorePage/BoardScorePage';
+import BoardScorePage from '../../core/BoardScorePage/BoardScorePage';
 import By from '../../components/By';
 import getDefinition from './definition';
-import { GameDef, Label, RowDef } from '../../api/types/GameDef';
+import { GameDef, Label, RowDef } from '../../core/types/GameDef';
 import LogoWithBanner from '../../components/LogoWithBanner';
 
 export default function SeaSaltPaperView() {

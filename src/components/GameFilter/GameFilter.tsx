@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './GameFilter.scss';
-import { GameWithView } from '../../api/types/GameWithView';
+import { GameWithView } from '../../core/types/GameWithView';
 
 interface GameFilterProps {
 	allGames: GameWithView[];

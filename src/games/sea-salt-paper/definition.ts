@@ -1,5 +1,5 @@
-import { GameDef } from '../../api/types/GameDef';
-import { WinMode } from '../../api/types/WinMode';
+import { GameDef } from '../../core/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
 import captain from './assets/captain.png';
 import colorBonus from './assets/color-bonus.png';
 import duoCards from './assets/duo-cards.png';

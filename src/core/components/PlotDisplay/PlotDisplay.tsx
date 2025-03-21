@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { GameDef } from '../types/GameDef';
+import { GameDef } from '../../types/GameDef';
 import './PlotDisplay.scss';
 import ReactECharts from 'echarts-for-react'; // import reactecharts
 

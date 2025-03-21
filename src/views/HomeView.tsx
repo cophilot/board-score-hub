@@ -14,8 +14,8 @@ import {
 	useIsDarkModeEnabled,
 	useToggleTheme,
 } from '../providers/ThemeProvider';
-import StyleUtils from '../api/utils/StyleUtils';
-import { GameWithView } from '../api/types/GameWithView';
+import StyleUtils from '../core/utils/StyleUtils';
+import { GameWithView } from '../core/types/GameWithView';
 import GameFilter from '../components/GameFilter/GameFilter';
 
 export default function HomeView() {

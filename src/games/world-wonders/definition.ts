@@ -1,6 +1,6 @@
-import { GameDef } from '../../api/types/GameDef';
-import { WinMode } from '../../api/types/WinMode';
-import FontUtils from '../../api/utils/FontUtils';
+import { GameDef } from '../../core/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
+import FontUtils from '../../core/utils/FontUtils';
 import blockedBuilding from './assets/blocked-building.png';
 import loan from './assets/loan.png';
 import resources from './assets/resources.png';
