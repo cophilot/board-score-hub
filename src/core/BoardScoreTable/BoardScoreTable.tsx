@@ -180,7 +180,7 @@ function BoardScoreTable({
 			onExtensionOn(extensionName, false);
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [state.activatedExtension]);
+	}, []);
 	//** END HOOKS **//
 
 	return (
