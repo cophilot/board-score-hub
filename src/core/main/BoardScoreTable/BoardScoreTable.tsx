@@ -8,14 +8,14 @@ import NumInput from '../../components/NumInput/NumInput';
 import { NumInputFocusManager } from '../../components/NumInput/NumInputFocusManager';
 import PlotDisplay from '../../components/PlotDisplay/PlotDisplay';
 import { isMobile } from '../../utils/functions';
-import { GameState } from '../../types/GameState';
 import { InternalRowDef, RowDef } from '../../types/RowDef';
 import { GameSettings } from '../../types/GameSettings';
+import {
+	useGameDefinition,
+	useGameState,
+} from '../../providers/GameDataProvider';
 
 interface BoardScoreTableProps {
-	definition: GameDef;
-	state: GameState;
-	setState: (state: GameState) => void;
 	gameSettings: GameSettings;
 	showPlot?: boolean;
 	onClosePlot: () => void;
@@ -30,9 +30,6 @@ interface BoardScoreTableProps {
  * @created 2024-7-21
  */
 function BoardScoreTable({
-	state,
-	setState,
-	definition,
 	gameSettings,
 	onCellChange,
 	onClosePlot,
@@ -40,7 +37,9 @@ function BoardScoreTable({
 	showPlot,
 }: BoardScoreTableProps) {
 	//** STARTING CONSTANTS **//
-	const playerSizes = Array.from(Array(state.currPlayerSize).keys());
+	const definition = useGameDefinition();
+	const state = useGameState();
+	const playerSizes = Array.from(Array(state.getCurrPlayerSize()).keys());
 	//** END CONSTANTS **//
 
 	//** STARTING STATE **//
@@ -48,11 +47,11 @@ function BoardScoreTable({
 	const [tableMatrix, setTableMatrix] = useState(
 		GameStorage.getGameMatrix(
 			definition.title,
-			getEmptyTableMatrix(rows.length, state.currPlayerSize),
+			getEmptyTableMatrix(rows.length, state.getCurrPlayerSize()),
 		),
 	);
 	const [totalRow, setTotalRow] = useState(
-		Array.from(Array(state.currPlayerSize).keys()).map(() => 0),
+		Array.from(Array(state.getCurrPlayerSize()).keys()).map(() => 0),
 	);
 	const [playerNames, setPlayerNames] = useState(
 		GameStorage.getPlayerNames(definition.title, []),
@@ -78,7 +77,7 @@ function BoardScoreTable({
 
 		while (newTableMatrix.length < rows.length) {
 			newTableMatrix.push(
-				Array.from(Array(state.currPlayerSize).keys()).map(() => 0),
+				Array.from(Array(state.getCurrPlayerSize()).keys()).map(() => 0),
 			);
 		}
 
@@ -130,24 +129,16 @@ function BoardScoreTable({
 			if (!emitToState) {
 				return;
 			}
-			setState({
-				...state,
-				activatedExtension: [...state.activatedExtension, extensionName],
-			});
+			state.activateExtension(extensionName);
 		},
-		[definition.extensions, rows, setState, state],
+		[definition.extensions, rows, state],
 	);
 
 	const onExtensionOff = (extensionName: string) => {
 		setRows(
 			rows.filter((row: InternalRowDef) => row.__extName !== extensionName),
 		);
-		setState({
-			...state,
-			activatedExtension: state.activatedExtension.filter(
-				(ext: string) => ext !== extensionName,
-			),
-		});
+		state.deactivateExtension(extensionName);
 	};
 	//** END FUNCTIONS **//
 
@@ -158,12 +149,12 @@ function BoardScoreTable({
 
 	useEffect(() => {
 		if (definition.roundMapper) {
-			setRounds(definition.roundMapper[state.currPlayerSize]);
+			setRounds(definition.roundMapper[state.getCurrPlayerSize()]);
 		}
-	}, [definition.roundMapper, state.currPlayerSize]);
+	}, [definition.roundMapper, state]);
 
 	useEffect(() => {
-		const newTotalRow = Array.from(Array(state.currPlayerSize).keys()).map(
+		const newTotalRow = Array.from(Array(state.getCurrPlayerSize()).keys()).map(
 			(playerIndex) => getColumnTotal(tableMatrix, playerIndex, rounds),
 		);
 		setTotalRow(newTotalRow);
@@ -171,10 +162,10 @@ function BoardScoreTable({
 			getTotalRow(newTotalRow);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [state.currPlayerSize, tableMatrix]);
+	}, [state, tableMatrix]);
 
 	useEffect(() => {
-		state.activatedExtension.forEach((extensionName) => {
+		state.getActivatedExtension().forEach((extensionName) => {
 			onExtensionOn(extensionName, false);
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -188,13 +179,16 @@ function BoardScoreTable({
 					<PlotDisplay
 						definition={definition}
 						tableMatrix={tableMatrix}
-						playerNames={fillPlayerNames(playerNames, state.currPlayerSize)}
+						playerNames={fillPlayerNames(
+							playerNames,
+							state.getCurrPlayerSize(),
+						)}
 						onClose={onClosePlot}
 					/>
 				)}
 				<ExtensionButtons
 					extensionDefinition={definition.extensions}
-					initialSelectedExtensions={state.activatedExtension}
+					initialSelectedExtensions={state.getActivatedExtension()}
 					onExtensionOn={onExtensionOn}
 					onExtensionOff={onExtensionOff}
 				/>
@@ -229,14 +223,14 @@ function BoardScoreTable({
 									<>
 										{getLabelForID(row.id) && (
 											<tr key={'label-row-' + index} className="label-row">
-												<td colSpan={state.currPlayerSize + 1}>
+												<td colSpan={state.getCurrPlayerSize() + 1}>
 													{getLabelForID(row.id)?.label}
 												</td>
 											</tr>
 										)}
 										{gameSettings.showHelp && row.icon && (
 											<tr className="help-row" key={'help-row-' + index}>
-												<td colSpan={state.currPlayerSize + 1}>
+												<td colSpan={state.getCurrPlayerSize() + 1}>
 													<b>{row.name}</b>
 													<i>
 														{row.description ? ' - ' + row.description : ''}

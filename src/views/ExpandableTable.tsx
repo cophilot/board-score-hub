@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import BoardScorePage from '../core/main/BoardScorePage/BoardScorePage';
 import { WinMode } from '../core/types/WinMode';
 import By from '../components/By';
 import Logo from '../components/Logo';
 import { useIsDarkModeEnabled } from '../providers/ThemeProvider';
 import { RowDef } from '../core/types/RowDef';
+import BoardScore from '../core';
 
 export default function ExpandableTable() {
 	const rowsLSKey = 'expandable-table-rows';
@@ -51,7 +51,7 @@ export default function ExpandableTable() {
 	const logo = <Logo size={100} detectDarkMode />;
 
 	return (
-		<BoardScorePage
+		<BoardScore
 			definition={definition}
 			onCellChange={onCellChange}
 			logo={logo}
@@ -64,6 +64,6 @@ export default function ExpandableTable() {
 			}}
 		>
 			<By />
-		</BoardScorePage>
+		</BoardScore>
 	);
 }

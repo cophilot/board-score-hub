@@ -1,4 +1,4 @@
-import BoardScorePage from '../core/main/BoardScorePage/BoardScorePage';
+import BoardScore from '../core';
 import { GameDef } from '../core/types/GameDef';
 import By from './By';
 import LogoWithBanner from './LogoWithBanner';
@@ -20,12 +20,12 @@ export default function GameView({
 		/>
 	);
 	return (
-		<BoardScorePage
+		<BoardScore
 			definition={definition}
 			logo={logo}
 			afterTableElement={afterTabelElement}
 		>
 			<By />
-		</BoardScorePage>
+		</BoardScore>
 	);
 }

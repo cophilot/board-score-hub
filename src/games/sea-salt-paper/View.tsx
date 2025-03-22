@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import BoardScorePage from '../../core/main/BoardScorePage/BoardScorePage';
 import By from '../../components/By';
 import getDefinition from './definition';
 import { GameDef, Label } from '../../core/types/GameDef';
 import LogoWithBanner from '../../components/LogoWithBanner';
 import { RowDef } from '../../core/types/RowDef';
+import BoardScore from '../../core';
 
 export default function SeaSaltPaperView() {
 	const [def, setDef] = useState(getDefinition());
@@ -54,13 +54,13 @@ export default function SeaSaltPaperView() {
 		/>
 	);
 	return (
-		<BoardScorePage
+		<BoardScore
 			definition={def}
 			logo={logo}
 			afterTableElement={roundBtn}
 			//getTotalRow={getTotalRow}
 		>
 			<By />
-		</BoardScorePage>
+		</BoardScore>
 	);
 }

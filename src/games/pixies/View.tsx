@@ -1,10 +1,10 @@
-import BoardScorePage from '../../core/main/BoardScorePage/BoardScorePage';
 import { useState } from 'react';
 import By from '../../components/By';
 import getDefinition from './definition';
 import { GameDef, Label } from '../../core/types/GameDef';
 import LogoWithBanner from '../../components/LogoWithBanner';
 import { RowDef } from '../../core/types/RowDef';
+import BoardScore from '../../core';
 
 export default function PixiesView() {
 	const [def, setDef] = useState(getDefinition());
@@ -54,8 +54,8 @@ export default function PixiesView() {
 		/>
 	);
 	return (
-		<BoardScorePage definition={def} logo={logo} afterTableElement={roundBtn}>
+		<BoardScore definition={def} logo={logo} afterTableElement={roundBtn}>
 			<By />
-		</BoardScorePage>
+		</BoardScore>
 	);
 }

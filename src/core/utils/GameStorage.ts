@@ -1,9 +1,5 @@
 import { GameSettings } from '../types/GameSettings';
-import {
-	gameSateToString,
-	GameState,
-	gameStateFromString,
-} from '../types/GameState';
+import { GameState } from '../types/GameState';
 
 export default class GameStorage {
 	static getStorageKeyFromTitle(gameTitle: string, subKey: string = '') {
@@ -65,21 +61,23 @@ export default class GameStorage {
 		);
 	}
 
-	static saveGameState(gameTitle: string, gameState: GameState) {
+	// USE
+	static saveGameState(gameState: GameState) {
 		localStorage.setItem(
-			GameStorage.getStorageKeyFromTitle(gameTitle, 'game-state'),
-			gameSateToString(gameState),
+			this.getStorageKeyFromTitle(gameState.getGameTitle(), 'game-state'),
+			gameState.toString(),
 		);
 	}
 
-	static getGameState(gameTitle: string, fallback: () => GameState) {
+	// USE
+	static getGameState(gameTitle: string, fallback: () => GameState): GameState {
 		const gameState = localStorage.getItem(
 			GameStorage.getStorageKeyFromTitle(gameTitle, 'game-state'),
 		);
 		if (gameState === null) {
 			return fallback();
 		}
-		return gameStateFromString(gameState);
+		return GameState.fromString(gameState);
 	}
 
 	static getSelectedExtension(gameTitle: string, fallback: string[] = []) {

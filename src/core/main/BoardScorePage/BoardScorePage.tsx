@@ -8,13 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import UIUtils from '../../utils/UIUtils';
 import { GameDef } from '../../types/GameDef';
 import { GameMenu } from '../../components/GameMenu/GameMenu';
-import { GameState, getDefaultGameState } from '../../types/GameState';
 import { RowDef } from '../../types/RowDef';
 import { GameSettings, getDefaultGameSettings } from '../../types/GameSettings';
 import { callIfArgIsPresent } from '../../utils/generalFunctions';
+import {
+	useGameDefinition,
+	useGameState,
+} from '../../providers/GameDataProvider';
 
 interface BoardScoreTableProps {
-	definition: GameDef;
 	children?: JSX.Element;
 	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
 	getTotalRow?: (row: number[]) => void;
@@ -23,7 +25,6 @@ interface BoardScoreTableProps {
 	logo?: JSX.Element;
 	afterTableElement?: JSX.Element;
 	isDarkModeEnabled?: boolean;
-	onGameStateChange?: (gameState: GameState) => void;
 }
 
 /**
@@ -33,7 +34,6 @@ interface BoardScoreTableProps {
  * @created 2024-7-21
  */
 export default function BoardScorePage({
-	definition,
 	children,
 	onCellChange,
 	getTotalRow,
@@ -42,39 +42,29 @@ export default function BoardScorePage({
 	logo,
 	afterTableElement,
 	isDarkModeEnabled = false,
-	onGameStateChange,
 }: BoardScoreTableProps): JSX.Element {
 	//** STARTING CONSTANTS **//
 	const navigate = useNavigate();
 	const date = new Date().toLocaleDateString();
+	const definition = useGameDefinition();
 	const showHelpButton = definition.rows.some(
 		(row: RowDef) => row.icon || row.description,
 	);
 	//** END CONSTANTS **//
 
 	//** STARTING STATES **//
-	const [gst, setGST] = useState<GameState>(
-		GameStorage.getGameState(definition.title, () =>
-			getDefaultGameState(definition),
-		),
-	);
+	const state = useGameState();
 	const [settings, setSettings] = useState<GameSettings>(
 		GameStorage.getGameSettings(definition.title, getDefaultGameSettings()),
 	);
 	//** END STATES **//
 
 	//** START FUNCTIONS **//
-	const setGameSate = (newState: GameState, saveInStorage = true) => {
-		setGST(newState);
-		onGameStateChange && onGameStateChange(newState);
-		saveInStorage && GameStorage.saveGameState(definition.title, newState);
-	};
 	const setGameSettings = (newSettings: GameSettings, saveInStorage = true) => {
 		setSettings(newSettings);
 		saveInStorage && GameStorage.setGameSettings(definition.title, newSettings);
 	};
-	const onPlayerSizeChange = (size: number) =>
-		setGameSate({ ...gst, currPlayerSize: size });
+	const onPlayerSizeChange = (size: number) => state.setCurrPlayerSize(size);
 	//** END FUNCTIONS **//
 
 	//** START HOOKS **//
@@ -170,17 +160,14 @@ export default function BoardScorePage({
 				)}
 				<PlayerSwitch
 					playerSizes={definition.playerSizes}
-					initPlayerSize={gst.currPlayerSize}
+					initPlayerSize={state.getCurrPlayerSize()}
 					onPlayerSizeChange={onPlayerSizeChange}
 				></PlayerSwitch>
 				{/* <h2 className="print-hide">Timer</h2>
 				<Timer gameTitle={definition.title} /> // TODO */}
 				<BoardScoreTable
-					state={gst}
-					setState={setGameSate}
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}
-					definition={definition}
 					gameSettings={settings}
 					showPlot={settings.showPlot}
 					onClosePlot={() => {
