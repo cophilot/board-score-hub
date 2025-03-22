@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
 import './BoardScorePage.scss';
 import { useEffect, useState, useMemo } from 'react';
 import PlayerSwitch from '../../components/PlayerSwitch/PlayerSwitch';
@@ -10,11 +9,14 @@ import UIUtils from '../../utils/UIUtils';
 import { GameDef } from '../../types/GameDef';
 import { GameMenu } from '../../components/GameMenu/GameMenu';
 import { GameState, getDefaultGameState } from '../../types/GameState';
+import { RowDef } from '../../types/RowDef';
+import { GameSettings, getDefaultGameSettings } from '../../types/GameSettings';
+import { callIfArgIsPresent } from '../../utils/generalFunctions';
 
 interface BoardScoreTableProps {
 	definition: GameDef;
-	children?: any;
-	onCellChange?: (rowIndex: number, playerIndex: number, value: any) => void;
+	children?: JSX.Element;
+	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
 	getTotalRow?: (row: number[]) => void;
 	onReset?: () => void;
 	onClear?: () => void;
@@ -45,7 +47,9 @@ export default function BoardScorePage({
 	//** STARTING CONSTANTS **//
 	const navigate = useNavigate();
 	const date = new Date().toLocaleDateString();
-	const showHelpButton = definition.rows.some((row: any) => row.icon);
+	const showHelpButton = definition.rows.some(
+		(row: RowDef) => row.icon || row.description,
+	);
 	//** END CONSTANTS **//
 
 	//** STARTING STATES **//
@@ -54,39 +58,34 @@ export default function BoardScorePage({
 			getDefaultGameState(definition),
 		),
 	);
-	/* const [playerSize, setPlayerSize] = useState<number>(
-		GameStorage.getPlayerSize(definition.title, definition.playerSizes[0]),
-	); */
-	const [settings, setSettings] = useState(
-		GameStorage.getGameSettings(definition.title, {
-			showHelp: false,
-			showPlot: false,
-		}),
+	const [settings, setSettings] = useState<GameSettings>(
+		GameStorage.getGameSettings(definition.title, getDefaultGameSettings()),
 	);
 	//** END STATES **//
 
-	const setGameSate = (newState: GameState) => {
+	//** START FUNCTIONS **//
+	const setGameSate = (newState: GameState, saveInStorage = true) => {
 		setGST(newState);
 		onGameStateChange && onGameStateChange(newState);
-		GameStorage.saveGameState(definition.title, newState);
+		saveInStorage && GameStorage.saveGameState(definition.title, newState);
 	};
-
-	const onPlayerSizeChange = (size: number) => {
+	const setGameSettings = (newSettings: GameSettings, saveInStorage = true) => {
+		setSettings(newSettings);
+		saveInStorage && GameStorage.setGameSettings(definition.title, newSettings);
+	};
+	const onPlayerSizeChange = (size: number) =>
 		setGameSate({ ...gst, currPlayerSize: size });
-	};
+	//** END FUNCTIONS **//
 
+	//** START HOOKS **//
 	useEffect(() => {
 		setTimeout(() => {
 			setInitialAttributes(definition, isDarkModeEnabled);
 		}, 10);
 	}, [definition, isDarkModeEnabled]);
+	//** END HOOKS **//
 
 	const buttonDefinitions = useMemo(() => {
-		const applySettings = (newSettings: any, saveInStorage = true) => {
-			setSettings(newSettings);
-			saveInStorage &&
-				GameStorage.setGameSettings(definition.title, newSettings);
-		};
 		return [
 			{
 				label: settings.showHelp ? 'Hide Help' : 'Help',
@@ -96,7 +95,7 @@ export default function BoardScorePage({
 						...settings,
 						showHelp: !settings.showHelp,
 					};
-					applySettings(newSettings);
+					setGameSettings(newSettings);
 				},
 				disabled: !showHelpButton,
 			},
@@ -121,7 +120,7 @@ export default function BoardScorePage({
 						...settings,
 						showPlot: !settings.showPlot,
 					};
-					applySettings(newSettings, false);
+					setGameSettings(newSettings, false);
 				},
 			},
 			{
@@ -147,7 +146,15 @@ export default function BoardScorePage({
 				},
 			},
 		];
-	}, [definition, onClear, onReset, settings, showHelpButton]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [
+		definition.rulesUrl,
+		definition.title,
+		onClear,
+		onReset,
+		settings,
+		showHelpButton,
+	]);
 
 	return (
 		<>
@@ -167,7 +174,7 @@ export default function BoardScorePage({
 					onPlayerSizeChange={onPlayerSizeChange}
 				></PlayerSwitch>
 				{/* <h2 className="print-hide">Timer</h2>
-				<Timer gameTitle={definition.title} /> */}
+				<Timer gameTitle={definition.title} /> // TODO */}
 				<BoardScoreTable
 					state={gst}
 					setState={setGameSate}
@@ -203,7 +210,12 @@ export default function BoardScorePage({
 	);
 }
 
+/**
+ * Print the current page
+ */
 function print() {
+	const TIMEOUT = 500;
+
 	const displayStyles = UIUtils.hideElementsWithClass('print-hide');
 	UIUtils.showElementsWithClass('print-show');
 
@@ -221,49 +233,39 @@ function print() {
 			setTimeout(() => {
 				UIUtils.showElementsWithClass('print-hide', displayStyles);
 				UIUtils.hideElementsWithClass('print-show');
-			}, 500);
-		}, 500);
-	}, 500);
+			}, TIMEOUT);
+		}, TIMEOUT);
+	}, TIMEOUT);
 }
 
-function TableHeading({ definition }: { definition: any }) {
+/**
+ * The heading of the table
+ */
+function TableHeading({ definition }: { definition: GameDef }) {
 	const heading = <h1>{definition.title}</h1>;
-	if (definition.url) {
-		return (
-			<a
-				href={definition.url}
-				target="_blank"
-				rel="noreferrer"
-				className="heading-link"
-			>
-				{heading}
-			</a>
-		);
+	if (!definition.url) {
+		return heading;
 	}
-	return heading;
+	return (
+		<a
+			href={definition.url}
+			target="_blank"
+			rel="noreferrer"
+			className="heading-link"
+		>
+			{heading}
+		</a>
+	);
 }
 
-function setInitialAttributes(definition: any, darkMode: boolean) {
+function setInitialAttributes(definition: GameDef, darkMode: boolean) {
 	StyleUtils.setDefaultValues(darkMode);
-	setAttributeIfPresent(definition.title, (title) => {
+	callIfArgIsPresent(definition.title, (title) => {
 		document.title = title + ' - BoardScoreHub';
 	});
-	setAttributeIfPresent(definition.bgColor, StyleUtils.setBackGroundColor);
-	setAttributeIfPresent(definition.fontColor, StyleUtils.setFontColor);
-	setAttributeIfPresent(definition.primaryColor, StyleUtils.setPrimaryColor);
-	setAttributeIfPresent(
-		definition.secondaryColor,
-		StyleUtils.setSecondaryColor,
-	);
-	setAttributeIfPresent(definition.fontFamily, StyleUtils.setFontFamily);
-}
-
-function setAttributeIfPresent(
-	attribute: unknown,
-	callback: (arg0?: any) => void,
-) {
-	if (attribute !== undefined && attribute !== null) {
-		callback(attribute);
-		return;
-	}
+	callIfArgIsPresent(definition.bgColor, StyleUtils.setBackGroundColor);
+	callIfArgIsPresent(definition.fontColor, StyleUtils.setFontColor);
+	callIfArgIsPresent(definition.primaryColor, StyleUtils.setPrimaryColor);
+	callIfArgIsPresent(definition.secondaryColor, StyleUtils.setSecondaryColor);
+	callIfArgIsPresent(definition.fontFamily, StyleUtils.setFontFamily);
 }

@@ -13,4 +13,5 @@ export interface RowDef {
 
 export interface InternalRowDef extends RowDef {
 	__extName?: string; // The name of the extension this row belongs to
+	__visible?: boolean; // Whether this row is visible
 }

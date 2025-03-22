@@ -224,8 +224,8 @@ function BoardScoreTable({
 					</thead>
 					<tbody>
 						{rows.map(
-							(row: RowDef, index: number) =>
-								(rounds === -1 || index < rounds) && (
+							(row: InternalRowDef, index: number) =>
+								(row.__visible || rounds === -1 || index < rounds) && (
 									<>
 										{getLabelForID(row.id) && (
 											<tr key={'label-row-' + index} className="label-row">

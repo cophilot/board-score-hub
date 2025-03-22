@@ -12,7 +12,7 @@
 		"preview": "vite preview",
 		"format": "prettier --write src --ignore-path .prettierignore",
 		"format:check": "prettier --check src --ignore-path .prettierignore",
-		"verify": "pnpm run lint && pnpm run format:check",
+		"verify": "pnpm run lint && pnpm run format:check && pnpm run build",
 		"prepare": "husky"
 	},
 	"dependencies": {

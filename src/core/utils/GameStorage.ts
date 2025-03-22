@@ -1,3 +1,4 @@
+import { GameSettings } from '../types/GameSettings';
 import {
 	gameSateToString,
 	GameState,
@@ -115,14 +116,17 @@ export default class GameStorage {
 		);
 	}
 
-	static setGameSettings(gameTitle: string, settings: unknown) {
+	static setGameSettings(gameTitle: string, settings: GameSettings) {
 		localStorage.setItem(
 			GameStorage.getStorageKeyFromTitle(gameTitle, 'settings'),
 			JSON.stringify(settings),
 		);
 	}
 
-	static getGameSettings(gameTitle: string, fallback: unknown = {}) {
+	static getGameSettings(
+		gameTitle: string,
+		fallback: GameSettings,
+	): GameSettings {
 		const settings = localStorage.getItem(
 			GameStorage.getStorageKeyFromTitle(gameTitle, 'settings'),
 		);
