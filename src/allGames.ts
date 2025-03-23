@@ -20,11 +20,13 @@ import EverdellDuo from './games/everdell-duo/main';
 import { GameWithView } from './core/types/GameWithView';
 import Cascadia from './games/cascadia/main';
 import PlanetUnknown from './games/planet-unknown/main';
+import Seti from './games/seti/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Seti,
 		PlanetUnknown,
 		Everdell,
 		Calico,

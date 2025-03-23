@@ -1,10 +1,11 @@
-import { GameDef } from '../../api/types/GameDef';
-import { WinMode } from '../../api/types/WinMode';
+import { GameDef } from '../../core/types/GameDef';
+import { WinMode } from '../../core/types/WinMode';
 
 export default function getDefinition(): GameDef {
 	return {
 		title: '$$name.p$$',
 		//url: '',
+		//rulesUrl: '',
 		//bgColor: '#fff',
 		//fontColor: '#000',
 		//primaryColor: '#fff',
