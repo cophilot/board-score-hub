@@ -16,28 +16,21 @@ export default function getDefinition(): GameDef {
 		winMode: WinMode.MOST,
 		rows: [
 			{
-				name: 'Points from Orbiters',
-			},
-			{
-				name: 'Points from Landers',
-			},
-			{
-				name: 'Points from Sector Wins',
-			},
-			{
-				name: 'Missions Completed',
-			},
-			{
-				name: 'Gold Milestone Bonuses',
-			},
-			{
-				name: 'Gold Scoring Tile Bonuses',
-			},
-			{
-				name: 'Alien Species Traces / Bonuses',
+				name: 'Current Track',
+				description: 'Points got during the game',
 			},
 			{
 				name: 'End-of-Game Scoring Cards',
+				description: 'Points from end-of-game scoring cards that you played',
+			},
+			{
+				name: 'Gold Scoring Tile Bonuses',
+				description: 'Points from the four gold scoring tiles',
+			},
+			{
+				name: 'Alien Species',
+				description:
+					'Some alien species give you points at the end of the game',
 			},
 		],
 	};
