@@ -1,5 +1,9 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
+import alienImg from './assets/alien.png';
+import pointsImg from './assets/points.png';
+import endOfGameCardsImg from './assets/end-of-game-cards.png';
+import goldScoringTilesImg from './assets/golden-tiles.png';
 
 export default function getDefinition(): GameDef {
 	return {
@@ -16,18 +20,22 @@ export default function getDefinition(): GameDef {
 		winMode: WinMode.MOST,
 		rows: [
 			{
+				icon: pointsImg,
 				name: 'Current Track',
-				description: 'Points got during the game',
+				description: 'Points earned during the game',
 			},
 			{
+				icon: endOfGameCardsImg,
 				name: 'End-of-Game Scoring Cards',
 				description: 'Points from end-of-game scoring cards that you played',
 			},
 			{
+				icon: goldScoringTilesImg,
 				name: 'Gold Scoring Tile Bonuses',
 				description: 'Points from the four gold scoring tiles',
 			},
 			{
+				icon: alienImg,
 				name: 'Alien Species',
 				description:
 					'Some alien species give you points at the end of the game',
