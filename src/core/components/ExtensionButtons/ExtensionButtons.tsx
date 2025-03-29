@@ -22,11 +22,11 @@ function ExtensionButtons({
 	onExtensionOn,
 	onExtensionOff,
 }: ExtensionButtonsProps) {
-	//** STARTING CONSTANTS **//
+	//** START CONSTANTS **//
 	const extensionsNames = Object.keys(extensionDefinition);
 	//** END CONSTANTS **//
 
-	//** STARTING STATE **//
+	//** START STATE **//
 	const [selectedExtensions, setSelectedExtensions] = useState<string[]>(
 		initialSelectedExtensions,
 	);

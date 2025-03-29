@@ -1,7 +1,7 @@
 import BoardScorePage from './main/BoardScorePage/BoardScorePage';
-import { GameDataProvider } from './providers/GameDataProvider';
+import { GameDataProvider } from './main/GameDataProvider';
 import { GameDef } from './types/GameDef';
-import { GameState } from './types/GameState';
+import { GameState } from './state/GameState';
 
 interface BoardScoreProps {
 	definition: GameDef;

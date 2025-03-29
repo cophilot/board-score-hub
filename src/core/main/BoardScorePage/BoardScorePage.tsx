@@ -1,20 +1,20 @@
 import './BoardScorePage.scss';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import PlayerSwitch from '../../components/PlayerSwitch/PlayerSwitch';
 import StyleUtils from '../../utils/StyleUtils';
 import BoardScoreTable from '../BoardScoreTable/BoardScoreTable';
-import GameStorage from '../../utils/GameStorage';
 import { useNavigate } from 'react-router-dom';
 import UIUtils from '../../utils/UIUtils';
 import { GameDef } from '../../types/GameDef';
-import { GameMenu } from '../../components/GameMenu/GameMenu';
+import { ButtonDefinition, GameMenu } from '../../components/GameMenu/GameMenu';
 import { RowDef } from '../../types/RowDef';
-import { GameSettings, getDefaultGameSettings } from '../../types/GameSettings';
 import { callIfArgIsPresent } from '../../utils/generalFunctions';
 import {
 	useGameDefinition,
+	useGameSettings,
 	useGameState,
-} from '../../providers/GameDataProvider';
+} from '../GameDataProvider';
+import PlotDisplay from '../../components/PlotDisplay/PlotDisplay';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -43,27 +43,24 @@ export default function BoardScorePage({
 	afterTableElement,
 	isDarkModeEnabled = false,
 }: BoardScoreTableProps): JSX.Element {
-	//** STARTING CONSTANTS **//
+	//** START GAME DATA **//
+	const definition = useGameDefinition();
+	const state = useGameState();
+	const settings = useGameSettings();
+	//** END GAME DATA **//
+
+	//** START CONSTANTS **//
 	const navigate = useNavigate();
 	const date = new Date().toLocaleDateString();
-	const definition = useGameDefinition();
 	const showHelpButton = definition.rows.some(
 		(row: RowDef) => row.icon || row.description,
 	);
 	//** END CONSTANTS **//
 
-	//** STARTING STATES **//
-	const state = useGameState();
-	const [settings, setSettings] = useState<GameSettings>(
-		GameStorage.getGameSettings(definition.title, getDefaultGameSettings()),
-	);
+	//** START STATES **//
 	//** END STATES **//
 
 	//** START FUNCTIONS **//
-	const setGameSettings = (newSettings: GameSettings, saveInStorage = true) => {
-		setSettings(newSettings);
-		saveInStorage && GameStorage.setGameSettings(definition.title, newSettings);
-	};
 	const onPlayerSizeChange = (size: number) => state.setCurrPlayerSize(size);
 	//** END FUNCTIONS **//
 
@@ -75,18 +72,12 @@ export default function BoardScorePage({
 	}, [definition, isDarkModeEnabled]);
 	//** END HOOKS **//
 
-	const buttonDefinitions = useMemo(() => {
+	const buttonDefinitions: ButtonDefinition[] = useMemo(() => {
 		return [
 			{
-				label: settings.showHelp ? 'Hide Help' : 'Help',
+				label: settings.getShowHelp() ? 'Hide Help' : 'Help',
 				iconClass: 'bi bi-question-circle',
-				onClick: () => {
-					const newSettings = {
-						...settings,
-						showHelp: !settings.showHelp,
-					};
-					setGameSettings(newSettings);
-				},
+				onClick: () => settings.toggleShowHelp(),
 				disabled: !showHelpButton,
 			},
 			{
@@ -105,22 +96,16 @@ export default function BoardScorePage({
 			{
 				label: 'Plot',
 				iconClass: 'bi bi-graph-up',
-				onClick: () => {
-					const newSettings = {
-						...settings,
-						showPlot: !settings.showPlot,
-					};
-					setGameSettings(newSettings, false);
-				},
+				onClick: () => settings.toggleShowPlot(),
 			},
 			{
-				label: 'Clear',
+				label: 'Clear Table',
 				iconClass: 'bi bi-x-circle',
 				onClick: () => {
 					if (onClear) {
 						onClear();
 					}
-					GameStorage.deleteGameMatrix(definition.title);
+					state.clearTableMatrix();
 					window.location.reload();
 				},
 			},
@@ -131,25 +116,30 @@ export default function BoardScorePage({
 					if (onReset) {
 						onReset();
 					}
-					GameStorage.deleteStorage(definition.title);
+					state.reset(definition);
 					window.location.reload();
 				},
 			},
 		];
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [
-		definition.rulesUrl,
-		definition.title,
-		onClear,
-		onReset,
-		settings,
-		showHelpButton,
-	]);
+	}, [definition, onClear, onReset, settings, showHelpButton, state]);
 
 	return (
 		<>
 			<div className="board-score-page">
 				<GameMenu buttonDefinitions={buttonDefinitions} />
+				{settings.getShowPlot() && (
+					<PlotDisplay
+						definition={definition}
+						tableMatrix={state.getTableMatrix()}
+						playerNames={fillPlayerNames(
+							state.getPlayerNames(),
+							state.getCurrPlayerSize(),
+						)}
+						onClose={() => {
+							settings.setShowPlot(false);
+						}}
+					/>
+				)}
 				{logo}
 				<TableHeading definition={definition} />
 				<h2 className="print-show">
@@ -168,15 +158,6 @@ export default function BoardScorePage({
 				<BoardScoreTable
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}
-					gameSettings={settings}
-					showPlot={settings.showPlot}
-					onClosePlot={() => {
-						const newSettings = {
-							...settings,
-							showPlot: false,
-						};
-						setSettings(newSettings);
-					}}
 				></BoardScoreTable>
 				{afterTableElement}
 				<button
@@ -255,4 +236,16 @@ function setInitialAttributes(definition: GameDef, darkMode: boolean) {
 	callIfArgIsPresent(definition.primaryColor, StyleUtils.setPrimaryColor);
 	callIfArgIsPresent(definition.secondaryColor, StyleUtils.setSecondaryColor);
 	callIfArgIsPresent(definition.fontFamily, StyleUtils.setFontFamily);
+}
+
+function fillPlayerNames(playerNames: string[], playerSize: number): string[] {
+	const newPlayers: string[] = [];
+	for (let i = 0; i < playerSize; i++) {
+		let name = playerNames[i];
+		if (!name || name === '') {
+			name = `P${i + 1}`;
+		}
+		newPlayers.push(name);
+	}
+	return newPlayers;
 }
