@@ -11,7 +11,12 @@ export default class GameStorage {
 		if (state === null) {
 			return null;
 		}
-		return fromString(state);
+		try {
+			return fromString(state);
+		} catch (e) {
+			console.error('Error parsing state data:', e);
+			return null;
+		}
 	}
 
 	private static getStorageKeyFromTitle(

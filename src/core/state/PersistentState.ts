@@ -96,6 +96,17 @@ export abstract class PersistentState<T extends object> {
 		return JSON.parse(dataString);
 	}
 
+	public loadFromString(dataString: string): void {
+		try {
+			const state = this.stringToData(dataString);
+			if (state) {
+				this.setData(state);
+			}
+		} catch (e) {
+			console.error('Error loading state from string:', e);
+		}
+	}
+
 	//** END PUBLIC */
 
 	//** START PROTECTED */

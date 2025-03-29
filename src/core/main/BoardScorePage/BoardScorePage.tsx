@@ -15,6 +15,7 @@ import {
 	useGameState,
 } from '../GameDataProvider';
 import PlotDisplay from '../../components/PlotDisplay/PlotDisplay';
+import { GameState } from '../../state/GameState';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -85,6 +86,16 @@ export default function BoardScorePage({
 				iconClass: 'bi bi-box-arrow-up',
 				onClick: print,
 			},
+			/* {
+				label: 'QR Code',
+				iconClass: 'bi bi-qr-code',
+				onClick: print, //TODO
+			}, */
+			{
+				label: 'Share',
+				iconClass: 'bi bi-link-45deg',
+				onClick: () => shareStateViaURL(state),
+			},
 			{
 				label: 'Rules',
 				iconClass: 'bi bi-book',
@@ -99,7 +110,7 @@ export default function BoardScorePage({
 				onClick: () => settings.toggleShowPlot(),
 			},
 			{
-				label: 'Clear Table',
+				label: 'Clear',
 				iconClass: 'bi bi-x-circle',
 				onClick: () => {
 					if (onClear) {
@@ -224,6 +235,24 @@ function TableHeading({ definition }: { definition: GameDef }) {
 			{heading}
 		</a>
 	);
+}
+
+function shareStateViaURL(state: GameState) {
+	const stateString = state.dataToString();
+
+	let currUrl = window.location.href;
+	if (!currUrl.endsWith('/')) {
+		currUrl = currUrl + '/';
+	}
+	currUrl = currUrl + 'share/' + stateString;
+	// copy to clipboard
+
+	const el = document.createElement('textarea');
+	el.value = currUrl;
+	document.body.appendChild(el);
+	el.select();
+	document.execCommand('copy');
+	document.body.removeChild(el);
 }
 
 function setInitialAttributes(definition: GameDef, darkMode: boolean) {

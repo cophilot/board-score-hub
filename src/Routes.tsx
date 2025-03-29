@@ -19,7 +19,7 @@ function Routes() {
 							key={game.definition.title}
 							path={`/game/${StringUtils.gameNameToPath(
 								game.definition.title,
-							)}`}
+							)}/*`}
 							Component={game.view}
 						/>
 					))}

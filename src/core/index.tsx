@@ -28,8 +28,20 @@ export default function BoardScore({
 	isDarkModeEnabled = false,
 	onGameStateChange,
 }: BoardScoreProps) {
+	const getSharedStateString = () => {
+		const url = window.location.href;
+		if (!url.includes('/share/')) {
+			return undefined;
+		}
+		return url.split('/share/')[1];
+	};
+
 	return (
-		<GameDataProvider definition={definition} onStateChange={onGameStateChange}>
+		<GameDataProvider
+			definition={definition}
+			onStateChange={onGameStateChange}
+			sharedGameState={getSharedStateString()}
+		>
 			<BoardScorePage
 				onCellChange={onCellChange}
 				getTotalRow={getTotalRow}

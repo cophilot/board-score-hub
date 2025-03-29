@@ -39,18 +39,24 @@ interface GameDataProps {
 	children: ReactNode;
 	definition: GameDef;
 	onStateChange?: (state: GameState) => void;
+	sharedGameState?: string;
 }
 
 export function GameDataProvider({
 	children,
 	definition,
 	onStateChange,
+	sharedGameState,
 }: GameDataProps) {
 	const getNewGameState = React.useCallback(() => {
 		const state = new GameState(definition);
-		state.load();
+		if (sharedGameState) {
+			state.loadFromString(sharedGameState);
+		} else {
+			state.load();
+		}
 		return state;
-	}, [definition]);
+	}, [definition, sharedGameState]);
 
 	const getNewGameSettings = React.useCallback(() => {
 		const sett = new GameSettings(definition.title);

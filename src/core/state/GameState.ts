@@ -17,6 +17,10 @@ const defaultGameStateData: GameStateData = {
 	activatedExtension: [],
 };
 
+const SEPARATOR = '|';
+const ARRAY_SEPARATOR = ',';
+const INLINE_ARRAY_SEPARATOR = ';';
+
 /**
  * Class representing the state of a game.
  * The state is persisted in local storage.
@@ -40,6 +44,41 @@ export class GameState extends PersistentState<GameStateData> {
 
 	protected override createNewState(): GameState {
 		return new GameState();
+	}
+
+	public override dataToString(): string {
+		const flattenMatrix = this.data.tableMatrix.map((row) =>
+			row.join(INLINE_ARRAY_SEPARATOR),
+		);
+
+		const str = joinStringArray(
+			SEPARATOR,
+			this.data.gameTitle,
+			this.data.currPlayerSize.toString(),
+			this.data.playerNames.join(ARRAY_SEPARATOR),
+			flattenMatrix.join(ARRAY_SEPARATOR),
+			this.data.activatedExtension.join(ARRAY_SEPARATOR),
+		);
+
+		return encodeURIComponent(str);
+	}
+
+	public override stringToData(state: string): GameStateData {
+		state = decodeURIComponent(state);
+		const parts = state.split(SEPARATOR);
+		if (parts.length !== 5) {
+			throw new Error('Invalid state format');
+		}
+
+		return {
+			gameTitle: parts[0],
+			currPlayerSize: parseInt(parts[1]),
+			playerNames: parts[2].split(ARRAY_SEPARATOR),
+			tableMatrix: parts[3]
+				.split(ARRAY_SEPARATOR)
+				.map((row) => row.split(INLINE_ARRAY_SEPARATOR).map(Number)),
+			activatedExtension: parts[4].split(ARRAY_SEPARATOR),
+		};
 	}
 
 	//** START GETTER/SETTER */
@@ -135,6 +174,10 @@ export class GameState extends PersistentState<GameStateData> {
 }
 
 //** START HELPER FUNCTIONS */
+
+function joinStringArray(separator: string, ...array: string[]): string {
+	return array.join(separator);
+}
 
 /**
  * Fills the data with default values.
