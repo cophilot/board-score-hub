@@ -18,5 +18,5 @@
 
 # IMPORTANT: Lines starting with a . are auto generated and should not be changed.
 
-description: A default template for a new react-component
-path: src/api/$$name.pascal$$
+description: A new component for the core
+path: src/core/components/$$name.pascal$$

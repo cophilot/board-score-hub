@@ -16,6 +16,8 @@ import {
 } from '../GameDataProvider';
 import PlotDisplay from '../../components/PlotDisplay/PlotDisplay';
 import { GameState } from '../../state/GameState';
+import PopUp from '../../components/PopUp/PopUp';
+import { QRCode } from 'react-qrcode-logo';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -86,11 +88,11 @@ export default function BoardScorePage({
 				iconClass: 'bi bi-box-arrow-up',
 				onClick: print,
 			},
-			/* {
+			{
 				label: 'QR Code',
 				iconClass: 'bi bi-qr-code',
-				onClick: print, //TODO
-			}, */
+				onClick: () => settings.setShowQrCode(true),
+			},
 			{
 				label: 'Share',
 				iconClass: 'bi bi-link-45deg',
@@ -137,6 +139,15 @@ export default function BoardScorePage({
 	return (
 		<>
 			<div className="board-score-page">
+				<PopUp
+					isVisible={settings.getShowQrCode()}
+					onClose={() => settings.setShowQrCode(false)}
+				>
+					<QRCode
+						value={stateToUrl(state)}
+						style={{ width: '80%', height: 'auto', maxWidth: '300px' }}
+					/>
+				</PopUp>
 				<GameMenu buttonDefinitions={buttonDefinitions} />
 				{settings.getShowPlot() && (
 					<PlotDisplay
@@ -237,16 +248,18 @@ function TableHeading({ definition }: { definition: GameDef }) {
 	);
 }
 
-function shareStateViaURL(state: GameState) {
+function stateToUrl(state: GameState) {
 	const stateString = state.dataToString();
 
 	let currUrl = window.location.href;
 	if (!currUrl.endsWith('/')) {
 		currUrl = currUrl + '/';
 	}
-	currUrl = currUrl + 'share/' + stateString;
-	// copy to clipboard
+	return currUrl + 'share/' + stateString;
+}
 
+function shareStateViaURL(state: GameState) {
+	const currUrl = stateToUrl(state);
 	const el = document.createElement('textarea');
 	el.value = currUrl;
 	document.body.appendChild(el);

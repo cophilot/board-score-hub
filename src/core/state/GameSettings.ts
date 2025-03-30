@@ -3,11 +3,13 @@ import { PersistentState } from './PersistentState';
 export interface GameSettingsData {
 	showHelp: boolean;
 	showPlot: boolean;
+	showQrCode: boolean;
 }
 
 export const defaultSettings: GameSettingsData = {
 	showHelp: false,
 	showPlot: false,
+	showQrCode: false,
 };
 
 /**
@@ -54,6 +56,15 @@ export class GameSettings extends PersistentState<GameSettingsData> {
 
 	public setShowPlot(show: boolean): void {
 		this.data.showPlot = show;
+		this.emitChange(true);
+	}
+
+	public getShowQrCode(): boolean {
+		return this.data.showQrCode;
+	}
+
+	public setShowQrCode(show: boolean): void {
+		this.data.showQrCode = show;
 		this.emitChange(true);
 	}
 	//** END GETTER/SETTER */
