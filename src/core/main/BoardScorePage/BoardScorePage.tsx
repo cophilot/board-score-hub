@@ -143,10 +143,14 @@ export default function BoardScorePage({
 					isVisible={settings.getShowQrCode()}
 					onClose={() => settings.setShowQrCode(false)}
 				>
-					<QRCode
-						value={stateToUrl(state)}
-						style={{ width: '80%', height: 'auto', maxWidth: '300px' }}
-					/>
+					<div>
+						<h1>{definition.title}</h1>
+						<h2>{date}</h2>
+						<QRCode
+							value={stateToUrl(state)}
+							style={{ width: '80%', height: 'auto', maxWidth: '300px' }}
+						/>
+					</div>
 				</PopUp>
 				<GameMenu buttonDefinitions={buttonDefinitions} />
 				{settings.getShowPlot() && (
