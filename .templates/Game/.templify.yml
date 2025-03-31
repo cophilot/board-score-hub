@@ -28,3 +28,10 @@ snippets:
     file: src/allGames.ts
     content: "import $$name.p$$ from './games/$$name.k$$/main';"
     before: true
+vars:
+  - url()
+  - rulesUrl()
+  - backgroundColor(white)
+  - fontColor(black)
+  - primaryColor(red)
+  - secondaryColor(blue)
