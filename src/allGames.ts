@@ -21,11 +21,13 @@ import { GameWithView } from './core/types/GameWithView';
 import Cascadia from './games/cascadia/main';
 import PlanetUnknown from './games/planet-unknown/main';
 import Seti from './games/seti/main';
+import ThreeChapters from './games/three-chapters/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		ThreeChapters,
 		Seti,
 		PlanetUnknown,
 		Everdell,
