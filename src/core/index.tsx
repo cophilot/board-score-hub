@@ -2,6 +2,7 @@ import BoardScorePage from './main/BoardScorePage/BoardScorePage';
 import { GameDataProvider } from './main/GameDataProvider';
 import { GameDef } from './types/GameDef';
 import { GameState } from './state/GameState';
+import { getSharedStateUrlSeparator, isSharedState } from './utils/functions';
 
 interface BoardScoreProps {
 	definition: GameDef;
@@ -29,11 +30,11 @@ export default function BoardScore({
 	onGameStateChange,
 }: BoardScoreProps) {
 	const getSharedStateString = () => {
-		const url = window.location.href;
-		if (!url.includes('/share/')) {
+		if (!isSharedState()) {
 			return undefined;
 		}
-		return url.split('/share/')[1];
+		const url = window.location.href;
+		return url.split(getSharedStateUrlSeparator())[1];
 	};
 
 	return (

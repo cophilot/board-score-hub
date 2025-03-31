@@ -18,6 +18,7 @@ import PlotDisplay from '../../components/PlotDisplay/PlotDisplay';
 import { GameState } from '../../state/GameState';
 import PopUp from '../../components/PopUp/PopUp';
 import { QRCode } from 'react-qrcode-logo';
+import { isSharedState } from '../../utils/functions';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -171,9 +172,6 @@ export default function BoardScorePage({
 				<h2 className="print-show">
 					<i>{date}</i>
 				</h2>
-				{definition.playerSizes.length > 1 && (
-					<h2 className="print-hide">Players</h2>
-				)}
 				<PlayerSwitch
 					playerSizes={definition.playerSizes}
 					initPlayerSize={state.getCurrPlayerSize()}
@@ -186,6 +184,24 @@ export default function BoardScorePage({
 					getTotalRow={getTotalRow}
 				></BoardScoreTable>
 				{afterTableElement}
+				{isSharedState() && (
+					<div className="print-hide">
+						<h2>
+							<i>
+								You are currently watching a shared game state.
+								<br />
+								Therefore, you can not change the table.
+							</i>
+						</h2>
+						<button
+							className="btn selected nav-btn print-hide"
+							onClick={exitSharedState}
+						>
+							<i className="bi bi-box-arrow-left"></i>
+							Exit
+						</button>
+					</div>
+				)}
 				<button
 					className="btn selected nav-btn print-hide"
 					onClick={() => {
@@ -202,6 +218,13 @@ export default function BoardScorePage({
 			</div>
 		</>
 	);
+}
+
+function exitSharedState() {
+	const currUrl = window.location.href;
+	const newUrl = currUrl.split('/share/')[0];
+	window.history.pushState({}, '', newUrl);
+	window.location.reload();
 }
 
 /**

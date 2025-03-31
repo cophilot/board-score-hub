@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './NumInput.scss';
 import NumPad from '../NumPad/NumPad';
+import { isSharedState } from '../../utils/functions';
 import {
 	useNumInputFocus,
 	useNumInputLooseFocus,
@@ -60,6 +61,10 @@ function NumInput({
 		setShowNumPad(false);
 		lostFocus();
 	};
+
+	if (isSharedState()) {
+		return <div className="NumInput">{num !== 0 && num}</div>;
+	}
 
 	return (
 		<>

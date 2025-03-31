@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './PlayerSwitch.scss';
+import { isSharedState } from '../../utils/functions';
 
 interface PlayerSwitchProps {
 	playerSizes?: number[];
@@ -22,12 +23,13 @@ function PlayerSwitch({
 	const [currentPlayerSize, setCurrentPlayerSize] = useState(
 		initPlayerSize || minPlayerSize,
 	);
-	if (!playerSizes || playerSizes.length <= 1) {
+	if (!playerSizes || playerSizes.length <= 1 || isSharedState()) {
 		return null;
 	}
 
 	return (
 		<>
+			<h2 className="print-hide">Players</h2>
 			<div className="player-switch print-hide">
 				{playerSizes.map((size) => (
 					<button
