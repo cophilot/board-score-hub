@@ -11,6 +11,8 @@ export default function getDefinition(): GameDef {
 		url: 'https://boardgamegeek.com/boardgame/423517/3-chapters',
 		rulesUrl:
 			'https://blog.amigo-spiele.de/content/ap/rule/02451-GB-AmigoRule.pdf',
+		banner:
+			'https://wallpaperswide.com/download/fairytale_cottage_painting-wallpaper-960x540.jpg',
 		bgColor: '#f0e1c8',
 		fontColor: '#000',
 		primaryColor: '#af3838',
