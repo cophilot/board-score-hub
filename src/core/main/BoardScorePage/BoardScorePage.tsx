@@ -19,6 +19,7 @@ import { GameState } from '../../state/GameState';
 import PopUp from '../../components/PopUp/PopUp';
 import { QRCode } from 'react-qrcode-logo';
 import { isSharedState } from '../../utils/functions';
+import IconButton from '../../components/IconButton/IconButton';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -193,24 +194,20 @@ export default function BoardScorePage({
 								Therefore, you can not change the table.
 							</i>
 						</h2>
-						<button
-							className="btn selected nav-btn print-hide"
-							onClick={exitSharedState}
-						>
-							<i className="bi bi-box-arrow-left"></i>
+						<IconButton icon="bi bi-box-arrow-left" onClick={exitSharedState}>
 							Exit
-						</button>
+						</IconButton>
 					</div>
 				)}
-				<button
-					className="btn selected nav-btn print-hide"
+				<IconButton
+					icon="bi-house"
+					cls="print-hide"
 					onClick={() => {
 						navigate('/');
 					}}
 				>
-					<i className="bi bi-house"></i>
 					Home
-				</button>
+				</IconButton>
 				<h2 className="print-show">
 					<i>board-score-hub.philipp-bonin.com</i>
 				</h2>

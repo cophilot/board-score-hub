@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './GameMenu.scss';
+import IconButton from '../IconButton/IconButton';
 
 export type ButtonDefinition = {
 	label: string;
@@ -46,14 +47,13 @@ export function GameMenu({ buttonDefinitions }: GameMenuProps) {
 					return null;
 				}
 				return (
-					<button
+					<IconButton
 						key={index}
-						className="btn selected nav-btn print-hide"
+						icon={buttonDef.iconClass}
 						onClick={() => onClickWrapper(buttonDef.onClick)}
 					>
-						{buttonDef.iconClass && <i className={buttonDef.iconClass}></i>}
 						{buttonDef.label}
-					</button>
+					</IconButton>
 				);
 			})}
 			<button
