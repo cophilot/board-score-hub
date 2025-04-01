@@ -17,20 +17,30 @@ interface IconButtonProps {
 function IconButton({
 	children,
 	onClick,
-	icon = '',
+	icon,
 	cls = '',
 	fill = true,
 }: IconButtonProps) {
-	if (!icon.startsWith('bi ')) {
+	if (icon && !icon.startsWith('bi ')) {
 		icon = 'bi ' + icon;
 	}
+
+	const isDoubleLine = children.toString().includes('\n');
+
 	return (
 		<button
-			className={'btn nav-btn ' + (fill ? 'selected ' : '') + cls}
+			className={'icon-button btn nav-btn ' + (fill ? 'selected ' : '') + cls}
 			onClick={onClick}
 		>
 			{icon && <i className={icon}></i>}
-			{children}
+			{isDoubleLine ? (
+				<span className="double-line">
+					<span>{children.toString().split('\n')[0]}</span>
+					<span>{children.toString().split('\n')[1]}</span>
+				</span>
+			) : (
+				children
+			)}
 		</button>
 	);
 }

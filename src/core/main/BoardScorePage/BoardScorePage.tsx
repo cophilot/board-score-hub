@@ -114,7 +114,7 @@ export default function BoardScorePage({
 				onClick: () => settings.toggleShowPlot(),
 			},
 			{
-				label: 'Clear',
+				label: 'Clear\nTable',
 				iconClass: 'bi bi-x-circle',
 				onClick: () => {
 					if (onClear) {
