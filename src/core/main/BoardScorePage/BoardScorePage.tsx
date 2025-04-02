@@ -186,7 +186,7 @@ export default function BoardScorePage({
 				></BoardScoreTable>
 				{afterTableElement}
 				{isSharedState() && (
-					<div className="print-hide">
+					<div className="print-hide ver">
 						<h2>
 							<i>
 								You are currently watching a shared game state.

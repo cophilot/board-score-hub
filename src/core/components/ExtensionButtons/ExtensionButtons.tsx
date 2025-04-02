@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './ExtensionButtons.scss';
 import ToggleButton from '../ToggleButton/ToggleButton';
 import { ExtensionDefCollection } from '../../types/ExtensionDef';
+import { isSharedState } from '../../utils/functions';
 
 interface ExtensionButtonsProps {
 	extensionDefinition?: ExtensionDefCollection; // The extension definition
@@ -49,6 +50,10 @@ function ExtensionButtons({
 		callback && callback(extensionName);
 		setSelectedExtensions(newSelectedExtensions);
 	};
+
+	if (isSharedState()) {
+		return null;
+	}
 
 	return (
 		<div className="print-hide">
