@@ -1,0 +1,31 @@
+.notification {
+	font-family: 'Ubuntu';
+	position: fixed;
+	background-color: var(--primary-color);
+	width: 90%;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 10px;
+	z-index: 100000;
+	border-radius: 5px;
+	padding: 10px 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	color: var(--bg-color);
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	flex-direction: column;
+	animation: slideFromTop 0.5s ease-in-out;
+	* {
+		margin: 0;
+	}
+}
+
+@keyframes slideFromTop {
+	0% {
+		transform: translateY(-100%) translateX(-50%);
+	}
+	100% {
+		transform: translateY(0) translateX(-50%);
+	}
+}
