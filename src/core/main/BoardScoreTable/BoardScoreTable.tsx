@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import './BoardScoreTable.scss';
 import { getFunctionForWinMode, WinMode } from '../../types/WinMode';
 import ExtensionButtons from '../../components/ExtensionButtons/ExtensionButtons';
@@ -12,6 +12,9 @@ import {
 	useGameSettings,
 	useGameState,
 } from '../GameDataProvider';
+import PopUp from '../../components/PopUp/PopUp';
+import { GameState } from '../../state/GameState';
+import { GameSettings } from '../../state/GameSettings';
 
 interface BoardScoreTableProps {
 	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
@@ -161,6 +164,12 @@ function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
 	return (
 		<NumInputFocusManager>
 			<>
+				<RankingPopUp
+					definition={definition}
+					state={state}
+					settings={settings}
+					totalRow={totalRow}
+				/>
 				<ExtensionButtons
 					extensionDefinition={definition.extensions}
 					initialSelectedExtensions={state.getActivatedExtension()}
@@ -252,6 +261,74 @@ function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
 	);
 }
 export default BoardScoreTable;
+
+function RankingPopUp({
+	definition,
+	state,
+	settings,
+	totalRow,
+}: {
+	definition: GameDef;
+	state: GameState;
+	settings: GameSettings;
+	totalRow: number[];
+}) {
+	const playerValues = useMemo(() => {
+		const playerValues: { player: string; score: number }[] = [];
+		totalRow.forEach((_, playerIndex) => {
+			let playerName = state.getPlayerNamesAt(playerIndex);
+			if ([null, undefined, ''].includes(playerName)) {
+				playerName = 'P' + (playerIndex + 1);
+			}
+			playerValues.push({
+				player: playerName,
+				score: totalRow[playerIndex],
+			});
+		});
+
+		const winMode = definition.winMode || WinMode.MOST;
+
+		playerValues.sort((a, b) => {
+			if (winMode === WinMode.MOST) {
+				return b.score - a.score;
+			}
+			return a.score - b.score;
+		});
+		return playerValues;
+	}, [definition, state, totalRow]);
+
+	const getFontSize = (index: number) => {
+		if (index > 3) {
+			index = 3;
+		}
+		return 32 - index * 4 + 'px';
+	};
+
+	return (
+		<PopUp
+			isVisible={settings.getShowRanking()}
+			onClose={() => settings.setShowRanking(false)}
+		>
+			<div className="ver">
+				<h1>{definition.title}</h1>
+				<div className="ver">
+					{playerValues.map((playerValue, index) => (
+						<div
+							key={index}
+							className="ranking-row"
+							style={{
+								fontSize: getFontSize(index),
+								marginBottom: '5px',
+							}}
+						>
+							<b>{index + 1}.</b> {playerValue.player} - {playerValue.score}
+						</div>
+					)) || <div>No players</div>}
+				</div>
+			</div>
+		</PopUp>
+	);
+}
 
 type InputCellProps = {
 	row: RowDef;

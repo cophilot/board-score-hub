@@ -20,6 +20,7 @@ import PopUp from '../../components/PopUp/PopUp';
 import { QRCode } from 'react-qrcode-logo';
 import { isSharedState } from '../../utils/functions';
 import IconButton from '../../components/IconButton/IconButton';
+import { GameSettings } from '../../state/GameSettings';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -56,7 +57,6 @@ export default function BoardScorePage({
 
 	//** START CONSTANTS **//
 	const navigate = useNavigate();
-	const date = new Date().toLocaleDateString();
 	const showHelpButton = definition.rows.some(
 		(row: RowDef) => row.icon || row.description,
 	);
@@ -114,6 +114,11 @@ export default function BoardScorePage({
 				onClick: () => settings.toggleShowPlot(),
 			},
 			{
+				label: 'Rank',
+				iconClass: 'bi-list-ol',
+				onClick: () => settings.setShowRanking(true),
+			},
+			{
 				label: 'Clear\nTable',
 				iconClass: 'bi bi-x-circle',
 				onClick: () => {
@@ -141,19 +146,11 @@ export default function BoardScorePage({
 	return (
 		<>
 			<div className="board-score-page">
-				<PopUp
-					isVisible={settings.getShowQrCode()}
-					onClose={() => settings.setShowQrCode(false)}
-				>
-					<div>
-						<h1>{definition.title}</h1>
-						<h2>{date}</h2>
-						<QRCode
-							value={stateToUrl(state)}
-							style={{ width: '80%', height: 'auto', maxWidth: '300px' }}
-						/>
-					</div>
-				</PopUp>
+				<QRCodePopUp
+					definition={definition}
+					state={state}
+					settings={settings}
+				/>
 				<GameMenu buttonDefinitions={buttonDefinitions} />
 				{settings.getShowPlot() && (
 					<PlotDisplay
@@ -171,7 +168,7 @@ export default function BoardScorePage({
 				{logo}
 				<TableHeading definition={definition} />
 				<h2 className="print-show">
-					<i>{date}</i>
+					<i>{getDateString()}</i>
 				</h2>
 				<PlayerSwitch
 					playerSizes={definition.playerSizes}
@@ -214,6 +211,30 @@ export default function BoardScorePage({
 				{children}
 			</div>
 		</>
+	);
+}
+
+interface GameManagementProps {
+	definition: GameDef;
+	state: GameState;
+	settings: GameSettings;
+}
+
+function QRCodePopUp({ definition, state, settings }: GameManagementProps) {
+	return (
+		<PopUp
+			isVisible={settings.getShowQrCode()}
+			onClose={() => settings.setShowQrCode(false)}
+		>
+			<div>
+				<h1>{definition.title}</h1>
+				<h2>{getDateString()}</h2>
+				<QRCode
+					value={stateToUrl(state)}
+					style={{ width: '80%', height: 'auto', maxWidth: '300px' }}
+				/>
+			</div>
+		</PopUp>
 	);
 }
 
@@ -314,4 +335,8 @@ function fillPlayerNames(playerNames: string[], playerSize: number): string[] {
 		newPlayers.push(name);
 	}
 	return newPlayers;
+}
+
+function getDateString(): string {
+	return new Date().toLocaleDateString();
 }
