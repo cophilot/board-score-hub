@@ -1,17 +1,14 @@
 import { WinMode } from '../../core/types/WinMode';
 import FontUtils from '../../core/utils/FontUtils';
-import eggIcon from './assets/eggs.png';
-import resourceIcon from './assets/resources.png';
-import roundGoalIcon from './assets/round-goals.png';
-import bonusIcon from './assets/bonus.png';
-import tuckedCardIcon from './assets/tucked-card.png';
-import birdIcon from './assets/bird.png';
-import nectarIcon from './assets/nectar.png';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Wingspan';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Wingspan',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/266192/wingspan',
 		rulesUrl: 'https://www.szellemlovas.hu/szabalyok/fesztavEN.pdf',
 		banner: 'https://cdn.mos.cms.futurecdn.net/frHNesBiPKkAJJ2aPrWAZD.jpg',
@@ -26,32 +23,32 @@ export default function getDefinition(): GameDef {
 			{
 				name: 'Birds',
 				description: 'Birds in the players collection',
-				icon: birdIcon,
+				icon: pu.getAbsoluteImagePath('bird'),
 			},
 			{
 				name: 'Bonus cards',
 				description: 'Bonus cards in the players collection',
-				icon: bonusIcon,
+				icon: pu.getAbsoluteImagePath('bonus'),
 			},
 			{
 				name: 'End-of-round goals',
-
-				icon: roundGoalIcon,
+				description: 'Points earned from end-of-round goals',
+				icon: pu.getAbsoluteImagePath('round-goals'),
 			},
 			{
 				name: 'Eggs on cards',
-				description: '1 point per egg on cards',
-				icon: eggIcon,
+				description: '1 point per egg on players cards',
+				icon: pu.getAbsoluteImagePath('eggs'),
 			},
 			{
 				name: 'Food on cards',
 				description: '1 point per food token on cards',
-				icon: resourceIcon,
+				icon: pu.getAbsoluteImagePath('resources'),
 			},
 			{
 				name: 'Tucked cards',
 				description: '1 point per card tucked under another card',
-				icon: tuckedCardIcon,
+				icon: pu.getAbsoluteImagePath('tucked-card'),
 			},
 		],
 		extensions: {
@@ -62,7 +59,7 @@ export default function getDefinition(): GameDef {
 						name: 'Nectar',
 						description:
 							'5 points for the player with the most nectar and 2 points for the player with the second most nectar per region',
-						icon: nectarIcon,
+						icon: pu.getAbsoluteImagePath('nectar'),
 					},
 				],
 			},

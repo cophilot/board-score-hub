@@ -1,16 +1,14 @@
 import { WinMode } from '../../core/types/WinMode';
 import FontUtils from '../../core/utils/FontUtils';
-import awardsIcon from './assets/awards.png';
-import milestonesIcon from './assets/milestones.png';
-import treeIcon from './assets/tree.png';
-import cityIcon from './assets/city.png';
-import terraformingRatingIcon from './assets/terraforming-rating.png';
-import victoryPointsIcon from './assets/victory-points.png';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Terraforming Mars';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Terraforming Mars',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/167791/terraforming-mars',
 		rulesUrl:
 			'https://cdn.1j1ju.com/medias/13/3f/fb-terraforming-mars-rule.pdf',
@@ -25,27 +23,27 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Terraforming Rating',
-				icon: terraformingRatingIcon,
+				icon: pu.getAbsoluteImagePath('terraforming-rating'),
 			},
 			{
 				name: 'Milestones',
-				icon: milestonesIcon,
+				icon: pu.getAbsoluteImagePath('milestones'),
 			},
 			{
 				name: 'Awards',
-				icon: awardsIcon,
+				icon: pu.getAbsoluteImagePath('awards'),
 			},
 			{
 				name: 'Greenery',
-				icon: treeIcon,
+				icon: pu.getAbsoluteImagePath('tree'),
 			},
 			{
 				name: 'City',
-				icon: cityIcon,
+				icon: pu.getAbsoluteImagePath('city'),
 			},
 			{
 				name: 'Victory Points',
-				icon: victoryPointsIcon,
+				icon: pu.getAbsoluteImagePath('victory-points'),
 			},
 		],
 	};

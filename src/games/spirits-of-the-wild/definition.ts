@@ -1,13 +1,13 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
-import owl from './assets/owl.png';
-import rabbit from './assets/rabbit.png';
-import beaver from './assets/beaver.png';
-import turtle from './assets/turtle.png';
-import salmon from './assets/salmon.png';
+import PathUtils from '../../core/utils/PathUtils';
+
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Spirits of the Wild';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Spirits of the Wild',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/256606/spirits-of-the-wild',
 		rulesUrl:
 			'https://s3.amazonaws.com/geekdo-files.com/bgg222578?response-content-disposition=inline%3B%20filename%3D%22SpiritsOfTheWild-Rules-DOM-03-Digital.pdf%22&response-content-type=application%2Fpdf&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJYFNCT7FKCE4O6TA%2F20241019%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241019T181306Z&X-Amz-SignedHeaders=host&X-Amz-Expires=120&X-Amz-Signature=93a304c53762c1f6cd4d9eedfbccf51a7cd9487d4b5d0697fedd401a37473efc',
@@ -20,23 +20,23 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Owl',
-				icon: owl,
+				icon: pu.getAbsoluteImagePath('owl'),
 			},
 			{
 				name: 'Rabbit',
-				icon: rabbit,
+				icon: pu.getAbsoluteImagePath('rabbit'),
 			},
 			{
 				name: 'Beaver',
-				icon: beaver,
+				icon: pu.getAbsoluteImagePath('beaver'),
 			},
 			{
 				name: 'Salmon',
-				icon: salmon,
+				icon: pu.getAbsoluteImagePath('salmon'),
 			},
 			{
 				name: 'Turtle',
-				icon: turtle,
+				icon: pu.getAbsoluteImagePath('turtle'),
 			},
 		],
 	};

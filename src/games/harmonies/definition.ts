@@ -1,16 +1,14 @@
-import leaf from './assets/leaf.png';
-import stone from './assets/stone.png';
-import flower from './assets/flower.png';
-import house from './assets/house.png';
-import water from './assets/water.png';
-import card from './assets/card.png';
 import { WinMode } from '../../core/types/WinMode';
 import FontUtils from '../../core/utils/FontUtils';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Harmonies';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Harmonies',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/414317/harmonies',
 		rulesUrl:
 			'https://cdn.svc.asmodee.net/production-libellud/uploads/2024/03/LIBELLUD_HARMONIES_RULES_EN-1.pdf',
@@ -25,47 +23,47 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Leaf',
-				icon: leaf,
+				icon: pu.getAbsoluteImagePath('leaf'),
 			},
 			{
 				name: 'Stone',
-				icon: stone,
+				icon: pu.getAbsoluteImagePath('stone'),
 			},
 			{
 				name: 'Flower',
-				icon: flower,
+				icon: pu.getAbsoluteImagePath('flower'),
 			},
 			{
 				name: 'House',
-				icon: house,
+				icon: pu.getAbsoluteImagePath('house'),
 			},
 			{
 				name: 'Water',
-				icon: water,
+				icon: pu.getAbsoluteImagePath('water'),
 			},
 			{
 				name: 'Animal',
-				icon: card,
+				icon: pu.getAbsoluteImagePath('card'),
 			},
 			{
 				name: 'Animal',
-				icon: card,
+				icon: pu.getAbsoluteImagePath('card'),
 			},
 			{
 				name: 'Animal',
-				icon: card,
+				icon: pu.getAbsoluteImagePath('card'),
 			},
 			{
 				name: 'Animal',
-				icon: card,
+				icon: pu.getAbsoluteImagePath('card'),
 			},
 			{
 				name: 'Animal',
-				icon: card,
+				icon: pu.getAbsoluteImagePath('card'),
 			},
 			{
 				name: 'Animal',
-				icon: card,
+				icon: pu.getAbsoluteImagePath('card'),
 			},
 		],
 	};

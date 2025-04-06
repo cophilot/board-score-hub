@@ -1,15 +1,13 @@
 import { WinMode } from '../../core/types/WinMode';
-import cardIcon from './assets/card.png';
-import topIcon from './assets/top.png';
-import downIcon from './assets/down.png';
-import leftIcon from './assets/left.png';
-import rightIcon from './assets/right.png';
-import caveIcon from './assets/cave.png';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Forest Shuffle';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Forest Shuffle',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/391163/forest-shuffle',
 		rulesUrl:
 			'https://lookout-spiele.de/upload/en_forrestshuffle.html_Forest_Shuffle_175_Rules_EN_WEB_230516.pdf',
@@ -22,27 +20,27 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Tree',
-				icon: cardIcon,
+				icon: pu.getAbsoluteImagePath('card'),
 			},
 			{
 				name: 'Cards top',
-				icon: topIcon,
+				icon: pu.getAbsoluteImagePath('top'),
 			},
 			{
 				name: 'Cards right',
-				icon: rightIcon,
+				icon: pu.getAbsoluteImagePath('right'),
 			},
 			{
 				name: 'Cards below',
-				icon: downIcon,
+				icon: pu.getAbsoluteImagePath('down'),
 			},
 			{
 				name: 'Cards left',
-				icon: leftIcon,
+				icon: pu.getAbsoluteImagePath('left'),
 			},
 			{
 				name: 'Cave',
-				icon: caveIcon,
+				icon: pu.getAbsoluteImagePath('cave'),
 			},
 		],
 	};

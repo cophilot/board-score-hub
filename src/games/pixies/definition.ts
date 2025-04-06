@@ -1,13 +1,13 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
-import validatedCards from './assets/validated-cards.png';
-import spiral from './assets/spiral.png';
-import cross from './assets/cross.png';
-import colorZone from './assets/color-zone.png';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Pixies';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Pixies',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/411875/pixies',
 		rulesUrl: 'https://studiobombyx.com/assets/PIXIES_rulebook_EN.pdf',
 		banner:
@@ -22,24 +22,24 @@ export default function getDefinition(): GameDef {
 			{
 				id: 'round-1',
 				name: 'Validated Cards',
-				icon: validatedCards,
+				icon: pu.getAbsoluteImagePath('validated-cards'),
 				description:
 					'Each validated card earns as many points as the number on it',
 			},
 			{
 				name: 'Spiral',
-				icon: spiral,
+				icon: pu.getAbsoluteImagePath('spiral'),
 				description: 'Each spiral earns 1 point',
 			},
 			{
 				name: 'Cross',
-				icon: cross,
+				icon: pu.getAbsoluteImagePath('cross'),
 				description: 'Each cross makes the player lose 1 point',
 				negative: true,
 			},
 			{
 				name: 'Color Zone',
-				icon: colorZone,
+				icon: pu.getAbsoluteImagePath('color-zone'),
 				description:
 					'A color zone is made up of at least 2 cards of the same color touching along a side. Diagonals do not count. Each card that is part of the player´s largest zone earns: 2 points in round 1, 3 points in round 2 and 4 points in round 3',
 			},

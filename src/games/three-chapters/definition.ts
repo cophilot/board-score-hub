@@ -1,13 +1,14 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
 import FontUtils from '../../core/utils/FontUtils';
-import starImg from './assets/star.png';
-import heartImg from './assets/heart.png';
-import gemImg from './assets/gem.png';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = '3 Chapters';
+	const pu = new PathUtils(gameTitle, 'three-chapters');
+
 	return {
-		title: '3 Chapters',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/423517/3-chapters',
 		rulesUrl:
 			'https://blog.amigo-spiele.de/content/ap/rule/02451-GB-AmigoRule.pdf',
@@ -25,18 +26,18 @@ export default function getDefinition(): GameDef {
 			{
 				name: 'Stars',
 				description: '2 points for each  you earned during the game',
-				icon: starImg,
+				icon: pu.getAbsoluteImagePath('star'),
 			},
 
 			{
 				name: 'Hearts',
 				description: '1 point for each heart you earned during the game',
-				icon: heartImg,
+				icon: pu.getAbsoluteImagePath('heart'),
 			},
 			{
 				name: 'Gems',
 				description: '1 point for each pair of gems you earned during the game',
-				icon: gemImg,
+				icon: pu.getAbsoluteImagePath('gem'),
 			},
 		],
 	};

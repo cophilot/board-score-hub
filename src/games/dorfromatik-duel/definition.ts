@@ -1,21 +1,13 @@
-import tree from './assets/tree.png';
-import field from './assets/field.png';
-import house from './assets/house.png';
-import rail from './assets/rail.png';
-import river from './assets/river.png';
-import border from './assets/border.png';
-import six from './assets/six.png';
-import flagGreen from './assets/flag-green.png';
-import flagYellow from './assets/flag-yellow.png';
-import flagRed from './assets/flag-red.png';
-import longRail from './assets/longest-rail.png';
-import longRiver from './assets/longest-river.png';
 import { WinMode } from '../../core/types/WinMode';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Dorfromatik: Duel';
+	const pu = new PathUtils(gameTitle, 'dorfromatik-duel');
+
 	return {
-		title: 'Dorfromatik: Duel',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/395364/dorfromantik-the-duel',
 		rulesUrl:
 			'https://pegasus.de/media/pdf/e9/7c/e3/4250231736070_Dorfromantik_Duel_Rules_EN_Web.pdf',
@@ -26,51 +18,51 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Tree',
-				icon: tree,
+				icon: pu.getAbsoluteImagePath('tree'),
 			},
 			{
 				name: 'Field',
-				icon: field,
+				icon: pu.getAbsoluteImagePath('field'),
 			},
 			{
 				name: 'House',
-				icon: house,
+				icon: pu.getAbsoluteImagePath('house'),
 			},
 			{
 				name: 'Railway',
-				icon: rail,
+				icon: pu.getAbsoluteImagePath('rail'),
 			},
 			{
 				name: 'River',
-				icon: river,
+				icon: pu.getAbsoluteImagePath('river'),
 			},
 			{
 				name: 'Border',
-				icon: border,
+				icon: pu.getAbsoluteImagePath('border'),
 			},
 			{
 				name: 'Six',
-				icon: six,
+				icon: pu.getAbsoluteImagePath('six'),
 			},
 			{
 				name: 'Flag green',
-				icon: flagGreen,
+				icon: pu.getAbsoluteImagePath('flag-green'),
 			},
 			{
 				name: 'Flag yellow',
-				icon: flagYellow,
+				icon: pu.getAbsoluteImagePath('flag-yellow'),
 			},
 			{
 				name: 'Flag red',
-				icon: flagRed,
+				icon: pu.getAbsoluteImagePath('flag-red'),
 			},
 			{
 				name: 'Longest Railway',
-				icon: longRail,
+				icon: pu.getAbsoluteImagePath('longest-rail'),
 			},
 			{
 				name: 'Longest River',
-				icon: longRiver,
+				icon: pu.getAbsoluteImagePath('longest-river'),
 			},
 		],
 	};

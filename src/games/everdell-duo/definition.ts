@@ -1,14 +1,14 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
 import FontUtils from '../../core/utils/FontUtils';
-import prosperity from './assets/prosperity.png';
-import events from './assets/events.png';
-import cards from './assets/cards.png';
-import pointToken from './assets/point-token.png';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Everdell Duo';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Everdell Duo',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/425005/everdell-duo',
 		rulesUrl:
 			'https://desktopgames.com.ua/games/8869/everdell_duo_rules_eng_compresse.pdf?srsltid=AfmBOoo8BiN6UvWu8VxLB9885KoLNmncqkO4Y-3kbXpLFeX_LM0Mfj5j',
@@ -24,20 +24,20 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Points on Cards',
-				icon: cards,
+				icon: pu.getAbsoluteImagePath('cards'),
 			},
 
 			{
 				name: 'Purple bonus points',
-				icon: prosperity,
+				icon: pu.getAbsoluteImagePath('prosperity'),
 			},
 			{
 				name: 'Points tokens',
-				icon: pointToken,
+				icon: pu.getAbsoluteImagePath('point-token'),
 			},
 			{
 				name: 'Events',
-				icon: events,
+				icon: pu.getAbsoluteImagePath('events'),
 			},
 		],
 	};

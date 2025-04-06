@@ -1,13 +1,13 @@
 import { WinMode } from '../../core/types/WinMode';
-import moodIcon from './assets/mood.png';
-import experienceIcon from './assets/experience.png';
-import researchTokenIcon from './assets/research-tokens.png';
-import trainsIcon from './assets/trains.png';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = "Let's Go! To Japan";
+	const pu = new PathUtils(gameTitle, 'lets-go-to-japan');
+
 	return {
-		title: "Let's Go! To Japan",
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/368173/lets-go-to-japan',
 		rulesUrl:
 			'https://www.alderac.com/wp-content/uploads/2023/03/LetsGoToJapan_Influencer_EN_1P_Rulebook_FINAL-copy.pdf',
@@ -40,19 +40,19 @@ export default function getDefinition(): GameDef {
 			},
 			{
 				name: 'Stress / Happiness Trackers',
-				icon: moodIcon,
+				icon: pu.getAbsoluteImagePath('mood'),
 			},
 			{
 				name: 'Experience',
-				icon: experienceIcon,
+				icon: pu.getAbsoluteImagePath('experience'),
 			},
 			{
 				name: 'Trains',
-				icon: trainsIcon,
+				icon: pu.getAbsoluteImagePath('trains'),
 			},
 			{
 				name: 'Research Tokens',
-				icon: researchTokenIcon,
+				icon: pu.getAbsoluteImagePath('research-tokens'),
 			},
 		],
 	};

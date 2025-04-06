@@ -1,20 +1,13 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
-import captain from './assets/captain.png';
-import colorBonus from './assets/color-bonus.png';
-import duoCards from './assets/duo-cards.png';
-import lighthouse from './assets/lighthouse.png';
-import mermaid from './assets/mermaid.png';
-import octopus from './assets/octopus.png';
-import pinguinColony from './assets/pinguin-colony.png';
-import pinguin from './assets/pinguin.png';
-import sailor from './assets/sailor.png';
-import schoolFish from './assets/school-of-fish.png';
-import shell from './assets/shell.png';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Sea Salt & Paper';
+	const pu = new PathUtils(gameTitle, 'sea-salt-paper');
+
 	return {
-		title: 'Sea Salt & Paper',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/367220/sea-salt-and-paper',
 		rulesUrl:
 			'https://cdn.1j1ju.com/medias/a5/4b/bb-sea-salt-paper-rulebook.pdf',
@@ -30,52 +23,52 @@ export default function getDefinition(): GameDef {
 			{
 				id: 'round-1',
 				name: 'Duo Cards',
-				icon: duoCards,
+				icon: pu.getAbsoluteImagePath('duo-cards'),
 				description: '1 Point / Duo',
 			},
 			{
 				name: 'Shell',
-				icon: shell,
+				icon: pu.getAbsoluteImagePath('shell'),
 			},
 			{
 				name: 'Octopus',
-				icon: octopus,
+				icon: pu.getAbsoluteImagePath('octopus'),
 			},
 			{
 				name: 'Pinguin',
-				icon: pinguin,
+				icon: pu.getAbsoluteImagePath('pinguin'),
 			},
 			{
 				name: 'Sailor',
-				icon: sailor,
+				icon: pu.getAbsoluteImagePath('sailor'),
 			},
 			{
 				name: 'Lighthouse',
-				icon: lighthouse,
+				icon: pu.getAbsoluteImagePath('lighthouse'),
 				description: '1 Point / Boat',
 			},
 			{
 				name: 'School of Fish',
-				icon: schoolFish,
+				icon: pu.getAbsoluteImagePath('school-of-fish'),
 				description: '1 Point / Fish',
 			},
 			{
 				name: 'Pinguin Colony',
-				icon: pinguinColony,
+				icon: pu.getAbsoluteImagePath('pinguin-colony'),
 				description: '2 Points / Pinguin',
 			},
 			{
 				name: 'Captain',
-				icon: captain,
+				icon: pu.getAbsoluteImagePath('captain'),
 				description: '3 Points / Sailor',
 			},
 			{
 				name: 'Mermaid',
-				icon: mermaid,
+				icon: pu.getAbsoluteImagePath('mermaid'),
 			},
 			{
 				name: 'Color Bonus',
-				icon: colorBonus,
+				icon: pu.getAbsoluteImagePath('color-bonus'),
 				description: 'The highest number of cards of the same color.',
 			},
 		],

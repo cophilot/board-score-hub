@@ -1,5 +1,6 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
+import PathUtils from '../../core/utils/PathUtils';
 
 /**
  * This is the definition for the $$name.p$$ game.
@@ -8,8 +9,11 @@ import { WinMode } from '../../core/types/WinMode';
  * @created $$year$$-$$month$$-$$day$$
  */
 export default function getDefinition(): GameDef {
+	const gameTitle = '$$name.p$$';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: '$$name.p$$',
+		title: gameTitle,
 		url: '$$url$$',
 		rulesUrl: '$$rulesUrl$$',
 		bgColor: '$$backgroundColor$$',
@@ -27,7 +31,7 @@ export default function getDefinition(): GameDef {
 
 			{
 				name: 'Row2',
-				icon: 'src/games/$$name.k$$/assets/test.png',
+				icon: pu.getAbsoluteImagePath('row2'),
 			},
 		],
 	};

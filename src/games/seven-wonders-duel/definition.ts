@@ -1,18 +1,14 @@
-import blueCard from './assets/blue-card.png';
-import greenCard from './assets/green-card.png';
-import yellowCard from './assets/yellow-card.png';
-import purpleCard from './assets/purple-card.png';
-import worldWonder from './assets/world-wonder.png';
-import greenChip from './assets/green-chip.png';
-import coins from './assets/coins.png';
-import military from './assets/military.png';
 import { WinMode } from '../../core/types/WinMode';
 import FontUtils from '../../core/utils/FontUtils';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Seven Wonders: Duel';
+	const pu = new PathUtils(gameTitle, 'seven-wonders-duel');
+
 	return {
-		title: 'Seven Wonders: Duel',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/173346/7-wonders-duel',
 		rulesUrl: 'https://cdn.1j1ju.com/medias/1a/ba/6b-7-wonders-duel-rules.pdf',
 		banner:
@@ -26,42 +22,42 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Blue cards',
-				icon: blueCard,
+				icon: pu.getAbsoluteImagePath('blue-card'),
 				bgColor: '#c7f0fc',
 			},
 			{
 				name: 'Green cards',
-				icon: greenCard,
+				icon: pu.getAbsoluteImagePath('green-card'),
 				bgColor: '#d8edd6',
 			},
 			{
 				name: 'Yellow cards',
-				icon: yellowCard,
+				icon: pu.getAbsoluteImagePath('yellow-card'),
 				bgColor: '#fffad9',
 			},
 			{
 				name: 'Purple cards',
-				icon: purpleCard,
+				icon: pu.getAbsoluteImagePath('purple-card'),
 				bgColor: '#d2cce0',
 			},
 			{
 				name: 'World wonders',
-				icon: worldWonder,
+				icon: pu.getAbsoluteImagePath('world-wonder'),
 				bgColor: '#ececed',
 			},
 			{
 				name: 'Progress tokens',
-				icon: greenChip,
+				icon: pu.getAbsoluteImagePath('green-chip'),
 				bgColor: '#d8edd6',
 			},
 			{
 				name: 'Coins',
-				icon: coins,
+				icon: pu.getAbsoluteImagePath('coins'),
 				bgColor: '#fffad9',
 			},
 			{
 				name: 'Military',
-				icon: military,
+				icon: pu.getAbsoluteImagePath('military'),
 				bgColor: '#fad2c5',
 			},
 		],

@@ -1,19 +1,14 @@
-import basicEvents from './assets/basic-events.png';
-import journey from './assets/journey.png';
-import pointToken from './assets/point-token.png';
-import specialEvents from './assets/special-events.png';
-import expedition from './assets/expedition.png';
-import discoveryCard from './assets/discovery-cards.png';
-import village from './assets/village.png';
-import visitor from './assets/visitor.png';
-import prosperity from './assets/prosperity.png';
 import { WinMode } from '../../core/types/WinMode';
 import FontUtils from '../../core/utils/FontUtils';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Everdell';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Everdell',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/199792/everdell',
 		rulesUrl: 'https://cdn.1j1ju.com/medias/c6/cd/89-everdell-rulebook.pdf',
 		banner:
@@ -29,27 +24,27 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Cards in Village',
-				icon: village,
+				icon: pu.getAbsoluteImagePath('village'),
 			},
 			{
 				name: 'Prosperity',
-				icon: prosperity,
+				icon: pu.getAbsoluteImagePath('prosperity'),
 			},
 			{
 				name: 'Point Tokens',
-				icon: pointToken,
+				icon: pu.getAbsoluteImagePath('point-token'),
 			},
 			{
 				name: 'Basic Events',
-				icon: basicEvents,
+				icon: pu.getAbsoluteImagePath('basic-events'),
 			},
 			{
 				name: 'Special Events',
-				icon: specialEvents,
+				icon: pu.getAbsoluteImagePath('special-events'),
 			},
 			{
 				name: 'Journey',
-				icon: journey,
+				icon: pu.getAbsoluteImagePath('journey'),
 			},
 		],
 		extensions: {
@@ -59,7 +54,7 @@ export default function getDefinition(): GameDef {
 						id: 'newleaf',
 						name: 'Vistors',
 						description: 'Points from the visitors challenges',
-						icon: visitor,
+						icon: pu.getAbsoluteImagePath('visitor'),
 					},
 				],
 			},
@@ -69,12 +64,12 @@ export default function getDefinition(): GameDef {
 						id: 'spirecrest',
 						name: 'Expedition',
 						description: 'Points gained from your expedition',
-						icon: expedition,
+						icon: pu.getAbsoluteImagePath('expedition'),
 					},
 					{
 						name: 'Discovery Cards',
 						description: 'Points from your discovery cards',
-						icon: discoveryCard,
+						icon: pu.getAbsoluteImagePath('discovery-cards'),
 					},
 				],
 			},

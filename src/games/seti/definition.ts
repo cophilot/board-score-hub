@@ -1,13 +1,13 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
-import alienImg from './assets/alien.png';
-import pointsImg from './assets/points.png';
-import endOfGameCardsImg from './assets/end-of-game-cards.png';
-import goldScoringTilesImg from './assets/golden-tiles.png';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'SETI';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'SETI',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/418059/seti-search-for-extraterrestrial-intelligence',
 		rulesUrl: '',
 		banner:
@@ -20,22 +20,22 @@ export default function getDefinition(): GameDef {
 		winMode: WinMode.MOST,
 		rows: [
 			{
-				icon: pointsImg,
+				icon: pu.getAbsoluteImagePath('points'),
 				name: 'Current Track',
 				description: 'Points earned during the game',
 			},
 			{
-				icon: endOfGameCardsImg,
+				icon: pu.getAbsoluteImagePath('end-of-game-cards'),
 				name: 'End-of-Game Scoring Cards',
 				description: 'Points from end-of-game scoring cards that you played',
 			},
 			{
-				icon: goldScoringTilesImg,
+				icon: pu.getAbsoluteImagePath('golden-tiles'),
 				name: 'Gold Scoring Tile Bonuses',
 				description: 'Points from the four gold scoring tiles',
 			},
 			{
-				icon: alienImg,
+				icon: pu.getAbsoluteImagePath('alien'),
 				name: 'Alien Species',
 				description:
 					'Some alien species give you points at the end of the game',

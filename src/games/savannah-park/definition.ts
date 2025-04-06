@@ -1,17 +1,13 @@
 import { GameDef } from '../../core/types/GameDef';
 import { WinMode } from '../../core/types/WinMode';
-import antelope from './assets/antelope.png';
-import bush from './assets/bush.png';
-import elephant from './assets/elephant.png';
-import giraffe from './assets/giraffe.png';
-import ostrich from './assets/ostrich.png';
-import rhino from './assets/rhino.png';
-import tree from './assets/tree.png';
-import zebra from './assets/zebra.png';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Savannah Park';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Savannah Park',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/339484/savannah-park',
 		rulesUrl:
 			'https://deep-print-games.com/wp-content/uploads/2021/05/SavPark_Rulebook_US.pdf',
@@ -26,37 +22,37 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Grass',
-				icon: bush,
+				icon: pu.getAbsoluteImagePath('bush'),
 				description: '1 Point for each empty Grass space',
 			},
 			{
 				name: 'Trees',
-				icon: tree,
+				icon: pu.getAbsoluteImagePath('tree'),
 				description: '3 Point for each empty Tree space',
 			},
 			{
 				name: 'Giraffes',
-				icon: giraffe,
+				icon: pu.getAbsoluteImagePath('giraffe'),
 			},
 			{
 				name: 'Elephants',
-				icon: elephant,
+				icon: pu.getAbsoluteImagePath('elephant'),
 			},
 			{
 				name: 'Rhinos',
-				icon: rhino,
+				icon: pu.getAbsoluteImagePath('rhino'),
 			},
 			{
 				name: 'Zebras',
-				icon: zebra,
+				icon: pu.getAbsoluteImagePath('zebra'),
 			},
 			{
 				name: 'Antelopes',
-				icon: antelope,
+				icon: pu.getAbsoluteImagePath('antelope'),
 			},
 			{
 				name: 'Ostriches',
-				icon: ostrich,
+				icon: pu.getAbsoluteImagePath('ostrich'),
 			},
 		],
 	};
