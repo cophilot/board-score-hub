@@ -2,7 +2,6 @@ import { WinMode } from '../../core/types/WinMode';
 import goalTileTop from './assets/goal-tile-top.png';
 import goalTileRight from './assets/goal-tile-right.png';
 import goalTileLeft from './assets/goal-tile-left.png';
-import catTokens from './assets/cat-tokens.png';
 import buttonTokens from './assets/button-tokens.png';
 import FontUtils from '../../core/utils/FontUtils';
 import { GameDef } from '../../core/types/GameDef';
@@ -42,7 +41,7 @@ export default function getDefinition(): GameDef {
 			},
 			{
 				name: 'Cat Tokens',
-				icon: catTokens,
+				icon: 'src/games/calico/assets/cat-tokens.png',
 				bgColor: '#582895',
 			},
 
