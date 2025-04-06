@@ -1,8 +1,4 @@
 import { WinMode } from '../../core/types/WinMode';
-import goalTileTop from './assets/goal-tile-top.png';
-import goalTileRight from './assets/goal-tile-right.png';
-import goalTileLeft from './assets/goal-tile-left.png';
-import buttonTokens from './assets/button-tokens.png';
 import FontUtils from '../../core/utils/FontUtils';
 import { GameDef } from '../../core/types/GameDef';
 import PathUtils from '../../core/utils/PathUtils';
@@ -28,30 +24,30 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Top Goal Tile',
-				icon: goalTileTop,
+				icon: pu.getAbsoluteImagePath('goal-tile-top'),
 				bgColor: '#6c993b',
 				fn: (n: number) => n * -2,
 				fnDisplay: '_ x -2',
 			},
 			{
 				name: 'Left Goal Tile',
-				icon: goalTileLeft,
+				icon: pu.getAbsoluteImagePath('goal-tile-left'),
 				bgColor: '#792a94',
 			},
 			{
 				name: 'Right Goal Tile',
-				icon: goalTileRight,
+				icon: pu.getAbsoluteImagePath('goal-tile-right'),
 				bgColor: '#ffac33',
 			},
 			{
 				name: 'Cat Tokens',
-				icon: pu.getAbsoluteImagePath('/assets/cat-tokens.png'),
+				icon: pu.getAbsoluteImagePath('cat-tokens'),
 				bgColor: '#582895',
 			},
 
 			{
 				name: 'Button Tokens',
-				icon: buttonTokens,
+				icon: pu.getAbsoluteImagePath('button-tokens'),
 				bgColor: '#68cfda',
 			},
 		],
