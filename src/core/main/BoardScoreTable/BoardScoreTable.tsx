@@ -393,7 +393,9 @@ type FirstRowCellProps = {
 function FirstRowCell({ row }: FirstRowCellProps) {
 	let inner = <>{row.name}</>;
 	if (row.icon) {
-		inner = <img src={row.icon} alt={row.name} className="row-icon" />;
+		inner = (
+			<img src={row.icon} alt={row.name} className="row-icon" loading="lazy" />
+		);
 	}
 	return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
 }

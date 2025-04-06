@@ -5,10 +5,14 @@ import goalTileLeft from './assets/goal-tile-left.png';
 import buttonTokens from './assets/button-tokens.png';
 import FontUtils from '../../core/utils/FontUtils';
 import { GameDef } from '../../core/types/GameDef';
+import PathUtils from '../../core/utils/PathUtils';
 
 export default function getDefinition(): GameDef {
+	const gameTitle = 'Calico';
+	const pu = new PathUtils(gameTitle);
+
 	return {
-		title: 'Calico',
+		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/283155/calico',
 		rulesUrl:
 			'https://www.alderac.com/wp-content/uploads/2020/09/Calico-Rules.pdf',
@@ -41,7 +45,7 @@ export default function getDefinition(): GameDef {
 			},
 			{
 				name: 'Cat Tokens',
-				icon: 'src/games/calico/assets/cat-tokens.png',
+				icon: pu.getAbsoluteImagePath('/assets/cat-tokens.png'),
 				bgColor: '#582895',
 			},
 
