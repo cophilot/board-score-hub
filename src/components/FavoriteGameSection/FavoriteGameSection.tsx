@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './FavoriteGameSection.scss';
-import { getGameByName, getSortedGames } from '../../allGames';
+import { getSortedGames } from '../../allGames';
 import LocalStorageService from '../../utils/LocalStorageService';
-import { GameWithViewButton } from '../GameButton/GameButton';
 import GameFilter from '../GameFilter/GameFilter';
+import GameButtonList from '../GameButtonList';
 
 /**
  * This is a FavoriteGameSection component
@@ -42,29 +42,28 @@ function FavoriteGameSection() {
 			{!addingMode && favoriteGames.length > 0 && (
 				<GameFilter allGames={allGames} setGames={setGames} />
 			)}
-			{addingMode
-				? games.map((game) => (
-						<button
-							key={game.definition.title}
-							className={
-								'btn wide ' +
-								(favoriteGames.includes(game.definition.title)
-									? 'selected'
-									: '')
-							}
-							style={
-								favoriteGames.includes(game.definition.title)
-									? {}
-									: templateButtonStyle
-							}
-							onClick={() => onGameClick(game.definition.title)}
-						>
-							{game.definition.title}
-						</button>
-					))
-				: favoriteGames.map((gameName: string) => (
-						<GameWithViewButton game={getGameByName(gameName)} />
-					))}
+			{addingMode ? (
+				games.map((game) => (
+					<button
+						key={game.definition.title}
+						className={
+							'btn wide ' +
+							(favoriteGames.includes(game.definition.title) ? 'selected' : '')
+						}
+						style={
+							favoriteGames.includes(game.definition.title)
+								? {}
+								: templateButtonStyle
+						}
+						onClick={() => onGameClick(game.definition.title)}
+					>
+						{game.definition.title}
+					</button>
+				))
+			) : (
+				<GameButtonList gameNames={favoriteGames} />
+			)}
+
 			<i
 				className={'bi icon ' + getIconClassName(addingMode, favoriteGames)}
 				onClick={() => setAddingMode(!addingMode)}

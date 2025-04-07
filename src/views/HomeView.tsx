@@ -15,8 +15,9 @@ import {
 	useToggleTheme,
 } from '../providers/ThemeProvider';
 import StyleUtils from '../core/utils/StyleUtils';
-import { GameWithView } from '../core/types/GameWithView';
 import GameFilter from '../components/GameFilter/GameFilter';
+import GameSearch from '../components/GameSearch/GameSearch';
+import GameButtonList from '../components/GameButtonList';
 
 export default function HomeView() {
 	const navigate = useNavigate();
@@ -53,15 +54,13 @@ export default function HomeView() {
 			</div>
 			<h2>Game of the Day</h2>
 			<GameWithViewButton game={getGameOfTheDay()} />
+			<h2>Search</h2>
+			<GameSearch />
 			<h2>Favorites</h2>
 			<FavoriteGameSection />
 			<h2>Games</h2>
 			<GameFilter allGames={getSortedGames()} setGames={setGames} />
-			<div className="ver">
-				{games.map((game: GameWithView) => {
-					return <GameWithViewButton game={game} />;
-				})}
-			</div>
+			<GameButtonList games={games} />
 			<p>
 				<i>Missing a game? </i>
 			</p>
