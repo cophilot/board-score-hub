@@ -3,7 +3,6 @@ import { GameDataProvider } from './main/GameDataProvider';
 import { GameDef } from './types/GameDef';
 import { GameState } from './state/GameState';
 import { getSharedStateUrlSeparator, isSharedState } from './utils/functions';
-import Notification from './components/Notification/Notification';
 
 interface BoardScoreProps {
 	definition: GameDef;
@@ -44,11 +43,6 @@ export default function BoardScore({
 			onStateChange={onGameStateChange}
 			sharedGameState={getSharedStateString()}
 		>
-			<Notification
-				message="Welcome to BoardScore!"
-				heading="test"
-				timeout={3000}
-			/>
 			<BoardScorePage
 				onCellChange={onCellChange}
 				getTotalRow={getTotalRow}
