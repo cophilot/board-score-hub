@@ -5,7 +5,9 @@ interface NotificationProps {
 	message: string;
 	heading?: string;
 	onClose?: () => void;
+	onClick?: () => void;
 	timeout?: number;
+	level?: 'info' | 'warning' | 'error';
 }
 
 /**
@@ -18,24 +20,45 @@ function Notification({
 	heading,
 	message,
 	onClose,
-	timeout = 3000,
+	onClick = () => {},
+	timeout = 5000,
+	level = 'info',
 }: NotificationProps) {
 	const [show, setShow] = useState(false);
+	const [cls, setCls] = useState('');
 
 	const isNotDefined = (str: string | undefined | null) =>
 		[null, undefined, ''].includes(str);
 
 	const close = useCallback(() => {
-		setShow(false);
-		onClose && onClose();
+		setCls('closing');
+		setTimeout(() => {
+			setShow(false);
+			onClose && onClose();
+		}, 500);
 	}, [onClose]);
+
+	const getLevelClass = () => {
+		switch (level) {
+			case 'warning':
+				return 'bi-exclamation-octagon';
+			case 'error':
+				return 'bi-exclamation-triangle';
+			default:
+				return 'bi-info-circle';
+		}
+	};
 
 	useEffect(() => {
 		if (isNotDefined(heading) && isNotDefined(message)) {
 			return;
 		}
 		setShow(true);
-		timeout && setTimeout(close, timeout);
+		if (!timeout || timeout === -1) {
+			return;
+		}
+
+		setTimeout(close, timeout);
 	}, [close, heading, message, timeout]);
 
 	if (!show) {
@@ -43,9 +66,14 @@ function Notification({
 	}
 
 	return (
-		<div className="notification">
-			{heading && <h2>{heading}</h2>}
-			<p className="text">{message}</p>
+		<div className={'notification ' + cls} onClick={onClick}>
+			<div className="hor">
+				<i className={'bi level mr ' + getLevelClass()}></i>
+				<div className="ver-start">
+					{heading && <h2>{heading}</h2>}
+					<p className="text">{message}</p>
+				</div>
+			</div>
 		</div>
 	);
 }
