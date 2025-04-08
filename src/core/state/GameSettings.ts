@@ -5,6 +5,7 @@ export interface GameSettingsData {
 	showPlot: boolean;
 	showQrCode: boolean;
 	showRanking: boolean;
+	showQuickGuide: boolean;
 }
 
 export const defaultSettings: GameSettingsData = {
@@ -12,6 +13,7 @@ export const defaultSettings: GameSettingsData = {
 	showPlot: false,
 	showQrCode: false,
 	showRanking: false,
+	showQuickGuide: false,
 };
 
 /**
@@ -76,6 +78,15 @@ export class GameSettings extends PersistentState<GameSettingsData> {
 
 	public setShowRanking(show: boolean): void {
 		this.data.showRanking = show;
+		this.emitChange(true);
+	}
+
+	public getShowQuickGuide(): boolean {
+		return this.data.showQuickGuide;
+	}
+
+	public setShowQuickGuide(show: boolean): void {
+		this.data.showQuickGuide = show;
 		this.emitChange(true);
 	}
 	//** END GETTER/SETTER */

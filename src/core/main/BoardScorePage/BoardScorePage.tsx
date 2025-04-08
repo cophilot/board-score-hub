@@ -21,6 +21,7 @@ import { QRCode } from 'react-qrcode-logo';
 import { isSharedState } from '../../utils/functions';
 import IconButton from '../../components/IconButton/IconButton';
 import { GameSettings } from '../../state/GameSettings';
+import QuickGuidePopUp from '../../components/QuickGuidePopUp/QuickGuidePopUp';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -101,6 +102,12 @@ export default function BoardScorePage({
 				onClick: () => shareStateViaURL(state),
 			},
 			{
+				label: 'Quick\nGuide',
+				iconClass: 'bi bi-list-columns-reverse',
+				onClick: () => settings.setShowQuickGuide(true),
+				disabled: !definition.quickGuide,
+			},
+			{
 				label: 'Rules',
 				iconClass: 'bi bi-book',
 				onClick: () => {
@@ -146,6 +153,7 @@ export default function BoardScorePage({
 	return (
 		<>
 			<div className="board-score-page">
+				<QuickGuidePopUp />
 				<QRCodePopUp
 					definition={definition}
 					state={state}

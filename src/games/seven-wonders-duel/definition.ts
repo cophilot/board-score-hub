@@ -61,5 +61,33 @@ export default function getDefinition(): GameDef {
 				bgColor: '#fad2c5',
 			},
 		],
+		quickGuide: [
+			{
+				heading: 'Setup',
+				text: [
+					'Remove 3 Cards from each Age deck',
+					'Each player takes 7 coins from the Bank.',
+					'Draw 3 Guild cards (C) nd shuffle them into the Age III deck',
+				],
+			},
+			{
+				heading: 'Wonders Selection Phase',
+				text: [
+					'Place 4 random Wonders, face up, between the two players',
+					'The first player chooses 1 Wonder',
+					'The second player chooses 2 Wonders',
+					'The first player takes the remaining Wonder',
+					'Place 4 more Wonders and repeat the selection, but this time, start with the second player',
+				],
+			},
+			{
+				heading: 'Winning Conditions',
+				text: [
+					"You can win by Military dominance when you reach the opponent's capital",
+					'You can win by Scientific dominance when you collect 6 different Scientific symbols',
+					'You can win by Civilian victory when reaching more points than your opponent at the end of the game',
+				],
+			},
+		],
 	};
 }

@@ -38,5 +38,18 @@ export default function getDefinition(): GameDef {
 				name: 'Round 5',
 			},
 		],
+		quickGuide: [
+			{
+				heading: 'Setup',
+				text: 'Shuffle the deck and deal 5 cards to each player.',
+			},
+			{
+				heading: 'Winning',
+				text: [
+					'More cards are always better.',
+					'A pair is higher than a street.',
+				],
+			},
+		],
 	};
 }

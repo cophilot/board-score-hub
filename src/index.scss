@@ -68,6 +68,21 @@ p {
 	}
 }
 
+.btn-no-hover {
+	cursor: pointer;
+	margin: 10px;
+	font-size: 20px;
+	padding: 10px 20px;
+	font-weight: bold;
+	color: var(--font-color);
+	border: 3px solid var(--primary-color);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
+	border-radius: 5px;
+	background-color: var(--bg-color);
+	font-family: var(--font-family);
+	transition: all 0.3s;
+}
+
 .selected {
 	background-color: var(--primary-color);
 	color: var(--bg-color);

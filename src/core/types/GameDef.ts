@@ -20,6 +20,7 @@ export interface GameDef {
 	rulesUrl?: string; // The URL to the rules
 	winMode?: WinMode; // The winnning mode
 	extensions?: ExtensionDefCollection; // Specify Extensions
+	quickGuide?: QuickGuideDef[] | string[]; // A quick guide to the game
 	roundMapper?: { [playerCount: number]: number }; // A mapping of player count to round count
 }
 
@@ -32,4 +33,9 @@ export interface ExternalGameDef {
 export interface Label {
 	beforeID?: string; // The ID of the row to add this label after
 	label: string; // The label to be displayed
+}
+
+export interface QuickGuideDef {
+	heading: string; // The heading of the quick guide
+	text: string | string[]; // The text of the quick guide
 }

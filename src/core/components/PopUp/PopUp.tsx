@@ -19,7 +19,7 @@ function PopUp({ children, onClose, isVisible = true }: PopUpProps) {
 
 	return (
 		<div className="pop-up">
-			{children}
+			<div className="content">{children}</div>
 			<button onClick={onClose} className="close-btn">
 				<i className="bi bi-x-circle"></i>
 			</button>

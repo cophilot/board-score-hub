@@ -1,0 +1,23 @@
+.quick-guide {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	.heading {
+		font-weight: bold;
+		width: 85vw;
+		max-width: 400px;
+		border: none;
+	}
+	ul {
+		padding: 0;
+		margin: 0;
+		width: 300px;
+		max-width: 90%;
+		li {
+			font-size: 20px;
+			text-align: left;
+			margin-left: 20px;
+		}
+	}
+}
