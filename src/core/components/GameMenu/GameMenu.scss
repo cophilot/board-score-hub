@@ -51,6 +51,14 @@
 	color: var(--bg-color);
 }
 
+.quick-game-menu {
+	i {
+		margin: 10px;
+		font-size: 40px;
+		cursor: pointer;
+	}
+}
+
 @keyframes slide-in-from-lower-right {
 	0% {
 		transform: translate(100%, 100%) scale(0.1);

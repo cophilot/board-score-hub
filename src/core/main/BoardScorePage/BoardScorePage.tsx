@@ -106,6 +106,7 @@ export default function BoardScorePage({
 				iconClass: 'bi bi-list-columns-reverse',
 				onClick: () => settings.setShowQuickGuide(true),
 				disabled: !definition.quickGuide,
+				quickMenu: true,
 			},
 			{
 				label: 'Rules',
@@ -122,8 +123,9 @@ export default function BoardScorePage({
 			},
 			{
 				label: 'Rank',
-				iconClass: 'bi-list-ol',
+				iconClass: 'bi-trophy',
 				onClick: () => settings.setShowRanking(true),
+				quickMenu: true,
 			},
 			{
 				label: 'Clear\nTable',
@@ -135,6 +137,7 @@ export default function BoardScorePage({
 					state.clearTableMatrix();
 					window.location.reload();
 				},
+				disabled: isSharedState(),
 			},
 			{
 				label: 'Reset',
@@ -146,6 +149,7 @@ export default function BoardScorePage({
 					state.reset(definition);
 					window.location.reload();
 				},
+				disabled: isSharedState(),
 			},
 		];
 	}, [definition, onClear, onReset, settings, showHelpButton, state]);
@@ -159,7 +163,6 @@ export default function BoardScorePage({
 					state={state}
 					settings={settings}
 				/>
-				<GameMenu buttonDefinitions={buttonDefinitions} />
 				{settings.getShowPlot() && (
 					<PlotDisplay
 						definition={definition}
@@ -178,6 +181,7 @@ export default function BoardScorePage({
 				<h2 className="print-show">
 					<i>{getDateString()}</i>
 				</h2>
+				<GameMenu buttonDefinitions={buttonDefinitions} />
 				<PlayerSwitch
 					playerSizes={definition.playerSizes}
 					initPlayerSize={state.getCurrPlayerSize()}
