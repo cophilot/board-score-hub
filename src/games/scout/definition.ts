@@ -41,13 +41,16 @@ export default function getDefinition(): GameDef {
 		quickGuide: [
 			{
 				heading: 'Setup',
-				text: 'Shuffle the deck and deal 5 cards to each player.',
+				text: [
+					'Remove the following cards depending on the number of players: 3 Players - Cards with 10 (9 Cards) | 4 Players - Cards with 9 and 10 (1 Card) | 5 Players - Remove nothing',
+					'Shuffle the cards and deal as follows: 3 Players - 12 Cards | 4 Players - 11 Cards | 5 Players - 9 Cards',
+				],
 			},
 			{
-				heading: 'Winning',
+				heading: 'Strength of Cards',
 				text: [
-					'More cards are always better.',
-					'A pair is higher than a street.',
+					'More cards are always better',
+					'Mathcing cards are stronger than consecutive cards',
 				],
 			},
 		],
