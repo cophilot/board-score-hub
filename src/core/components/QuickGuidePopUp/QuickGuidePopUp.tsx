@@ -42,6 +42,7 @@ function QuickGuide({ def }: { def: QuickGuideDef }) {
 				className="heading btn-no-hover wide inverted"
 				onClick={() => setExtended(!extended)}
 			>
+				<i className={'bi bi-caret-' + (extended ? 'down' : 'right')}></i>{' '}
 				{def.heading}
 			</button>
 			{extended && (

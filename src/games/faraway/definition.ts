@@ -56,5 +56,14 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('sanctuary'),
 			},
 		],
+		quickGuide: [
+			{
+				heading: 'Setup',
+				text: [
+					'Deal 5 Region cards to each player. Each player selects three cards before the game begins, and removes the other two, without showing them to the other players.',
+					'Reveal as many cards from the deck as there are players, plus one.',
+				],
+			},
+		],
 	};
 }
