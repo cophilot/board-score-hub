@@ -4,7 +4,6 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: var(--primary-color);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,7 +18,6 @@
 		font-size: 30px;
 		background-color: transparent;
 		border: none;
-		color: var(--text-color);
 	}
 	.content {
 		padding-top: 50px;

@@ -19,17 +19,29 @@ export default class StyleUtils {
 	}
 
 	static setDefaultValues(darkMode: boolean = false) {
-		if (darkMode) {
-			StyleUtils.setBackGroundColor('#1D2B53');
-			StyleUtils.setFontColor('#fff');
-			StyleUtils.setPrimaryColor('#FF004D');
-			StyleUtils.setSecondaryColor('#FAEF5D');
-		} else {
-			StyleUtils.setBackGroundColor();
-			StyleUtils.setFontColor();
-			StyleUtils.setPrimaryColor();
-			StyleUtils.setSecondaryColor();
-		}
+		const colors = StyleUtils.getDefaultColors(darkMode);
+		StyleUtils.setBackGroundColor(colors.bgColor);
+		StyleUtils.setFontColor(colors.fontColor);
+		StyleUtils.setPrimaryColor(colors.primaryColor);
+		StyleUtils.setSecondaryColor(colors.secondaryColor);
 		StyleUtils.setFontFamily();
+	}
+
+	static getDefaultColors(darkMode: boolean = false) {
+		if (darkMode) {
+			return {
+				bgColor: '#1D2B53',
+				fontColor: '#FFFFFF',
+				primaryColor: '#FF004D',
+				secondaryColor: '#FAEF5D',
+			};
+		} else {
+			return {
+				bgColor: '#FFFFFF',
+				fontColor: '#000000',
+				primaryColor: '#436FE9',
+				secondaryColor: '#E9BD43',
+			};
+		}
 	}
 }
