@@ -22,11 +22,13 @@ import Cascadia from './games/cascadia/main';
 import PlanetUnknown from './games/planet-unknown/main';
 import Seti from './games/seti/main';
 import ThreeChapters from './games/three-chapters/main';
+import CastleCombo from './games/castle-combo/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		CastleCombo,
 		ThreeChapters,
 		Seti,
 		PlanetUnknown,
