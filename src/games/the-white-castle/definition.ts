@@ -16,7 +16,7 @@ export default function getDefinition(): GameDef {
 		fontColor: '#342d38',
 		primaryColor: '#3d3544',
 		secondaryColor: '#fad668',
-		fontFamily: FontUtils.CLASSIC,
+		fontFamily: FontUtils.getClassicFont(),
 		stripeColor: '#cfb5a6',
 		playerSizes: [1, 2, 3, 4],
 		winMode: WinMode.MOST,

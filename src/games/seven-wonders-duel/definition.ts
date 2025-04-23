@@ -18,7 +18,7 @@ export default function getDefinition(): GameDef {
 		secondaryColor: '#2a7c6d',
 		playerSizes: [2],
 		winMode: WinMode.MOST,
-		fontFamily: FontUtils.ANCIENT,
+		fontFamily: FontUtils.getAncientFont(),
 		rows: [
 			{
 				name: 'Blue cards',

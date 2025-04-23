@@ -17,7 +17,7 @@ export default function getDefinition(): GameDef {
 		bgColor: '#a36743',
 		primaryColor: '#612720',
 		secondaryColor: '#ffe048',
-		fontFamily: FontUtils.FUTURISTIC,
+		fontFamily: FontUtils.getFuturisticFont(),
 		playerSizes: [1, 2, 3, 4, 5],
 		winMode: WinMode.MOST,
 		rows: [

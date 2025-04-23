@@ -12,7 +12,7 @@ export default function getDefinition(): GameDef {
 		fontColor: '#4B0082',
 		primaryColor: '#F08600',
 		secondaryColor: '#3E0099',
-		fontFamily: FontUtils.CLASSIC,
+		fontFamily: FontUtils.getClassicFont(),
 		playerSizes: [2, 3, 4, 5],
 		winMode: WinMode.MOST,
 		roundMapper: {

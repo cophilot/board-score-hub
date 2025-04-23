@@ -17,7 +17,7 @@ export default function getDefinition(): GameDef {
 		primaryColor: '#9fcccf',
 		secondaryColor: '#73645b', //73645b
 		playerSizes: [1, 2, 3, 4, 5],
-		fontFamily: FontUtils.PLAYFUL,
+		fontFamily: FontUtils.getPlayfulFont(),
 		winMode: WinMode.MOST,
 		rows: [
 			{

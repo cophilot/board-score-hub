@@ -16,7 +16,7 @@ export default function getDefinition(): GameDef {
 		fontColor: '#2c2e35',
 		primaryColor: '#e16d24',
 		secondaryColor: '#808e8e',
-		fontFamily: FontUtils.FUTURISTIC,
+		fontFamily: FontUtils.getFuturisticFont(),
 		playerSizes: [1, 2, 3, 4, 5, 6],
 		winMode: WinMode.MOST,
 		banner:

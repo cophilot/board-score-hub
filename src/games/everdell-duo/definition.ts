@@ -18,7 +18,7 @@ export default function getDefinition(): GameDef {
 		fontColor: '#572a15',
 		primaryColor: '#ffaf34',
 		secondaryColor: '#1e4f6c',
-		fontFamily: FontUtils.HANDWRITING,
+		fontFamily: FontUtils.getHandwritingFont(),
 		playerSizes: [1, 2],
 		winMode: WinMode.MOST,
 		rows: [

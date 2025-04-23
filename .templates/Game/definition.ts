@@ -20,7 +20,7 @@ export default function getDefinition(): GameDef {
 		fontColor: '$$fontColor$$',
 		primaryColor: '$$primaryColor$$',
 		secondaryColor: '$$secondaryColor$$',
-		//fontFamily: FontUtils.PLAYFUL,
+		//fontFamily: FontUtils.getHandwritingFont(),
 		//stripeColor: '#000',
 		playerSizes: [1, 2, 3, 4],
 		winMode: WinMode.MOST,

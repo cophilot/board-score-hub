@@ -21,7 +21,7 @@ export default function getDefinition(): GameDef {
 		fontColor: '#2c2e35',
 		primaryColor: '#e52c1a',
 		secondaryColor: '#efd27c',
-		fontFamily: FontUtils.CLASSIC,
+		fontFamily: FontUtils.getClassicFont(),
 		banner:
 			'https://cf.geekdo-images.com/5FBIAvZi3Sw8dvmfwwJTjg__opengraph/img/1-Xv2Tm_dG5eeRz7kY-rmXhaFHs=/0x0:1042x547/fit-in/1200x630/filters:strip_icc()/pic2760568.jpg',
 		//stripeColor: '#000',

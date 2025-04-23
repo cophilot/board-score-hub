@@ -16,6 +16,7 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
+		"@types/webfontloader": "^1.6.38",
 		"bootstrap-icons": "^1.11.3",
 		"echarts": "^5.6.0",
 		"echarts-for-react": "^3.0.2",
@@ -25,7 +26,8 @@
 		"react-dom": "^18.3.1",
 		"react-qrcode-logo": "^3.0.0",
 		"react-router-dom": "^6.25.1",
-		"sass": "^1.77.8"
+		"sass": "^1.77.8",
+		"webfontloader": "^1.6.28"
 	},
 	"devDependencies": {
 		"@types/react": "^18.3.3",
