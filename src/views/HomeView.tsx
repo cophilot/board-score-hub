@@ -61,6 +61,7 @@ export default function HomeView() {
 			<h2>Games</h2>
 			<GameFilter allGames={getSortedGames()} setGames={setGames} />
 			<GameButtonList games={games} />
+			<p>{games.length} Games</p>
 			<p>
 				<i>Missing a game? </i>
 			</p>

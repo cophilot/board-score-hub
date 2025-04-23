@@ -23,11 +23,13 @@ import PlanetUnknown from './games/planet-unknown/main';
 import Seti from './games/seti/main';
 import ThreeChapters from './games/three-chapters/main';
 import CastleCombo from './games/castle-combo/main';
+import Village from './games/village/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Village,
 		CastleCombo,
 		ThreeChapters,
 		Seti,
