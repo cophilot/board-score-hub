@@ -17,7 +17,7 @@ function ConceptView() {
 			<Logo detectDarkMode />
 			<h1>BoardScoreHub Concept</h1>
 			<p>
-				<b>BoardScoreHub</b> is a web application that allows provides online
+				<b>BoardScoreHub</b> is a web application that provides online
 				scoresheets for your favorite board games. It is designed to be easy to
 				use and should mimic the atmosphere of the board game as much as
 				possible.
