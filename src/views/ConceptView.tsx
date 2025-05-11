@@ -20,7 +20,8 @@ function ConceptView() {
 				<b>BoardScoreHub</b> is a web application that provides online
 				scoresheets for your favorite board games. It is designed to be easy to
 				use and should mimic the atmosphere of the board game as much as
-				possible. It also comes with a wide range of utilities to share and analyze the score sheet.
+				possible. It also comes with a wide range of utilities to share and
+				analyze the score sheet.
 			</p>
 			<HomeButton />
 		</div>
