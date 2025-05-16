@@ -71,5 +71,14 @@ export default function getDefinition(): GameDef {
 				description: 'Each key is worth 1 victory point.',
 			},
 		],
+		quickGuide: [
+			{
+				heading: 'Setup',
+				text: [
+					'Each player takes 2 Keys and 15 Gold',
+					'Place the Messenger pawn besides the revealed Village cards',
+				],
+			},
+		],
 	};
 }
