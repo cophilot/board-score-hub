@@ -44,6 +44,7 @@ function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
 		Array.from(Array(state.getCurrPlayerSize()).keys()).map(() => 0),
 	);
 	const [rounds, setRounds] = useState(-1);
+	const [excludedIDs, setExcludedIDS] = useState<string[]>([]);
 	//** END STATE **//
 
 	//** START FUNCTIONS **//
@@ -112,6 +113,12 @@ function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
 			exRows.forEach((row: InternalRowDef) => {
 				row.__extName = extensionName;
 			});
+
+			// Handle exclude rows
+			if (exDef.excludeRows) {
+				setExcludedIDS([...excludedIDs, ...exDef.excludeRows]);
+			}
+
 			setRows([...rows, ...exRows]);
 
 			if (!emitToState) {
@@ -119,13 +126,23 @@ function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
 			}
 			state.activateExtension(extensionName);
 		},
-		[definition.extensions, rows, state],
+		[definition.extensions, excludedIDs, rows, state],
 	);
 
 	const onExtensionOff = (extensionName: string) => {
+		const exDef = definition.extensions?.[extensionName];
+		if (!exDef) {
+			return;
+		}
 		setRows(
 			rows.filter((row: InternalRowDef) => row.__extName !== extensionName),
 		);
+		if (exDef.excludeRows) {
+			const newExcludeIds = excludedIDs.filter(
+				(id) => !exDef.excludeRows?.includes(id),
+			);
+			setExcludedIDS(newExcludeIds);
+		}
 		state.deactivateExtension(extensionName);
 	};
 	//** END FUNCTIONS **//
@@ -199,7 +216,8 @@ function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
 					<tbody>
 						{rows.map(
 							(row: InternalRowDef, index: number) =>
-								(row.__visible || rounds === -1 || index < rounds) && (
+								(row.__visible || rounds === -1 || index < rounds) &&
+								!excludedIDs.includes(row.id || '___no_id___') && (
 									<>
 										{getLabelForID(row.id) && (
 											<tr key={'label-row-' + index} className="label-row">

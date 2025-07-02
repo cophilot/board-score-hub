@@ -36,6 +36,7 @@ export default function getDefinition(): GameDef {
 				bgColor: '#fffad9',
 			},
 			{
+				id: 'purple-card',
 				name: 'Purple cards',
 				icon: pu.getAbsoluteImagePath('purple-card'),
 				bgColor: '#d2cce0',
@@ -87,6 +88,32 @@ export default function getDefinition(): GameDef {
 					'You can win by Scientific dominance when you collect 6 different Scientific symbols',
 					'You can win by Civilian victory when reaching more points than your opponent at the end of the game',
 				],
+			},
+		],
+		extensions: {
+			Pantheon: {
+				rows: [
+					{
+						id: 'pantheon',
+						name: 'Grand Temple Cards',
+						description: 'Points from the Grand Temple cards',
+						icon: pu.getAbsoluteImagePath('dark-blue-card'),
+						bgColor: '#d7dbe9',
+					},
+					{
+						name: 'Divinities',
+						description: 'Points from the divinities',
+						icon: pu.getAbsoluteImagePath('divinity'),
+						bgColor: '#e4d9d3',
+					},
+				],
+				excludeRows: ['purple-card'],
+			},
+		},
+		labels: [
+			{
+				beforeID: 'pantheon',
+				label: 'Pantheon',
 			},
 		],
 	};
