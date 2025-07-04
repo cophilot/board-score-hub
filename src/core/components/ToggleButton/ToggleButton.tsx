@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './ToggleButton.scss';
 
 interface ToggleButtonProps {
@@ -13,15 +14,21 @@ interface ToggleButtonProps {
  * @created 2025-3-21
  */
 function ToggleButton({ label, checked = false, onChange }: ToggleButtonProps) {
+	const [blocked, setBlocked] = useState(false); // Prevents automated double clicks
+
+	const onChangeInternal = () => {
+		if (!onChange || blocked) {
+			return;
+		}
+		onChange(!checked);
+		setBlocked(true);
+		setTimeout(() => {
+			setBlocked(false);
+		}, 10);
+	};
+
 	return (
-		<div
-			className="toggle-button-container"
-			onClick={() => {
-				if (onChange) {
-					onChange(!checked);
-				}
-			}}
-		>
+		<div className="toggle-button-container" onClick={onChangeInternal}>
 			<label className="toggle-button">
 				<input type="checkbox" checked={checked} />
 				<span className="slider round"></span>
