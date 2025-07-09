@@ -67,8 +67,9 @@ export default function getDefinition(): GameDef {
 				heading: 'Setup',
 				text: [
 					'Remove 3 Cards from each Age deck',
-					'Each player takes 7 coins from the Bank.',
-					'Draw 3 Guild cards (C) nd shuffle them into the Age III deck',
+					'Each player takes 7 coins from the Bank',
+					'Draw 3 Guild cards (C) and shuffle them into the Age III deck',
+					'When playing with the Pantheon extension leave the Guild Cards out of the game and instead shuffle 3 Grand Temple Cards into the Age III deck'
 				],
 			},
 			{
