@@ -22,6 +22,7 @@ import { isSharedState } from '../../utils/functions';
 import IconButton from '../../components/IconButton/IconButton';
 import { GameSettings } from '../../state/GameSettings';
 import QuickGuidePopUp from '../../components/QuickGuidePopUp/QuickGuidePopUp';
+import { ExtensionDef } from '../../types/ExtensionDef';
 
 interface BoardScoreTableProps {
 	children?: JSX.Element;
@@ -116,6 +117,19 @@ export default function BoardScorePage({
 				},
 				disabled: !definition.rulesUrl,
 			},
+			...(definition.extensions
+				? Object.entries(definition.extensions)
+						// eslint-disable-next-line @typescript-eslint/no-unused-vars
+						.filter(([_key, value]: [string, ExtensionDef]) => value.rules)
+						.map(([key, value]: [string, ExtensionDef]) => ({
+							label: key + ' Rules',
+							iconClass: 'bi bi-book',
+							onClick: () => {
+								window.open(value.rules, '_blank');
+							},
+						}))
+				: []),
+
 			{
 				label: 'Plot',
 				iconClass: 'bi bi-graph-up',

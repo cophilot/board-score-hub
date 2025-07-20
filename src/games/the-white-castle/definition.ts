@@ -47,14 +47,42 @@ export default function getDefinition(): GameDef {
 				description: 'Score the points for your courtiers on the board.',
 			},
 			{
+				name: 'Coins',
+				icon: pu.getAbsoluteImagePath('coins'),
+				description: 'Get 1 point for every 5 coins you have.',
+			},
+			{
+				id: 'resources',
 				name: 'Resources',
 				icon: pu.getAbsoluteImagePath('resources'),
 				description: 'Get points for resources you have left.',
 			},
+		],
+		extensions: {
+			Matcha: {
+				rows: [
+					{
+						id: 'matcha',
+						name: 'Geishas',
+						description: 'Score the points for your geishas in the tea garden.',
+						icon: pu.getAbsoluteImagePath('geishas'),
+					},
+					{
+						name: 'Resources and Matcha',
+						description:
+							'Get points for your resources and matcha you have left.',
+						icon: pu.getAbsoluteImagePath('resources-matcha'),
+					},
+				],
+				excludeRows: ['resources'],
+				rules:
+					'https://gamers-hq.de/media/pdf/3b/23/f9/WhiteCastle_Matcha_ENG.pdf',
+			},
+		},
+		labels: [
 			{
-				name: 'Coins',
-				icon: pu.getAbsoluteImagePath('coins'),
-				description: 'Get 1 point for every 5 coins you have.',
+				beforeID: 'matcha',
+				label: 'Matcha',
 			},
 		],
 	};
