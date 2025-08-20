@@ -55,5 +55,24 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('research-tokens'),
 			},
 		],
+		extensions: {
+			Passport: {
+				rows: [
+					{
+						id: 'passport',
+						name: 'Passport',
+						description: 'Points from your passport',
+						icon: pu.getAbsoluteImagePath('passport'),
+					},
+				],
+			},
+			Daytrip: {
+				rows: [
+					{
+						name: 'Sunday',
+					},
+				],
+			},
+		},
 	};
 }
