@@ -46,7 +46,14 @@ The game definition defines the structure of the table for the game. You can fin
 
 ## Development
 
-TODO
+Perquisites for development are [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/).
+
+To start the development server, run the following command:
+
+```bash
+pnpm setup # install dependencies and setup husky
+pnpm start # start the development server
+```
 
 ---
 
