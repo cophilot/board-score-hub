@@ -1,0 +1,37 @@
+.contributors-list {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.contributor-card {
+	text-align: center;
+}
+
+.contributor-avatar {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	box-shadow: 0 2px 8px #0002;
+	transition: box-shadow 0.2s;
+}
+
+.contributor-name {
+	color: white;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 16px;
+	transition: color 0.2s;
+}
+
+.contributor-card:hover .contributor-name,
+.contributor-card:focus-within .contributor-name {
+	color: red;
+}
+.contributor-card:hover .contributor-avatar,
+.contributor-card:focus-within .contributor-avatar {
+	box-shadow: 0 4px 16px #f002;
+}
