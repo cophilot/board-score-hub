@@ -6,6 +6,7 @@ import StringUtils from './utils/StringUtils';
 import CreateCustomView from './views/CreateCustomView/CreateCustomView';
 import PrivacyView from './views/PrivacyView';
 import ConceptView from './views/ConceptView';
+import ContributorsView from './views/ContributorsView/ContributorsView';
 
 function Routes() {
 	const games = getAllGames();
@@ -26,6 +27,7 @@ function Routes() {
 					<Route path="/custom/create" Component={CreateCustomView} />
 					<Route path="/privacy" Component={PrivacyView} />
 					<Route path="/concept" Component={ConceptView} />
+					<Route path="/contributors" Component={ContributorsView} />
 					<Route path="/" Component={HomeView} />
 					<Route path="*" Component={HomeView} />
 				</ReactRoutes>
