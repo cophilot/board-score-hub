@@ -24,11 +24,13 @@ import Seti from './games/seti/main';
 import ThreeChapters from './games/three-chapters/main';
 import CastleCombo from './games/castle-combo/main';
 import Village from './games/village/main';
+import EverdellSilverfrost from './games/everdell-silverfrost/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		EverdellSilverfrost,
 		Village,
 		CastleCombo,
 		ThreeChapters,
