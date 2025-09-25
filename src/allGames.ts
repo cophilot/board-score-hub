@@ -25,11 +25,15 @@ import ThreeChapters from './games/three-chapters/main';
 import CastleCombo from './games/castle-combo/main';
 import Village from './games/village/main';
 import EverdellSilverfrost from './games/everdell-silverfrost/main';
+import KnittingCircle from './games/knitting-circle/main';
+import Flip7 from './games/flip-7/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Flip7,
+		KnittingCircle,
 		EverdellSilverfrost,
 		Village,
 		CastleCombo,
