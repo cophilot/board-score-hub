@@ -27,11 +27,13 @@ import Village from './games/village/main';
 import EverdellSilverfrost from './games/everdell-silverfrost/main';
 import KnittingCircle from './games/knitting-circle/main';
 import Flip7 from './games/flip-7/main';
+import Prophecy from './games/prophecy/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Prophecy,
 		Flip7,
 		KnittingCircle,
 		EverdellSilverfrost,
