@@ -5,6 +5,7 @@ import { GameState } from './state/GameState';
 import { getSharedStateUrlSeparator, isSharedState } from './utils/functions';
 import { useMemo } from 'react';
 import StyleUtils from './utils/StyleUtils';
+import { ButtonDefinition } from './components/GameMenu/GameMenu';
 
 interface BoardScoreProps {
 	definition: GameDef;
@@ -17,6 +18,7 @@ interface BoardScoreProps {
 	afterTableElement?: JSX.Element;
 	isDarkModeEnabled?: boolean;
 	onGameStateChange?: (gameState: GameState) => void;
+	userButtons?: ButtonDefinition[];
 }
 
 export default function BoardScore({
@@ -30,6 +32,7 @@ export default function BoardScore({
 	afterTableElement,
 	isDarkModeEnabled = false,
 	onGameStateChange,
+	userButtons,
 }: BoardScoreProps) {
 	const getSharedStateString = () => {
 		if (!isSharedState()) {
@@ -57,6 +60,7 @@ export default function BoardScore({
 				logo={logo}
 				afterTableElement={afterTableElement}
 				isDarkModeEnabled={isDarkModeEnabled}
+				userButtons={userButtons}
 			>
 				{children}
 			</BoardScorePage>

@@ -33,6 +33,7 @@ interface BoardScoreTableProps {
 	logo?: JSX.Element;
 	afterTableElement?: JSX.Element;
 	isDarkModeEnabled?: boolean;
+	userButtons?: ButtonDefinition[];
 }
 
 /**
@@ -50,6 +51,7 @@ export default function BoardScorePage({
 	logo,
 	afterTableElement,
 	isDarkModeEnabled = false,
+	userButtons = [],
 }: BoardScoreTableProps): JSX.Element {
 	//** START GAME DATA **//
 	const definition = useGameDefinition();
@@ -141,6 +143,7 @@ export default function BoardScorePage({
 				onClick: () => settings.setShowRanking(true),
 				quickMenu: true,
 			},
+			...userButtons,
 			{
 				label: 'Clear\nTable',
 				iconClass: 'bi bi-x-circle',
@@ -166,7 +169,15 @@ export default function BoardScorePage({
 				disabled: isSharedState(),
 			},
 		];
-	}, [definition, onClear, onReset, settings, showHelpButton, state]);
+	}, [
+		definition,
+		onClear,
+		onReset,
+		settings,
+		showHelpButton,
+		state,
+		userButtons,
+	]);
 
 	return (
 		<>

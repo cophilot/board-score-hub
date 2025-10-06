@@ -6,8 +6,10 @@ import { useIsDarkModeEnabled } from '../providers/ThemeProvider';
 import { RowDef } from '../core/types/RowDef';
 import BoardScore from '../core';
 
+const ROWS_LS_KEY = 'expandable-table-rows';
+const WIN_MODE_LS_KEY = 'expandable-table-win-mode';
+
 export default function ExpandableTable() {
-	const rowsLSKey = 'expandable-table-rows';
 	const isDarkModeEnabled = useIsDarkModeEnabled();
 
 	const [rows, setRows] = useState<RowDef[]>([
@@ -15,24 +17,30 @@ export default function ExpandableTable() {
 			name: 'Row 1',
 		},
 	]);
+	const [winMode, setWinModeState] = useState<WinMode>(WinMode.MOST);
+
+	const setWinMode = (mode: WinMode) => {
+		setWinModeState(mode);
+		localStorage.setItem(WIN_MODE_LS_KEY, mode);
+	};
 
 	useEffect(() => {
-		const storedRows = localStorage.getItem(rowsLSKey);
-		if (storedRows) {
-			const parsedRows = JSON.parse(storedRows);
-			setRows(parsedRows);
-		}
+		const storedRows = localStorage.getItem(ROWS_LS_KEY);
+		storedRows && setRows(JSON.parse(storedRows));
+
+		const storedWinMode = localStorage.getItem(WIN_MODE_LS_KEY) as WinMode;
+		storedWinMode && setWinModeState(storedWinMode);
 	}, []);
 
 	const definition = useMemo(() => {
 		return {
 			title: 'Expandable Table',
 			playerSizes: [1, 2, 3, 4, 5, 6],
-			winMode: WinMode.NONE,
+			winMode: winMode,
 			rows: rows,
 			stripeColor: isDarkModeEnabled() ? '#15203f' : '#d8d8d8',
 		};
-	}, [rows, isDarkModeEnabled]);
+	}, [rows, isDarkModeEnabled, winMode]);
 
 	const onCellChange = (row: number) => {
 		if (row < rows.length - 1) {
@@ -45,7 +53,7 @@ export default function ExpandableTable() {
 			},
 		];
 		setRows(newRows);
-		localStorage.setItem(rowsLSKey, JSON.stringify(newRows));
+		localStorage.setItem(ROWS_LS_KEY, JSON.stringify(newRows));
 	};
 
 	const logo = <Logo size={100} detectDarkMode />;
@@ -57,11 +65,27 @@ export default function ExpandableTable() {
 			logo={logo}
 			isDarkModeEnabled={isDarkModeEnabled()}
 			onReset={() => {
-				localStorage.removeItem(rowsLSKey);
+				localStorage.removeItem(ROWS_LS_KEY);
 			}}
 			onClear={() => {
-				localStorage.removeItem(rowsLSKey);
+				localStorage.removeItem(ROWS_LS_KEY);
 			}}
+			userButtons={[
+				{
+					label:
+						'Use ' +
+						(definition.winMode === WinMode.MOST ? ' Least' : ' Most') +
+						' to Win',
+					onClick: () => {
+						setWinMode(
+							definition.winMode === WinMode.MOST
+								? WinMode.LEAST
+								: WinMode.MOST,
+						);
+					},
+					iconClass: 'bi bi-arrow-left-right',
+				},
+			]}
 		>
 			<By />
 		</BoardScore>
