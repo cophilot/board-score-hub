@@ -16,18 +16,24 @@ import PopUp from '../../components/PopUp/PopUp';
 import { GameState } from '../../state/GameState';
 import { GameSettings } from '../../state/GameSettings';
 
-interface BoardScoreTableProps {
+export interface BoardScoreTableProps {
+	/** Callback function triggered when a cell value changes */
 	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
+	/** Callback function to retrieve the total row values, triggered when the table changes */
 	getTotalRow?: (row: number[]) => void;
 }
 
 /**
- * This is a BoardScoreTable component
+ * The BoardScoreTable component consists of the score table that is defined in the game definition.
+ * It handles the rendering of the table, input fields, total calculations, and extensions.
  * @author cophilot
  * @version 1.0.0
  * @created 2024-7-21
  */
-function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
+export function BoardScoreTable({
+	onCellChange,
+	getTotalRow,
+}: BoardScoreTableProps) {
 	//** START GAME DATA **//
 	const definition = useGameDefinition();
 	const state = useGameState();
@@ -278,7 +284,6 @@ function BoardScoreTable({ onCellChange, getTotalRow }: BoardScoreTableProps) {
 		</NumInputFocusManager>
 	);
 }
-export default BoardScoreTable;
 
 function RankingPopUp({
 	definition,

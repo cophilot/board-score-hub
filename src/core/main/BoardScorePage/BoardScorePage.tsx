@@ -2,7 +2,10 @@ import './BoardScorePage.scss';
 import { useEffect, useMemo } from 'react';
 import PlayerSwitch from '../../components/PlayerSwitch/PlayerSwitch';
 import StyleUtils from '../../utils/StyleUtils';
-import BoardScoreTable from '../BoardScoreTable/BoardScoreTable';
+import {
+	BoardScoreTable,
+	BoardScoreTableProps,
+} from '../BoardScoreTable/BoardScoreTable';
 import { useNavigate } from 'react-router-dom';
 import UIUtils from '../../utils/UIUtils';
 import { GameDef } from '../../types/GameDef';
@@ -24,35 +27,41 @@ import { GameSettings } from '../../state/GameSettings';
 import QuickGuidePopUp from '../../components/QuickGuidePopUp/QuickGuidePopUp';
 import { ExtensionDef } from '../../types/ExtensionDef';
 
-interface BoardScoreTableProps {
+export interface BoardScorePageProps extends BoardScoreTableProps {
+	/** Children elements to be rendered after the main content */
 	children?: JSX.Element;
-	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
-	getTotalRow?: (row: number[]) => void;
+	/** Callback function triggered when the reset button is clicked */
 	onReset?: () => void;
+	/** Callback function triggered when the clear button is clicked */
 	onClear?: () => void;
+	/** Optional logo element to be displayed at the top of the page */
 	logo?: JSX.Element;
+	/** Optional element to be rendered immediately after the score table */
 	afterTableElement?: JSX.Element;
+	/** Flag to enable dark mode styling */
 	isDarkModeEnabled?: boolean;
+	/** Array of user-defined buttons to be added to the game menu */
 	userButtons?: ButtonDefinition[];
 }
 
 /**
- * This is a BoardScorePage component
+ * The BoardScorePage component consists of the entire page including the header, player switcher, score table, and footer.
+ * It manages the overall layout and integrates various functionalities such as printing, sharing, and displaying additional information.
  * @author cophilot
  * @version 1.0.0
  * @created 2024-7-21
  */
-export default function BoardScorePage({
+export function BoardScorePage({
 	children,
-	onCellChange,
-	getTotalRow,
 	onReset,
 	onClear,
 	logo,
 	afterTableElement,
 	isDarkModeEnabled = false,
 	userButtons = [],
-}: BoardScoreTableProps): JSX.Element {
+	onCellChange,
+	getTotalRow,
+}: BoardScorePageProps): JSX.Element {
 	//** START GAME DATA **//
 	const definition = useGameDefinition();
 	const state = useGameState();

@@ -1,38 +1,40 @@
-import BoardScorePage from './main/BoardScorePage/BoardScorePage';
+import {
+	BoardScorePage,
+	BoardScorePageProps,
+} from './main/BoardScorePage/BoardScorePage';
 import { GameDataProvider } from './main/GameDataProvider';
 import { GameDef } from './types/GameDef';
 import { GameState } from './state/GameState';
 import { getSharedStateUrlSeparator, isSharedState } from './utils/functions';
 import { useMemo } from 'react';
 import StyleUtils from './utils/StyleUtils';
-import { ButtonDefinition } from './components/GameMenu/GameMenu';
 
-interface BoardScoreProps {
+interface BoardScoreProps extends BoardScorePageProps {
+	/** Game definition object containing the configuration for the score table */
 	definition: GameDef;
-	children?: JSX.Element;
-	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
-	getTotalRow?: (row: number[]) => void;
-	onReset?: () => void;
-	onClear?: () => void;
-	logo?: JSX.Element;
-	afterTableElement?: JSX.Element;
-	isDarkModeEnabled?: boolean;
+	/** Callback function triggered when the game state changes */
 	onGameStateChange?: (gameState: GameState) => void;
-	userButtons?: ButtonDefinition[];
 }
 
+/**
+ * The BoardScore component is the main entry point for rendering the score table application.
+ * It sets up the game data context and renders the BoardScorePage component, passing down necessary props and handling shared state.
+ * @author cophilot
+ * @version 1.0.0
+ * @created 2024-3-22
+ */
 export default function BoardScore({
 	definition,
+	onGameStateChange,
 	children,
-	onCellChange,
-	getTotalRow,
 	onReset,
 	onClear,
 	logo,
 	afterTableElement,
 	isDarkModeEnabled = false,
-	onGameStateChange,
-	userButtons,
+	userButtons = [],
+	onCellChange,
+	getTotalRow,
 }: BoardScoreProps) {
 	const getSharedStateString = () => {
 		if (!isSharedState()) {
