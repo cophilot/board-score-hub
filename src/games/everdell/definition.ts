@@ -23,27 +23,33 @@ export default function getDefinition(): GameDef {
 		stripeColor: '#4b5729',
 		rows: [
 			{
-				name: 'Cards in Village',
+				name: 'Cards in City',
+				description: 'Base points from cards in your city',
 				icon: pu.getAbsoluteImagePath('village'),
 			},
 			{
 				name: 'Prosperity',
+				description: 'Bonus points from prosperity',
 				icon: pu.getAbsoluteImagePath('prosperity'),
 			},
 			{
 				name: 'Point Tokens',
+				description: 'Earned point tokens',
 				icon: pu.getAbsoluteImagePath('point-token'),
 			},
 			{
 				name: 'Basic Events',
+				description: 'Points from completed basic events',
 				icon: pu.getAbsoluteImagePath('basic-events'),
 			},
 			{
 				name: 'Special Events',
+				description: 'Points from completed special events',
 				icon: pu.getAbsoluteImagePath('special-events'),
 			},
 			{
 				name: 'Journey',
+				description: 'Points for any workers you placed on Journey',
 				icon: pu.getAbsoluteImagePath('journey'),
 			},
 		],
@@ -52,7 +58,7 @@ export default function getDefinition(): GameDef {
 				rows: [
 					{
 						id: 'newleaf',
-						name: 'Vistors',
+						name: 'Visitors',
 						description: 'Points from the visitors challenges',
 						icon: pu.getAbsoluteImagePath('visitor'),
 					},

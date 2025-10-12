@@ -23,20 +23,27 @@ export default function getDefinition(): GameDef {
 		winMode: WinMode.MOST,
 		rows: [
 			{
-				name: 'Points on Cards',
+				name: 'Cards in City',
+				description: 'Base points from cards in your city',
+
 				icon: pu.getAbsoluteImagePath('cards'),
 			},
 
 			{
-				name: 'Purple bonus points',
+				name: 'Prosperity',
+				description: 'Bonus points from prosperity',
+
 				icon: pu.getAbsoluteImagePath('prosperity'),
 			},
 			{
-				name: 'Points tokens',
+				name: 'Point Tokens',
+				description: 'Earned point tokens',
+
 				icon: pu.getAbsoluteImagePath('point-token'),
 			},
 			{
 				name: 'Events',
+				description: 'Points from completed events',
 				icon: pu.getAbsoluteImagePath('events'),
 			},
 		],
