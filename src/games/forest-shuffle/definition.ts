@@ -8,6 +8,7 @@ export default function getDefinition(): GameDef {
 
 	return {
 		title: gameTitle,
+		altTitles: ['Mischwald'],
 		url: 'https://boardgamegeek.com/boardgame/391163/forest-shuffle',
 		rulesUrl:
 			'https://lookout-spiele.de/upload/en_forrestshuffle.html_Forest_Shuffle_175_Rules_EN_WEB_230516.pdf',

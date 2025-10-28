@@ -75,11 +75,27 @@ export function getSortedGames() {
 
 export function getSortedGameNames(): string[] {
 	const games = getSortedGames();
-	return games.map((game) => game.definition.title);
+	const names: string[] = [];
+	games.forEach((game: GameWithView) => {
+		names.push(game.definition.title);
+		if (game.definition.altTitles) {
+			names.push(...game.definition.altTitles);
+		}
+	});
+	return names.sort((a, b) => a.localeCompare(b));
 }
 
 export function getGameByName(name: string): GameWithView | undefined {
-	return getAllGames().find((game) => game.definition.title === name);
+	const game = getAllGames().find((game) => game.definition.title === name);
+	if (game) {
+		return game;
+	}
+
+	// Check alt titles
+	return getAllGames().find(
+		(game) =>
+			game.definition.altTitles && game.definition.altTitles.includes(name),
+	);
 }
 
 export function getGameOfTheDay() {

@@ -4,6 +4,7 @@ import { WinMode } from './WinMode';
 
 export interface GameDef {
 	title: string; // The name of the game
+	altTitles?: string[]; // Alternative names for the game
 	playerSizes: number[]; // An array of all possible player counts
 	minDurr?: number; // The minimum duration of the game
 	maxDurr?: number; // The maximum duration of the game
@@ -26,6 +27,7 @@ export interface GameDef {
 
 export interface ExternalGameDef {
 	title: string; // The name of the game
+	altTitles?: string[]; // Alternative names for the game
 	playerSizes: number[]; // An array of all possible player counts
 	link: string; // The URL to the game
 }
