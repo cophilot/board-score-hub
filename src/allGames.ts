@@ -29,11 +29,15 @@ import KnittingCircle from './games/knitting-circle/main';
 import Flip7 from './games/flip-7/main';
 import Prophecy from './games/prophecy/main';
 import EverdellFarshore from './games/everdell-farshore/main';
+import Sanctuary from './games/sanctuary/main';
+import SevenWondersDice from './games/seven-wonders-dice/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		SevenWondersDice,
+		Sanctuary,
 		EverdellFarshore,
 		Prophecy,
 		Flip7,
