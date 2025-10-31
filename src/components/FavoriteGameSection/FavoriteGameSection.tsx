@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './FavoriteGameSection.scss';
 import { getSortedGames } from '../../allGames';
-import LocalStorageService from '../../utils/LocalStorageService';
 import GameFilter from '../GameFilter/GameFilter';
 import GameButtonList from '../GameButtonList';
+import IndexedDBService from '../../utils/IndexedDBService';
 
 /**
  * This is a FavoriteGameSection component
@@ -13,16 +13,14 @@ import GameButtonList from '../GameButtonList';
  */
 function FavoriteGameSection() {
 	const [addingMode, setAddingMode] = useState(false);
-	const [favoriteGames, setFavoriteGamesInternal] = useState<string[]>(
-		LocalStorageService.getFavoriteGames(),
-	);
+	const [favoriteGames, setFavoriteGamesInternal] = useState<string[]>([]);
 	const allGames = getSortedGames();
 	const [games, setGames] = useState(allGames);
 
 	const setFavoriteGames = (favoriteGames: string[]) => {
 		favoriteGames.sort();
 		setFavoriteGamesInternal(favoriteGames);
-		LocalStorageService.setFavoriteGames(favoriteGames);
+		IndexedDBService.setFavoriteGames(favoriteGames);
 	};
 
 	const templateButtonStyle = { border: '2px dashed var(--font-color)' };
@@ -36,6 +34,12 @@ function FavoriteGameSection() {
 			}
 		}
 	};
+
+	useEffect(() => {
+		IndexedDBService.getFavoriteGames().then((favGames) => {
+			setFavoriteGamesInternal(favGames);
+		});
+	}, []);
 
 	return (
 		<div className="ver">
