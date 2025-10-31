@@ -46,6 +46,7 @@ export function BoardScoreTable({
 
 	//** START STATE **//
 	const [rows, setRows] = useState(definition.rows || []);
+	const [singleRowHelp, setSingleRowHelp] = useState<string[]>([]);
 	const [totalRow, setTotalRow] = useState(
 		Array.from(Array(state.getCurrPlayerSize()).keys()).map(() => 0),
 	);
@@ -232,21 +233,36 @@ export function BoardScoreTable({
 												</td>
 											</tr>
 										)}
-										{settings.getShowHelp() && row.icon && (
-											<tr className="help-row" key={'help-row-' + index}>
-												<td colSpan={state.getCurrPlayerSize() + 1}>
-													<b>{row.name}</b>
-													<i>
-														{row.description ? ' - ' + row.description : ''}
-													</i>
-												</td>
-											</tr>
-										)}
+										{row.icon &&
+											(settings.getShowHelp() ||
+												singleRowHelp.includes(row.name)) && (
+												<tr className="help-row" key={'help-row-' + index}>
+													<td colSpan={state.getCurrPlayerSize() + 1}>
+														<b>{row.name}</b>
+														<i>
+															{row.description ? ' - ' + row.description : ''}
+														</i>
+													</td>
+												</tr>
+											)}
 										<tr
 											key={index}
 											style={getStyleForRow(row, definition, index)}
 										>
-											<FirstRowCell row={row} />
+											<FirstRowCell
+												row={row}
+												onShowHelp={() => {
+													if (settings.getShowHelp()) return;
+													setSingleRowHelp((prev) => [...prev, row.name]);
+													setTimeout(
+														() =>
+															setSingleRowHelp((prev) =>
+																prev.filter((name) => name !== row.name),
+															),
+														5000,
+													);
+												}}
+											/>
 											{playerSizes.map((playerIndex) => (
 												<InputCell
 													row={row}
@@ -410,17 +426,24 @@ function InputCell({
 
 type FirstRowCellProps = {
 	row: RowDef;
-	helpOn?: boolean;
+	onShowHelp?: () => void;
 };
 
-function FirstRowCell({ row }: FirstRowCellProps) {
+function FirstRowCell({ row, onShowHelp }: FirstRowCellProps) {
 	let inner = <>{row.name}</>;
 	if (row.icon) {
 		inner = (
 			<img src={row.icon} alt={row.name} className="row-icon" loading="lazy" />
 		);
 	}
-	return <td style={{ fontWeight: 'bold' }}>{inner}</td>;
+	return (
+		<td
+			style={{ fontWeight: 'bold' }}
+			onClick={() => onShowHelp && onShowHelp()}
+		>
+			{inner}
+		</td>
+	);
 }
 
 const getColumnTotal = (
