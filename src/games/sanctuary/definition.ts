@@ -24,8 +24,6 @@ export default function getDefinition(): GameDef {
 		fontColor: '#020702',
 		primaryColor: '#009771',
 		secondaryColor: '#feed00',
-		//fontFamily: FontUtils.getHandwritingFont(),
-		//stripeColor: '#000',
 		playerSizes: [1, 2, 3, 4, 5],
 		winMode: WinMode.MOST,
 		rows: [
@@ -62,10 +60,16 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('restover'),
 			},
 			{
-				name: 'End-of-game Marker',
-				description:
-					'The points (1O or 5) on your End-of-game marker, if you have one.',
-				icon: pu.getAbsoluteImagePath('end-of-game-marker'),
+				name: 'End-of-game Marker First',
+				description: '10 points on your End-of-game marker, if you have one.',
+				icon: pu.getAbsoluteImagePath('end-of-game-marker-first'),
+				checkValue: 10,
+			},
+			{
+				name: 'End-of-game Marker Second',
+				description: '5 points on your End-of-game marker, if you have one.',
+				icon: pu.getAbsoluteImagePath('end-of-game-marker-second'),
+				checkValue: 5,
 			},
 		],
 	};

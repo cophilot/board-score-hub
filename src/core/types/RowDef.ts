@@ -8,6 +8,7 @@ export interface RowDef {
 	negative?: boolean; // Whether this row is negative
 	fn?: (n: number) => number; // The function to calculate the score
 	fnDisplay?: string; // A string to display the function
+	checkValue?: number; // If set to a number, clicking the row will add that number to the score when clicked
 	//staticNumber?: number[]; // A static number to be displayed
 }
 

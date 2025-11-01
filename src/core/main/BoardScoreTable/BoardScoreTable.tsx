@@ -15,6 +15,7 @@ import {
 import PopUp from '../../components/PopUp/PopUp';
 import { GameState } from '../../state/GameState';
 import { GameSettings } from '../../state/GameSettings';
+import CheckCell from '../../components/CheckCell/CheckCell';
 
 export interface BoardScoreTableProps {
 	/** Callback function triggered when a cell value changes */
@@ -405,21 +406,31 @@ function InputCell({
 	const getValueOrUndefined = () => {
 		return value === 0 ? undefined : value;
 	};
-
-	const inputElement = isMobile() ? (
-		<NumInput
-			name={row.name + ' | ' + playerName}
-			value={getValueOrUndefined()}
-			onChange={setValueFn}
-			transformNumber={transformValue}
-		/>
-	) : (
-		<input
-			type="number"
-			value={getValueOrUndefined()}
-			onChange={(e) => setValueFn(Number(e.target.value))}
-		/>
-	);
+	let inputElement = null;
+	if (row.checkValue) {
+		inputElement = (
+			<CheckCell
+				checkValue={row.checkValue}
+				currentValue={value}
+				onClick={setValueFn}
+			/>
+		);
+	} else {
+		inputElement = isMobile() ? (
+			<NumInput
+				name={row.name + ' | ' + playerName}
+				value={getValueOrUndefined()}
+				onChange={setValueFn}
+				transformNumber={transformValue}
+			/>
+		) : (
+			<input
+				type="number"
+				value={getValueOrUndefined()}
+				onChange={(e) => setValueFn(Number(e.target.value))}
+			/>
+		);
+	}
 
 	return <td>{inputElement}</td>;
 }
