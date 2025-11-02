@@ -31,11 +31,13 @@ import Prophecy from './games/prophecy/main';
 import EverdellFarshore from './games/everdell-farshore/main';
 import Sanctuary from './games/sanctuary/main';
 import SevenWondersDice from './games/seven-wonders-dice/main';
+import Earthrise from './games/earthrise/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Earthrise,
 		SevenWondersDice,
 		Sanctuary,
 		EverdellFarshore,
