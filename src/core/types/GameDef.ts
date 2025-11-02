@@ -23,6 +23,7 @@ export interface GameDef {
 	extensions?: ExtensionDefCollection; // Specify Extensions
 	quickGuide?: QuickGuideDef[] | string[]; // A quick guide to the game
 	roundMapper?: { [playerCount: number]: number }; // A mapping of player count to round count
+	tableShadow?: boolean; // Whether to show a shadow under the table
 }
 
 export interface ExternalGameDef {

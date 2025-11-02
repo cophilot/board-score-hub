@@ -201,7 +201,12 @@ export function BoardScoreTable({
 					onExtensionOn={onExtensionOn}
 					onExtensionOff={onExtensionOff}
 				/>
-				<table className="board-score-table">
+				<table
+					className={
+						'board-score-table ' +
+						(definition.tableShadow ? 'table-shadow' : '')
+					}
+				>
 					<thead>
 						<tr key="header">
 							<th key="-1"></th>

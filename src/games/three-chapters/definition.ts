@@ -22,6 +22,7 @@ export default function getDefinition(): GameDef {
 		stripeColor: '#ebcaa9',
 		playerSizes: [2, 3, 4, 5, 6],
 		winMode: WinMode.MOST,
+		tableShadow: true,
 		rows: [
 			{
 				name: 'Stars',

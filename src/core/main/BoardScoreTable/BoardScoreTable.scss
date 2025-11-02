@@ -6,6 +6,7 @@
 	line-height: 1;
 	border-spacing: 0;
 	border: 2px solid var(--primary-color);
+
 	th {
 		font-weight: bold;
 		background-color: var(--primary-color);
@@ -67,6 +68,11 @@
 		color: var(--bg-color);
 		font-weight: bold;
 	}
+}
+
+.table-shadow {
+	box-shadow: 10px 10px 10px
+		color-mix(in srgb, var(--font-color) 40%, transparent);
 }
 
 /* Chrome, Safari, Edge, Opera */
