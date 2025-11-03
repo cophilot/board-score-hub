@@ -32,11 +32,13 @@ import EverdellFarshore from './games/everdell-farshore/main';
 import Sanctuary from './games/sanctuary/main';
 import SevenWondersDice from './games/seven-wonders-dice/main';
 import Earthrise from './games/earthrise/main';
+import Spectacular from './games/spectacular/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Spectacular,
 		Earthrise,
 		SevenWondersDice,
 		Sanctuary,
