@@ -27,6 +27,12 @@ export default function getDefinition(): GameDef {
 					'Each validated card earns as many points as the number on it',
 			},
 			{
+				id: 'flower-power',
+				name: 'Facedown Card',
+				icon: pu.getAbsoluteImagePath('facedown-cards'),
+				description: 'Each facedown card without a card on top earns 5 points',
+			},
+			{
 				name: 'Spiral',
 				icon: pu.getAbsoluteImagePath('spiral'),
 				description: 'Each spiral earns 1 point',
@@ -38,11 +44,17 @@ export default function getDefinition(): GameDef {
 				negative: true,
 			},
 			{
+				id: 'round-end-1',
 				name: 'Color Zone',
 				icon: pu.getAbsoluteImagePath('color-zone'),
 				description:
 					'A color zone is made up of at least 2 cards of the same color touching along a side. Diagonals do not count. Each card that is part of the player´s largest zone earns: 2 points in round 1, 3 points in round 2 and 4 points in round 3',
 			},
 		],
+		extensions: {
+			'Flower Power': {
+				rows: [],
+			},
+		},
 	};
 }

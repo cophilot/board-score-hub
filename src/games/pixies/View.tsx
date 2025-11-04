@@ -8,6 +8,7 @@ import BoardScore from '../../core';
 
 export default function PixiesView() {
 	const [def, setDef] = useState(getDefinition());
+	const [fpOn, setFpOn] = useState(false);
 
 	const ogRows = getDefinition().rows;
 	const [rows, setRows] = useState(ogRows);
@@ -54,7 +55,17 @@ export default function PixiesView() {
 		/>
 	);
 	return (
-		<BoardScore definition={def} logo={logo} afterTableElement={roundBtn}>
+		<BoardScore
+			definition={def}
+			logo={logo}
+			afterTableElement={roundBtn}
+			onExtensionChange={(name, isActive) => {
+				if (name === 'Flower Power') {
+					setFpOn(isActive);
+				}
+			}}
+			rowFilter={fpOn ? () => true : (rf: RowDef) => rf.id !== 'flower-power'}
+		>
 			<By />
 		</BoardScore>
 	);
