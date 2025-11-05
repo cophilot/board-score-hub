@@ -61,6 +61,8 @@ export function BoardScorePage({
 	userButtons = [],
 	onCellChange,
 	getTotalRow,
+	onExtensionChange,
+	rowFilter,
 }: BoardScorePageProps): JSX.Element {
 	//** START GAME DATA **//
 	const definition = useGameDefinition();
@@ -226,6 +228,8 @@ export function BoardScorePage({
 				<BoardScoreTable
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}
+					onExtensionChange={onExtensionChange}
+					rowFilter={rowFilter}
 				></BoardScoreTable>
 				{afterTableElement}
 				{isSharedState() && (

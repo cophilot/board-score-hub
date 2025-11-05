@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './GameFilter.scss';
 import { GameWithView } from '../../core/types/GameWithView';
 
@@ -23,7 +23,7 @@ function GameFilter({ allGames, setGames }: GameFilterProps) {
 			return g;
 		}
 
-		setFilterString([...filterString, `Players: ${players}`]);
+		setFilterString([`Players: ${players}`]);
 		return g.filter((game) =>
 			game.definition.playerSizes.includes(parseInt(players)),
 		);
@@ -45,9 +45,13 @@ function GameFilter({ allGames, setGames }: GameFilterProps) {
 		setGames(filteredGames);
 	};
 
+	useEffect(() => {
+		apply();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [players]);
+
 	const clear = () => {
 		setPlayers('All');
-		apply();
 	};
 
 	return (
@@ -70,12 +74,11 @@ function GameFilter({ allGames, setGames }: GameFilterProps) {
 						</select>
 					</div>
 					<div className="row">
-						<button className="btn" onClick={clear}>
-							Clear
-						</button>
-						<button className="btn" onClick={apply}>
-							Apply
-						</button>
+						<i
+							className="bi bi-x-circle icon-btn"
+							onClick={() => setOpen(false)}
+						></i>
+						<i className="bi bi-trash icon-btn" onClick={clear}></i>
 					</div>
 				</>
 			) : (

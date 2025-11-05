@@ -35,6 +35,8 @@ export default function BoardScore({
 	userButtons = [],
 	onCellChange,
 	getTotalRow,
+	onExtensionChange,
+	rowFilter,
 }: BoardScoreProps) {
 	const getSharedStateString = () => {
 		if (!isSharedState()) {
@@ -63,6 +65,8 @@ export default function BoardScore({
 				afterTableElement={afterTableElement}
 				isDarkModeEnabled={isDarkModeEnabled}
 				userButtons={userButtons}
+				onExtensionChange={onExtensionChange}
+				rowFilter={rowFilter}
 			>
 				{children}
 			</BoardScorePage>

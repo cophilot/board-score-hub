@@ -22,6 +22,10 @@ export interface BoardScoreTableProps {
 	onCellChange?: (rowIndex: number, playerIndex: number, value: number) => void;
 	/** Callback function to retrieve the total row values, triggered when the table changes */
 	getTotalRow?: (row: number[]) => void;
+	/** Callback function triggered when an extension is toggled */
+	onExtensionChange?: (extensionName: string, isActive: boolean) => void;
+	/** Optional filter function to determine which rows to display */
+	rowFilter?: (row: RowDef) => boolean;
 }
 
 /**
@@ -34,6 +38,8 @@ export interface BoardScoreTableProps {
 export function BoardScoreTable({
 	onCellChange,
 	getTotalRow,
+	onExtensionChange,
+	rowFilter = () => true,
 }: BoardScoreTableProps) {
 	//** START GAME DATA **//
 	const definition = useGameDefinition();
@@ -133,8 +139,9 @@ export function BoardScoreTable({
 				return;
 			}
 			state.activateExtension(extensionName);
+			onExtensionChange && onExtensionChange(extensionName, true);
 		},
-		[definition.extensions, excludedIDs, rows, state],
+		[definition.extensions, excludedIDs, onExtensionChange, rows, state],
 	);
 
 	const onExtensionOff = (extensionName: string) => {
@@ -152,6 +159,7 @@ export function BoardScoreTable({
 			setExcludedIDS(newExcludeIds);
 		}
 		state.deactivateExtension(extensionName);
+		onExtensionChange && onExtensionChange(extensionName, false);
 	};
 	//** END FUNCTIONS **//
 
@@ -227,7 +235,7 @@ export function BoardScoreTable({
 						</tr>
 					</thead>
 					<tbody>
-						{rows.map(
+						{rows.filter(rowFilter).map(
 							(row: InternalRowDef, index: number) =>
 								(row.__visible || rounds === -1 || index < rounds) &&
 								!excludedIDs.includes(row.id || '___no_id___') && (
