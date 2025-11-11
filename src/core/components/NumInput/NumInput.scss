@@ -20,12 +20,19 @@
 	}
 }
 
+.small-font {
+	font-size: 24px;
+}
+
 @media (max-width: 700px) {
 	.NumInput {
 		font-size: 18px;
 		.cursor {
 			height: 20px;
 		}
+	}
+	.small-font {
+		font-size: 14px;
 	}
 }
 
