@@ -6,6 +6,7 @@ interface NumPadProps {
 	onBackspaceClick?: () => void;
 	name?: string;
 	onAddButtonClick: () => void;
+	isNegative?: boolean;
 }
 
 function NumPad({
@@ -14,6 +15,7 @@ function NumPad({
 	onBackspaceClick,
 	name = '',
 	onAddButtonClick,
+	isNegative = false,
 }: NumPadProps) {
 	return (
 		<div className="NumPad">
@@ -58,7 +60,7 @@ function NumPad({
 			</div>
 			<div className="row">
 				<button className="btn left-bottom inverted" onClick={onAddButtonClick}>
-					<i className="bi bi-plus-circle"></i>
+					<i className={`bi bi-${isNegative ? 'dash' : 'plus'}-circle`}></i>
 				</button>
 				<button className="btn" onClick={() => onNumberClick(0)}>
 					0

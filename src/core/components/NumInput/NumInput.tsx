@@ -12,13 +12,15 @@ interface NumInputProps {
 	name?: string;
 	onChange?: (value: number) => void;
 	transformNumber?: (value: number) => number;
+	isNegative?: boolean;
 }
 
 function NumInput({
 	value = 0,
 	name = '',
 	onChange,
-	transformNumber,
+	transformNumber = (v) => v,
+	isNegative = false,
 }: NumInputProps) {
 	const onFocus = useNumInputFocus();
 	const lostFocus = useNumInputLooseFocus();
@@ -36,16 +38,24 @@ function NumInput({
 		aNumRef.current = aNum;
 	}, [num, aNum]);
 
+	const merge = useCallback(
+		(a: number, b: number | undefined): number => {
+			return b === undefined ? a : isNegative ? a - b : a + b;
+		},
+		[isNegative],
+	);
+
 	const changed = useCallback(
 		(v: number, aNum: number | undefined) => {
-			if (transformNumber) {
-				v = transformNumber(v);
+			v = transformNumber(v);
+			if (isNegative && v > 0) {
+				v = v * -1;
 			}
 			onChange && onChange(v + (aNum || 0));
 			setNum(v);
 			setANum(aNum);
 		},
-		[onChange, transformNumber],
+		[isNegative, onChange, transformNumber],
 	);
 
 	const onNumberClick = (n: number) => {
@@ -63,7 +73,7 @@ function NumInput({
 			return;
 		}
 		if (aNum === 0) return;
-		changed(num + aNum, 0);
+		changed(merge(num, aNum), 0);
 	};
 
 	const onDeleteClick = () => {
@@ -79,9 +89,9 @@ function NumInput({
 		changed(num, deleteDigit(aNum));
 	};
 	const onLooseFocus = useCallback(() => {
-		changed(numRef.current + (aNumRef.current || 0), undefined);
+		changed(merge(numRef.current, aNumRef.current), undefined);
 		setShowNumPad(false);
-	}, [changed]);
+	}, [changed, merge]);
 
 	const onInputClick = useCallback(() => {
 		setShowNumPad(true);
@@ -90,7 +100,7 @@ function NumInput({
 
 	const closeNumPad = () => {
 		if (aNum !== undefined) {
-			changed(num + aNum, undefined);
+			changed(merge(num, aNum), undefined);
 		}
 		setShowNumPad(false);
 		lostFocus();
@@ -98,11 +108,11 @@ function NumInput({
 
 	const numString = useMemo(() => {
 		if (aNum === undefined) return parseNum(num);
-		return `${parseNum(num)} + ${parseNum(aNum)}`;
-	}, [num, aNum]);
+		return `${parseNum(num)} ${isNegative ? '-' : '+'} ${parseNum(aNum)}`;
+	}, [num, aNum, isNegative]);
 
 	if (isSharedState()) {
-		return <div className="NumInput">{parseNum(num + (aNum || 0))}</div>;
+		return <div className="NumInput">{parseNum(merge(num, aNum))}</div>;
 	}
 
 	return (
@@ -114,6 +124,7 @@ function NumInput({
 					onClose={closeNumPad}
 					onBackspaceClick={onDeleteClick}
 					onAddButtonClick={onAddButtonClick}
+					isNegative={isNegative}
 				/>
 			)}
 			<div

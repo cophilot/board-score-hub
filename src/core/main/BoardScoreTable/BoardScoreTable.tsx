@@ -402,13 +402,6 @@ function InputCell({
 }: InputCellProps) {
 	const value = getValue(rowIndex, playerIndex);
 
-	const transformValue = (value: number): number => {
-		if (row.negative && value > 0) {
-			return value * -1;
-		}
-		return value;
-	};
-
 	const setValueFn = (value: number) => {
 		if (isNaN(value)) {
 			return;
@@ -434,7 +427,7 @@ function InputCell({
 				name={row.name + ' | ' + playerName}
 				value={getValueOrUndefined()}
 				onChange={setValueFn}
-				transformNumber={transformValue}
+				isNegative={row.negative}
 			/>
 		) : (
 			<input
