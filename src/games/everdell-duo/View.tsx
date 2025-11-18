@@ -5,7 +5,7 @@ export default function EverdellDuoView() {
 	return (
 		<GameView
 			definition={getDefinition()}
-			afterTabelElement={<IndexButton />}
+			afterTableElement={<IndexButton />}
 		/>
 	);
 }
