@@ -6,6 +6,7 @@ export interface GameDef {
 	title: string; // The name of the game
 	altTitles?: string[]; // Alternative names for the game
 	playerSizes: number[]; // An array of all possible player counts
+	playerSizesInfo?: { [playerCount: number]: string }; // Infos to each player size
 	minDurr?: number; // The minimum duration of the game
 	maxDurr?: number; // The maximum duration of the game
 	rows: RowDef[]; // An array of rows

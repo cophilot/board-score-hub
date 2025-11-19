@@ -223,6 +223,18 @@ export function BoardScorePage({
 					initPlayerSize={state.getCurrPlayerSize()}
 					onPlayerSizeChange={onPlayerSizeChange}
 				></PlayerSwitch>
+				{definition.playerSizesInfo &&
+					definition.playerSizesInfo[state.getCurrPlayerSize()] && (
+						<p className="player-size-info">
+							{definition.playerSizesInfo[state.getCurrPlayerSize()]
+								.split('\n')
+								.map((line, index) => (
+									<>
+										<span key={index}>{line}</span> <br />
+									</>
+								))}
+						</p>
+					)}
 				{/* <h2 className="print-hide">Timer</h2>
 				<Timer gameTitle={definition.title} /> // TODO */}
 				<BoardScoreTable

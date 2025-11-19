@@ -23,6 +23,13 @@ export default function getDefinition(): GameDef {
 		primaryColor: '#e94f3d',
 		secondaryColor: '#f6ead1',
 		playerSizes: [2, 3, 4, 5, 6],
+		playerSizesInfo: {
+			2: 'Number of cards dealt: 17\nNumber of cards bid: 4\n Bonus points: 6\n Reveal bids: X',
+			3: 'Number of cards dealt: 17\nNumber of cards bid: 3\n Bonus points: 5\n Reveal bids: X',
+			4: 'Number of cards dealt: 15\nNumber of cards bid: 3\n Bonus points: 5\n Reveal bids: ✓',
+			5: 'Number of cards dealt: 12\nNumber of cards bid: 2\n Bonus points: 4\n Reveal bids: ✓',
+			6: 'Number of cards dealt: 10\nNumber of cards bid: 2\n Bonus points: 3\n Reveal bids: ✓',
+		},
 		winMode: WinMode.MOST,
 		rows: [
 			{
