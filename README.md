@@ -26,21 +26,9 @@ BoardScoreHub is a web application that is used for keeping track of scores for 
 
 ---
 
-## Add a game
+## Missing a game?
 
-Add a new folder in the [games](./src/games) directory with the structure of the other games. Alternative you can install [templify](https://github.com/cophilot/templify) and run the following command:
-
-```bash
-tpy generate game <game-name>
-```
-
-After adding the game folder you have to register the game in the [allGames.ts](./src/allGames.ts) file.
-
----
-
-## Game Definition
-
-The game definition defines the structure of the table for the game. You can find the interface for the definition [here](./src/api/types/GameDef.ts).
+Add a Game Request on the [Issues](https://github.com/cophilot/board-score-hub/issues/new?template=game-request.md) page.
 
 ---
 
@@ -54,6 +42,37 @@ To start the development server, run the following command:
 pnpm setup # install dependencies and setup husky
 pnpm start # start the development server
 ```
+
+---
+
+## Game Definition
+
+The game definition defines the structure of the table for the game. You can find the interface for the definition [here](./src/api/types/GameDef.ts).
+
+---
+
+## Add a game
+
+Add a new folder in the [games](./src/games) directory with the structure of the other games. Alternative you can install [templify](https://github.com/cophilot/templify) and run the following command and fill out the prompts:
+
+```bash
+tpy generate game <game-name>
+```
+
+After adding the game folder you have to register the game in the [allGames.ts](./src/allGames.ts) file.
+
+---
+
+## Project Structure
+
+- `src/core`: Core logic for the table page rendering and score calculation and storage.
+- `src/core/main`: Contains the `BoardScorePage` and `BoardScoreTable` components that are responsible for rendering the main page and table.
+- `src/core/state`: Contains state management logic for the application.
+- `src/core/types`: TypeScript types used throughout the core logic.
+- `src/games`: Contains all the game definitions and related assets.
+- `src/providers`: Context providers for state management and other global functionalities.
+- `src/views`: Different pages of the application (e.g., Home, About, ...).
+- `src/components`: Common components used throughout the application.
 
 ---
 
