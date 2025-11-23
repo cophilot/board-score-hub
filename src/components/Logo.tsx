@@ -1,7 +1,7 @@
 import logoPic from '../assets/logo.png';
 import logoPicWhite from '../assets/logo-white.png';
-import ColorUtils from '../utils/ColorUtils';
 import { useIsDarkModeEnabled } from '../providers/ThemeProvider';
+import ColorUtils from '../core/utils/ColorUtils';
 
 interface LogoProps {
 	size?: number;

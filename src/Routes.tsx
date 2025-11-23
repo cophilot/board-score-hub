@@ -2,7 +2,7 @@ import { Route, Routes as ReactRoutes, HashRouter } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import ExpandableTable from './views/ExpandableTable';
 import { getAllGames } from './allGames';
-import StringUtils from './utils/StringUtils';
+import StringUtils from './core/utils/StringUtils';
 import CreateCustomView from './views/CreateCustomView/CreateCustomView';
 import PrivacyView from './views/PrivacyView';
 import ConceptView from './views/ConceptView';

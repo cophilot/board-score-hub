@@ -21,4 +21,8 @@ export default class UIUtils {
 			element.style.display = displayStyles[i] || displayStyleFallback;
 		}
 	}
+
+	static isMobile() {
+		return window.innerWidth < 700;
+	}
 }

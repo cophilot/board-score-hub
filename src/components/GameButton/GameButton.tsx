@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './GameButton.scss';
-import StringUtils from '../../utils/StringUtils';
+import StringUtils from '../../core/utils/StringUtils';
 import { GameWithView } from '../../core/types/GameWithView';
 import { ExternalGameDef } from '../../core/types/GameDef';
 

@@ -3,7 +3,7 @@ import './FavoriteGameSection.scss';
 import { getSortedGames } from '../../allGames';
 import GameFilter from '../GameFilter/GameFilter';
 import GameButtonList from '../GameButtonList';
-import IndexedDBService from '../../utils/IndexedDBService';
+import IndexedDBService from '../../core/utils/IndexedDBService';
 
 /**
  * This is a FavoriteGameSection component
