@@ -1,4 +1,5 @@
 import { GameDef } from '../types/GameDef';
+import { WinMode } from '../types/WinMode';
 import { PersistentState } from './PersistentState';
 
 export interface GameStateData {
@@ -82,6 +83,36 @@ export class GameState extends PersistentState<GameStateData> {
 	}
 
 	//** START GETTER/SETTER */
+
+	public getTotalScores(): number[] {
+		const scores = this.data.tableMatrix[0];
+		for (let i = 1; i < this.data.tableMatrix.length; i++) {
+			for (let j = 0; j < this.data.tableMatrix[i].length; j++) {
+				scores[j] += this.data.tableMatrix[i][j] || 0;
+			}
+		}
+		return scores;
+	}
+
+	public getCurrentWinner(definition: GameDef): string {
+		const winMode = definition.winMode || WinMode.MOST;
+
+		let winnerIndex = -1;
+		let winningScore = winMode === WinMode.MOST ? -Infinity : Infinity;
+
+		this.getTotalScores().forEach((score, index) => {
+			if (
+				(winMode === WinMode.MOST && score > winningScore) ||
+				(winMode === WinMode.LEAST && score < winningScore)
+			) {
+				winningScore = score;
+				winnerIndex = index;
+			}
+		});
+
+		return this.getPlayerNamesAt(winnerIndex) || 'P' + (winnerIndex + 1);
+	}
+
 	public getGameTitle(): string {
 		return this.data.gameTitle;
 	}

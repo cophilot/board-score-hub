@@ -26,6 +26,7 @@ import IconButton from '../../components/IconButton/IconButton';
 import { GameSettings } from '../../state/GameSettings';
 import QuickGuidePopUp from '../../components/QuickGuidePopUp/QuickGuidePopUp';
 import { ExtensionDef } from '../../types/ExtensionDef';
+import IndexedDBService from '../../utils/IndexedDBService';
 
 export interface BoardScorePageProps extends BoardScoreTableProps {
 	/** Children elements to be rendered after the main content */
@@ -114,6 +115,20 @@ export function BoardScorePage({
 				label: 'Share',
 				iconClass: 'bi bi-link-45deg',
 				onClick: () => shareStateViaURL(state),
+			},
+			{
+				label: 'Log Play',
+				iconClass: 'bi bi-floppy',
+				onClick: () =>
+					IndexedDBService.addPLayLogEntry({
+						gameTitle: state.getGameTitle(),
+						timestamp: Date.now(),
+						playerNames: state.getPlayerNames(),
+						scores: state.getTotalScores(),
+						activatedExtensions: state.getActivatedExtension(),
+					}).then(() => {
+						alert('Play log entry saved!');
+					}),
 			},
 			{
 				label: 'Quick\nGuide',
