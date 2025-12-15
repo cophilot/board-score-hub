@@ -96,6 +96,10 @@ export default function HomeView() {
 					link="https://next-station.philipp-bonin.com/"
 				/>
 			</div>
+			<h2>Play Log</h2>
+			<div className="ver">
+				<RouteButton to="play-log">Play Log</RouteButton>
+			</div>
 			<h2>Infos</h2>
 			<div className="ver">
 				<RouteButton to="concept">Concept</RouteButton>
