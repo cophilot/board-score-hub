@@ -6,6 +6,7 @@ interface NumPadProps {
 	onBackspaceClick?: () => void;
 	name?: string;
 	onAddButtonClick: () => void;
+	onPlusMinusClick: () => void;
 	isNegative?: boolean;
 }
 
@@ -15,6 +16,7 @@ function NumPad({
 	onBackspaceClick,
 	name = '',
 	onAddButtonClick,
+	onPlusMinusClick,
 	isNegative = false,
 }: NumPadProps) {
 	return (
@@ -24,6 +26,13 @@ function NumPad({
 				<button className="btn small-btn right-top highlight" onClick={onClose}>
 					Done
 				</button>
+			</div>
+			<div className="row">
+				<button className="btn small-btn inverted"></button>
+				<button className="btn small-btn" onClick={onPlusMinusClick}>
+					<i className="bi bi-plus-slash-minus"></i>
+				</button>
+				<button className="btn small-btn inverted"></button>
 			</div>
 			<div className="row">
 				<button className="btn" onClick={() => onNumberClick(1)}>

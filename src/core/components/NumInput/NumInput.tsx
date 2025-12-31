@@ -66,6 +66,14 @@ function NumInput({
 		changed(num, addDigit(aNum, n));
 	};
 
+	const onSignChangeClick = () => {
+		if (aNum === undefined) {
+			changed(num * -1, undefined);
+			return;
+		}
+		changed(num, aNum * -1);
+	};
+
 	const onAddButtonClick = () => {
 		if (num === 0) return;
 		if (aNum === undefined) {
@@ -121,6 +129,7 @@ function NumInput({
 				<NumPad
 					name={name}
 					onNumberClick={onNumberClick}
+					onPlusMinusClick={onSignChangeClick}
 					onClose={closeNumPad}
 					onBackspaceClick={onDeleteClick}
 					onAddButtonClick={onAddButtonClick}
