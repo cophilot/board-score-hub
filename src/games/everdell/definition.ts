@@ -64,6 +64,16 @@ export default function getDefinition(): GameDef {
 					},
 				],
 			},
+			Bellfaire: {
+				rows: [
+					{
+						id: 'bellfaire',
+						name: 'Garland Awards',
+						description: 'Points from garland awards (ties are friendly)',
+						icon: pu.getAbsoluteImagePath('garland-awards'),
+					},
+				],
+			},
 			Spirecrest: {
 				rows: [
 					{
@@ -88,6 +98,10 @@ export default function getDefinition(): GameDef {
 			{
 				beforeID: 'spirecrest',
 				label: 'Spirecrest',
+			},
+			{
+				beforeID: 'bellfaire',
+				label: 'Bellfaire',
 			},
 		],
 	};
