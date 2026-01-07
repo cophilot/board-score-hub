@@ -33,11 +33,13 @@ import Sanctuary from './games/sanctuary/main';
 import SevenWondersDice from './games/seven-wonders-dice/main';
 import Earthrise from './games/earthrise/main';
 import Spectacular from './games/spectacular/main';
+import CapybaraCrush from './games/capybara-crush/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		CapybaraCrush,
 		Spectacular,
 		Earthrise,
 		SevenWondersDice,
