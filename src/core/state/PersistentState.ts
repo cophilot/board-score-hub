@@ -64,9 +64,21 @@ export abstract class PersistentState<T extends object> {
 
 	/**
 	 * Add an emitter that is called when the state changes.
+	 * @param stateEmitter The emitter to add
+	 * @returns The index of the added emitter
 	 */
-	public addEmitter(stateEmitter: (state: PersistentState<T>) => void): void {
+	public addEmitter(stateEmitter: (state: PersistentState<T>) => void): number {
 		this.emitters.push(stateEmitter);
+		return this.emitters.length - 1;
+	}
+
+	/** * Removes an emitter by its index.
+	 * @param index The index of the emitter to remove
+	 */
+	public removeEmitter(index: number): void {
+		if (index >= 0 && index < this.emitters.length) {
+			this.emitters.splice(index, 1);
+		}
 	}
 
 	/**

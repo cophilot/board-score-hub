@@ -1,5 +1,5 @@
 import './BoardScorePage.scss';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PlayerSwitch from '../../components/PlayerSwitch/PlayerSwitch';
 import StyleUtils from '../../utils/StyleUtils';
 import {
@@ -79,10 +79,14 @@ export function BoardScorePage({
 	//** END CONSTANTS **//
 
 	//** START STATES **//
+	const [savedPlay, setSavedPlay] = useState<boolean>(false);
 	//** END STATES **//
 
 	//** START FUNCTIONS **//
 	const onPlayerSizeChange = (size: number) => state.setCurrPlayerSize(size);
+	const onStateChange = () => {
+		setSavedPlay(false);
+	};
 	//** END FUNCTIONS **//
 
 	//** START HOOKS **//
@@ -91,6 +95,12 @@ export function BoardScorePage({
 			setInitialAttributes(definition, isDarkModeEnabled);
 		}, 10);
 	}, [definition, isDarkModeEnabled]);
+	useEffect(() => {
+		const id = state.addEmitter(onStateChange);
+		return () => {
+			state.removeEmitter(id);
+		};
+	}, [state]);
 	//** END HOOKS **//
 
 	const buttonDefinitions: ButtonDefinition[] = useMemo(() => {
@@ -118,7 +128,7 @@ export function BoardScorePage({
 			},
 			{
 				label: 'Log Play',
-				iconClass: 'bi bi-floppy',
+				iconClass: savedPlay ? 'bi bi-check-lg' : 'bi bi-floppy-fill',
 				onClick: () =>
 					IndexedDBService.addPLayLogEntry({
 						gameTitle: state.getGameTitle(),
@@ -128,6 +138,7 @@ export function BoardScorePage({
 						activatedExtensions: state.getActivatedExtension(),
 					}).then(() => {
 						alert('Play log entry saved!');
+						setSavedPlay(true);
 					}),
 			},
 			{
@@ -199,6 +210,7 @@ export function BoardScorePage({
 		definition,
 		onClear,
 		onReset,
+		savedPlay,
 		settings,
 		showHelpButton,
 		state,

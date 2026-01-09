@@ -61,7 +61,6 @@ export default class IndexedDBService {
 	}
 
 	static async addPLayLogEntry(playLog: PlayLogEntry): Promise<void> {
-		console.log('Adding play log entry:', playLog);
 		this.setEntry(
 			this.PLAY_LOG_STORE,
 			`${playLog.gameTitle}-${playLog.timestamp}`,
@@ -79,6 +78,7 @@ export default class IndexedDBService {
 				entries.push(JSON.parse(data as string) as PlayLogEntry);
 			}
 		}
+		entries.sort((a, b) => b.timestamp - a.timestamp);
 		return entries;
 	}
 }

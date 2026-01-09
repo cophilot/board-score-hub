@@ -16,15 +16,17 @@ export function playLogEntryToString(entry: PlayLogEntry): string {
 	const winnerIndex = entry.scores.indexOf(Math.max(...entry.scores));
 
 	const winner = parsedPlayerNames[winnerIndex] || `P${winnerIndex + 1}`;
-
+	const activeExtensions = entry.activatedExtensions.filter(
+		(x) => x.trim() !== '',
+	);
 	return (
 		`Game: ${entry.gameTitle}\n` +
 		`Timestamp: ${new Date(entry.timestamp).toLocaleString()}\n` +
 		`Players: ${parsedPlayerNames.join(', ')}\n` +
 		`Scores: ${entry.scores.join(', ')}\n` +
 		`Winner: ${winner}\n` +
-		(entry.activatedExtensions.length > 0
-			? `Extensions: ${entry.activatedExtensions.join(', ')}`
+		(activeExtensions.length > 0
+			? `Extensions: ${activeExtensions.join(', ')}`
 			: '')
 	);
 }
