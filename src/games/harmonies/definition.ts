@@ -45,26 +45,6 @@ export default function getDefinition(): GameDef {
 				name: 'Animal',
 				icon: pu.getAbsoluteImagePath('card'),
 			},
-			{
-				name: 'Animal',
-				icon: pu.getAbsoluteImagePath('card'),
-			},
-			{
-				name: 'Animal',
-				icon: pu.getAbsoluteImagePath('card'),
-			},
-			{
-				name: 'Animal',
-				icon: pu.getAbsoluteImagePath('card'),
-			},
-			{
-				name: 'Animal',
-				icon: pu.getAbsoluteImagePath('card'),
-			},
-			{
-				name: 'Animal',
-				icon: pu.getAbsoluteImagePath('card'),
-			},
 		],
 	};
 }
