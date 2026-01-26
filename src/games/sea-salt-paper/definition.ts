@@ -72,5 +72,29 @@ export default function getDefinition(): GameDef {
 				description: 'The highest number of cards of the same color.',
 			},
 		],
+		extensions: {
+			'Extra Salt': {
+				rules: 'https://studiobombyx.com/assets/EXTRA_SALT_rules_EN.pdf',
+				rows: [
+					{
+						id: 'extra-salt',
+						name: 'The cast of crabs',
+						description: '1 point per crab card.',
+						icon: pu.getAbsoluteImagePath('cast-of-crabs'),
+					},
+					{
+						name: 'Trio Cards',
+						description: '3 points per trio with a Starfish card.',
+						icon: pu.getAbsoluteImagePath('starfish'),
+					},
+				],
+			},
+		},
+		labels: [
+			{
+				beforeID: 'extra-salt',
+				label: 'Extra Salt',
+			},
+		],
 	};
 }
