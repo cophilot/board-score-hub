@@ -1,3 +1,4 @@
+import { ExtendedGameStats } from './ExtendedGameStats';
 import { ExtensionDefCollection } from './ExtensionDef';
 import { RowDef } from './RowDef';
 import { WinMode } from './WinMode';
@@ -25,6 +26,7 @@ export interface GameDef {
 	quickGuide?: QuickGuideDef[] | string[]; // A quick guide to the game
 	roundMapper?: { [playerCount: number]: number }; // A mapping of player count to round count
 	tableShadow?: boolean; // Whether to show a shadow under the table
+	stats?: ExtendedGameStats; // Extended stats for the game
 }
 
 export interface ExternalGameDef {
