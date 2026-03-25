@@ -48,16 +48,38 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('open-area'),
 			},
 			{
-				name: 'Conservation Achievement markers',
-				description:
-					'Points on your Conservation Achievement markers on the Conservation board.',
-				icon: pu.getAbsoluteImagePath('conservation-marker'),
-			},
-			{
 				name: 'Remaining Pouch and Conservation markers',
 				description:
 					'2 points for each Pouch marker and each remaining Conservation marker in your possession.',
 				icon: pu.getAbsoluteImagePath('restover'),
+			},
+			{
+				name: '2x Conservation Achievement markers',
+				description:
+					'5 Points when your 2x Conservation Achievement is on the Conservation board.',
+				icon: pu.getAbsoluteImagePath('conservation-marker-2'),
+				checkValue: 5,
+			},
+			{
+				name: '3x Conservation Achievement markers',
+				description:
+					'7 Points when your 3x Conservation Achievement is on the Conservation board.',
+				icon: pu.getAbsoluteImagePath('conservation-marker-3'),
+				checkValue: 7,
+			},
+			{
+				name: '4x Conservation Achievement markers',
+				description:
+					'10 Points when your 4x Conservation Achievement is on the Conservation board.',
+				icon: pu.getAbsoluteImagePath('conservation-marker-4'),
+				checkValue: 10,
+			},
+			{
+				name: '5x Conservation Achievement markers',
+				description:
+					'14 Points when your 5x Conservation Achievement is on the Conservation board.',
+				icon: pu.getAbsoluteImagePath('conservation-marker-5'),
+				checkValue: 14,
 			},
 			{
 				name: 'End-of-game Marker First',
