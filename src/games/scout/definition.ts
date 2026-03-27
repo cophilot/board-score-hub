@@ -8,8 +8,8 @@ export default function getDefinition(): GameDef {
 		url: 'https://boardgamegeek.com/boardgame/291453/scout',
 		rulesUrl:
 			'https://onemoregame.cloud-line.com/files/SCOUT!_v2.1_English_open.pdf',
-		bgColor: '#FBD800',
-		fontColor: '#4B0082',
+		bgColor: '#4B0082',
+		fontColor: '#F08600',
 		primaryColor: '#F08600',
 		secondaryColor: '#3E0099',
 		fontFamily: FontUtils.getClassicFont(),
