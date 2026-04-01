@@ -35,11 +35,13 @@ import Earthrise from './games/earthrise/main';
 import Spectacular from './games/spectacular/main';
 import CapybaraCrush from './games/capybara-crush/main';
 import LifeOfTheAmazonia from './games/life-of-the-amazonia/main';
+import Verdant from './games/verdant/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Verdant,
 		LifeOfTheAmazonia,
 		CapybaraCrush,
 		Spectacular,
