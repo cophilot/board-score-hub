@@ -95,6 +95,11 @@ export default function HomeView() {
 					asLink
 					link="https://next-station.philipp-bonin.com/"
 				/>
+				<GameButton
+					game="Emberleaf Randomizer"
+					asLink
+					link="/emberleaf-randomizer/"
+				/>
 			</div>
 			<h2>Play Log</h2>
 			<div className="ver">
