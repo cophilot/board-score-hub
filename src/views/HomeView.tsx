@@ -98,7 +98,7 @@ export default function HomeView() {
 				<GameButton
 					game="Emberleaf Randomizer"
 					asLink
-					link="/emberleaf-randomizer/"
+					link="https://cophilot.github.io/emberleaf-randomizer/"
 				/>
 			</div>
 			<h2>Play Log</h2>
