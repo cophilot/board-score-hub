@@ -37,11 +37,13 @@ import CapybaraCrush from './games/capybara-crush/main';
 import LifeOfTheAmazonia from './games/life-of-the-amazonia/main';
 import Verdant from './games/verdant/main';
 import Emberleaf from './games/emberleaf/main';
+import Targi from './games/targi/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Targi,
 		Emberleaf,
 		Verdant,
 		LifeOfTheAmazonia,
