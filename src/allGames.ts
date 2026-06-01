@@ -39,11 +39,13 @@ import Verdant from './games/verdant/main';
 import Emberleaf from './games/emberleaf/main';
 import Targi from './games/targi/main';
 import MovingWild from './games/moving-wild/main';
+import TheRedCathedral from './games/the-red-cathedral/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		TheRedCathedral,
 		MovingWild,
 		Targi,
 		Emberleaf,
