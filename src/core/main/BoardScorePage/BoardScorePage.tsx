@@ -39,6 +39,8 @@ export interface BoardScorePageProps extends BoardScoreTableProps {
 	logo?: JSX.Element;
 	/** Optional element to be rendered immediately after the score table */
 	afterTableElement?: JSX.Element;
+	/** Optional element to be rendered immediately before the score table */
+	beforeTableElement?: JSX.Element;
 	/** Flag to enable dark mode styling */
 	isDarkModeEnabled?: boolean;
 	/** Array of user-defined buttons to be added to the game menu */
@@ -58,6 +60,7 @@ export function BoardScorePage({
 	onClear,
 	logo,
 	afterTableElement,
+	beforeTableElement,
 	isDarkModeEnabled = false,
 	userButtons = [],
 	onCellChange,
@@ -264,6 +267,7 @@ export function BoardScorePage({
 					)}
 				{/* <h2 className="print-hide">Timer</h2>
 				<Timer gameTitle={definition.title} /> // TODO */}
+				{beforeTableElement}
 				<BoardScoreTable
 					onCellChange={onCellChange}
 					getTotalRow={getTotalRow}

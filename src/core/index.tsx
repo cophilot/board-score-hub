@@ -31,6 +31,7 @@ export default function BoardScore({
 	onClear,
 	logo,
 	afterTableElement,
+	beforeTableElement,
 	isDarkModeEnabled = false,
 	userButtons = [],
 	onCellChange,
@@ -63,6 +64,7 @@ export default function BoardScore({
 				onClear={onClear}
 				logo={logo}
 				afterTableElement={afterTableElement}
+				beforeTableElement={beforeTableElement}
 				isDarkModeEnabled={isDarkModeEnabled}
 				userButtons={userButtons}
 				onExtensionChange={onExtensionChange}

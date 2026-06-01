@@ -6,11 +6,13 @@ import LogoWithBanner from './LogoWithBanner';
 interface GameViewProps {
 	definition: GameDef;
 	afterTableElement?: JSX.Element;
+	beforeTableElement?: JSX.Element;
 }
 
 export default function GameView({
 	definition,
 	afterTableElement,
+	beforeTableElement,
 }: GameViewProps): JSX.Element {
 	const logo = (
 		<LogoWithBanner
@@ -24,6 +26,7 @@ export default function GameView({
 			definition={definition}
 			logo={logo}
 			afterTableElement={afterTableElement}
+			beforeTableElement={beforeTableElement}
 		>
 			<By />
 		</BoardScore>
