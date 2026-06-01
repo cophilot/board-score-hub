@@ -38,11 +38,13 @@ import LifeOfTheAmazonia from './games/life-of-the-amazonia/main';
 import Verdant from './games/verdant/main';
 import Emberleaf from './games/emberleaf/main';
 import Targi from './games/targi/main';
+import MovingWild from './games/moving-wild/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		MovingWild,
 		Targi,
 		Emberleaf,
 		Verdant,
