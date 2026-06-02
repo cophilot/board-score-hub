@@ -40,11 +40,13 @@ import Emberleaf from './games/emberleaf/main';
 import Targi from './games/targi/main';
 import MovingWild from './games/moving-wild/main';
 import TheRedCathedral from './games/the-red-cathedral/main';
+import Explorers from './games/explorers/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Explorers,
 		TheRedCathedral,
 		MovingWild,
 		Targi,
