@@ -264,6 +264,7 @@ export function BoardScoreTable({
 											style={getStyleForRow(row, definition, index)}
 										>
 											<FirstRowCell
+												state={state}
 												row={row}
 												onShowHelp={() => {
 													if (settings.getShowHelp()) return;
@@ -296,7 +297,7 @@ export function BoardScoreTable({
 								),
 						)}
 						<tr key="total" className="total-row">
-							<FirstRowCell row={{ name: 'Total' }} />
+							<FirstRowCell state={state} row={{ name: 'Total' }} />
 							{totalRow.map((value, playerIndex) => (
 								<td
 									key={playerIndex}
@@ -442,15 +443,21 @@ function InputCell({
 }
 
 type FirstRowCellProps = {
+	state: GameState;
 	row: RowDef;
 	onShowHelp?: () => void;
 };
 
-function FirstRowCell({ row, onShowHelp }: FirstRowCellProps) {
+function FirstRowCell({ state, row, onShowHelp }: FirstRowCellProps) {
 	let inner = <>{row.name}</>;
-	if (row.icon) {
+	if (row.icon || row.iconFn) {
 		inner = (
-			<img src={row.icon} alt={row.name} className="row-icon" loading="lazy" />
+			<img
+				src={row.icon || row.iconFn?.(state.getCurrPlayerSize())}
+				alt={row.name}
+				className="row-icon"
+				loading="lazy"
+			/>
 		);
 	}
 	return (

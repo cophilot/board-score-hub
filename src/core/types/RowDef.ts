@@ -2,6 +2,7 @@ export interface RowDef {
 	id?: string; // The ID of the row
 	name: string; // The name of the row
 	icon?: string; // The icon to be displayed for the row
+	iconFn?: (playerSize: number) => string; // Function to get the icon based on player size
 	description?: string; // The description of the row
 	bgColor?: string; // The background color to be used only for this row
 	fontColor?: string; // The font color to be used only for this row

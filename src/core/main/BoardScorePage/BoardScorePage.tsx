@@ -78,7 +78,7 @@ export function BoardScorePage({
 	const navigate = useNavigate();
 	const showHelpButton = definition.rows.some(
 		(row: RowDef) => row.icon || row.description,
-	);
+	); // Check if at least one row has an icon or description to determine if the help button is needed
 	//** END CONSTANTS **//
 
 	//** START STATES **//
