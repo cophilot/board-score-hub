@@ -13,6 +13,13 @@ export default function getDefinition(): GameDef {
 	const gameTitle = 'The Red Cathedral';
 	const pu = new PathUtils(gameTitle);
 
+	const getIconFn = (i: number): ((playerSize: number) => string) => {
+		return (playerSize: number) =>
+			pu.getAbsoluteImagePath(
+				`towers/${playerSize == 1 ? 2 : playerSize}-${i}`,
+			);
+	};
+
 	return {
 		title: gameTitle,
 		url: 'https://boardgamegeek.com/boardgame/227224/the-red-cathedral',
@@ -35,6 +42,12 @@ export default function getDefinition(): GameDef {
 		fontFamily: FontUtils.getClassicFont(),
 		playerSizes: [1, 2, 3, 4],
 		winMode: WinMode.MOST,
+		roundMapper: {
+			1: 6,
+			2: 6,
+			3: 7,
+			4: 8,
+		},
 		rows: [
 			{
 				name: 'Prestige Points',
@@ -49,10 +62,40 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('resources'),
 			},
 			{
-				name: 'Tower Contributions',
+				name: 'Tower 1 Contributions',
 				description:
-					'Gain prestige points based on their contributions to each of the towers.',
-				icon: pu.getAbsoluteImagePath('towers'),
+					'Gain prestige points based on the contributions to tower 1.',
+				iconFn: getIconFn(1),
+			},
+			{
+				name: 'Tower 2 Contributions',
+				description:
+					'Gain prestige points based on the contributions to tower 2.',
+				iconFn: getIconFn(2),
+			},
+			{
+				name: 'Tower 3 Contributions',
+				description:
+					'Gain prestige points based on the contributions to tower 3.',
+				iconFn: getIconFn(3),
+			},
+			{
+				name: 'Tower 4 Contributions',
+				description:
+					'Gain prestige points based on the contributions to tower 4.',
+				iconFn: getIconFn(4),
+			},
+			{
+				name: 'Tower 5 Contributions',
+				description:
+					'Gain prestige points based on the contributions to tower 5.',
+				iconFn: getIconFn(5),
+			},
+			{
+				name: 'Tower 6 Contributions',
+				description:
+					'Gain prestige points based on the contributions to tower 6.',
+				iconFn: getIconFn(6),
 			},
 		],
 	};
