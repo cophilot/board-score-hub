@@ -33,6 +33,7 @@ import Sanctuary from './games/sanctuary/main';
 import SevenWondersDice from './games/seven-wonders-dice/main';
 import Earthrise from './games/earthrise/main';
 import Spectacular from './games/spectacular/main';
+import Karuba from './games/karuba/main';
 import CapybaraCrush from './games/capybara-crush/main';
 import LifeOfTheAmazonia from './games/life-of-the-amazonia/main';
 import Verdant from './games/verdant/main';
@@ -56,6 +57,7 @@ export function getAllGames(): GameWithView[] {
 		CapybaraCrush,
 		Spectacular,
 		Earthrise,
+		Karuba,
 		SevenWondersDice,
 		Sanctuary,
 		EverdellFarshore,
