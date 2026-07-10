@@ -38,6 +38,7 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('point-token'),
 			},
 			{
+				id: 'basic-events',
 				name: 'Basic Events',
 				description: 'Points from completed basic events',
 				icon: pu.getAbsoluteImagePath('basic-events'),
@@ -89,6 +90,30 @@ export default function getDefinition(): GameDef {
 					},
 				],
 			},
+			Pearlbrook: {
+				excludeRows: ['basic-events'],
+				rules: 'https://boardgame.bg/everdell%20pearlbrook%20rules.pdf',
+				rows: [
+					{
+						id: 'pearlbrook',
+						name: 'Adornments',
+						description: 'Points gained from your played adornments cards',
+						icon: pu.getAbsoluteImagePath('adornments'),
+					},
+					{
+						name: 'Wonders',
+						description:
+							'Points from your wonders that you built during the game',
+						icon: pu.getAbsoluteImagePath('wonders'),
+					},
+					{
+						name: 'Pearls',
+						description:
+							'Any pearls you have remaining at the end ofthe game are worth 2 points each',
+						icon: pu.getAbsoluteImagePath('pearls'),
+					},
+				],
+			},
 		},
 		labels: [
 			{
@@ -102,6 +127,10 @@ export default function getDefinition(): GameDef {
 			{
 				beforeID: 'bellfaire',
 				label: 'Bellfaire',
+			},
+			{
+				beforeID: 'pearlbrook',
+				label: 'Pearlbrook',
 			},
 		],
 	};
