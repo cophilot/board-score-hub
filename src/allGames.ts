@@ -40,6 +40,7 @@ import Verdant from './games/verdant/main';
 import Emberleaf from './games/emberleaf/main';
 import Targi from './games/targi/main';
 import MovingWild from './games/moving-wild/main';
+import GreatWesternTrail from './games/great-western-trail/main';
 import TheRedCathedral from './games/the-red-cathedral/main';
 import Explorers from './games/explorers/main';
 // ~~new-game-import~~
@@ -48,6 +49,7 @@ export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
 		Explorers,
+		GreatWesternTrail,
 		TheRedCathedral,
 		MovingWild,
 		Targi,
