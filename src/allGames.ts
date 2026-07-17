@@ -43,14 +43,18 @@ import MovingWild from './games/moving-wild/main';
 import GreatWesternTrail from './games/great-western-trail/main';
 import TheRedCathedral from './games/the-red-cathedral/main';
 import Explorers from './games/explorers/main';
+import RaisingRobots from './games/raising-robots/main';
+import Bonsai from './games/bonsai/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Bonsai,
+		RaisingRobots,
 		Explorers,
-		GreatWesternTrail,
 		TheRedCathedral,
+		GreatWesternTrail,
 		MovingWild,
 		Targi,
 		Emberleaf,
