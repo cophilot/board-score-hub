@@ -158,6 +158,7 @@ export function BoardScorePage({
 					window.open(definition.rulesUrl, '_blank');
 				},
 				disabled: !definition.rulesUrl,
+				quickMenu: true,
 			},
 			...(definition.extensions
 				? Object.entries(definition.extensions)
