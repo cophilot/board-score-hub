@@ -35,3 +35,4 @@ vars:
   - fontColor(black)
   - primaryColor(red)
   - secondaryColor(blue)
+command: pnpm run format

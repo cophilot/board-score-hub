@@ -3,13 +3,13 @@ import { WinMode } from '../../core/types/WinMode';
 import PathUtils from '../../core/utils/PathUtils';
 
 /**
- * This is the definition for the $$name.p$$ game.
+ * This is the definition for the $$name$$ game.
  * @author $$git-name$$
  * @version 1.0.0
  * @created $$year$$-$$month$$-$$day$$
  */
 export default function getDefinition(): GameDef {
-	const gameTitle = '$$name.p$$';
+	const gameTitle = '$$name$$';
 	const pu = new PathUtils(gameTitle);
 
 	return {
@@ -27,10 +27,12 @@ export default function getDefinition(): GameDef {
 		rows: [
 			{
 				name: 'Row1',
+				description: 'Description for Row1',
+				icon: pu.getAbsoluteImagePath('row1'),
 			},
-
 			{
 				name: 'Row2',
+				description: 'Description for Row2',
 				icon: pu.getAbsoluteImagePath('row2'),
 			},
 		],
