@@ -44,6 +44,7 @@ import GreatWesternTrail from './games/great-western-trail/main';
 import TheRedCathedral from './games/the-red-cathedral/main';
 import Explorers from './games/explorers/main';
 import RaisingRobots from './games/raising-robots/main';
+import Parks from './games/parks/main';
 import Bonsai from './games/bonsai/main';
 // ~~new-game-import~~
 
@@ -51,6 +52,7 @@ export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
 		Bonsai,
+		Parks,
 		RaisingRobots,
 		Explorers,
 		TheRedCathedral,
