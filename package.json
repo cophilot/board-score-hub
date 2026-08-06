@@ -18,7 +18,7 @@
 	"dependencies": {
 		"@types/webfontloader": "^1.6.38",
 		"bootstrap-icons": "^1.11.3",
-		"echarts": "^5.6.0",
+		"echarts": "^6.1.0",
 		"echarts-for-react": "^3.0.2",
 		"html2canvas": "^1.4.1",
 		"idb": "^8.0.3",
