@@ -46,11 +46,13 @@ import Explorers from './games/explorers/main';
 import RaisingRobots from './games/raising-robots/main';
 import Parks from './games/parks/main';
 import Bonsai from './games/bonsai/main';
+import ForestShuffleDartmoor from './games/forest-shuffle-dartmoor/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		ForestShuffleDartmoor,
 		Bonsai,
 		Parks,
 		RaisingRobots,
