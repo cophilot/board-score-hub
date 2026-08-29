@@ -1,4 +1,4 @@
-import getDefinition from './definition';
+import { getDefinition } from './definition';
 import ForestShuffleDartmoorView from './View';
 
 const ForestShuffleDartmoor = {

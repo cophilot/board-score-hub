@@ -1,14 +1,44 @@
+import { useState } from 'react';
 import GameView from '../../components/GameView';
-import getDefinition from './definition';
+import { getDefinitionByKind, ForestShuffleDartmoorKind } from './definition';
+
+const KIND_LS_KEY = 'forest-shuffle-dartmoor-kind';
 
 export default function ForestShuffleDartmoorView() {
+	const [kind, setKindI] = useState(
+		(localStorage.getItem(KIND_LS_KEY) as ForestShuffleDartmoorKind) ||
+			ForestShuffleDartmoorKind.DEFAULT,
+	);
+
+	const setKind = (newKind: ForestShuffleDartmoorKind) => {
+		setKindI(newKind);
+		localStorage.setItem(KIND_LS_KEY, newKind);
+	};
+
 	return (
 		<GameView
-			definition={getDefinition()}
+			definition={getDefinitionByKind(kind)}
 			afterTableElement={<IndexButton />}
+			beforeTableElement={
+				<div className="btn-group kind-btn-group">
+					<button
+						className={`btn ${kind === ForestShuffleDartmoorKind.DEFAULT ? 'selected' : ''}`}
+						onClick={() => setKind(ForestShuffleDartmoorKind.DEFAULT)}
+					>
+						Default
+					</button>
+					<button
+						className={`btn ${kind === ForestShuffleDartmoorKind.BY_ICON ? 'selected' : ''}`}
+						onClick={() => setKind(ForestShuffleDartmoorKind.BY_ICON)}
+					>
+						By Icon
+					</button>
+				</div>
+			}
 		/>
 	);
 }
+
 const IndexButton = () => {
 	return (
 		<a
