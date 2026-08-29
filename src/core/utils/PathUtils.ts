@@ -32,7 +32,12 @@ export default class PathUtils {
 		prefixWithAssetsFolder = true,
 		extendWithPng = true,
 	): string {
-		const isProduction = import.meta.env.PROD;
+		let isProduction = true;
+		try {
+			isProduction = import.meta.env.PROD;
+		} catch (e) {
+			isProduction = true;
+		}
 
 		if (prefixWithAssetsFolder && !path.startsWith('/assets/')) {
 			path = `/assets/${path}`;

@@ -13,7 +13,8 @@
 		"format": "prettier --write src --ignore-path .prettierignore",
 		"format:check": "prettier --check src --ignore-path .prettierignore",
 		"verify": "pnpm run lint && pnpm run format:check && pnpm run build",
-		"prepare": "husky"
+		"prepare": "husky",
+		"parse-games": "npx tsx utils/parse.ts"
 	},
 	"dependencies": {
 		"@types/webfontloader": "^1.6.38",
