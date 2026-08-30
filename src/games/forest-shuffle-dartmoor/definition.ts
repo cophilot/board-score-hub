@@ -62,6 +62,18 @@ function getByIconRows(pu: PathUtils): RowDef[] {
 			icon: pu.getAbsoluteImagePath('moor_icon'),
 		},
 		{
+			name: 'Plants',
+			icon: pu.getAbsoluteImagePath('plant'),
+		},
+		{
+			name: 'Dragonflies',
+			icon: pu.getAbsoluteImagePath('dragonfly'),
+		},
+		{
+			name: 'Insects',
+			icon: pu.getAbsoluteImagePath('insect'),
+		},
+		{
 			name: 'Amphibians',
 			icon: pu.getAbsoluteImagePath('amphibian'),
 		},
@@ -70,34 +82,21 @@ function getByIconRows(pu: PathUtils): RowDef[] {
 			icon: pu.getAbsoluteImagePath('bat'),
 		},
 		{
-			name: 'Insects',
-			icon: pu.getAbsoluteImagePath('insect'),
-		},
-		{
-			name: 'Dragonflies',
-			icon: pu.getAbsoluteImagePath('dragonfly'),
+			name: 'Birds',
+			icon: pu.getAbsoluteImagePath('bird'),
 		},
 		{
 			name: 'Mice',
 			icon: pu.getAbsoluteImagePath('mouse'),
 		},
 		{
-			name: 'Cloven-hoofed animals',
-			icon: pu.getAbsoluteImagePath('hoof'),
-		},
-		{
-			name: 'Plants',
-			icon: pu.getAbsoluteImagePath('plant'),
-		},
-		{
 			name: 'Pawed Animals',
 			icon: pu.getAbsoluteImagePath('paw'),
 		},
 		{
-			name: 'Birds',
-			icon: pu.getAbsoluteImagePath('bird'),
+			name: 'Cloven-hoofed animals',
+			icon: pu.getAbsoluteImagePath('hoof'),
 		},
-
 		{
 			name: 'Cave',
 			description: '1 point for each card in the cave',
