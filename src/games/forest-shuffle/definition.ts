@@ -24,20 +24,16 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('card'),
 			},
 			{
+				name: 'Cards left and right',
+				icon: pu.getAbsoluteImagePath('left_right'),
+			},
+			{
 				name: 'Cards top',
 				icon: pu.getAbsoluteImagePath('top'),
 			},
 			{
-				name: 'Cards right',
-				icon: pu.getAbsoluteImagePath('right'),
-			},
-			{
 				name: 'Cards below',
 				icon: pu.getAbsoluteImagePath('down'),
-			},
-			{
-				name: 'Cards left',
-				icon: pu.getAbsoluteImagePath('left'),
 			},
 			{
 				name: 'Cave',
