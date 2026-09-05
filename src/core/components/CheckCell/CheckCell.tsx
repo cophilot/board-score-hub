@@ -2,6 +2,7 @@ import './CheckCell.scss';
 
 interface CheckCellProps {
 	checkValue: number;
+	exclusiveCheck?: boolean;
 	currentValue: number;
 	onClick?: (value: number) => void;
 }
@@ -12,7 +13,12 @@ interface CheckCellProps {
  * @version 1.0.0
  * @created 2025-10-31
  */
-function CheckCell({ currentValue, checkValue, onClick }: CheckCellProps) {
+function CheckCell({
+	currentValue,
+	exclusiveCheck,
+	checkValue,
+	onClick,
+}: CheckCellProps) {
 	const isChecked = currentValue === checkValue;
 
 	const click = () => {
@@ -29,10 +35,10 @@ function CheckCell({ currentValue, checkValue, onClick }: CheckCellProps) {
 					<div className="value">{checkValue}</div>
 				</div>
 			) : (
-				<div className="square"></div>
+				<div className={'square ' + (exclusiveCheck ? 'exclusive' : '')}></div>
 			)}
 		</div>
 	);
 }
-// {currentValue !== 0 && '✔'}
+
 export default CheckCell;

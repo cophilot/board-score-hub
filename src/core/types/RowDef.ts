@@ -10,6 +10,7 @@ export interface RowDef {
 	fn?: (n: number) => number; // The function to calculate the score
 	fnDisplay?: string; // A string to display the function
 	checkValue?: number; // If set to a number, clicking the row will add that number to the score when clicked
+	exclusiveCheck?: boolean; // If set to true, only one player can have a check in this row
 	//staticNumber?: number[]; // A static number to be displayed
 }
 

@@ -70,6 +70,12 @@ export function BoardScoreTable({
 		return state.getTableMatrix()[rowIndex][playerIndex] || 0;
 	};
 
+	const resetRow = (rowIndex: number) => {
+		playerSizes.forEach((playerIndex) => {
+			setTableValue(rowIndex, playerIndex, 0);
+		});
+	};
+
 	const setTableValue = (
 		rowIndex: number,
 		playerIndex: number,
@@ -290,6 +296,7 @@ export function BoardScoreTable({
 													playerIndex={playerIndex}
 													getValue={getTableValue}
 													setValue={setTableValue}
+													resetRow={resetRow}
 												/>
 											))}
 										</tr>
@@ -391,6 +398,7 @@ type InputCellProps = {
 	playerName: string;
 	getValue: (rowIndex: number, playerIndex: number) => number;
 	setValue: (rowIndex: number, playerIndex: number, value: number) => void;
+	resetRow: (rowIndex: number) => void;
 };
 
 function InputCell({
@@ -400,10 +408,14 @@ function InputCell({
 	playerName,
 	getValue,
 	setValue,
+	resetRow,
 }: InputCellProps) {
 	const value = getValue(rowIndex, playerIndex);
 
 	const setValueFn = (value: number) => {
+		if (row.exclusiveCheck && value !== 0) {
+			resetRow(rowIndex);
+		}
 		if (isNaN(value)) {
 			return;
 		}
@@ -420,6 +432,7 @@ function InputCell({
 				checkValue={row.checkValue}
 				currentValue={value}
 				onClick={setValueFn}
+				exclusiveCheck={row.exclusiveCheck}
 			/>
 		);
 	} else {
