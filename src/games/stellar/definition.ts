@@ -35,6 +35,10 @@ export default function getDefinition(): GameDef {
 				beforeID: 'top',
 				label: '2. Section Majorities',
 			},
+			{
+				beforeID: 'diversity',
+				label: '3. Diversity Bonus',
+			},
 		],
 		rows: [
 			{
@@ -60,18 +64,27 @@ export default function getDefinition(): GameDef {
 			},
 			{
 				id: 'top',
-				name: 'Top',
+				name: 'Top Majority',
 				icon: pu.getAbsoluteImagePath('top'),
 				checkValue: 10,
+				exclusiveCheck: true,
 			},
 			{
-				name: 'Middle',
+				name: 'Middle Majority',
 				icon: pu.getAbsoluteImagePath('middle'),
 				checkValue: 10,
+				exclusiveCheck: true,
 			},
 			{
-				name: 'Bottom',
+				name: 'Bottom Majority',
 				icon: pu.getAbsoluteImagePath('bottom'),
+				checkValue: 10,
+				exclusiveCheck: true,
+			},
+			{
+				id: 'diversity',
+				name: 'Diversity',
+				icon: pu.getAbsoluteImagePath('diversity'),
 				checkValue: 10,
 			},
 		],
