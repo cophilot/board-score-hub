@@ -94,6 +94,7 @@ export default function getDefinition(): GameDef {
 					'Gain 2 victory points if you have the job market token in front of you.',
 				icon: pu.getAbsoluteImagePath('job-market-token'),
 				checkValue: 2,
+				exclusiveCheck: true,
 			},
 		],
 	};

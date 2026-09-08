@@ -46,6 +46,7 @@ export default function getDefinition(): GameDef {
 					'One point for the player who has the Start Player Maker at the end of the game.',
 				icon: pu.getAbsoluteImagePath('start-player-maker'),
 				checkValue: 1,
+				exclusiveCheck: true,
 			},
 		],
 	};

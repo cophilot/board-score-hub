@@ -31,7 +31,6 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('robot'),
 				bgColor: '#3d82c4',
 				fontColor: '#fff',
-				checkValue: 7,
 			},
 			{
 				name: 'Class Cards',

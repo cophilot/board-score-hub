@@ -106,6 +106,7 @@ export default function getDefinition(): GameDef {
 					'The player with the End Game Bonus token receives 5 points.',
 				icon: pu.getAbsoluteImagePath('end-game-bonus'),
 				checkValue: 5,
+				exclusiveCheck: true,
 			},
 		],
 	};

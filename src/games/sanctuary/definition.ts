@@ -86,6 +86,7 @@ export default function getDefinition(): GameDef {
 				description: '10 points on your End-of-game marker, if you have one.',
 				icon: pu.getAbsoluteImagePath('end-of-game-marker-first'),
 				checkValue: 10,
+				exclusiveCheck: true,
 			},
 			{
 				name: 'End-of-game Marker Second',
