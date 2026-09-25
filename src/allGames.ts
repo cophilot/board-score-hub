@@ -49,11 +49,13 @@ import Bonsai from './games/bonsai/main';
 import ForestShuffleDartmoor from './games/forest-shuffle-dartmoor/main';
 import Stellar from './games/stellar/main';
 import CatInTheBox from './games/cat-in-the-box/main';
+import TheGameMakers from './games/the-game-makers/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		TheGameMakers,
 		CatInTheBox,
 		Stellar,
 		ForestShuffleDartmoor,
