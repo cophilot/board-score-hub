@@ -43,6 +43,27 @@
 	.row-icon {
 		height: 70px;
 	}
+	.row-icon-text {
+		font-size: 20px;
+		color: var(--font-color);
+		/* text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000; */
+	}
+	.row-icon-text-position-center {
+		margin-top: -45px;
+		margin-bottom: 25px;
+	}
+	.row-icon-text-position-top {
+		margin-top: -90px;
+		margin-bottom: 70px;
+	}
+	.row-icon-text-position-bottom {
+		margin-top: -5px;
+		margin-bottom: -15px;
+	}
 	.total-row {
 		background-color: var(--secondary-color);
 		color: var(--primary-color);

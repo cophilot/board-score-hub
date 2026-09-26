@@ -260,7 +260,10 @@ export function BoardScoreTable({
 													<td colSpan={state.getCurrPlayerSize() + 1}>
 														<b>{row.name}</b>
 														<i>
-															{row.description ? ' - ' + row.description : ''}
+															{getDescriptionForRow(
+																row,
+																state.getCurrPlayerSize(),
+															)}
 														</i>
 													</td>
 												</tr>
@@ -465,12 +468,30 @@ function FirstRowCell({ state, row, onShowHelp }: FirstRowCellProps) {
 	let inner = <>{row.name}</>;
 	if (row.icon || row.iconFn) {
 		inner = (
-			<img
-				src={row.icon || row.iconFn?.(state.getCurrPlayerSize())}
-				alt={row.name}
-				className="row-icon"
-				loading="lazy"
-			/>
+			<div>
+				<img
+					src={row.icon || row.iconFn?.(state.getCurrPlayerSize())}
+					alt={row.name}
+					className="row-icon"
+					loading="lazy"
+				/>
+				{row.iconText && (
+					<div
+						className={
+							'row-icon-text row-icon-text-position-' +
+							(row.iconText.position || 'center')
+						}
+						style={{
+							color: row.iconText.color,
+							textShadow: row.iconText.outlineColor
+								? `-1px -1px 0 ${row.iconText.outlineColor}, 1px -1px 0 ${row.iconText.outlineColor}, -1px 1px 0 ${row.iconText.outlineColor}, 1px 1px 0 ${row.iconText.outlineColor}`
+								: undefined,
+						}}
+					>
+						{row.iconText.text}
+					</div>
+				)}
+			</div>
 		);
 	}
 	return (
@@ -498,6 +519,16 @@ const getColumnTotal = (
 		return acc + row[playerIndex];
 	}, 0);
 };
+
+function getDescriptionForRow(row: RowDef, playerSize: number) {
+	if (row.descriptionFn) {
+		return ' - ' + row.descriptionFn(playerSize);
+	}
+	if (row.description) {
+		return ' - ' + row.description;
+	}
+	return '';
+}
 
 function getStyleForRow(row: RowDef, definition: GameDef, rowIndex: number) {
 	const style: React.CSSProperties = {};
