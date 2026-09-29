@@ -47,6 +47,7 @@ import RaisingRobots from './games/raising-robots/main';
 import Parks from './games/parks/main';
 import Bonsai from './games/bonsai/main';
 import ForestShuffleDartmoor from './games/forest-shuffle-dartmoor/main';
+import CascadiaAlpineLakes from './games/cascadia-alpine-lakes/main';
 import Stellar from './games/stellar/main';
 import CatInTheBox from './games/cat-in-the-box/main';
 import TheGameMakers from './games/the-game-makers/main';
@@ -58,6 +59,7 @@ export function getAllGames(): GameWithView[] {
 		TheGameMakers,
 		CatInTheBox,
 		Stellar,
+		CascadiaAlpineLakes,
 		ForestShuffleDartmoor,
 		Bonsai,
 		Parks,
