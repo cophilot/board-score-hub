@@ -51,11 +51,13 @@ import CascadiaAlpineLakes from './games/cascadia-alpine-lakes/main';
 import Stellar from './games/stellar/main';
 import CatInTheBox from './games/cat-in-the-box/main';
 import TheGameMakers from './games/the-game-makers/main';
+import EverdellEmerland from './games/everdell-emerland/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		EverdellEmerland,
 		TheGameMakers,
 		CatInTheBox,
 		Stellar,
