@@ -72,21 +72,28 @@ export default function getDefinition(): GameDef {
 					'Each players scores 3 points if their home contains at least 1 of each of the 5 different room types.',
 				icon: pu.getAbsoluteImagePath('decorator-bonus'),
 			},
-			{
-				name: 'Plant Goal Card',
-				description: 'Score the Plant Goal Card if you completed it.',
-				icon: pu.getAbsoluteImagePath('plant-goal'),
-			},
-			{
-				name: 'Item Goal Card',
-				description: 'Score the Item Goal Card if you completed it.',
-				icon: pu.getAbsoluteImagePath('item-goal'),
-			},
-			{
-				name: 'Room Goal Card',
-				description: 'Score the Room Goal Card if you completed it.',
-				icon: pu.getAbsoluteImagePath('room-goal'),
-			},
 		],
+		extensions: {
+			'Advanced Mode': {
+				rows: [
+					{
+						id: 'advanced-mode',
+						name: 'Plant Goal Card',
+						description: 'Score the Plant Goal Card if you completed it.',
+						icon: pu.getAbsoluteImagePath('plant-goal'),
+					},
+					{
+						name: 'Item Goal Card',
+						description: 'Score the Item Goal Card if you completed it.',
+						icon: pu.getAbsoluteImagePath('item-goal'),
+					},
+					{
+						name: 'Room Goal Card',
+						description: 'Score the Room Goal Card if you completed it.',
+						icon: pu.getAbsoluteImagePath('room-goal'),
+					},
+				],
+			},
+		},
 	};
 }
