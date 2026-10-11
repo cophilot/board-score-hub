@@ -52,11 +52,13 @@ import Stellar from './games/stellar/main';
 import CatInTheBox from './games/cat-in-the-box/main';
 import TheGameMakers from './games/the-game-makers/main';
 import EverdellEmerland from './games/everdell-emerland/main';
+import Finspan from './games/finspan/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Finspan,
 		EverdellEmerland,
 		TheGameMakers,
 		CatInTheBox,
