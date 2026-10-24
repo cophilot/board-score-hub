@@ -25,6 +25,7 @@ export default function getDefinition(): GameDef {
 		winMode: WinMode.MOST,
 		rows: [
 			{
+				id: 'round-1',
 				name: 'Points Round 1',
 				description: 'Points gained on Round 1.',
 				icon: pu.getAbsoluteImagePath('1'),
@@ -37,6 +38,7 @@ export default function getDefinition(): GameDef {
 				negative: true,
 			},
 			{
+				id: 'round-2',
 				name: 'Points Round 2',
 				description: 'Points gained on Round 2.',
 				icon: pu.getAbsoluteImagePath('2'),
@@ -49,6 +51,7 @@ export default function getDefinition(): GameDef {
 				negative: true,
 			},
 			{
+				id: 'round-3',
 				name: 'Points Round 3',
 				description: 'Points gained on Round 3.',
 				icon: pu.getAbsoluteImagePath('3'),
@@ -60,6 +63,20 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('-3'),
 				negative: true,
 			},
+		],
+		labels: [
+			{
+				beforeID: 'round-1',
+				label: 'Round 1',
+			},
+			{
+				beforeID: 'round-2',
+				label: 'Round 2',
+			},
+			{
+				beforeID: 'round-3',
+				label: 'Round 3',
+			}
 		],
 	};
 }
