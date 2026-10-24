@@ -76,7 +76,7 @@ export default function getDefinition(): GameDef {
 			{
 				beforeID: 'round-3',
 				label: 'Round 3',
-			}
+			},
 		],
 	};
 }
