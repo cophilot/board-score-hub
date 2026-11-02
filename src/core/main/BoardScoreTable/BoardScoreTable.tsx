@@ -542,5 +542,8 @@ function getStyleForRow(row: RowDef, definition: GameDef, rowIndex: number) {
 	if (row.fontColor) {
 		style.color = row.fontColor;
 	}
+	if (row.fontItalic) {
+		style.fontStyle = 'italic';
+	}
 	return style;
 }

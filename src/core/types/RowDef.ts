@@ -8,6 +8,7 @@ export interface RowDef {
 	descriptionFn?: (playerSize: number) => string; // A function to get the description based on player size
 	bgColor?: string; // The background color to be used only for this row
 	fontColor?: string; // The font color to be used only for this row
+	fontItalic?: boolean; // Whether the font should be italic for this row
 	negative?: boolean; // Whether this row is negative
 	fn?: (n: number) => number; // The function to calculate the score
 	fnDisplay?: string; // A string to display the function
