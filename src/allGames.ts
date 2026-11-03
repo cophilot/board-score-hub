@@ -52,6 +52,7 @@ import Stellar from './games/stellar/main';
 import CatInTheBox from './games/cat-in-the-box/main';
 import TheGameMakers from './games/the-game-makers/main';
 import EverdellEmerland from './games/everdell-emerland/main';
+import DogsWithJobs from './games/dogs-with-jobs/main';
 import Finspan from './games/finspan/main';
 // ~~new-game-import~~
 
@@ -59,6 +60,7 @@ export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
 		Finspan,
+		DogsWithJobs,
 		EverdellEmerland,
 		TheGameMakers,
 		CatInTheBox,
