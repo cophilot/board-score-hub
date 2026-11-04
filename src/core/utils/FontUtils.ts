@@ -36,6 +36,11 @@ export default class FontUtils {
 		return this.loadFont(FontUtils.ANCIENT);
 	}
 
+	private static readonly ACTION = 'Barlow Condensed, sans-serif';
+	static getActionFont() {
+		return this.loadFont(FontUtils.ACTION);
+	}
+
 	private static readonly CLASSIC = 'Noto Serif Toto, sans-serif';
 	static getClassicFont() {
 		return this.loadFont(FontUtils.CLASSIC);
@@ -121,11 +126,19 @@ export default class FontUtils {
 			case FontUtils.ANCIENT:
 				WebFont.load({
 					google: {
-						families: ['Julius Sans One'],
+						families: ['Julius Sans One:300,400,500,600,700'],
 					},
 				});
 				break;
-
+			case FontUtils.ACTION:
+				WebFont.load({
+					google: {
+						families: [
+							'Barlow Condensed:300,400,500,700,300italic,400italic,500italic,700italic',
+						],
+					},
+				});
+				break;
 			default:
 				console.error(`FontUtils: Font "${font}" is not recognized.`);
 				break;
