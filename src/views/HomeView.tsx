@@ -96,9 +96,9 @@ export default function HomeView() {
 					link="https://next-station.philipp-bonin.com/"
 				/>
 				<GameButton
-					game="Emberleaf Randomizer"
+					game="Word Dealer"
 					asLink
-					link="https://cophilot.github.io/emberleaf-randomizer/"
+					link="https://cophilot.github.io/word-dealer/"
 				/>
 			</div>
 			<h2>Play Log</h2>
