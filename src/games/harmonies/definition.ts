@@ -46,5 +46,29 @@ export default function getDefinition(): GameDef {
 				icon: pu.getAbsoluteImagePath('card'),
 			},
 		],
+		extensions: {
+			Crescendo: {
+				rows: [
+					{
+						id: 'crescendo',
+						name: 'Sanctuaries',
+						description: 'Points from your completed sanctuaries',
+						icon: pu.getAbsoluteImagePath('sanctuaries'),
+					},
+					{
+						name: 'Whisper Cubes',
+						description:
+							'2 Points for each whisper cube WITHOUT a animal cube and 5 Points for each whisper cube WITH a animal cube',
+						icon: pu.getAbsoluteImagePath('whisper'),
+					},
+				],
+			},
+		},
+		labels: [
+			{
+				beforeID: 'crescendo',
+				label: 'Crescendo',
+			},
+		],
 	};
 }
