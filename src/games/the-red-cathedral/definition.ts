@@ -56,6 +56,18 @@ export default function getDefinition(): GameDef {
 					'Prestige points scored during the game. Remember to move BACK to the closest lower Prestige Point space.',
 			},
 			{
+				name: 'Finished the game',
+				icon: pu.getAbsoluteImagePath('flag'),
+				description:
+					'3 Prestige points if you finished the game by finishing 6 constructions.',
+				checkValue: 3,
+				exclusiveCheck: true,
+				iconText: {
+					text: '6',
+					color: '#fff',
+				},
+			},
+			{
 				name: 'Left Resources',
 				description:
 					'Gain 1 prestige point for each 5 resources and rubles left at the end of the game.',
