@@ -41,7 +41,7 @@ export default function getDefinition(): GameDef {
 			{
 				name: 'Cube Collection Switch',
 				description:
-					'If the switch is activated, get $2 for each cube of the color you have the most of (the color grey also counts), on the map of yourPersonal Board.',
+					'If the switch is activated, get $2 for each cube of the color you have the most of (the color grey also counts), on the map of your Personal Board.',
 				icon: pu.getAbsoluteImagePath('cube-collection-switch'),
 			},
 			{
