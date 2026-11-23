@@ -56,11 +56,13 @@ import DogsWithJobs from './games/dogs-with-jobs/main';
 import Finspan from './games/finspan/main';
 import YukonAirways from './games/yukon-airways/main';
 import CarcassonneLabyrinth from './games/carcassonne-labyrinth/main';
+import Emberheart from './games/emberheart/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Emberheart,
 		CarcassonneLabyrinth,
 		YukonAirways,
 		Finspan,
