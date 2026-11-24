@@ -54,6 +54,7 @@ import TheGameMakers from './games/the-game-makers/main';
 import EverdellEmerland from './games/everdell-emerland/main';
 import DogsWithJobs from './games/dogs-with-jobs/main';
 import Finspan from './games/finspan/main';
+import FitToPrint from './games/fit-to-print/main';
 import YukonAirways from './games/yukon-airways/main';
 import CarcassonneLabyrinth from './games/carcassonne-labyrinth/main';
 import Emberheart from './games/emberheart/main';
@@ -63,6 +64,7 @@ export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
 		Emberheart,
+		FitToPrint,
 		CarcassonneLabyrinth,
 		YukonAirways,
 		Finspan,
