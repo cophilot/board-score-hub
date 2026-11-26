@@ -58,11 +58,13 @@ import FitToPrint from './games/fit-to-print/main';
 import YukonAirways from './games/yukon-airways/main';
 import CarcassonneLabyrinth from './games/carcassonne-labyrinth/main';
 import Emberheart from './games/emberheart/main';
+import Fishing from './games/fishing/main';
 // ~~new-game-import~~
 
 export function getAllGames(): GameWithView[] {
 	return [
 		// ~~new-game~~
+		Fishing,
 		Emberheart,
 		FitToPrint,
 		CarcassonneLabyrinth,
